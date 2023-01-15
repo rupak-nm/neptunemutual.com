@@ -1,0 +1,23 @@
+{
+  "META_TITLE": "Protocol and Platform Security / Neptune Mutual",
+  "META_DESCRIPTION": "Review the results of security audits, penetration tests, and other assessments done on the Neptune Mutual platform by third-party cybersecurity firms.",
+  "META_OG_TITLE": "Protocol and Platform Security / Neptune Mutual",
+  "META_OG_DESCRIPTION": "Review the results of security audits, penetration tests, and other assessments done on the Neptune Mutual platform by third-party cybersecurity firms.",
+  "META_OG_IMAGE": "/assets/images/meta/og/security-and-cyber.png",
+  "META_TWITTER_TITLE": "Protocol and Platform Security / Neptune Mutual",
+  "META_TWITTER_DESCRIPTION": "Review the results of security audits, penetration tests, and other assessments done on the Neptune Mutual platform by third-party cybersecurity firms.",
+  "META_TWITTER_IMAGE": "/assets/images/meta/og/security-and-cyber.png",
+  "META_TWITTER_IMAGE_ALT": "Neptune Mutual Security and Cyber Hygiene Open Graph Banner",
+  "Security Reviews": "Security Reviews",
+  "Our decentralized insurance marketplace has been subjected to a number of smart contract audits, as well as a code review and penetration testing": "Our decentralized insurance marketplace has been subjected to a number of smart contract audits, as well as a code review and penetration testing",
+  "Show Result": "Show Result",
+  "Independent Third-Party Assessments of Smart Contract and Application Security": "Independent Third-Party Assessments of Smart Contract and Application Security",
+  "Security and Cyber Hygiene": "Security and Cyber Hygiene",
+  "Here at Neptune Mutual, we value security and protection highly. We have spent a lot of time and resource doing code reviews of our smart contracts, frontend, and backend. We have security firms that we deal with on a regular basis to do security review and penetration testing on our hosting systems and applications. In addition, we have a stringent cyber hygiene policy that everyone must follow.": "Here at Neptune Mutual, we value security and protection highly. We have spent a lot of time and resource doing code reviews of our smart contracts, frontend, and backend. We have security firms that we deal with on a regular basis to do security review and penetration testing on our hosting systems and applications. In addition, we have a stringent cyber hygiene policy that everyone must follow.",
+  "Smart Contract": "Smart Contract",
+  "Open Zeppelin Third Audit Report": "Open Zeppelin Third Audit Report",
+  "Second Open Zeppelin Audit Report": "Second Open Zeppelin Audit Report",
+  "Blocksec Second Audit Report": "Blocksec Second Audit Report",
+  "Blocksec Audit Report": "Blocksec Audit Report",
+  "Open Zeppelin Audit Report": "Open Zeppelin Audit Report"
+}

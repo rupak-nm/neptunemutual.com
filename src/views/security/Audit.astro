@@ -1,0 +1,44 @@
+---
+import Button from "../../elements/buttons/Button.astro";
+import Tags from "../../elements/Tags.astro";
+
+import { fromCdnUnqualified } from "../../../util/dns";
+
+interface Props {
+  audit: Audit;
+  className?: string;
+}
+
+const t = (x: string): string => x;
+const { audit, className } = Astro.props;
+
+const tags = JSON.parse(audit.badges);
+const icon = fromCdnUnqualified(audit.partner.icon.filename);
+---
+
+<div class={`security audit report ${className || ""} item`.trim()}>
+  <div class="icon and tag">
+    <span class="icon">
+      <img
+        alt={audit.partner.icon.alt}
+        width="48"
+        height="48"
+        src={`${icon}`}
+      />
+    </span>
+
+    <Tags tags={tags} />
+  </div>
+  <p class="title">{t(`${audit.title}`)}</p>
+  <p class="content">{audit.intro}</p>
+
+  <Button
+    type={"anchor"}
+    variant={"link-color"}
+    iconTrailing="arrow-right"
+    size="md"
+    href={`/security/${audit.slug}/`}
+  >
+    {t("Show Result")}
+  </Button>
+</div>

@@ -1,0 +1,55 @@
+---
+import { slugify } from "../../../util/slug";
+import { featured, partners } from "./partners/data";
+
+const t = (x: string): string => x;
+---
+
+<div class="partner container">
+  <div class="inner full width container">
+    <h2>{t("Powered by You, Trusted by Industry Leaders")}</h2>
+
+    <ul class="featured partner list">
+      {
+        featured.map((f) => (
+          <>
+            <li class="item" title={f.name}>
+              <Fragment
+                set:html={f.icon.then((x: any) => x.default) || f.name}
+              />
+            </li>
+          </>
+        ))
+      }
+    </ul>
+
+    <div class="ui partners marquee list">
+      <ul class="item">
+        {
+          partners.map((partner) => {
+            return (
+              <>
+                <li title={partner.name}>
+                  <Fragment
+                    set:html={
+                      partner.icon.then((x: any) => x.default) || partner.name
+                    }
+                  />
+                </li>
+              </>
+            );
+          })
+        }
+      </ul>
+      <ul aria-hidden="true" class="item">
+        {
+          partners.map((partner) => {
+            return (
+              <li data-partner={slugify(partner.name)} title={partner.name} />
+            );
+          })
+        }
+      </ul>
+    </div>
+  </div>
+</div>

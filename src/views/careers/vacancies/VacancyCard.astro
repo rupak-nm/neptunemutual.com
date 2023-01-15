@@ -1,0 +1,53 @@
+---
+import Button from "../../../elements/buttons/Button.astro";
+import Tags from "../../../elements/Tags.astro";
+import WorkDetail from "./WorkDetail.astro";
+
+interface Props {
+  vacancy: Vacancy;
+}
+
+const t = (x: string): string => x;
+
+const { vacancy } = Astro.props;
+const badges: Tag[] = JSON.parse(vacancy.badges);
+---
+
+<div
+  class="job vacancy card"
+  data-department={vacancy.department}
+  data-show="true"
+>
+  <div class="title and cta">
+    <div>
+      <h3>
+        <div class="dept">{vacancy.department}</div>
+        <div class="title">
+          <span>{vacancy.title}</span>
+
+          <div class="badges">
+            <Tags tags={badges} size={"md"} />
+          </div>
+        </div>
+      </h3>
+    </div>
+
+    <Button
+      href={`/careers/${vacancy.slug}/`}
+      type="anchor"
+      size="sm"
+      iconTrailing="arrow-right"
+      inline
+      classname="view-job-button"
+    >
+      View Job
+    </Button>
+  </div>
+
+  <p class="intro">{vacancy.intro}</p>
+
+  <div class="work details">
+    <WorkDetail variant="marker-pin-02" text={vacancy.location} />
+    <WorkDetail variant="clock" text={vacancy.type} />
+  </div>
+</div>

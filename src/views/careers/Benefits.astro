@@ -1,0 +1,34 @@
+---
+import Features from "./Features.astro";
+
+const t = (x: string): string => x;
+---
+
+<div class="careers benefits container">
+  <div class="inner container">
+    <div class="text container">
+      <h2>
+        <div class="subheading">
+          {
+            t(
+              "Work together with the brightest minds in decentralized insurance space"
+            )
+          }
+        </div>
+        <div class="heading">
+          {t("Why should you apply for a position at Neptune Mutual?")}
+        </div>
+      </h2>
+
+      <p class="supporting text">
+        {
+          t(
+            "Our common values are the cornerstone of our company culture, serving to foster collaboration and teamwork."
+          )
+        }
+      </p>
+    </div>
+
+    <Features />
+  </div>
+</div>

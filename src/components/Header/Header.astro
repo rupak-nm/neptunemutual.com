@@ -1,0 +1,58 @@
+---
+import CookiePopup from "../CookiePopup.astro";
+import HamburgerButton from "./HamburgerButton.astro";
+import LanguageSelect from "./LanguageSelector.astro";
+import MobileMenu from "./MobileMenu.astro";
+import Navigation from "./Navigation.astro";
+import NpmLightLogo from "../../elements/icons/custom/npm-logo-light-mode.svg?raw";
+import NpmDarkLogo from "../../elements/icons/custom/npm-logo-dark-mode.svg?raw";
+import SubMenu from "./SubMenu.astro";
+import ThemeSelector from "./ThemeSelector.astro";
+import VideoModal from "../VideoModal.astro";
+
+import { data } from "../../../util/nav";
+import * as api from "../../../service/api";
+
+const videos = await api.getEnumerable<Video>("videos", 4, 0);
+const updatedVideos: Video[] = videos.map((video) => ({
+  ...video,
+  thumbnail: { ...video.thumbnail, url: "" },
+}));
+
+interface Props {
+  headerStyle: "default" | "colored";
+}
+
+const { headerStyle } = Astro.props;
+---
+
+<VideoModal />
+
+<header data-style={headerStyle}>
+  <div class="inner container">
+    <div class="logo and nav">
+      <a class="logo" href="/">
+        <span class="sr-only">Neptune Mutual</span>
+        <span class="light only" set:html={NpmLightLogo} />
+        <span class="dark only" set:html={NpmDarkLogo} />
+      </a>
+
+      <Navigation data={data} />
+    </div>
+
+    <div class="language and theme">
+      <LanguageSelect />
+      <ThemeSelector />
+    </div>
+
+    <HamburgerButton />
+  </div>
+
+  <SubMenu data={data} videos={updatedVideos} />
+
+  <MobileMenu data={data} videos={updatedVideos} />
+</header>
+
+<CookiePopup />
+
+<hr />

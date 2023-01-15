@@ -1,0 +1,47 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+.media.mentions.container {
+  .inner.container {
+    padding: 32px 0 96px 0;
+    border-top: 0.5px solid colors.$gray-300;
+  }
+
+  h2 {
+    @include styles.display-xs;
+    @include weights.semibold;  
+  }
+
+  .all.mentions {
+    margin-top: 32px;
+  }
+
+  .article.card.container {
+    width: calc(100vw - 32px);
+  
+    @media (min-width: 576px) {
+      width: calc(50vw - 32px);
+    }
+  
+    @media (min-width: 1024px) {
+      width: calc(33vw - 32px);
+    }
+  
+  
+    @media (min-width: 1440px) {
+      width: 384px;
+    }
+  }
+  
+}
+
+.dark .media.mentions.container {
+  .inner.container {
+    border-top: 1px solid colors.$gray-700;
+  
+  }
+}

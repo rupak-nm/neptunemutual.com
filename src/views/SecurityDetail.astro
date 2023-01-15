@@ -1,0 +1,47 @@
+---
+import Breadcrumb from "../elements/Breadcrumb.astro";
+import HeaderSection from "../components/HeaderSection.astro";
+import NewsletterSignupForm from "../components/NewsletterSignupForm.astro";
+import PDFViewer from "./security-detail/PDFViewer.astro";
+
+interface Props {
+  audit: Audit;
+}
+
+const { audit } = Astro.props;
+const subheading = `${audit.startDate} - ${audit.endDate}`;
+
+const t = (x: string): string => x;
+
+const items = [
+  {
+    link: "/",
+    name: "Home",
+  },
+  {
+    link: "/security/",
+    name: t("Security"),
+  },
+  {
+    link: `/security/${audit.slug}`,
+    name: t(audit.title),
+  },
+];
+---
+
+<HeaderSection
+  color={"basic"}
+  alignment={"left"}
+  heading={audit.title}
+  subheading={subheading}
+>
+  <div set:html={audit.intro} slot="supporting-text" />
+  <Breadcrumb items={items} />
+</HeaderSection>
+<PDFViewer report={audit.report} />
+
+<NewsletterSignupForm
+  heading="Sign up for our newsletter"
+  text="Be the first to know about releases and industry news and insights."
+  showFeedButtons={false}
+/>

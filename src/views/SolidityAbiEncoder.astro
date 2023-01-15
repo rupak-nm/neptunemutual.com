@@ -1,0 +1,30 @@
+---
+import HeaderSection from "../components/HeaderSection.astro";
+import NewsletterSignupForm from "../components/NewsletterSignupForm.astro";
+
+import { Encoder } from "../react-code/Encoder";
+
+const t = (x: string): string => x;
+---
+
+<HeaderSection
+  color={"basic"}
+  alignment={"center"}
+  heading={t("Solidity ABI Encoder Online")}
+>
+  <Fragment slot="supporting-text">
+    {
+      t(
+        "The Solidity ABI Encoder from Neptune Mutual allows you to encode your smart contract arguments. You may also use your ABI and smart contract address to perform read and write operations on the blockchain."
+      )
+    }
+  </Fragment>
+</HeaderSection>
+
+<Encoder client:only />
+
+<NewsletterSignupForm
+  heading="Sign up for our newsletter"
+  text="Be the first to know about releases and industry news and insights."
+  showFeedButtons={false}
+/>

@@ -1,0 +1,51 @@
+---
+import FeatureTabContent from "./FeatureTabContent.astro";
+
+interface Props {
+  features: HomepageFeatureItem[];
+}
+
+const { features } = Astro.props;
+const t = (x: string): string => x;
+---
+
+<div class="features section">
+  <div class="tabs">
+    <div class="tab list">
+      {
+        features.map((feature, index) => {
+          return (
+            <div
+              class="item"
+              data-tab-id={feature.id}
+              data-active={index == 0 ? "true" : "false"}
+            >
+              <FeatureTabContent
+                icon={feature.icon}
+                title={t(feature.title)}
+                text={t(feature.text)}
+              />
+            </div>
+          );
+        })
+      }
+    </div>
+    <div class="tab panel list">
+      {
+        features.map((feature: any, index) => {
+          return (
+            <div
+              class="item"
+              data-tabpanel-id={feature.id}
+              data-active={index == 0 ? "true" : "false"}
+            >
+              <div class="image container">
+                <Fragment set:html={feature.image || feature.title} />
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</div>

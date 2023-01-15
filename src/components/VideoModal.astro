@@ -1,0 +1,28 @@
+---
+import Icon from "../elements/Icon.astro";
+
+const t = (x: string): string => x;
+---
+
+<div class="video modal container" data-open="false">
+  <div class="panel">
+    <p class="title">
+      {t("Youtube Video")}
+    </p>
+    <p class="description">
+      {t("Playing the video that you've selected below in an iframe")}
+    </p>
+
+    <iframe
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      title="Embedded youtube"
+      class="video modal iframe"></iframe>
+  </div>
+
+  <button class="video modal close">
+    <span>Close video modal</span>
+    <Icon variant="x" size={"lg"} />
+  </button>
+</div>

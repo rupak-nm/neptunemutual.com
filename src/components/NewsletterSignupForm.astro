@@ -1,0 +1,33 @@
+---
+import EmailSubscription from "./EmailSubscription.astro";
+
+interface Props {
+  showFeedButtons: boolean;
+  atomLink?: string;
+  rssLink?: string;
+  heading: string;
+  text: string;
+}
+
+const { atomLink, rssLink, heading, text, showFeedButtons } = Astro.props;
+
+const t = (x: string): string => x;
+---
+
+<div class="newsletter script only signup">
+  <div class="full width inner container">
+    <div class="box">
+      <div class="content container">
+        <h2>{t(`${heading}`)}</h2>
+        <p class="text">{t(`${text}`)}</p>
+      </div>
+
+      <EmailSubscription
+        className="script only"
+        atomLink={atomLink}
+        rssLink={rssLink}
+        showFeedButtons={showFeedButtons}
+      />
+    </div>
+  </div>
+</div>

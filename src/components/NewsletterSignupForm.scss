@@ -1,0 +1,91 @@
+@use "../design-system/utils";
+@use "../design-system/colors";
+@use "../design-system/typography/styles";
+@use "../design-system/typography/weights";
+@use "../design-system/theme/light";
+@use "../design-system/theme/dark";
+
+
+.newsletter.signup {
+  gap: 40px;
+  padding-bottom: 96px;
+
+  @media (max-width: 767px) {
+    padding-bottom: 64px;
+    gap: 32px;
+  }
+
+  .box {
+    border-radius: 16px;
+    background-color: colors.$primary-25;
+
+    padding-top: 64px;
+    padding-bottom: 64px;
+    padding-left: 64px;
+    padding-right: 64px;
+
+    @media (max-width: 767px) {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+  }
+
+  .content.container {
+    max-width: 767px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    
+    h2 {
+      @include styles.display-md;
+      @include weights.semibold;
+    
+      @media (max-width: 767px) {
+        @include styles.display-sm;
+      }      
+    }
+
+    p {
+      margin-top: 20px;
+      color: light.$secondary-color;
+      @include styles.text-lg;
+      @include weights.regular;
+    
+      @media (max-width: 767px) {
+        margin-top: 16px;
+      }      
+    }
+  }
+
+  .form.container {
+    margin-top: 20px;
+  }
+}
+
+.dark .newsletter.signup {
+  .box {
+    background-color: colors.$gray-700;
+  }
+
+  .content.container {
+    p {
+      color: dark.$secondary-color;
+    }
+  }
+
+  .ui.message {
+    &.success {
+      color: colors.$success-200;
+    }
+  
+    &.error {
+      color: colors.$error-200;
+    }
+  }
+
+  p.input.hint a {
+    color: colors.$primary-200;
+  }
+}

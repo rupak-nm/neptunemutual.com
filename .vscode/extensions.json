@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "standard.vscode-standard",
+    "astro-build.astro-vscode",
+    "dozerg.tsimportsorter",
+    "mrmlnc.vscode-scss",
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "unwantedRecommendations": []
+}

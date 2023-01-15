@@ -1,0 +1,166 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+
+.tools.container {
+  padding-top: 56px;
+  padding-bottom: 96px;
+  @include utils.full-width-container;
+  
+  @media (max-width: 767px) {
+    padding-top: 24px;
+    padding-bottom: 64px;
+  }
+
+  > .inner.container {
+    max-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+  
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    @media (max-width: 767px) {
+      max-width: none;
+  }
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+  }
+
+ .tool.list.item{
+  display: block;
+  padding-top: 24px;
+  
+  &:not(:first-of-type) {
+    border-top: 1px solid colors.$gray-200;
+    
+  }
+ }
+
+ .title.and.badge{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+ }
+
+
+ .badge.container{
+  display: flex;
+  align-items: center;
+  padding: 2px 10px 2px 8px;
+  border-radius: 16px;
+  gap: 6px;
+  background-color: colors.$success-50;
+ }
+
+ 
+ .badge.icon {
+  color: colors.$success-500;
+   path {
+    fill: currentColor;
+  }
+ }
+
+ .badge.name {
+  color: colors.$success-700;
+  @include styles.text-sm;
+  @include weights.medium;
+ }
+
+ a {
+  color: inherit;
+ }
+
+ h3 {
+  color: colors.$gray-900;
+  @include styles.text-lg;
+  @include weights.medium;
+ }
+
+ p{
+  margin-top: 8px;
+  color: colors.$gray-600;
+  @include styles.text-md;
+  @include weights.regular;
+ }
+
+.category.and.arrow{
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ }
+
+ .category.container{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+ }
+
+ 
+ .category.icon {
+  color: colors.$gray-400;
+ }
+
+ .category.name {
+  color: colors.$gray-600;
+  @include styles.text-md;
+  @include weights.medium;
+ }
+
+ .arrow.container {
+  color: colors.$primary-700;
+ }
+}
+
+.dark .tools.container {
+  .tool.list.item {
+    &:not(:first-of-type) {
+      border-top: 1px solid colors.$gray-700;
+    }
+  }
+
+
+ .badge.container{
+  background-color: colors.$gray-600;
+ }
+
+ 
+ .badge.icon {
+  color: colors.$success-500;
+ }
+
+ .badge.name {
+  color: colors.$success-50;
+ }
+
+  h3 {
+    color: colors.$white;
+  }
+
+  p {
+    color: colors.$gray-25;
+  }
+
+ .category.icon {
+  color: colors.$gray-500;
+ }
+
+ .category.name {
+  color: colors.$gray-25;
+ }
+
+ .arrow.container {
+  color: colors.$primary-300;
+ }
+}

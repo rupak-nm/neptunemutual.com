@@ -1,0 +1,115 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+
+
+.security.review.section {
+  display: flex;
+  padding-bottom: 96px;
+  padding-top: 96px;
+  gap: 32px;
+
+  .slider.container .arrows {
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 767px) {
+    padding-bottom: 64px;
+    padding-top: 64px;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  @media (max-width: 1023px) {
+    flex-direction: column;
+  }
+
+
+  .pitch {
+    width: 100%;
+
+    @media (min-width: 1024px) {
+      width: 33%;
+    }
+
+    h2 {
+      margin-top: 24px;
+      @include styles.display-md;
+      @include weights.semibold;
+
+      color: colors.$gray-900;
+
+      @media (max-width: 767px) {
+        margin-top: 12px;
+      }
+    }
+
+    p {
+      margin-top: 20px;
+      color: colors.$gray-600;
+      @include styles.text-lg;
+      @include weights.regular;
+
+      @media (max-width: 767px) {
+        margin-top: 16px;
+      }
+    }
+  }
+
+  .results {
+    padding-left: 4px;
+
+    @media (min-width: 1024px) {
+      width: 67%;
+    }
+  }
+
+  .security.review.list {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+
+    .item {
+
+      @media (min-width: 1024px) {
+        width: 400px;
+      }
+
+      @media (max-width: 1023px) {
+        width: calc(50vw - 32px - 8px); // 100vw / number of cards - padding of parent container - gap between cards / 2
+      }
+
+
+      @media (max-width: 575px) {
+        width: calc(100vw - 64px);
+      }
+
+
+    }
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+
+    .tags.container {
+      display: unset;
+      flex-wrap: unset;
+    }
+  }
+}
+
+.dark .security.review.section {
+  .pitch {
+    h2 {
+      color: colors.$white;
+    }
+
+    p {
+      color: colors.$white;
+    }
+  }
+}

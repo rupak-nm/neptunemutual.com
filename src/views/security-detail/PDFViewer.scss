@@ -1,0 +1,69 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+
+.pdf.viewer.section {
+  background-color: colors.$gray-600;
+  color: colors.$white;
+  padding-top: 96px;
+  padding-bottom: 96px;
+  margin-bottom: 64px;
+
+  @media (max-width: 767px) {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .reader.element {
+    display: block;
+    max-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+
+    height: 90vh;
+    min-height: 600px;
+  }
+
+  .text.container {
+    max-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+
+    h2 {
+      @include styles.display-md;
+      @include weights.semibold;
+
+      @media (max-width: 767px) {
+        @include styles.display-sm;
+      }
+    }
+
+    .supporting.text {
+      margin-top: 20px;
+
+      @include styles.text-xl;
+      @include weights.regular;
+    
+      @media (max-width: 767px) {
+        margin-top: 16px;
+        @include styles.text-lg;
+      }
+    }
+  }
+
+  .button.container {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+  
+    @media (max-width: 767px) {
+      margin-top: 16px;
+    }  
+  }
+}
+
+.dark .pdf.viewer.section {}

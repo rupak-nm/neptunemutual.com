@@ -1,0 +1,48 @@
+---
+import Button from "../../elements/buttons/Button.astro";
+
+import { fromCdnUnqualified } from "../../../util/dns";
+import { normalizeUrl } from "../../../util/url";
+
+interface Props {
+  report: Media;
+}
+
+const t = (x: string): string => x;
+const { report } = Astro.props;
+const url = fromCdnUnqualified(report.filename);
+---
+
+<div class="pdf viewer section">
+  <div class="full width container">
+    <object
+      class="reader element"
+      data={`${url}#view=FitH&toolbar=0&toolbar=0&navpanes=0&scrollbar=0`}
+      type="application/pdf"
+      width="100%"
+    >
+      <div class="text container">
+        <h2>{t("Note")}</h2>
+        <p class="supporting text">
+          {
+            t(
+              "Your web browser doesn't have a PDF plugin. Instead you can click below to download the PDF file."
+            )
+          }
+        </p>
+
+        <div class="button container">
+          <Button
+            type={"anchor"}
+            variant={"primary"}
+            href={normalizeUrl(url)}
+            size="xl"
+            iconLeading="download-01"
+          >
+            {t("Download File")}
+          </Button>
+        </div>
+      </div>
+    </object>
+  </div>
+</div>

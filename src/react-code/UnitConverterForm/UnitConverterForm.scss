@@ -1,0 +1,111 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+.ethereum.unit.converter {
+  @include utils.full-width-container;
+
+  padding-top: 56px;
+  padding-bottom: 96px;
+  display: flex;
+  gap: 64px;
+  align-items: flex-start;
+
+  @media screen and (max-width: 767px) {
+    padding-top: 32px;
+    padding-bottom: 64px;
+    flex-direction: column-reverse;
+    gap: 0;
+  }
+
+  .left.container {
+    width: 754px;
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+
+    .desktop.header {
+      h2 {
+        @include styles.display-sm;
+        @include weights.semibold;
+      }
+
+      @media screen and (max-width: 767px) {
+        display: none;
+      }
+    }
+
+    form {
+      margin-top: 32px;
+      
+      > :not(:first-child) {
+          margin-top: 32px;
+      }
+
+      div {
+        
+        label {
+          @include styles.text-sm;
+          @include weights.medium;
+        }
+
+        input {
+          margin-top: 6px;
+        }
+      }
+    }
+  }
+
+  .right.container {
+    border-radius: 8px;
+    width: 398px;
+    padding: 24px;
+    border: 1px solid colors.$gray-300;
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+
+    .option.container {
+
+      legend {
+        @include styles.text-lg;
+        @include weights.semibold;
+      }
+
+      .options {
+        display: flex;
+        gap: 16px;
+        padding-top: 16px;
+  
+        .option {
+          display: flex;
+          label {
+            margin-left: 8px;
+          }
+        }
+      }
+    }
+  }
+
+  .mobile.header {
+    display: none;
+
+    @media screen and (max-width: 767px) {
+      display: block;
+      margin: 32px 0;
+    }
+  }
+}
+
+.dark {
+  .ethereum.unit.converter {
+    .right.container {
+      border: 1px solid colors.$gray-500;
+    }
+  }
+}

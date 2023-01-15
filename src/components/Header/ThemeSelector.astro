@@ -1,0 +1,20 @@
+---
+import Icon from "../../elements/Icon.astro";
+
+const t = (x: string) => x;
+---
+
+<label class="theme selector label">
+  <span>{t("Dark Mode")}</span>
+  <input type="checkbox" id="DarkModeInputCheckbox" />
+  <div class="switch">
+    <!-- @todo: IDs should be Pascal Case. Not needed here. Delete this. -->
+    <i id="moon-star-filled">
+      <Icon variant="moon-star-filled" size={"md"} />
+    </i>
+    <!-- @todo: IDs should be Pascal Case. Not needed here. Delete this. -->
+    <i id="sun-filled">
+      <Icon variant="sun-filled" size={"md"} />
+    </i>
+  </div>
+</label>

@@ -1,0 +1,16 @@
+@use "../design-system/utils";
+@use "../design-system/colors";
+@use "../design-system/shadows";
+@use "../design-system/typography/styles";
+@use "../design-system/typography/weights";
+@use "../design-system/theme/light";
+@use "../design-system/theme/dark";
+
+
+.ui.hero.section > .container {
+  padding-bottom: 16px;
+
+  .content {
+    gap: 80px;
+  }
+}

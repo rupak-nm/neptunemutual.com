@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Seo from "../../components/Seo.astro";
+import StringToBytes32Converter from "../../views/StringToBytes32Converter.astro";
+
+import styles from "./string-to-bytes32-converter.scss?inline";
+---
+
+<BaseLayout>
+  <Seo
+    slot="seo"
+    title="Online String to Solidity Bytes32 Converter"
+    description="Efficiently convert a string value to solidity's bytes32 data type. Additionally, discover other useful web3 tools."
+    og={{
+      image: "/assets/images/meta/og/web3-string-to-bytes32.png",
+      imageAlt: "String to Bytes32",
+    }}
+  />
+  <style slot="header" is:inline set:html={styles}></style>
+  <StringToBytes32Converter />
+
+  <Fragment slot="footer">
+    <script src="../../scripts/react/index.js"></script>
+  </Fragment>
+</BaseLayout>

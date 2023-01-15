@@ -1,0 +1,28 @@
+@use "../../../design-system/utils";
+@use "../../../design-system/colors";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/theme/light";
+@use "../../../design-system/theme/dark";
+
+.work.detail.container {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: light.$secondary-color;
+  
+  @include styles.text-md;
+  @include weights.medium;
+  
+  svg  {
+    color: colors.$gray-400;
+  }
+}
+
+.dark .work.detail.container {
+  color: dark.$secondary-color;
+  
+  svg  {
+    color: colors.$gray-500;
+  }
+}

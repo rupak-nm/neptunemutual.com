@@ -1,0 +1,17 @@
+@use "../design-system/utils";
+@use "../design-system/colors";
+@use "../design-system/typography/styles";
+@use "../design-system/typography/weights";
+@use "../design-system/theme/light";
+@use "../design-system/theme/dark";
+
+
+.grants.and.bounties.container {
+  .text.block.and.hero {  
+    .hero {
+      img {
+        max-width: 315px;
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+---
+import Icon from "../../elements/Icon.astro";
+import LanguageSelector from "./LanguageSelector.astro";
+import MobileSection from "./MobileSection.astro";
+import ThemeSelector from "./ThemeSelector.astro";
+
+import { linkNav } from "../../../util/nav";
+import { normalizeUrl } from "../../../util/url";
+
+interface Props {
+  data: linkNav[];
+  videos: Video[];
+}
+const { data, videos } = Astro.props;
+
+const t = (x: string) => x;
+---
+
+<div class="mobile menu container" id="MobileMenu" data-open="false">
+  <div class="mobile menu inner">
+    <div class="actions container">
+      <LanguageSelector />
+      <ThemeSelector />
+    </div>
+
+    {
+      data.map((item) => {
+        if (item.href)
+          return (
+            <a class="item link container" href={normalizeUrl(item.href)}>
+              {t(item.title)}
+            </a>
+          );
+
+        if (item.children)
+          return (
+            <div class="item expandable container">
+              <button class="item trigger button" data-open="false">
+                <p class="title">{item.title}</p>
+                <i data-state="closed">
+                  <Icon variant="chevron-down" />
+                </i>
+                <i data-state="opened">
+                  <Icon variant="chevron-up" />
+                </i>
+              </button>
+
+              <MobileSection
+                navTitle={item.title}
+                sections={item.children}
+                videos={videos}
+              />
+            </div>
+          );
+      })
+    }
+  </div>
+</div>

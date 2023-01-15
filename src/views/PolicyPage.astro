@@ -1,0 +1,48 @@
+---
+import ContentViewer from "../components/ContentViewer.astro";
+import HeaderSection from "../components/HeaderSection.astro";
+
+import { parseContent } from "../../util/content-viewer";
+
+interface Props {
+  pages: Page[];
+  page: Page;
+}
+
+const { pages, page } = Astro.props;
+const type = "policies";
+
+const t = (x: string): string => x;
+const { intro, toc, parsedHtml, tags, pageUrl } = await parseContent(
+  type,
+  ["contentHtml", "html"],
+  page
+);
+---
+
+<div class="policy page container">
+  <HeaderSection heading="Policies" color={"basic"} alignment={"left"}>
+    <div class="ui tab buttons">
+      {
+        pages.map(({ slug, title }) => (
+          <a
+            class={`${page.slug === slug ? "active" : ""} item`.trim()}
+            href={`/policies/${slug}/`}
+          >
+            {t(`${title}`)}
+          </a>
+        ))
+      }
+    </div>
+  </HeaderSection>
+  <ContentViewer
+    type={type}
+    title="Policies"
+    intro={intro}
+    toc={toc}
+    html={parsedHtml}
+    tags={tags}
+    pageUrl={pageUrl}
+    showSocial={false}
+  />
+</div>

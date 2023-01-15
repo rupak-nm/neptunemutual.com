@@ -1,0 +1,17 @@
+---
+import HeaderSection from "../components/HeaderSection.astro";
+import NewsletterSignupForm from "../components/NewsletterSignupForm.astro";
+import ToolsList from "./web3-tools/ToolsList.astro";
+
+const t = (x: string): string => x;
+---
+
+<HeaderSection color={"basic"} alignment={"center"} heading={t("Web3 Tools")} />
+
+<ToolsList />
+
+<NewsletterSignupForm
+  heading="Sign up for our newsletter"
+  text="Be the first to know about releases and industry news and insights."
+  showFeedButtons={false}
+/>

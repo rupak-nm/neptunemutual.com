@@ -1,0 +1,55 @@
+---
+import Tags from "../elements/Tags.astro";
+
+import { getFormattedDate } from "../../util/format";
+import * as dns from "../../util/dns";
+import { toTagsWithHref } from "../../util/tag";
+import { normalizeUrl } from "../../util/url";
+
+const t = (x: string): string => x;
+
+interface Props {
+  post: Content;
+  className?: string;
+  type: "blog" | "pressroom" | "custom";
+  href?: string;
+  rel?: string;
+  target?: "_self" | "_blank" | "_parent" | "_top" | (string & {});
+}
+
+const { post, type, rel, target, href, className } = Astro.props;
+
+const date = new Date((post.publishedAt || post.createdAt) as Date);
+const coverImage = dns.fromCdnUnqualified(post.cover?.filename);
+---
+
+<div class={`article card ${className || ""} container`.trim()}>
+  <div class="image container">
+    <img
+      src={coverImage}
+      alt={post.cover?.alt.toLowerCase() === post.title.toLowerCase()
+        ? ""
+        : post.cover?.alt}
+      loading="lazy"
+    />
+  </div>
+
+  <div class="contents">
+    <time itemprop="published" datetime={date.toISOString()}
+      >{getFormattedDate(new Date(date).toUTCString())}</time
+    >
+
+    <a
+      class="title container"
+      rel={rel}
+      target={target}
+      href={normalizeUrl(href) || `/${type}/${post.slug}/`}
+    >
+      <h3>{post.title}</h3>
+    </a>
+
+    <p class="intro" set:html={post.intro} />
+
+    <Tags tags={toTagsWithHref(type, post.tags)} />
+  </div>
+</div>

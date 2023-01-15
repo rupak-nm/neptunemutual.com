@@ -1,0 +1,38 @@
+---
+import Icon from "../../elements/Icon.astro";
+
+import { getFormattedDate } from "../../../util/format";
+import { slugify } from "../../../util/slug";
+
+interface Props {
+  publishedAt: Date;
+  timeToRead: number;
+  title: string;
+  featuredImage: string;
+  alt: string;
+}
+
+const { publishedAt, timeToRead, title, featuredImage, alt } = Astro.props;
+---
+
+<div class="blog post hero full width container">
+  <div class="header">
+    <div class="blog info">
+      <span itemprop="datePublished" content={publishedAt.toISOString()}>
+        <time itemprop="published" datetime={publishedAt.toISOString()}
+          >{getFormattedDate(new Date(publishedAt).toUTCString())}</time
+        >
+      </span>
+
+      <Icon size={"sm"} variant="dot" />
+      <span class="time to read">{timeToRead} min read</span>
+    </div>
+    <h1 itemprop="headline" id={slugify(title)}>
+      {title}
+    </h1>
+  </div>
+  <div class="image container">
+    <meta itemprop="image" content={`${featuredImage}`} />
+    <img itemprop="image" src={`${featuredImage}`} alt={alt} loading="eager" />
+  </div>
+</div>

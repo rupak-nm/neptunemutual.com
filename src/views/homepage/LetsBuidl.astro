@@ -1,0 +1,69 @@
+---
+import Button from "../../elements/buttons/Button.astro";
+import Features from "./lets-buidl/Features.astro";
+import Prism from "@astrojs/prism/Prism.astro";
+
+const t = (x: string): string => x;
+---
+
+<div class="lets buidl section">
+  <div class="inner container">
+    <div class="text container">
+      <h2 id="lets-buidl">Let's #buidl</h2>
+
+      <p class="supporting text">
+        Don't let your users ever leave your DeFi app. With a few lines of code,
+        enable your users to access all cover features. Supply liquidity,
+        purchase covers, and interact with your decentralized cover pool
+        directly within your own DeFi app, frontend, or backend.
+      </p>
+    </div>
+
+    <div class="code block">
+      <Prism
+        code={`
+  import { ChainId, liquidity } from '@neptunemutual/sdk'
+
+  const add = async () => {
+    const amount = 150_000 * 1e18
+
+    // First approve the Policy contract to spend your DAI
+    await liquidity.approve(ChainId.Ethereum, key, { amount })
+
+    const response = await liquidity.add(ChainId.Ethereum, key, amount)
+    console.info(response)
+  }
+
+  /*******************************************************************
+  [info] {
+    status: 'Success',
+    result: {
+      nonce: 1,
+      gasPrice: BigNumber { _hex: '0x06fc23ac00', _isBigNumber: true },
+      wait: [Function (anonymous)]
+    }
+  }
+  *******************************************************************/
+
+  `}
+        lang="js"
+      />
+    </div>
+
+    <Features />
+
+    <div class="button container">
+      <Button
+        type={"anchor"}
+        href="https://www.npmjs.com/package/@neptunemutual/sdk"
+        rel="noopener"
+        target={"_blank"}
+        size={"2xl"}
+        iconVariant="link-external-01"
+        variant={"primary"}
+      >
+        {t("Get the Neptune Mutual SDK")}
+      </Button>
+    </div>
+  </div>
+</div>

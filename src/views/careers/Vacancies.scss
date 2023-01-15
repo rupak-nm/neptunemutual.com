@@ -1,0 +1,88 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+.ui.job.vacancies.section {
+  padding-top: 96px;
+  padding-bottom: 96px;
+
+
+  @media (max-width: 767px) {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .inner.container {
+    @include utils.full-width-container;
+
+    display: flex;
+    gap: 64px;
+  
+    @media (max-width: 767px) {
+      flex-direction: column;
+    }
+
+    .job.vacancy.list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+  }
+
+  .content {
+    flex: 1;
+
+    .subheading {
+      color: colors.$primary-700;
+      @include styles.text-md;
+      @include weights.semibold;
+      
+      @media (max-width: 767px) {
+        @include styles.text-sm;
+      }
+    }
+
+    .heading {
+      margin-top: 12px;
+      color: light.$color;
+      @include styles.display-md;
+      @include weights.semibold;
+      
+      @media (max-width: 767px) {
+        @include styles.display-sm;
+      }
+    }
+
+    .supporting.text {
+      margin-top: 20px;
+      color: light.$secondary-color;
+    
+      @include styles.text-xl;
+      @include weights.regular;
+      
+      @media (max-width: 767px) {
+        margin-top: 16px;
+        @include styles.text-lg;
+      }
+    }
+  }
+}
+
+.dark .ui.job.vacancies.section {
+  .content {
+    .subheading {
+      color: colors.$primary-300;
+    }
+
+    .heading {
+      color: dark.$color;
+    }
+
+    .supporting.text {
+      color: dark.$secondary-color;
+    }
+  }
+}

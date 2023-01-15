@@ -1,0 +1,53 @@
+---
+import ArticleCard from "../../components/ArticleCard.astro";
+import Pagination from "../../elements/Pagination.astro";
+import TagFilters from "./TagFilters.astro";
+import TagFilterDropdown from "./TagFilterDropdown.astro";
+
+import { slugify } from "../../../util/slug";
+
+interface Props {
+  articles: Article[];
+  totalPages?: number;
+  currentPage?: number;
+  tag?: Tag;
+}
+
+const { articles, totalPages, currentPage, tag } = Astro.props;
+
+const heading = tag?.name || "Recent Posts";
+const slug = tag?.slug ?? slugify(heading);
+---
+
+<div class="blog post full width container">
+  <div class="inner container">
+    <div class="desktop only visible">
+      <TagFilters />
+    </div>
+
+    <div class="mobile only visible">
+      <TagFilterDropdown />
+    </div>
+
+    <div class="text and cta">
+      <div class="text">
+        <h2 id={slug}>{heading}</h2>
+      </div>
+    </div>
+    <div class="blog posts">
+      {
+        articles.map((post) => (
+          <div class="single card">
+            <ArticleCard type="blog" post={post} />
+          </div>
+        ))
+      }
+    </div>
+    <Pagination
+      type="blog"
+      tag={tag}
+      currentPage={currentPage}
+      totalPages={totalPages}
+    />
+  </div>
+</div>

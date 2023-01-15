@@ -1,0 +1,30 @@
+---
+import Button from "../elements/buttons/Button.astro";
+
+interface Props {
+  gap: number;
+}
+
+const { gap } = Astro.props;
+---
+
+<div class="slider container extra padding" data-gap={gap}>
+  <div class="slider scrollable">
+    <slot />
+  </div>
+
+  <div class="arrows initially hidden">
+    <Button
+      disabled
+      variant={"secondary-gray"}
+      icon="only"
+      iconLeading="arrow-left"
+    >
+      Previous
+    </Button>
+
+    <Button variant={"secondary-gray"} icon="only" iconLeading="arrow-right">
+      Next
+    </Button>
+  </div>
+</div>

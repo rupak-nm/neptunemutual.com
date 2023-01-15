@@ -1,0 +1,20 @@
+{
+  "importStringConfiguration": {
+    "trailingComma": "multiLine",
+    "tabSize": 2,
+    "maximumNumberOfImportExpressionsPerLine": {
+      "count": 50
+    }
+  },
+  "quoteMark": "single",
+  "hasSemicolon": false,
+  "trailingComma": "none",
+  "development": {
+    "enableDebug": true
+  },
+  "sortConfiguration": {
+    "customOrderingRules": {
+      "defaultNumberOfEmptyLinesAfterGroup": 2
+    }
+  }
+}

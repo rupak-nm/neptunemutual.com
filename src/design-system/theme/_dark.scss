@@ -1,0 +1,9 @@
+@use '../_colors';
+
+$name: 'dark';
+$is-lightmode: false;
+$color-scheme: dark;
+$primary-background-color: colors.$gray-800;
+$color: colors.$white;
+$secondary-color: colors.$gray-25;
+$tertiary-color: colors.$gray-300;

@@ -1,0 +1,154 @@
+@use "../../../design-system/utils";
+@use "../../../design-system/colors";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/theme/light";
+@use "../../../design-system/theme/dark";
+@use "../../../design-system/shadows";
+
+.ui.dropdown.filter.container {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 16px;
+
+  .label {
+    color: colors.$gray-500;
+
+    @include styles.text-md;
+    @include weights.medium;
+  
+    @media (max-width: 767px) {
+      @include utils.sr-only;
+    }
+  }
+
+  .button.container {
+    position: relative;
+    width: max-content;
+    
+    button {
+      min-width: 240px;
+      padding: 10px 14px;
+      border: 1px solid colors.$gray-300;
+      color: colors.$gray-900;
+      border-radius: 8px;
+      cursor: pointer;
+      justify-content: space-between;
+      @include styles.text-md;
+      @include weights.regular;
+
+      svg {
+        color: colors.$gray-500;
+      }
+
+      &, & > div {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      div {
+        overflow: hidden;
+
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      @media (max-width: 767px) {
+        min-width: 100%;
+      }
+    }
+
+    .menu {
+      display: none;
+      width: 100%;
+      position: absolute;
+      top: calc(100% + 8px);
+      background-color: colors.$white;
+      box-shadow: shadows.$lg;
+      border-radius: 8px;
+      z-index: 10;
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 6px;
+
+        li {
+          justify-content: space-between;
+          padding: 10px 10px 10px 8px;
+          border-radius: 6px;
+          cursor: pointer;
+          color: colors.$gray-900;
+          overflow: hidden;
+          white-space: nowrap;
+
+          @include styles.text-md;
+          @include weights.regular;
+
+          &:hover {
+            background-color: colors.$gray-50;
+          }
+
+          &, & > div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+          }
+
+          div {
+            overflow: hidden;
+
+            span {
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+        }
+      }
+
+      &[data-open="true"] {
+        display: block;
+      }
+    }
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+  }
+}
+
+.dark .ui.dropdown.filter.container {
+  .label {
+    color: colors.$white;
+  }
+
+  .button.container {
+    button {
+      border: 1px solid colors.$gray-700;
+      background-color: colors.$gray-700;
+      
+      &, & svg {
+        color: colors.$white
+      }
+    }
+
+    .menu {
+      border: 1px solid colors.$gray-600;
+      background-color: colors.$gray-700;
+
+      ul li {
+        color: colors.$white;
+
+        &:hover {
+          background-color: colors.$gray-600;
+        }
+      }
+    }
+  }
+}

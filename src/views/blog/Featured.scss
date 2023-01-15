@@ -1,0 +1,144 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+
+.featured.posts.container {
+  margin: 56px auto 96px;
+
+  @media screen and (max-width: 1023px) {
+    margin-bottom: 32px;
+  }
+
+  h2 {
+    color: light.$color;
+    @include styles.display-xs;
+    @include weights.semibold;
+
+    @media (max-width: 767px) {
+      @include styles.text-xl;
+    }
+  }
+
+  .grid.container {
+    display: grid;
+    margin-top: 32px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 32px;
+    row-gap: 32px;
+
+    @media screen and (max-width: 1023px) {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .article.card.container {
+      --max-lines: 1;
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+
+      align-items: flex-start;
+
+      
+      .contents {
+        display: flex;
+        flex-direction: column;
+
+        @media (max-width: 1023px) {
+          width: 100%;
+        }
+      }
+
+
+      time {
+        margin-top: 0;
+      }
+
+      .image.container {
+        @media (max-width: 1023px) {
+          width: auto;
+        }
+
+        @media (max-width: 767px) {
+          width: 100%;
+        }
+      }
+
+
+      &:not(:nth-of-type(1)) {
+        @media (min-width: 1024px) {
+          height: 200px;
+
+          .image.container {
+            height: 200px;
+            width: 320px;
+          }
+        }
+      }
+
+      &:nth-of-type(1) {
+        @media (min-width: 1024px) {
+          grid-row-start: 1;
+          grid-row-end: 3;
+
+          flex-direction: column;
+          gap: 32px;
+
+          --max-lines: 2;
+        }
+
+        img {
+          height: 240px;
+        }
+      }
+
+      // if not first child, then change font style for <Title> component
+      &:not(:nth-of-type(1))>div:nth-of-type(2) h3 {
+        @include styles.text-lg;
+
+      }
+
+      &:not(:nth-of-type(1))>div:nth-of-type(2)>p,
+      &:not(:nth-of-type(1))>div:nth-of-type(2) h3 {
+        @media (min-width: 1024px) {
+          width: 250px;
+        }
+
+      }
+
+      @media (max-width: 1023px) {
+
+        // change font style of <Title> component of 2nd/3rd children
+        &>div:nth-of-type(2) h3 {
+          @include styles.text-lg;
+        }
+      }
+
+      // if screen size is below 768px
+      @media (max-width: 767px) {
+        flex-direction: column;
+        gap: 20px;
+
+        --max-lines: 2;
+      }
+
+      .tags.container {
+        margin-bottom: 0px;
+        margin-top: 24px;
+      }
+    }
+
+  }
+}
+
+.dark .featured.posts.container {
+  h2 {
+    color: dark.$color;
+
+  }
+}

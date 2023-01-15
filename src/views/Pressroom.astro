@@ -1,0 +1,55 @@
+---
+import Announcements from "./pressroom/Announcements.astro";
+import HeaderSection from "../components/HeaderSection.astro";
+import MediaMentions from "./pressroom/MediaMentions.astro";
+import NewsletterSignupForm from "../components/NewsletterSignupForm.astro";
+
+interface Props {
+  currentPage?: number;
+  totalPages?: number;
+  data: Content[];
+  newsPosts: NewsItem[];
+  tag?: Tag;
+}
+
+const { currentPage, totalPages, data, newsPosts, tag } = Astro.props;
+---
+
+<HeaderSection
+  color={"basic"}
+  alignment={"center"}
+  heading="Neptune Mutual Press Room"
+  secondary={{
+    text: "Download Press Kit",
+    href: "https://docs.neptunemutual.com/usage/brand-assets",
+    target: "_blank",
+    rel: "noopener",
+    size: "xl",
+  }}
+  primary={{
+    text: "Media Inquiries",
+    href: "/contact/",
+    size: "xl",
+  }}
+>
+  <Fragment slot="supporting-text">
+    Together, let’s build a safer Ethereum DeFi ecosystem for everyone by
+    decentralizing and democratizing crypto-native insurance.
+  </Fragment>
+</HeaderSection>
+
+<Announcements
+  posts={data}
+  totalPages={totalPages}
+  currentPage={currentPage}
+  tag={tag}
+/>
+
+<MediaMentions news={newsPosts} />
+<NewsletterSignupForm
+  heading="Subscribe to Our Pressroom"
+  text="Be the first to know about releases and industry news and insights."
+  showFeedButtons
+  atomLink="/feeds/pressroom/atom.xml"
+  rssLink="/feeds/pressroom/rss.xml"
+/>

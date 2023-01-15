@@ -1,0 +1,135 @@
+@use "../../../design-system/utils";
+@use "../../../design-system/colors";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/theme/light";
+@use "../../../design-system/theme/dark";
+
+.job.vacancy.card:not(.container) {
+  padding: 24px 24px 28px;
+  gap: 24px;
+  background: colors.$white;
+  border: 1px solid colors.$gray-200;
+  border-radius: 16px;
+  transition: all 50ms ease-in;
+
+
+  &:hover {
+    background: colors.$gray-25;
+  }
+
+  // @todo: move this style to tags.scss
+  // and also account for i[data-size]
+  // @todo: delete redundant styles
+  .badges .tag {
+    gap: 6px;
+
+    i {
+      width: 8px;      
+      height: 8px;
+    }    
+  }
+
+
+  &:hover {
+    transform: scale(1.025);
+  }
+
+  .title.and.cta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+    
+    a:not(.tag) {
+      color: colors.$primary-700
+    }
+
+    .dept {
+      color: colors.$primary-700;
+      @include styles.text-md;
+      @include weights.semibold;
+      
+      @media (max-width: 767px) {
+        @include styles.text-sm;
+      }
+    }
+
+    .title {
+      margin-top: 4px;
+      color: light.$color;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    
+      @include styles.text-lg;
+      @include weights.medium;
+    }
+
+    .view-job-button {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      
+      &:hover {
+        background: transparent !important;
+        color: inherit !important;
+      }
+      
+      &:focus-visible, &:focus {
+        background: transparent !important;
+        color: inherit !important;
+      }
+    }
+  }
+
+  .intro {
+    margin-top: 16px;
+    color: light.$secondary-color;
+  
+    @include styles.text-md;
+      @include weights.regular;
+  }
+
+  .work.details:not(.container) {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  &[data-show="false"] {
+    display: none;
+  }
+}
+
+.dark .job.vacancy.card:not(.container) {
+  background: colors.$gray-700;
+  border: 1px solid colors.$gray-600;
+
+  &:hover {
+    background: colors.$gray-600;
+  }
+
+  .title.and.cta {
+    a:not(.tag) {
+      color: colors.$primary-300;
+    }
+    
+    .dept {
+      color: colors.$primary-300;
+    }
+
+    .title {
+      color: dark.$color;
+    }
+  }
+
+  .intro {
+    color: dark.$secondary-color;
+  }
+}

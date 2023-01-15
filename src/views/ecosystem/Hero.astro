@@ -1,0 +1,45 @@
+---
+import Icon from "../../elements/Icon.astro";
+
+const t = (x: string): string => x;
+---
+
+<div class="ui hero">
+  <div class="full width container">
+    <div class="text and features">
+      <div class="text container">
+        <h1 id="neptune-mutual-ecosystem">{t("Neptune Mutual Ecosystem")}</h1>
+        <div class="supporting text">
+          {
+            t(
+              "Neptune Mutual is designed to protect your project from any potential hacking or security issues. Make sure your community is aware of the advantages of a parametric insurance model. Unlike other insurance products, policyholders do not need to request another user to confirm their proof of loss."
+            )
+          }
+        </div>
+      </div>
+
+      <div class="ui check icon list">
+        <div class="item">
+          <Icon variant="check-icon" size={"2xl"} />
+          <span>{t("Cover Creators")}</span>
+        </div>
+        <div class="item">
+          <Icon variant="check-icon" size={"2xl"} />
+          <span>{t("Policyholders")}</span>
+        </div>
+        <div class="item">
+          <Icon variant="check-icon" size={"2xl"} />
+          <span>{t("Liquidity Providers")}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="image container">
+      <img
+        src="/assets/images/hero/ecosystem.webp"
+        alt='A banner image featuring cards labeled "Dedicated Cover" and "Diversified Pool" with progress bars'
+        loading="eager"
+      />
+    </div>
+  </div>
+</div>

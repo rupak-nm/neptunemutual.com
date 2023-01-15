@@ -1,0 +1,39 @@
+---
+import HeaderSection from "../components/HeaderSection.astro";
+import NewsletterSignupForm from "../components/NewsletterSignupForm.astro";
+import Reviews from "./security/Reviews.astro";
+
+interface Props {
+  audits: Audit[];
+}
+
+const { audits } = Astro.props;
+---
+
+<HeaderSection
+  alignment={"left"}
+  color={"basic"}
+  heading="Security and Cyber Hygiene"
+  subheading="Independent Third-Party Assessments of Smart Contract and Application Security"
+  hero={{
+    src: "/assets/images/hero/shield.webp",
+    alt: "An image that depicts a blue shield or armor that appears to be floating in mid-air.",
+  }}
+>
+  <Fragment slot="supporting-text">
+    Here at Neptune Mutual, we value security and protection highly. We have
+    spent a lot of time and resource doing code reviews of our smart contracts,
+    frontend, and backend. We have security firms that we deal with on a regular
+    basis to do security review and penetration testing on our hosting systems
+    and applications. In addition, we have a stringent cyber hygiene policy that
+    everyone must follow.
+  </Fragment>
+</HeaderSection>
+
+<Reviews audits={audits} />
+
+<NewsletterSignupForm
+  heading="Sign up for our newsletter"
+  text="Be the first to know about releases and industry news and insights."
+  showFeedButtons={false}
+/>

@@ -1,0 +1,17 @@
+@use "../design-system/utils";
+@use "../design-system/colors";
+@use "../design-system/typography/styles";
+@use "../design-system/typography/weights";
+@use "../design-system/theme/light";
+@use "../design-system/theme/dark";
+
+.pressroom, .media.mentions {
+  .tags.container {
+    margin-top:24px;
+  }
+}
+
+.media.mentions .slider.container .arrows {
+  justify-content: flex-end;
+  margin-top: 64px;
+}

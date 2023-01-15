@@ -1,0 +1,44 @@
+---
+import Icon from "../../elements/Icon.astro";
+
+import { Section } from "../../../util/nav";
+import { normalizeUrl } from "../../../util/url";
+
+interface Props {
+  section: Section; // @todo: Improper name of the type
+}
+
+const { section } = Astro.props;
+
+const { title, links } = section;
+const t = (x: any) => x;
+---
+
+<div class="nav section container">
+  <h4 class="title">{t(title)}</h4>
+  <div class="content">
+    {
+      links &&
+        links.map((link) => (
+          <a
+            class="item container"
+            href={normalizeUrl(link.href)}
+            target={link.isExternal ? "_blank" : ""}
+            target={link.isExternal ? "_blank" : null}
+          >
+            {link.icon && <Icon size={"md"} variant={link.icon} />}
+            <div>
+              <h3 class="title">
+                {t(link.title)}
+                {link?.badge && <div class="badge">{link.badge}</div>}{" "}
+                {link.isExternal && (
+                  <Icon size={"sm"} variant="link-external-01" />
+                )}{" "}
+              </h3>
+              <p class="description">{t(link.description)}</p>
+            </div>
+          </a>
+        ))
+    }
+  </div>
+</div>

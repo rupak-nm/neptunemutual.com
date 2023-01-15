@@ -1,0 +1,66 @@
+---
+import Icon from "../../elements/Icon.astro";
+
+import { normalizeUrl } from "../../../util/url";
+import { fromCdnUnqualified } from "../../../util/dns";
+import { toText } from "../../../util/html";
+import { Section } from "../../../util/nav";
+
+interface Props {
+  section: Section; // @todo: Incorrect type name
+  videos: Video[];
+}
+const { section, videos } = Astro.props;
+
+const { title, more } = section;
+const t = (x: any) => x;
+---
+
+<div class="nav video section container">
+  <h4 class="title">{t(title)}</h4>
+  <div class="content">
+    {
+      videos?.length &&
+        videos.map((video) => {
+          return (
+            <>
+              <button
+                class="video container play button"
+                data-video-id={video.videoId}
+              >
+                <div class="thumbnail">
+                  <img
+                    src={fromCdnUnqualified(video.thumbnail.filename)}
+                    alt={video.title}
+                    loading="lazy"
+                  />
+                  <div class="overlay">
+                    <Icon variant="play" size={"2xl"} />
+                  </div>
+                </div>
+                <div class="video content">
+                  <h3 class="video title">{video.title}</h3>
+                  <p
+                    class="video supporting text"
+                    set:text={toText(video.descriptionHtml, 80)}
+                  />
+                </div>
+              </button>
+            </>
+          );
+        })
+    }
+  </div>
+  {
+    more && (
+      <a
+        class="more"
+        href={normalizeUrl(more.href)}
+        rel="noreferrer"
+        target="_blank"
+      >
+        {t(more.title)} <Icon size={"sm"} variant="arrow-right" />
+      </a>
+    )
+  }
+</div>

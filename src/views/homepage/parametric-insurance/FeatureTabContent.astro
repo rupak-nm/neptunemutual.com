@@ -1,0 +1,18 @@
+---
+import FeaturedIcon from "../../../elements/FeaturedIcon.astro";
+
+interface Props {
+  icon: string;
+  title: string;
+  text: string;
+}
+
+const { icon, title, text } = Astro.props;
+const t = (x: string): string => x;
+---
+
+<section class="feature tab content">
+  <FeaturedIcon variant={icon} size="sm" />
+  <h3>{title}</h3>
+  <p>{text}</p>
+</section>

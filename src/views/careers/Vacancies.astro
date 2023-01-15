@@ -1,0 +1,44 @@
+---
+import VacancyList from "./vacancies/VacancyList.astro";
+
+interface Props {
+  vacancies: Vacancy[];
+}
+
+const { vacancies } = Astro.props;
+
+const departments = [
+  "Any Department",
+  ...new Set(vacancies.map((v) => v.department)),
+];
+
+const t = (x: string): string => x;
+---
+
+<div class="ui job vacancies section">
+  <div class="inner container">
+    <div class="content">
+      <h2>
+        <div class="subheading">
+          {t("Careers")}
+        </div>
+        <div class="heading">
+          {t("Job Vacancies")}
+        </div>
+      </h2>
+      <p class="supporting text">
+        {
+          t(
+            "If you have a love for your job and a desire to succeed, you should consider joining our organization. We think that individuals who are enthusiastic about their job are the key to our success, and we are committed to fostering their professional growth and achievement. When you join our organization, you can expect assistance and opportunities to improve your skills and move up in your career."
+          )
+        }
+      </p>
+    </div>
+
+    <div class="content">
+      <div class="job vacancy list">
+        <VacancyList vacancies={vacancies} departments={departments} />
+      </div>
+    </div>
+  </div>
+</div>

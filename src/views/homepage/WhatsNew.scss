@@ -1,0 +1,110 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+
+.whats.new.section {
+  padding-top: 96px;
+  padding-bottom: 96px;
+
+  @media (max-width: 767px) {
+    padding-top: 0px;
+    padding-bottom: 64px;
+  }
+
+
+  .inner.container {
+    @include utils.full-width-container;
+  }
+
+
+  .text.and.cta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 32px;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 48px;
+    }
+  }
+
+  .text.container {
+    max-width: 767px;
+  }
+
+  h2 {
+    color: light.$color;
+
+    @include styles.display-md;
+    @include weights.semibold;
+
+    @media (max-width: 767px) {
+      @include styles.display-sm;
+    }
+  }
+
+  .supporting.text {
+    margin-top: 20px;
+    color: light.$secondary-color;
+
+    @include styles.text-xl;
+    @include weights.regular;
+
+    @media (max-width: 767px) {
+      margin-top: 16px;
+      @include styles.text-lg;
+    }
+  }
+
+  .button.container {
+    @media (max-width: 767px) {
+      order: 2;
+    }
+  }
+
+  .article.card.container {
+    .tags.container {
+      margin-top: 24px;
+    }
+  }
+}
+
+.whats.new.section .article.card.container {
+  width: calc(100vw - 32px);
+
+  @media (min-width: 576px) {
+    width: calc(50vw - 32px);
+  }
+
+  @media (min-width: 1024px) {
+    width: calc(33vw - 32px);
+  }
+
+  @media (min-width: 1280px) {
+    width: 388px !important;
+  }
+
+  &:hover img {
+    transform: scale(1.15);
+  }
+}
+
+.dark .whats.new.section {
+  h2 {
+    color: dark.$color;
+  }
+
+  .supporting.text {
+    color: dark.$secondary-color;
+
+  }
+}
+
+

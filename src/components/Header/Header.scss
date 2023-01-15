@@ -1,0 +1,71 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+header {
+  width: 100%;
+  position: fixed;
+  border-bottom: 1px solid colors.$gray-200;
+  background-color: light.$primary-background-color;
+  z-index: 999;
+  
+  .inner.container {
+    @include utils.full-width-container;
+    
+    padding-top: 24px;
+    padding-bottom: 24px;
+    
+    @media (max-width: 767px) {
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .logo.and.nav, .language.and.theme {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .logo.and.nav {
+      gap: 40px;
+    }
+  
+    .logo.light {
+      display: none;
+    } 
+  
+    .logo.dark {
+      display: flex;
+    }
+
+    .language.and.theme {
+      @media (max-width: 1025px) {
+        display: none;
+      }
+    }
+  }
+
+  .sr-only {
+    @include utils.sr-only;
+  }
+
+  &[data-style="colored"] {
+    background-color: colors.$primary-25;
+  }
+}
+
+.dark header {
+  border-bottom: 1px solid colors.$gray-700;
+  background-color: dark.$primary-background-color;
+
+  &[data-style="colored"] {
+    background-color: colors.$gray-900;
+  }
+}

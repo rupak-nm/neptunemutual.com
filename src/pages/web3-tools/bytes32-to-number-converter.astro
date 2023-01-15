@@ -1,0 +1,25 @@
+---
+import Bytes32ToNumberConverter from "../../views/Bytes32ToNumberConverter.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Seo from "../../components/Seo.astro";
+
+import styles from "./bytes32-to-number-converter.scss?inline";
+---
+
+<BaseLayout>
+  <Seo
+    slot="seo"
+    title="Online Solidity Bytes32 to Number Converter"
+    description="Efficiently convert solidity's bytes32 data type to number. Additionally, discover other useful web3 tools."
+    og={{
+      image: "/assets/images/meta/og/web3-bytes32-to-number.png",
+      imageAlt: "Bytes32 to Number Converter",
+    }}
+  />
+  <style slot="header" is:inline set:html={styles}></style>
+  <Bytes32ToNumberConverter />
+
+  <Fragment slot="footer">
+    <script src="../../scripts/react/index.js"></script>
+  </Fragment>
+</BaseLayout>

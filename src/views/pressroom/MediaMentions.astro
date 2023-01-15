@@ -1,0 +1,40 @@
+---
+import ArticleCard from "../../components/ArticleCard.astro";
+import Slider from "../../components/Slider.astro";
+
+import { asPost } from "../../service/news";
+import { normalizeUrl } from "../../../util/url";
+
+interface Props {
+  news: NewsItem[];
+}
+
+const { news } = Astro.props;
+
+const t = (x: string): string => x;
+---
+
+<div class="media mentions full width container">
+  <div class="inner container">
+    <h2>{t("Neptune Mutual in the Media")}</h2>
+
+    <div class="all mentions">
+      <Slider gap={16}>
+        {
+          news.map((item) => {
+            return (
+              <ArticleCard
+                type={"custom"}
+                className="with slider"
+                rel="noopener nofollow noindex"
+                target={"_blank"}
+                href={normalizeUrl(item.link)}
+                post={asPost(item)}
+              />
+            );
+          })
+        }
+      </Slider>
+    </div>
+  </div>
+</div>

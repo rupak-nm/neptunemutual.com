@@ -1,0 +1,77 @@
+---
+import Button from "../elements/buttons/Button.astro";
+import Icon from "../elements/Icon.astro";
+import Input from "../elements/Input.astro";
+import Message from "../elements/Message.astro";
+
+interface Props {
+  showFeedButtons?: boolean;
+  className: string;
+  atomLink?: string;
+  rssLink?: string;
+  id?: string;
+}
+
+const { showFeedButtons, className, atomLink, rssLink, id } = Astro.props;
+
+const t = (x: string): string => x;
+---
+
+<div class={`${className || ""} email subscription container`.trim()}>
+  <div class="form container">
+    <div class="form fields">
+      <div class="input with message">
+        <Input
+          id={id || "SubscriptionEmail"}
+          label="Email"
+          hideLabel
+          placeholder="Enter your email"
+          type="email"
+          required
+          autocomplete="off"
+          hint={`Our <a href="/policies/privacy-policy/">privacy policy</a> explains how
+        we handle your data`}
+        />
+
+        <Message
+          className={"initially hidden"}
+          type={"success"}
+          icon="check-circle-broken"
+          size={"lg"}
+        >
+          We have sent email confirmation. Please confirm to receive our
+          newsletter.
+        </Message>
+
+        <Message
+          className={"initially hidden"}
+          type={"error"}
+          icon="alert-triangle"
+          size={"lg"}
+        >
+          Unfortunately, something went wrong while trying to complete your
+          request. Please try again later. If the problem persists, do not
+          hesitate to let us know through the community channels.
+        </Message>
+      </div>
+    </div>
+    <Button classname={"newsletter subscription"} variant={"primary"} size="xl">
+      Subscribe
+    </Button>
+  </div>
+
+  {
+    showFeedButtons && (
+      <div class="feed">
+        <a class="atom" href={atomLink} target="_blank">
+          <Icon variant="rss-01" size={"md"} />
+          Atom
+        </a>
+        <a class="rss" href={rssLink} target="_blank">
+          <Icon variant="rss-01" size={"md"} />
+          RSS
+        </a>
+      </div>
+    )
+  }
+</div>

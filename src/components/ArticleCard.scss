@@ -1,0 +1,90 @@
+@use "../design-system/utils";
+@use "../design-system/colors";
+@use "../design-system/typography/styles";
+@use "../design-system/typography/weights";
+@use "../design-system/theme/light";
+@use "../design-system/theme/dark";
+
+.article.card.container {
+  display: block;
+  text-align: left;
+
+  .image.container {
+    height: 240px;
+    width: 100%;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      transition: 500ms;
+
+      &:hover {
+        filter: inherit;
+      }
+    }
+  }
+
+  time {
+    display: inline-block;
+    margin-top: 32px;
+    @include styles.text-sm;
+    @include weights.semibold;
+    color: colors.$gray-500;
+
+    @media (max-width: 767px) {
+      margin-top: 20px;
+    }
+  }
+
+  h3 {
+    margin-top: 8px;
+    color: light.$color;
+
+    @include styles.display-xs;
+    @include weights.medium;
+
+    @include utils.max-lines;
+
+    @media (max-width: 767px) {
+      @include weights.semibold;
+      @include styles.text-xl;
+    }
+  }
+
+  p {
+    margin-top: 8px;
+    color: light.$secondary-color;
+
+    @include styles.text-md;
+    @include weights.medium;
+
+    @include utils.max-lines;
+
+    @media (max-width: 767px) {
+      @include weights.regular;
+      @include styles.text-md;
+    }
+  }
+}
+
+
+.dark .article.card.container {
+
+  time {
+    color: colors.$gray-200;
+
+  }
+
+  h3 {
+    color: dark.$color;
+
+  }
+
+  p {
+    color: dark.$secondary-color;
+
+  }
+}

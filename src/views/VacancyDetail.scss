@@ -1,0 +1,121 @@
+@use "../design-system/utils";
+@use "../design-system/colors";
+@use "../design-system/typography/styles";
+@use "../design-system/typography/weights";
+@use "../design-system/theme/light";
+@use "../design-system/theme/dark";
+
+
+.vacancy.detail.container {
+  .job.details {
+    display: flex;
+    margin-bottom: 56px;
+    gap: 32px;
+  
+    @media (max-width: 767px) {
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      
+    
+      &:nth-of-type(1){
+        margin-left: 0;
+      }
+
+      &:nth-last-of-type(1){
+        margin-right: 0;
+      }
+    
+      @media (max-width: 767px) {
+        margin: 0;
+      }      
+    }
+
+    .label {
+      color:colors.$gray-600;
+      @include styles.text-sm;
+      @include weights.regular;
+
+      @media (max-width: 767px) {
+        display: block;
+        margin-bottom: 4px;
+      }    
+    }
+
+    .value {
+      color:colors.$gray-900;
+      @include styles.text-lg;
+      @include weights.medium;
+
+    }
+  }
+
+  .button.container {
+    display: flex;
+    margin-top: 56px;
+    justify-content: center;
+  
+    @media (min-width: 768px) {
+      justify-content: start;
+    }    
+  }
+
+  .about.this.vacancy {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+  
+    div {
+      position: relative;
+      background-color:colors.$white;
+      padding: 0 24px;
+      @include styles.text-xl;
+      @include weights.semibold;
+    }
+  
+    span {
+      border-top: 1px solid colors.$gray-200;
+      display: block;
+      width: 100%;
+      position: absolute;
+      top: 50%;
+    }    
+  }
+}
+
+
+.dark .vacancy.detail.container {
+  .hero.header {
+    background-color: colors.$gray-900;
+  }
+
+  .job.details {
+    .label {
+      color: colors.$gray-300;
+    }
+
+    .value {
+      color:colors.$gray-25;
+    }
+  }
+
+  .about.this.vacancy {
+  
+    div {
+      background-color: colors.$gray-800;
+    }
+  
+    span {
+      border-top: 1px solid colors.$gray-700;
+    }    
+  }
+
+}

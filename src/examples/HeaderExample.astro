@@ -1,0 +1,122 @@
+---
+import EmailSubscription from "../components/EmailSubscription.astro";
+import HeaderSection from "../components/HeaderSection.astro";
+
+const t = (x: string): string => x;
+---
+
+<HeaderSection color={"basic"} heading="Policies" alignment={"center"} />
+<HeaderSection color={"basic"} heading="Policies" alignment={"left"} />
+
+<HeaderSection
+  color={"basic"}
+  alignment={"center"}
+  heading="Neptune Mutual Press Room"
+  secondary={{
+    text: "Download Press Kit",
+    href: "https://docs.neptunemutual.com/usage/brand-assets",
+    target: "_blank",
+    rel: "noopener",
+    size: "xl",
+  }}
+  primary={{
+    text: "Media Inquiries",
+    href: "/contact/",
+    size: "xl",
+  }}
+>
+  <Fragment slot="supporting-text">
+    Together, let’s build a safer Ethereum DeFi ecosystem for everyone by
+    decentralizing and democratizing crypto-native insurance.
+  </Fragment>
+</HeaderSection>
+
+<HeaderSection
+  color={"basic"}
+  alignment={"center"}
+  heading={t("Neptune Mutual Blog")}
+  subheading={t("Recent developments in the decentralized insurance space")}
+>
+  <Fragment slot="supporting-text">
+    The Neptune Mutual Blog is the go-to location for learning about web3 and
+    smart contract vulnerabilities, decentralized insurance, security best
+    practices, and industry news. Enter your address to get weekly updates.
+  </Fragment>
+  <div class="form container">
+    <EmailSubscription className="script only" />
+  </div>
+</HeaderSection>
+
+<HeaderSection
+  alignment={"left"}
+  color={"basic"}
+  heading={t("Grants and Bounties")}
+  hero={{
+    src: "/assets/images/hero/grants-hero.webp",
+    alt: "A banner illustration of a blue vault full with gold bullion coins, with a few more coins outside.",
+  }}
+>
+  <Fragment slot="supporting-text">
+    Join the Neptunite community and contribute to our goal of defending,
+    safeguarding, and covering DeFi, CeFi, and Metaverse ecosystem against
+    exploitation, hacking, and other forms of online attacks. We strive to
+    strengthen and expand our community outreach and exposure via our community
+    programs. The Neptune Mutual team will promote and reward users that
+    participate in and contribute to the development of the protocol via the
+    various community activities that are presently taking place. Partners that
+    provide value and increase adoption and usage of Neptune Mutual will be
+    handsomely compensated for their efforts.
+  </Fragment>
+</HeaderSection>
+
+<HeaderSection
+  alignment={"left"}
+  color={"basic"}
+  heading="Security and Cyber Hygiene"
+  subheading="Independent Third-Party Assessments of Smart Contract and Application Security"
+  hero={{
+    src: "/assets/images/hero/shield.webp",
+    alt: "An image that depicts a blue shield or armor that appears to be floating in mid-air.",
+  }}
+>
+  <Fragment slot="supporting-text">
+    Here at Neptune Mutual, we value security and protection highly. We have
+    spent a lot of time and resource doing code reviews of our smart contracts,
+    frontend, and backend. We have security firms that we deal with on a regular
+    basis to do security review and penetration testing on our hosting systems
+    and applications. In addition, we have a stringent cyber hygiene policy that
+    everyone must follow.
+  </Fragment>
+</HeaderSection>
+
+<HeaderSection
+  alignment={"left"}
+  color={"basic"}
+  heading="Interested in Pursuing a Career with Neptune Mutual?"
+  subheading="DeFi Insurance is the Future!"
+  hero={{
+    src: "/assets/images/hero/careers.webp",
+    alt: t("Neptune Mutual Careers Banner Image"),
+    loading: "eager",
+  }}
+>
+  <p slot="supporting-text">
+    {
+      t(
+        "If you are driven, passionate and an executor, then Neptune Mutual is for you!"
+      )
+    }
+    <br /><br />
+    {
+      t(
+        "We are looking for amazing talents anywhere across the globe to join our diverse and dynamic team that is on a mission to build a reliable, fast and effective platform that protects digital assets."
+      )
+    }
+    <br /><br />
+    {
+      t(
+        "Hyper-talented experts from all over the world grow and thrive in our super dynamic, connected team. As a dedicated talent-nurturing workspace, we give each of our team members a fun and professional environment for them to do the work they enjoy."
+      )
+    }
+  </p>
+</HeaderSection>

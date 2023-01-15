@@ -1,0 +1,47 @@
+---
+import ArticleCard from "../../components/ArticleCard.astro";
+import Button from "../../elements/buttons/Button.astro";
+
+const t = (x: string): string => x;
+
+interface Props {
+  type: "blog" | "pressroom";
+  tagSlug?: string;
+  relatedPosts: Content[];
+}
+
+const { type, tagSlug, relatedPosts } = Astro.props;
+---
+
+{
+  relatedPosts.length > 0 && (
+    <div class="related posts container">
+      <div class="full width container">
+        <div class="text and cta">
+          <div class="text container">
+            <h2>Related Posts</h2>
+          </div>
+
+          <div class="button container">
+            <Button
+              type={"anchor"}
+              href={`/${type}/tag/${tagSlug}#${tagSlug}/`}
+              variant={"primary"}
+              size="xl"
+            >
+              {t("More Related Posts")}
+            </Button>
+          </div>
+
+          <div class="related posts">
+            {relatedPosts.slice(0, 3).map((post) => (
+              <div class="single card">
+                <ArticleCard post={post} type={type} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

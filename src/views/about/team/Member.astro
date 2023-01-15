@@ -1,0 +1,79 @@
+---
+import Icon from "../../../elements/Icon.astro";
+
+interface Props {
+  member: TeamMember;
+  className?: string;
+}
+
+const { member, className } = Astro.props;
+const { id, image, name, title, links } = member;
+const { linkedIn, twitter, medium, facebook } = links;
+---
+
+<div class={`ui team member ${className || ""} item`.trim()}>
+  <div class="image">
+    <img src={image} aria-labelledby={`team-member-${id}`} />
+  </div>
+  <div class="info">
+    <div class="name and role">
+      <h3 class="member name" id={`team-member-${id}`}>{name}</h3>
+      <div class="title">{title}</div>
+    </div>
+
+    <div class="ui social links list">
+      {
+        linkedIn && (
+          <a
+            class="item"
+            href={linkedIn}
+            title={`${name} LinkedIn`}
+            target="_blank"
+            rel="nofollow noreferrer"
+          >
+            <Icon variant="linkedin" size="md" />
+          </a>
+        )
+      }
+      {
+        twitter && (
+          <a
+            class="item"
+            href={twitter}
+            target="_blank"
+            title={`${name} Twitter`}
+            rel="nofollow noreferrer"
+          >
+            <Icon variant="twitter" size="md" />
+          </a>
+        )
+      }
+      {
+        medium && (
+          <a
+            class="item"
+            href={medium}
+            target="_blank"
+            title={`${name} Medium`}
+            rel="nofollow noreferrer"
+          >
+            <Icon variant="medium" size="md" />
+          </a>
+        )
+      }
+      {
+        facebook && (
+          <a
+            class="item"
+            href={facebook}
+            target="_blank"
+            title={`${name} Facebook`}
+            rel="nofollow noreferrer"
+          >
+            <Icon variant="facebook" size="md" />
+          </a>
+        )
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+.language.select.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  @media (max-width: 767px) { 
+    position: unset;
+  }
+
+  .selected.language {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 0;
+  
+    color: light.$secondary-color;
+  
+    @include styles.text-md;
+    @include weights.semibold;
+    cursor: pointer;
+  }
+}
+
+.dark .language.select.container {
+  .selected.language {
+    color: dark.$secondary-color;
+  }
+}

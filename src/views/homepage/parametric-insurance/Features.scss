@@ -1,0 +1,84 @@
+@use "../../../design-system/utils";
+@use "../../../design-system/colors";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/theme/light";
+@use "../../../design-system/theme/dark";
+
+
+.features.section {
+  .tabs{
+    display: flex;
+    gap: 64px;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      gap: 48px;
+    }
+  }
+
+  .tab.list:not(.panel) {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .item {
+      padding-top: 16px;
+      padding-bottom: 16px;
+      padding-left: 24px;
+      text-align: left;
+      border-left: 4px solid colors.$gray-100;
+      outline: none;
+
+      &[data-active="true"] {
+        border-left: 4px solid colors.$primary-600;
+      }
+    }
+  }
+
+  .tab.panel.list {
+    flex: 1;
+
+    .item[data-active="false"] {
+      display: none;
+    }
+  }
+
+
+  .image.container {
+    position: relative;
+    height: 420px;
+    max-width: 100%;
+    background-color: colors.$gray-100;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 767px) {
+      height: auto;
+      border-radius: 0px;
+      max-width: none;
+      margin-left: -16px;
+      margin-right: -16px;
+    }
+  }
+}
+
+.dark .features.section {
+  .tab.list:not(.panel) {
+    .item {
+      border-left: 4px solid colors.$gray-700;
+
+      &[data-active="true"] {
+        border-left: 4px solid colors.$primary-600;
+      }
+
+    }
+  }
+
+  .image.container {
+    background-color: colors.$gray-700;
+  }
+}

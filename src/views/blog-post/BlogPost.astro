@@ -1,0 +1,65 @@
+---
+import ContentViewer from "../../components/ContentViewer.astro";
+import BlogPostHero from "./BlogPostHero.astro";
+import RelatedPosts from "./RelatedPosts.astro";
+import NewsletterSignupForm from "../../components/NewsletterSignupForm.astro";
+
+import { parseContent } from "../../../util/content-viewer";
+
+interface Props {
+  type: "blog" | "pressroom";
+  structured: "BlogPosting" | "NewsArticle";
+  post: Article;
+  related: Article[];
+}
+
+const { type, post, related, structured } = Astro.props;
+
+const {
+  tag,
+  title,
+  intro,
+  toc,
+  parsedHtml,
+  tags,
+  pageUrl,
+  createdAt,
+  publishedAt,
+  timeToRead,
+  featuredImage,
+  alt,
+} = await parseContent(type, ["contentHtml", "html"], post);
+
+const publishDate = new Date(createdAt || (publishedAt as Date));
+---
+
+<div itemscope itemtype={`https://schema.org/${structured}`}>
+  <BlogPostHero
+    publishedAt={publishDate}
+    timeToRead={timeToRead}
+    title={title}
+    featuredImage={featuredImage}
+    alt={alt}
+  />
+
+  <ContentViewer
+    type={type}
+    title={title}
+    intro={intro}
+    toc={toc}
+    html={parsedHtml}
+    tags={tags}
+    pageUrl={pageUrl}
+    showSocial={true}
+  />
+
+  <RelatedPosts type={type} tagSlug={tag?.slug} relatedPosts={related} />
+
+  <NewsletterSignupForm
+    heading="Sign up for our newsletter"
+    text="Be the first to know about releases and industry news and insights."
+    showFeedButtons
+    atomLink={`/feeds/${type}/atom.xml`}
+    rssLink={`/feeds/${type}/rss.xml`}
+  />
+</div>

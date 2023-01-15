@@ -1,0 +1,57 @@
+@use "../design-system/utils";
+@use "../design-system/colors";
+@use "../design-system/typography/styles";
+@use "../design-system/typography/weights";
+@use "../design-system/theme/light";
+@use "../design-system/theme/dark";
+
+.policy.page.container {
+  .ui.hero.section>.container {
+    padding-bottom: 12px;
+  }
+
+
+  .ui.tab.buttons {
+    display: flex;
+    gap: 8px;
+
+    overflow-x: auto;
+
+    .item {
+      padding: 8px 12px;
+      @include styles.text-sm;
+      @include weights.semibold;
+
+      border-radius: 6px;
+      color: colors.$gray-500;
+      white-space: nowrap;
+    }
+
+    .item.active, .item:not(.active):hover {
+      background-color: colors.$primary-100;
+      color: colors.$primary-700;
+    }
+
+    .item.active:hover {
+      background-color: colors.$primary-200;
+      color: colors.$primary-700;
+
+    }
+
+
+  }
+}
+
+.dark .policy.page.container {
+  .ui.tab.buttons {
+    .item {
+      color: colors.$gray-300;
+    }
+
+    .item.active {
+      background-color: colors.$gray-600;
+      color: colors.$white;
+
+    }
+  }
+}

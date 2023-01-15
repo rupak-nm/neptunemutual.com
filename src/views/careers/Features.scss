@@ -1,0 +1,60 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+.ui.career.feature.list {
+  margin-top: 64px;
+  display: flex;
+  gap: 32px;
+  
+  @media (max-width: 767px) {
+    flex-direction: column;
+    margin-top: 48px;
+    gap: 40px;
+  }
+
+  .item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      margin-top: 20px;
+      color: light.$color;
+      @include styles.text-xl;
+      @include weights.semibold;
+      
+      @media (max-width: 767px) {
+        margin-top: 16px;
+        @include styles.text-lg;
+      }
+    }
+
+    .content {
+      margin-top: 8px;
+      color: light.$secondary-color;
+    
+      @include styles.text-md;
+      @include weights.regular;
+    
+      @media (max-width: 767px) {
+        margin-top: 4px;
+      }
+    }
+  }
+}
+
+.dark .ui.career.feature.list {
+  .item {
+    .title {
+      color: dark.$color;
+    }
+
+    .content {
+      color: dark.$secondary-color;
+    }
+  }
+}

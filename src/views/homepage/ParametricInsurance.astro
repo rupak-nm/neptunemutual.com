@@ -1,0 +1,29 @@
+---
+import Features from "./parametric-insurance/Features.astro";
+
+import { features } from "./parametric-insurance/data";
+
+const t = (x: string): string => x;
+---
+
+<div class="parametric insurance section">
+  <div class="inner container">
+    <div class="text container">
+      <h2>
+        <div class="sub heading">
+          {t("Reduce Your Exposure to Crypto Market Risks")}
+        </div>
+        <div class="heading">{t("Decentralized Parametric Insurance")}</div>
+      </h2>
+      <div class="supporting text">
+        {
+          t(
+            "Neptune Mutual Protocol offers a couple of different flavors of decentralized parametric insurances."
+          )
+        }
+      </div>
+    </div>
+
+    <Features features={features} />
+  </div>
+</div>

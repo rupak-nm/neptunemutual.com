@@ -1,0 +1,19 @@
+---
+import ArticleCard from "../../components/ArticleCard.astro";
+
+const t = (x: string): string => x;
+
+interface Props {
+  posts: Article[];
+}
+
+const { posts } = Astro.props;
+---
+
+<div class="featured posts full width container">
+  <h2>{t("Featured Posts")}</h2>
+
+  <div class="grid container">
+    {posts.map((post: any) => <ArticleCard type="blog" post={post} />)}
+  </div>
+</div>

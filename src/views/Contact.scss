@@ -1,0 +1,227 @@
+@use "../design-system/utils";
+@use "../design-system/colors";
+@use "../design-system/shadows";
+@use "../design-system/typography/styles";
+@use "../design-system/typography/weights";
+@use "../design-system/theme/light";
+@use "../design-system/theme/dark";
+
+
+.contact.form {
+  max-width: 680px;
+  margin: 0 auto;
+  margin-top: 64px;
+  margin-bottom: 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  .fields {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 32px;
+
+    @media (max-width: 767px) {
+      grid-auto-flow: row;
+    }
+  }
+
+  .ui.blockchain.selection.list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+
+    @media (max-width: 767px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 575px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+
+    .item {
+      display: flex;
+      padding: 8px 16px;
+      border: 1px solid colors.$gray-300;
+      border-radius: 8px;
+      align-items: center;
+      justify-content: space-between;
+
+      &:not(.selected) {
+        .checkbox i {
+          display: none;
+        }
+      }
+
+      &.selected {
+        .checkbox {
+          border-color: colors.$primary-600;
+          background-color: colors.$primary-600;
+          color: colors.$white;
+        }
+      }
+
+
+      &:not(.selected):hover {
+        border-color: colors.$primary-300;
+
+        .checkbox {
+          background-color: colors.$primary-100;
+          border-color: colors.$primary-600;
+        }
+      }
+
+      .blockchain {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .label {
+          @include styles.text-md;
+          @include weights.medium;
+        }
+      }
+
+      .checkbox {
+        height: 16px;
+        width: 16px;
+        border-radius: 16px;
+        border: 1px solid colors.$gray-300;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+
+  .privacy.policy.field {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+
+    input {
+      height: 20px;
+      width: 20px;
+      border-radius: 6px;
+      border: 1px solid colors.$gray-300;
+    }
+  }
+
+  .captcha.field {
+    background-color: colors.$gray-100;
+    border: 1px solid colors.$gray-300;
+    width: 302px;
+    height: 74px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+
+    label {
+      @include utils.sr-only;
+    }
+  }
+
+  .success.message {
+    margin-top: 24px;
+    @include styles.text-lg;
+    @include weights.semibold;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    color: colors.$success-700;
+
+    >.icon {
+      background-color: colors.$success-600;
+      height: 24px;
+      width: 24px;
+      border-radius: 16px;
+      color: colors.$white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+  }
+
+  .error.message {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    @include styles.text-lg;
+    @include weights.medium;
+
+    .details {
+      @include weights.semibold;
+      color: colors.$error-700;
+    }
+  }
+}
+
+
+.dark .contact.form {
+  .ui.blockchain.selection.list {
+    .item {
+      border: 1px solid colors.$gray-500;
+      background-color: colors.$gray-700;
+
+      &.selected {
+        .checkbox {
+          border-color: colors.$primary-600;
+          background-color: colors.$primary-600;
+          color: colors.$white;
+        }
+      }
+
+
+      &:not(.selected):hover {
+        border: 1px solid colors.$gray-400;
+        background-color: colors.$gray-600;
+
+        .checkbox {
+          background-color: colors.$gray-500;
+          border-color: colors.$gray-400;
+        }
+      }
+
+
+      .checkbox {
+        border: 1px solid colors.$gray-500;
+      }
+    }
+  }
+
+  .privacy.policy.field {
+    input {
+      border: 1px solid colors.$gray-300;
+    }
+  }
+
+  .captcha.field {
+    background-color: colors.$gray-100;
+    border: 1px solid colors.$gray-300;
+
+    label {
+      color: colors.$white;
+      background-color: colors.$black;
+    }
+  }
+
+  .success.message {
+    color: colors.$success-500;
+
+    >.icon {
+      background-color: colors.$success-600;
+    }
+  }
+
+  .error.message .details {
+    color: colors.$error-400; 
+  }
+}
+

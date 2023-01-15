@@ -1,0 +1,47 @@
+---
+import Icon from "../../../elements/Icon.astro";
+
+interface Props {
+  options: string[];
+  label: string;
+  iconVariant: string;
+}
+
+const { options, label, iconVariant } = Astro.props;
+---
+
+<div class="ui dropdown filter script only container">
+  <p class="label">{label}</p>
+
+  <div class="button container">
+    <button type="button" id="CareersFilterButton">
+      <div>
+        {iconVariant && <Icon variant={iconVariant} size="lg" />}
+        <span>Select..</span>
+      </div>
+      <Icon variant="chevron-down" size="lg" />
+    </button>
+
+    <div class="menu" data-open="false">
+      <ul>
+        {
+          options.map((option, i) => {
+            return (
+              <li
+                data-department={option}
+                tabindex="0"
+                data-selected={i === 0 ? "true" : "false"}
+              >
+                <div>
+                  {iconVariant && <Icon variant={iconVariant} size="lg" />}
+                  <span>{option}</span>
+                </div>
+                {i === 0 && <Icon variant="check" size="lg" />}
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </div>
+</div>

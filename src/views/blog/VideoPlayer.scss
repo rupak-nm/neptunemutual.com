@@ -1,0 +1,97 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+a.video.player {
+  flex: 1;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: left;
+  gap: 24px;
+
+  .thumbnail {
+    overflow: hidden;
+    position: relative;
+    height: 216px;
+    padding: 0px;
+    
+    @media (max-width: 767px) {
+      height: unset;
+    }
+  
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      object-position: 5% center;
+    }
+  }
+
+  &:hover {
+    .overlay svg {
+      fill-opacity: 0.5;
+    }
+  }
+
+  .overlay {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.3);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: colors.$white;
+    fill-opacity: 0.3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    svg {
+      width: 72px;
+      height: 72px;
+    }  
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;    
+  }
+
+  h3 {
+    margin-top: 8px;
+    color:light.$color;
+  
+    @include styles.display-xs;
+    @include weights.semibold;
+
+    
+    @media (max-width: 767px) {
+      @include styles.text-xl;
+    }    
+  }
+
+  time {
+    color: colors.$gray-500;
+
+    @include styles.text-sm;
+    @include weights.semibold;
+    
+  }
+}
+
+.dark a.video.player {
+  h3 {
+    color:dark.$color;
+  }
+
+  time {
+    color: colors.$gray-400;  
+  }
+}

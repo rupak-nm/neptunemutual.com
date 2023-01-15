@@ -1,0 +1,102 @@
+---
+import Breadcrumb from "../elements/Breadcrumb.astro";
+import Button from "../elements/buttons/Button.astro";
+import ContentViewer from "../components/ContentViewer.astro";
+import HeaderSection from "../components/HeaderSection.astro";
+
+import { parseContent } from "../../util/content-viewer";
+import { normalizeUrl } from "../../util/url";
+
+interface Props {
+  vacancy: Vacancy;
+}
+
+const { vacancy } = Astro.props;
+
+const { title, intro, toc, parsedHtml, pageUrl } = await parseContent(
+  "careers",
+  ["descriptionHtml"],
+  vacancy
+);
+
+const t = (x: string): string => x;
+
+const items = [
+  {
+    link: "/",
+    name: "Home",
+  },
+  {
+    link: "/careers",
+    name: t("Careers"),
+  },
+  {
+    link: `/careers/${vacancy.slug}`,
+    name: t(vacancy.title),
+  },
+];
+---
+
+<div class="vacancy detail container">
+  <HeaderSection color={"basic"} heading={title} alignment={"center"} />
+
+  <div class="main wrapper">
+    <ContentViewer
+      type="careers"
+      title={title}
+      intro={intro}
+      toc={toc}
+      html={parsedHtml}
+      pageUrl={pageUrl}
+      showSocial={true}
+    >
+      <Fragment slot="pre">
+        <Breadcrumb items={items} />
+
+        <div class="job details">
+          <div class="item">
+            <span class="label">
+              {t("Department")}
+            </span>
+            <span class="value">{vacancy.department}</span>
+          </div>
+          <div class="item">
+            <span class="label">
+              {t("Job Type")}
+            </span>
+            <span class="value">{vacancy.type}</span>
+          </div>
+          <div class="item">
+            <span class="label">
+              {t("Location")}
+            </span>
+            <span class="value">{vacancy.location}</span>
+          </div>
+        </div>
+
+        <div class="about this vacancy">
+          <span></span>
+          <div>
+            {t("About this Vacancy")}
+          </div>
+        </div>
+      </Fragment>
+
+      <Fragment slot="post">
+        <div class="button container">
+          <Button
+            variant={"primary"}
+            type={"anchor"}
+            target="_blank"
+            href={normalizeUrl(vacancy.form)}
+            rel="noreferrer noopener nofllow"
+            size="lg"
+            iconTrailing="arrow-square-up-right"
+          >
+            {t("Submit My Job Application")}
+          </Button>
+        </div>
+      </Fragment>
+    </ContentViewer>
+  </div>
+</div>

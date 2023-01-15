@@ -1,0 +1,63 @@
+@use "../../../design-system/theme/dark";
+@use "../../../design-system/theme/light";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+
+.lets.buidl.feature.list {
+  margin-top: 96px;
+  display: flex;
+  gap: 32px;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    margin-top: 48px;
+    gap: 40px;
+  }
+
+  .item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    h3 {
+      margin-top: 20px;
+      color: light.$color;
+
+      @include styles.text-xl;
+      @include weights.semibold;
+
+      @media (max-width: 767px) {
+        margin-top: 16px;
+        @include styles.text-lg;
+        @include weights.semibold;
+      }
+    }
+
+    p {
+      margin-top: 8px;
+      color: light.$secondary-color;
+
+      @include styles.text-md;
+      @include weights.regular;
+
+      @media (max-width: 767px) {
+        margin-top: 4px;
+      }
+    }
+  }
+}
+
+.dark .lets.buidl.feature.list {
+  .item {
+
+    h3 {
+      color: dark.$color;
+    }
+
+    p {
+      color: dark.$secondary-color;
+    }
+  }
+}

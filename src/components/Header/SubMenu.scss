@@ -1,0 +1,80 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+@use "../../design-system/shadows";
+
+.sub.menu.container {
+  position: fixed;
+  top: var(--header-height);
+  left: 0px;
+  max-height: 80vh;
+  z-index: 1;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: light.$primary-background-color;
+  display: flex;
+  border-top: 1px solid colors.$gray-100;
+  box-shadow: shadows.$lg;
+
+  .left.space {
+    flex: 1;
+    background-color: light.$primary-background-color;
+  }
+
+  .right.space {
+    flex: 1;
+    background-color: colors.$gray-50;
+  }
+
+  .content {
+    flex: 1 1 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .content .non.video.sections {
+    padding: 32px;
+    display: flex;
+    gap: 24px;
+    flex: 2;
+    background-color: light.$primary-background-color;
+  }
+
+  .content .video.sections {
+    padding: 32px;
+    padding-left: 20px;
+    background-color: colors.$gray-50;
+    flex: 1;
+    min-width: 560px;
+  }
+
+  &[data-open="false"] {
+    display: none;
+  }
+
+  @media (max-width: 1023px) {
+    display: none;
+  }
+}
+
+.dark .sub.menu.container {
+  background-color: dark.$primary-background-color;
+  border-top: 1px solid colors.$gray-700;
+  box-shadow: shadows.$shadow-2xl;
+
+  .right.space,
+  .content .video.sections {
+    background-color: colors.$gray-900;
+  }
+
+  .left.space,
+  .content .non.video.sections {
+    background-color: dark.$primary-background-color;
+  }
+}

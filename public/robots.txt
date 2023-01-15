@@ -1,0 +1,33 @@
+sitemap: https://neptunemutual.com/sitemap.xml
+Sitemap: https://neptunemutual.com/sitemap.xml
+
+User-agent: rogerbot
+Crawl-delay: 10
+
+User-agent: AhrefsBot
+Crawl-delay: 10
+Disallow: /blog/search/*
+Disallow: /blog/tag/*
+Disallow: /blog/page/*
+Disallow: /pressroom/tag/*
+Disallow: /pressroom/page/*
+Disallow: /policies/*
+Disallow: /videos/*
+Disallow: /cdn/*
+Disallow: /assets/*
+Allow: /
+Allow: /blog/*
+Allow: /pressroom/*
+
+
+User-agent: *
+Allow: /
+Allow: /blog/*
+Allow: /pressroom/*
+Disallow: /blog/search/*
+Disallow: /blog/tag/*
+Disallow: /blog/page/*
+Disallow: /pressroom/tag/*
+Disallow: /pressroom/page/*
+Disallow: /policies/*
+Disallow: /videos/*

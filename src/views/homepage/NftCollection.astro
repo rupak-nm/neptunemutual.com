@@ -1,0 +1,42 @@
+---
+import Button from "../../elements/buttons/Button.astro";
+
+const t = (x: string): string => x;
+---
+
+<div class="nft collection section">
+  <div class="inner container">
+    <div class="text and cta">
+      <div class="text container">
+        <h2>
+          <div class="sub heading">{t("Coming Soon")}</div>
+          <div class="heading">{t("NFT Series Collection")}</div>
+        </h2>
+        <p>
+          {
+            t(
+              "We are developing an amazing collection of NFTs for our community. You can expect both tradeable and soulbound versions, some of which may have an economic benefit and utility within the marketplace. Be sure to join our Discord community to keep up to date with our NFT news."
+            )
+          }
+        </p>
+      </div>
+      <Button
+        href="https://discord.com/invite/2qMGTtJtnW"
+        type={"anchor"}
+        variant={"primary"}
+        size={"xl"}
+        iconTrailing="discord"
+      >
+        {t("Join Our Discord")}
+      </Button>
+    </div>
+
+    <div class="image container">
+      <img
+        src="/assets/images/nft/promo.webp"
+        alt="A banner of NFT cards with unique Neptune Mutual NFT character images, names, and descriptions."
+        loading="lazy"
+      />
+    </div>
+  </div>
+</div>

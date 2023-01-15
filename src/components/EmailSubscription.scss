@@ -1,0 +1,79 @@
+@use "../design-system/utils";
+@use "../design-system/colors";
+@use "../design-system/typography/styles";
+@use "../design-system/typography/weights";
+@use "../design-system/theme/light";
+@use "../design-system/theme/dark";
+
+
+.email.subscription.container {
+  display: flex;
+  flex-direction: column;  
+
+  .form.fields {
+    flex:1;
+    max-width: 360px;
+  
+    @media (max-width: 767px) {
+      max-width: none;
+    }    
+  }
+
+  .input.with.message{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form.container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+  
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-items: stretch;
+    }    
+  }
+
+  .feed {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+    gap:6px;    
+
+
+    .atom, .rss  {
+      display: flex;
+      align-items: center;
+      gap:6px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: colors.$white;
+
+      @include styles.text-sm;
+      @include weights.semibold;
+
+      cursor: pointer;
+      box-shadow: 0px 20px 24px -4px rgba(16, 24, 40, 0.08), 0px 8px 8px -4px rgba(16, 24, 40, 0.03);    
+    }
+
+    .atom {
+      background-color: colors.$gray-600;    
+    }
+
+    .rss {
+      background-color: colors.$orange-500;
+    }
+  }
+}
+
+.dark .email.subscription.container {
+  .feed {
+    .atom {
+      background-color: colors.$gray-800;    
+    }
+  }
+}

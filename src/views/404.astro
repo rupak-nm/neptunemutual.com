@@ -1,0 +1,29 @@
+---
+import Button from "../elements/buttons/Button.astro";
+---
+
+<div class="full width container notfound">
+  <div class="left container">
+    <h1>
+      <span>404 Error</span>
+      <span>Something’s gone missing...</span>
+    </h1>
+    <p>Sorry, the page you are looking for doesn't exist or has been moved.</p>
+    <Button
+      type={"anchor"}
+      href="/"
+      rel="noopener"
+      size={"2xl"}
+      iconTrailing="arrow-narrow-right"
+      variant={"primary"}
+    >
+      Take me to hompage
+    </Button>
+  </div>
+  <div class="right container">
+    <img
+      src="/assets/images/hero/not-found-alert.webp"
+      alt="A 404 Not Found Image Showing a Three-Dimensional Traffic Cone"
+    />
+  </div>
+</div>

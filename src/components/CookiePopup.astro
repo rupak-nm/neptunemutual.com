@@ -1,0 +1,40 @@
+---
+import Button from "../elements/buttons/Button.astro";
+import Icon from "../elements/Icon.astro";
+
+const t = (x: string) => x;
+---
+
+<div class="cookie popup container initially hidden">
+  <div class="content container">
+    <div class="close button container">
+      <button class="close button">
+        <span class="sr-only">Close Popup</span>
+        <Icon variant="x-close" size={"md"} />
+      </button>
+    </div>
+
+    <div class="text container">
+      <h2 class="title">{t("Cookie Settings")}</h2>
+      <p class="description">
+        {
+          t(
+            "By clicking “Accept All Cookies”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage and assist in our marketing efforts."
+          )
+        }
+      </p>
+
+      <a class="link" href="/policies/terms-of-use/">{t("Terms of Use")}</a>
+    </div>
+
+    <div class="actions container">
+      <Button classname={"accept button"} variant={"primary"} size="xl">
+        {t("Accept")}
+      </Button>
+
+      <button class={"decline button"}>
+        {t("Decline")}
+      </button>
+    </div>
+  </div>
+</div>

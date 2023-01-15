@@ -1,0 +1,39 @@
+@import "../styles/global.scss";
+
+
+@import "../elements/Tags.scss";
+@import "../elements/buttons/Button.scss";
+@import "../elements/buttons/_base/index.scss";
+@import "../elements/buttons/PrimaryButton.scss";
+@import "../elements/FeaturedIcon.scss";
+
+
+@import "../components/Header/Header.scss";
+@import "../components/Footer.scss";
+@import "../components/ArticleCard.scss";
+@import "../components/Slider.scss";
+@import "../components/Header/LanguageSelector.scss";
+@import "../components/Header/ThemeSelector.scss";
+@import "../components/Header/Navigation.scss";
+@import "../components/Header/SubMenu.scss";
+@import "../components/Header/Section.scss";
+@import "../components/Header/VideoSection.scss";
+@import "../components/VideoModal.scss";
+@import "../components/Header/HamburgerButton.scss";
+@import "../components/Header/MobileMenu.scss";
+@import "../components/Header/MobileSection.scss";
+@import "../components/CookiePopup.scss";
+
+
+@import "../views/homepage/Hero.scss";
+@import "../views/homepage/hero/PressroomAnnouncement.scss";
+@import "../views/homepage/LetsBuidl.scss";
+@import "../views/homepage/lets-buidl/Features.scss";
+@import "../views/homepage/NftCollection.scss";
+@import "../views/homepage/ParametricInsurance.scss";
+@import "../views/homepage/parametric-insurance/Features.scss";
+@import "../views/homepage/parametric-insurance/FeatureTabContent.scss";
+@import "../views/homepage/Partners.scss";
+@import "../views/homepage/SecuringApps.scss";
+@import "../views/homepage/securing-apps/Marquee.scss";
+@import "../views/homepage/WhatsNew.scss";

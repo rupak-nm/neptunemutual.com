@@ -1,0 +1,41 @@
+---
+import ArticleCard from "../../components/ArticleCard.astro";
+import Button from "../../elements/buttons/Button.astro";
+import Slider from "../../components/Slider.astro";
+
+import * as api from "../../../service/api";
+
+const posts = await api.getEnumerable<Article>("blog", 5, 0);
+const t = (x: string): string => x;
+---
+
+<div class="whats new section">
+  <div class="inner container">
+    <div class="text and cta">
+      <div class="text container">
+        <h2 id="whats-new">{t("What’s New?")}</h2>
+        <p class="supporting text">
+          {t("The latest news, updates, and announcements from our team.")}
+        </p>
+      </div>
+
+      <div class="button container">
+        <Button type="anchor" href="/blog/" variant={"primary"} size={"xl"}>
+          {t("View All Posts")}
+        </Button>
+      </div>
+
+      <Slider gap={16}>
+        <Fragment>
+          {
+            posts.map((post) => {
+              return (
+                <ArticleCard className="with slider" type="blog" post={post} />
+              );
+            })
+          }
+        </Fragment>
+      </Slider>
+    </div>
+  </div>
+</div>

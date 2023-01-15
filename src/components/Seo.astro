@@ -1,0 +1,53 @@
+---
+import * as dns from "../../util/dns";
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  og?: {
+    type?: "website";
+    locale?: string;
+    image?: string;
+    imageAlt?: string;
+  };
+  twitter?: {
+    title?: string;
+    description?: string;
+    image?: string;
+    imageAlt?: string;
+  };
+}
+
+const { title, description, noindex, twitter, og } = Astro.props;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+
+<link rel="canonical" href={dns.getCanonical(Astro)} />
+<meta property="og:locale" content={og?.locale || "en"} />
+<meta property="og:type" content={og?.type || "website"} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={dns.qualifyURL(og?.image)} />
+<meta property="og:url" content={dns.getCanonical(Astro)} />
+
+<meta property="twitter:site" content="@neptunemutual" />
+<meta property="twitter:title" content={twitter?.title || title} />
+<meta
+  property="twitter:description"
+  content={twitter?.description || description}
+/>
+<meta property="twitter:creator" content="@neptunemutual" />
+<meta property="twitter:card" content="summary_large_image" />
+<meta
+  property="twitter:image"
+  content={dns.qualifyURL(twitter?.image || og?.image)}
+/>
+<meta
+  property="twitter:image:alt"
+  content={twitter?.imageAlt || og?.imageAlt}
+/>
+
+{noindex && <meta name="robots" content="noindex" />}

@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import NotFound from "../views/404.astro";
+import Seo from "../components/Seo.astro";
+
+import styles from "./404.scss?inline";
+---
+
+<BaseLayout headerStyle={"default"}>
+  <Seo
+    slot="seo"
+    title="Could Not Find the Page / Neptune Mutual"
+    description="The page you requested either does not exist or has been deleted"
+    og={{
+      image: "/assets/images/meta/og/home.png",
+      imageAlt:
+        "The page you requested either does not exist or has been deleted",
+    }}
+    noindex
+  />
+  <style slot="header" is:inline set:html={styles}></style>
+
+  <NotFound />
+</BaseLayout>

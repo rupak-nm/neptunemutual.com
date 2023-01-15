@@ -1,0 +1,264 @@
+@use "../design-system/utils";
+@use "../design-system/colors";
+@use "../design-system/shadows";
+@use "../design-system/typography/styles";
+@use "../design-system/typography/weights";
+@use "../design-system/theme/light";
+@use "../design-system/theme/dark";
+
+
+.neptune.mutual.ecosystem {
+  .ui.feature.list {
+    display: flex;
+    gap: 24px;
+    padding-left: 24px;
+    transition: transform 0.4s ease-in;
+    padding: 32px 0;
+    overflow: auto;
+  }
+
+  .newsletter.signup {
+    margin-top:112px;
+  }
+
+
+  .ui.buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    
+    @media (max-width: 767px) {
+      // flex-direction: column;
+      display: none;
+    }
+
+
+    .button.active,
+    .button:hover {
+      color: colors.$primary-700 !important;
+      background: colors.$primary-50;
+    }
+
+    .button.active:hover {
+      background: colors.$primary-100;
+    }
+
+  }
+
+  .item {
+    transition: all 100ms ease-in;
+
+    &:first-child {
+      padding-left: 4px;
+    }
+
+    &:last-child {
+      padding-right: 4px;
+    }
+    
+    // @todo: this is creating a conflict
+    &:not(:first-child):not(:last-child):hover {
+      transform: scale(1.025);
+    }
+
+    .box {
+      padding: 24px;
+      border-radius: 8px;
+      background: colors.$white;
+      border: 1px solid colors.$gray-200;
+      box-shadow: shadows.$xl;
+      width: 384px;
+
+      @media (min-width: 376px) {
+        min-height: 192px;
+      }
+
+      @media (max-width: 1023px) {
+        width: calc(50vw - 48px);
+      }
+
+      @media (max-width: 767px) {
+        width: calc(100vw - 32px);
+      }
+
+      p {
+        margin-top: 16px;
+        color: light.$secondary-color;
+        @include styles.text-md;
+        @include weights.regular;
+
+      }
+    }
+  }
+
+  .ui.dropdown {
+    display: none;
+    
+    @media (max-width: 767px) {
+      display: flex;
+    }
+  }
+
+  .ui.dropdown .button.container {
+    position: relative;
+    width: 100%;
+    
+    button {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid colors.$gray-300;
+      color: colors.$gray-900;
+      border-radius: 8px;
+      cursor: pointer;
+      justify-content: space-between;
+      @include styles.text-md;
+      @include weights.regular;
+
+      &:focus,
+      &:focus-visible {
+        box-shadow: shadows.$xs, 0px 0px 0px 4px colors.$primary-100;
+      }
+
+      svg {
+        color: colors.$gray-500;
+      }
+
+      &, & > div {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      div {
+        overflow: hidden;
+
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      & span[data-selected="false"] {
+        display: none;
+      }
+    }
+
+    .menu {
+      display: none;
+      width: 100%;
+      position: absolute;
+      top: calc(100% + 8px);
+      background-color: colors.$white;
+      box-shadow: shadows.$lg;
+      border-radius: 8px;
+      z-index: 10;
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 6px;
+
+        li {
+          justify-content: space-between;
+          padding: 10px 10px 10px 8px;
+          border-radius: 6px;
+          cursor: pointer;
+          color: colors.$gray-900;
+          overflow: hidden;
+          white-space: nowrap;
+
+          @include styles.text-md;
+          @include weights.regular;
+
+          &:hover {
+            background-color: colors.$gray-50;
+          }
+
+          &, & > div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+          }
+
+          div {
+            overflow: hidden;
+
+            span {
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+          }
+
+          &[data-selected="false"] svg {
+            display: none;
+          }
+        }
+      }
+
+      &[data-open="true"] {
+        display: block;
+      }
+    }
+  }
+
+}
+
+.dark .neptune.mutual.ecosystem {
+  .item .box {
+    background: colors.$gray-700;
+    border: 1px solid colors.$gray-700;
+
+    p {
+      margin-top: 16px;
+      color: dark.$secondary-color;
+
+    }
+  }
+
+  .ui.buttons {
+    .button.active, 
+    .button:hover {
+      color: colors.$white !important;
+      background: colors.$gray-600 !important;
+    }
+
+    .button:focus {
+      color: colors.$white !important;
+    }
+
+    .button *:hover {
+      color: inherit !important;
+    }
+  }
+
+  .ui.dropdown .button.container {
+    button {
+      border: 1px solid colors.$gray-700;
+      background-color: colors.$gray-700;
+
+      &:focus,
+      &:focus-visible {
+        box-shadow: shadows.$xs, 0px 0px 0px 4px colors.$primary-800;
+      }
+      
+      &, & svg {
+        color: colors.$white
+      }
+    }
+
+    .menu {
+      border: 1px solid colors.$gray-600;
+      background-color: colors.$gray-700;
+
+      ul li {
+        color: colors.$white;
+
+        &:hover {
+          background-color: colors.$gray-600;
+        }
+      }
+    }
+  }
+}

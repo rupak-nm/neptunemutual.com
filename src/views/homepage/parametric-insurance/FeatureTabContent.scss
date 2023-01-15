@@ -1,0 +1,36 @@
+@use "../../../design-system/utils";
+@use "../../../design-system/colors";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/theme/light";
+@use "../../../design-system/theme/dark";
+
+.feature.tab.content {
+  h3 {
+    margin-top: 8px;
+    color: light.$color;
+
+    @include styles.text-xl;
+    @include weights.semibold;
+  }
+
+  p {
+    margin-top: 8px;
+    color: colors.$gray-600;
+
+    @include styles.text-md;
+    @include weights.regular;
+
+  }
+}
+
+.dark .feature.tab.content {
+
+  h3 {
+    color: dark.$color;
+  }
+
+  p {
+    color: colors.$gray-300;
+  }
+}

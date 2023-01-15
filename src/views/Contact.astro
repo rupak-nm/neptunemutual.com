@@ -1,0 +1,198 @@
+---
+import Button from "../elements/buttons/Button.astro";
+import HeaderSection from "../components/HeaderSection.astro";
+import Input from "../elements/Input.astro";
+import Icon from "../elements/Icon.astro";
+
+import { blockchains, contactMethods, purposes, roles } from "../data/contact";
+import { env } from "../../util/env";
+
+const t = (x: string): string => x;
+
+const recaptchaKey = env("RECAPTCHA_SITE_KEY");
+---
+
+<HeaderSection
+  color={"basic"}
+  alignment={"center"}
+  heading={t("Get in Touch")}
+  subheading={t("Contact Us")}
+>
+  <Fragment slot="supporting-text">
+    We’d love to hear from you. Please fill out this form.
+  </Fragment>
+</HeaderSection>
+
+<div class="full width container">
+  <form class="contact form" onsubmit="return false;">
+    <div class="fields">
+      <div class="field">
+        <Input
+          id="FirstnameInputText"
+          maxlength={128}
+          data-member="firstname"
+          type={"text"}
+          required
+          placeholder="John"
+          label="First Name"
+        />
+      </div>
+      <div class="field">
+        <Input
+          id="LastnameInputText"
+          data-member="lastname"
+          type={"text"}
+          required
+          maxlength={128}
+          placeholder="Doe"
+          label="Last Name"
+        />
+      </div>
+    </div>
+
+    <Input
+      id="EmailInputEmail"
+      data-member="email"
+      type={"email"}
+      required
+      maxlength={256}
+      placeholder="john@example.com"
+      label="Email"
+    />
+
+    <Input
+      id="CompanyInputText"
+      data-member="company"
+      type={"text"}
+      required
+      placeholder="Example Inc."
+      label="What is the name of your business or project?"
+    />
+
+    <Input
+      id="BlockchainsInputText"
+      data-member="blockchains"
+      type={"text"}
+      required
+      maxlength={196}
+      readonly
+      placeholder="Choose relevant blockchains from the list"
+      label="What blockchains are you currently building on?"
+    />
+    <div class="ui blockchain selection list">
+      {
+        blockchains.map((blockchain) => {
+          return (
+            <button
+              type="button"
+              class="item"
+              data-blockchain={blockchain.value}
+            >
+              <div class="blockchain">
+                <Icon size={"md"} variant={blockchain.iconVariant} />
+                <div class="label">{blockchain.text}</div>
+              </div>
+              <div class="checkbox">
+                <Icon size={"xs"} variant="check" />
+              </div>
+            </button>
+          );
+        })
+      }
+    </div>
+
+    <Input
+      id="WebsiteInputUrl"
+      data-member="website"
+      type={"url"}
+      required
+      maxlength={256}
+      placeholder="https://example.com"
+      label="What is the website for your business or project?"
+    />
+
+    <Input
+      id="PurposeDropdown"
+      data-member="purpose"
+      type={"select"}
+      options={purposes.map((x) => ({ key: x, value: x }))}
+      required
+      placeholder="Choose your reason for contacting us"
+      label="Please select a purpose of this contact request"
+    />
+
+    <Input
+      id="ContactMethodDropdown"
+      data-member="contactMethod"
+      type={"select"}
+      options={contactMethods.map((x) => ({ key: x, value: x }))}
+      required
+      placeholder="Tell us how we should respond to you"
+      label="What’s the best way to get in touch with you?"
+    />
+    <Input
+      id="RoleDropdown"
+      data-member="role"
+      type={"select"}
+      options={roles.map((x) => ({ key: x, value: x }))}
+      required
+      placeholder="Choose the most relevant role"
+      label="What role best describes you?"
+    />
+
+    <Input
+      id="MessageTextArea"
+      data-member="message"
+      type={"textarea"}
+      required
+      maxlength={1024}
+      placeholder="Kindly write your message"
+      label="Message"
+    />
+
+    <div class="privacy policy field">
+      <input type="checkbox" id="AcceptInputCheckbox" required />
+      <label for="AcceptInputCheckbox">
+        I accept the Neptune Mutual <a href="/policies/privacy-policy/"
+          >privacy policy</a
+        >
+      </label>
+    </div>
+
+    <div class="captcha field">
+      <label for="g-recaptcha-response">Google recaptcha field</label>
+      <div class="g-recaptcha" data-sitekey={recaptchaKey}></div>
+    </div>
+
+    <Button
+      id="SendMessageButton"
+      type={"button"}
+      variant={"primary"}
+      size={"xl"}
+      iconTrailing="send-03"
+    >
+      Send Message
+    </Button>
+
+    <div class="initially hidden error message">
+      Your message couldn't be sent due to some problem. The following error was
+      reported by the server:
+
+      <div class="details">The firstname is required</div>
+    </div>
+
+    <div class="initially hidden success message">
+      <div class="icon">
+        <Icon variant="check" size={"sm"} />
+      </div>
+      Thank you for reaching out. We have received your message.
+    </div>
+  </form>
+</div>
+
+<script
+  src="https://www.google.com/recaptcha/api.js?trustedtypes=true"
+  async
+  defer
+  fetchpriority="low"
+></script>

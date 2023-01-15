@@ -1,0 +1,74 @@
+---
+import Button from "./buttons/Button.astro";
+
+import { getPagination } from "../../util/pagination";
+import { normalizeUrl } from "../../util/url";
+
+interface Props {
+  type: "blog" | "pressroom";
+  tag?: Tag;
+  totalPages?: number;
+  currentPage?: number;
+}
+
+const { type, tag, totalPages, currentPage } = Astro.props;
+
+const prefix = [null, type, tag?.slug ? "tag" : null, tag?.slug, "page"]
+  .filter((x) => !!x)
+  .join("/");
+
+const { previous, pages, next } = getPagination(totalPages, currentPage);
+const previousHref = previous ? `/${prefix}/${previous}` : undefined;
+const nextHref = next ? `/${prefix}/${next}` : undefined;
+
+const t = (x: string): string => x;
+---
+
+<div class="ui pagination">
+  <div class="container">
+    <Button
+      type={"anchor"}
+      href={normalizeUrl(previousHref)}
+      variant={"link-color"}
+      iconLeading="arrow-left"
+      disabled={parseInt((currentPage || 0).toString()) <= 1}
+    >
+      {t("Previous")}
+    </Button>
+
+    <div class="page numbers">
+      {
+        pages &&
+          pages.map((page) => {
+            return page ? (
+              <Button
+                classname={
+                  parseInt((currentPage || 0).toString()) === page
+                    ? "active"
+                    : ""
+                }
+                type={"anchor"}
+                href={`/${prefix}/${page}/`}
+                variant={"link-color"}
+              >
+                {page}
+              </Button>
+            ) : (
+              <span class="continues"> ... </span>
+            );
+          })
+      }
+    </div>
+
+    <Button
+      type={"anchor"}
+      href={normalizeUrl(nextHref)}
+      variant={"link-color"}
+      iconTrailing="arrow-right"
+      disabled={parseInt((currentPage || 0).toString()) ===
+        parseInt((totalPages || 0).toString())}
+    >
+      {t("Next")}
+    </Button>
+  </div>
+</div>

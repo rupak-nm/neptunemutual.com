@@ -1,0 +1,50 @@
+---
+import Icon from "../elements/Icon.astro";
+import Tags from "../elements/Tags.astro";
+
+import { normalizeUrl } from "../../util/url";
+
+interface Props {
+  title: string;
+  subtitle: string;
+  items: DetailedListViewItem[];
+}
+
+const { props } = Astro;
+---
+
+<div class="ui detailed list view full width container">
+  <div class="header">
+    <h2>{props.title}</h2>
+    <div class="sub heading">
+      {props.subtitle}
+    </div>
+  </div>
+
+  <div class="ui list view">
+    {
+      props.items.map((item) => {
+        return (
+          <a class="list item" href={normalizeUrl(item.href)}>
+            <div class="title and intro">
+              <div class="title with badge">
+                <h3 class="title">{item.title}</h3>
+
+                <div class="badges">
+                  <Tags tags={item.badges} />
+                </div>
+              </div>
+
+              <div class="intro">{item.intro}</div>
+            </div>
+
+            <div class="item and category">
+              {item.icon && <Icon variant={item.icon} size={"lg"} />}
+              <div class="category">{item.category}</div>
+            </div>
+          </a>
+        );
+      })
+    }
+  </div>
+</div>

@@ -1,0 +1,40 @@
+---
+import Audit from "../security/Audit.astro";
+import FeaturedIcon from "../../elements/FeaturedIcon.astro";
+import Slider from "../../components/Slider.astro";
+
+interface Props {
+  audits: Audit[];
+}
+
+const t = (x: string): string => x;
+const { audits } = Astro.props;
+---
+
+<div class="security review section full width container">
+  <div class="pitch">
+    <FeaturedIcon size="2xl" variant="shield-tick" />
+
+    <h2>{t("Security Reviews")}</h2>
+    <p class="text">
+      {
+        t(
+          "Our decentralized insurance marketplace has been subjected to a number of smart contract audits, as well as a code review and penetration testing"
+        )
+      }
+    </p>
+  </div>
+
+  <div class="results">
+    <Slider gap={16}>
+      <div class="security review list">
+        {
+          audits &&
+            audits.map((audit) => {
+              return <Audit className="with slider" audit={audit} />;
+            })
+        }
+      </div>
+    </Slider>
+  </div>
+</div>

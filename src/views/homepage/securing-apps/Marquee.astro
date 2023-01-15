@@ -1,0 +1,36 @@
+---
+import { apps } from "./apps";
+
+const t = (x: string): string => x;
+---
+
+<div class="ui securing apps marquee list">
+  <ul class="item">
+    {
+      apps.map((app) => {
+        return (
+          <li class="app">
+            {/* @note - alt is empty because the content of the image is 
+            already provided in context through text*/}
+            <Fragment set:html={app.src || app.name} />
+            <span>{app.name}</span>
+          </li>
+        );
+      })
+    }
+  </ul>
+  <ul aria-hidden="true" class="item">
+    {
+      apps.map((app) => {
+        return (
+          <li class="app">
+            {/* @note - alt is empty because the content of the image is 
+            already provided in context through text*/}
+            <Fragment set:html={app.src || app.name} />
+            <span>{app.name}</span>
+          </li>
+        );
+      })
+    }
+  </ul>
+</div>

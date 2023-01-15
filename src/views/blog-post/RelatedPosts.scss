@@ -1,0 +1,87 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+.related.posts.container {
+  padding-top: 96px;
+  padding-bottom: 96px;
+
+  @media (max-width: 767px) {
+    padding-top: 64px;
+    padding-bottom: 112px;
+  }
+
+  .text.and.cta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 32px;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+      gap: 48px;
+    }
+  }
+
+  .text.container {
+    max-width: 767px;
+  }
+
+  h2 {
+    color: light.$color;
+
+    @include styles.display-xs;
+    @include weights.semibold;
+
+    @media (max-width: 767px) {
+      @include styles.display-sm;
+
+    }
+  }
+
+  .related.posts:not(.container) {
+    display: flex;
+    gap: 32px;
+    width: 100%;
+
+    @media (max-width: 767px) {
+      gap: 48px;
+      flex-direction: column;
+      order: 1;
+    }
+  }
+
+  .single.card {
+    flex: 1;
+
+
+    .article.card.container {
+      .image.container {
+        height: unset;
+      }
+
+      .tags.container {
+        margin-top: 24px;
+      }
+    }
+  }
+
+  .button.container {
+    @media (max-width: 767px) {
+      order: 2;
+    }
+  }
+}
+
+.dark .related.posts.container {
+
+  h2 {
+    color: dark.$color;
+  }
+}

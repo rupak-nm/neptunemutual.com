@@ -1,0 +1,101 @@
+---
+import Button from "../elements/buttons/Button.astro";
+
+import { slugify } from "../../util/slug";
+import { normalizeUrl } from "../../util/url";
+
+interface AnchorAttributes {
+  href: string;
+  text: string;
+  rel?: string;
+  size: "2xl" | "xl" | "lg" | "md" | "sm" | "xs";
+  target?: "_blank" | "_self" | "_top" | "_parent";
+  iconLeading?: string;
+  iconTrailing?: string;
+}
+
+interface Props {
+  heading: string;
+  subheading?: string;
+  subheadingTag?: {
+    color: string;
+  };
+  color: "default" | "basic";
+  alignment: "center" | "left" | "space between";
+  primary?: AnchorAttributes;
+  secondary?: AnchorAttributes;
+  hero?: {
+    src: string;
+    alt: string;
+    loading?: "lazy" | "eager";
+  };
+}
+
+const { heading, subheading, alignment, color, primary, secondary, hero } =
+  Astro.props;
+
+const actions = primary || secondary || null;
+---
+
+<div class={`ui ${color} ${alignment} hero section`.trim()}>
+  <div class="full width container">
+    <div class="content">
+      <div class="text block and hero">
+        <div class="heading and supporting text">
+          <h1 class="heading and subheading" id={slugify(heading)}>
+            {subheading && <div class="sub heading">{subheading}</div>}
+            <span class="heading">{heading}</span>
+          </h1>
+
+          <div class="supporting text"><slot name="supporting-text" /></div>
+        </div>
+
+        {
+          hero && (
+            <div class="hero">
+              <img src={hero?.src} alt={hero?.alt} loading={hero?.loading} />
+            </div>
+          )
+        }
+      </div>
+
+      {
+        actions && (
+          <div class="actions">
+            {secondary && (
+              <Button
+                type={"anchor"}
+                variant={"secondary-gray"}
+                size={secondary.size}
+                href={normalizeUrl(secondary.href)}
+                rel={secondary.rel}
+                target={secondary.target}
+                iconLeading={secondary.iconLeading}
+                iconTrailing={secondary.iconTrailing}
+              >
+                {secondary.text}
+              </Button>
+            )}
+
+            {primary && (
+              <Button
+                type={"anchor"}
+                variant={"primary"}
+                size={primary.size}
+                href={normalizeUrl(primary.href)}
+                rel={primary.rel}
+                target={primary.target}
+                iconLeading={primary.iconLeading}
+                iconTrailing={primary.iconTrailing}
+              >
+                {primary.text}
+              </Button>
+            )}
+          </div>
+        )
+      }
+
+      <slot class="custom content" />
+    </div>
+  </div>
+</div>

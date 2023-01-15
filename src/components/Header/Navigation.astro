@@ -1,0 +1,37 @@
+---
+import Icon from "../../elements/Icon.astro";
+
+import { linkNav } from "../../../util/nav";
+import { normalizeUrl } from "../../../util/url";
+
+interface Props {
+  data: linkNav[]; // @todo: incorrect casing of type
+}
+const { data } = Astro.props;
+---
+
+<nav>
+  <ul>
+    {
+      data.map(({ title, href }) => {
+        return href ? (
+          <li>
+            <a href={normalizeUrl(href)}>{title}</a>
+          </li>
+        ) : (
+          <li>
+            <button class="display resources mega menu" data-open="false">
+              <span>{title}</span>
+              <i data-state="closed">
+                <Icon variant="chevron-down" />
+              </i>
+              <i data-state="opened">
+                <Icon variant="chevron-up" />
+              </i>
+            </button>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>

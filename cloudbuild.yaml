@@ -1,0 +1,27 @@
+steps:
+- name: node
+  entrypoint: yarn
+  args: ['install']
+- name: node:10
+  entrypoint: yarn
+  args: ["run", "create-env"]
+  env:
+    - 'IMAGE_ORIGINS=${_IMAGE_ORIGINS}'
+    - 'CHUNK_SIZE=${_CHUNK_SIZE}'
+    - 'FILE_URL_PREFIX=${_FILE_URL_PREFIX}'
+    - 'COVER_FILE_URI_PREFIX=${_COVER_FILE_URI_PREFIX}'
+    - 'RESET_FILE_CACHE=${_RESET_FILE_CACHE}'
+    - 'API_AUTH_TOKEN=${_API_AUTH_TOKEN}'
+    - 'WEBSITE_API_ORIGIN=${_WEBSITE_API_ORIGIN}'
+    - 'CLARITY_TRACKING_CODE=${_CLARITY_TRACKING_CODE}'
+    - 'GA_ID=${_GA_ID}'
+    - 'DOMAIN_NAME=${_DOMAIN_NAME}'
+    - 'FORMS_API_SERVER=${_FORMS_API_SERVER}'
+    - 'RECAPTCHA_SITE_KEY=${_RECAPTCHA_SITE_KEY}'
+    - 'BUILD_ENV=${_BUILD_ENV}'
+- name: node
+  entrypoint: yarn
+  args: ["run", "build"]
+
+- name: gcr.io/cloud-builders/gsutil
+  args: ["-m", "rsync", "-r", "-c", "-d", "./dist", "gs://neptunemutual.com"]

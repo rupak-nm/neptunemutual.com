@@ -1,0 +1,73 @@
+---
+import Header from "../components/Header/Header.astro";
+import Footer from "../components/Footer.astro";
+import { env } from "../../util/env";
+
+interface Props {
+  headerStyle?: "default" | "colored";
+}
+
+const { headerStyle } = Astro.props;
+
+const server = env("FORMS_API_SERVER");
+const mock = env("MOCK");
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <slot name="seo" />
+    <slot name="header" />
+    <script
+      type="text/javascript"
+      nonce="j+h4QPo2G1leKJxLFUVrGw=="
+      define:vars={{ server, mock }}
+    >
+      const loadTheme = async (el) => {
+        const theme = getTheme();
+
+        if (el) {
+          el.checked = theme === "dark";
+        }
+
+        theme === "dark"
+          ? document.documentElement.classList.add("dark")
+          : document.documentElement.classList.remove("dark");
+      };
+
+      const getTheme = () => {
+        const theme = window.localStorage.getItem("theme");
+
+        if (theme) {
+          return theme;
+        }
+
+        const prefersDarkMode =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+        return prefersDarkMode ? "dark" : "light";
+      };
+
+      const theme = getTheme();
+
+      theme === "dark" && document.documentElement.classList.add("dark");
+
+      window.getTheme = getTheme;
+      window.loadTheme = loadTheme;
+      window.server = server;
+      window.mock = mock === "true";
+    </script>
+  </head>
+  <body>
+    <Header headerStyle={headerStyle || "colored"} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <slot name="footer" />
+  </body>
+</html>

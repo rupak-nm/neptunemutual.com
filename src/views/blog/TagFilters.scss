@@ -1,0 +1,51 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+.tag.filter.container {
+  margin: 32px auto;
+  display: flex;
+  gap: 8px;
+
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+
+  a {
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    @include styles.text-sm;
+    @include weights.semibold;
+    
+    color: colors.$gray-500;
+
+    &[data-active=on] {
+      color: colors.$primary-700;
+      background-color: colors.$primary-50;
+    }
+
+    &:hover {
+      color: colors.$gray-500;
+    }
+  }
+}
+
+.dark .tag.filter.container {
+
+  a {
+    color: colors.$gray-300;
+
+    &[data-active=on] {
+      color: colors.$white;
+      background-color: colors.$primary-700;
+    }
+
+    &:hover {
+      color: colors.$gray-300;
+    }
+  }
+}

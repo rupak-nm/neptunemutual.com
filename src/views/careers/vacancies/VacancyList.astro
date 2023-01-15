@@ -1,0 +1,26 @@
+---
+import Filter from "./Filter.astro";
+import VacancyCard from "./VacancyCard.astro";
+
+const t = (x: string): string => x;
+
+interface Props {
+  vacancies: Vacancy[];
+  departments: string[];
+}
+
+const { vacancies, departments } = Astro.props;
+---
+
+<>
+  <Filter
+    options={departments}
+    label="Filter by Department"
+    iconVariant="users-01"
+  />
+  {
+    vacancies.map((vacancy) => {
+      return <VacancyCard vacancy={vacancy} />;
+    })
+  }
+</>

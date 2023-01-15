@@ -1,0 +1,60 @@
+---
+import Icon from "../../elements/Icon.astro";
+import VideoSection from "./VideoSection.astro";
+
+import { Section } from "../../../util/nav";
+import { normalizeUrl } from "../../../util/url";
+
+interface Props {
+  navTitle: string;
+  sections: Section[];
+  videos: Video[];
+}
+
+const { navTitle, sections, videos } = Astro.props;
+
+const t = (x: string) => x;
+---
+
+<div
+  class="mobile sections container"
+  id={`mobile-link-dropdown-${navTitle}`}
+  data-open="false"
+>
+  {
+    sections.map((child) => {
+      if (child.type === "section" && child.links)
+        return (
+          <div>
+            <p class="section title">{t(child.title)}</p>
+            <div class="section content">
+              {child.links.map((link, idx) => {
+                return (
+                  <a
+                    class="section link title"
+                    href={normalizeUrl(link.href)}
+                    target={link.isExternal ? "_blank" : null}
+                  >
+                    {link.icon && <Icon size={"md"} variant={link.icon} />}
+                    {t(link.title)}{" "}
+                    {link.badge && (
+                      <div class="section link badge">{link.badge}</div>
+                    )}{" "}
+                    {link.isExternal && (
+                      <Icon size={"md"} variant="link-external-01" />
+                    )}
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        );
+
+      return (
+        <div class="mobile video section container">
+          <VideoSection videos={videos} section={child} />
+        </div>
+      );
+    })
+  }
+</div>

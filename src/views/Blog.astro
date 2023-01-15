@@ -1,0 +1,58 @@
+---
+import BlogPosts from "./blog/BlogPosts.astro";
+import EmailSubscription from "../components/EmailSubscription.astro";
+import Featured from "./blog/Featured.astro";
+import HeaderSection from "../components/HeaderSection.astro";
+import NewsletterSignupForm from "../components/NewsletterSignupForm.astro";
+import Videos from "./blog/Videos.astro";
+
+import * as api from "../../service/api";
+
+interface Props {
+  articles: Article[];
+  currentPage?: number;
+  totalPages?: number;
+  tag?: Tag;
+}
+
+const t = (x: string): string => x;
+const { articles, currentPage, totalPages, tag } = Astro.props;
+
+const posts = await api.getEnumerable<Article>("blog", 1000, 0);
+const featured = posts.filter((x) => x.featured).slice(0, 3);
+
+const videos = await api.getEnumerable<Video>("videos", 3, 0);
+---
+
+<HeaderSection
+  color={"basic"}
+  alignment={"center"}
+  heading={t("Neptune Mutual Blog")}
+  subheading={t("Recent developments in the decentralized insurance space")}
+>
+  <Fragment slot="supporting-text">
+    The Neptune Mutual Blog is the go-to location for learning about web3 and
+    smart contract vulnerabilities, decentralized insurance, security best
+    practices, and industry news. Enter your address to get weekly updates.
+  </Fragment>
+  <EmailSubscription id="BlogHeroSubscriptionEmail" className="script only" />
+</HeaderSection>
+
+<Featured posts={featured} />
+
+<Videos videos={videos} />
+
+<BlogPosts
+  tag={tag}
+  articles={articles}
+  totalPages={totalPages}
+  currentPage={currentPage}
+/>
+
+<NewsletterSignupForm
+  heading="Sign up for our newsletter"
+  text="Be the first to know about releases and industry news and insights."
+  showFeedButtons
+  atomLink="/feeds/blog/atom.xml"
+  rssLink="/feeds/blog/rss.xml"
+/>

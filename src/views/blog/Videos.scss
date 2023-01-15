@@ -1,0 +1,78 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+.blog.video.list {
+  border-top: 0.5px solid colors.$gray-300;
+
+  padding-top: 56px;
+  padding-bottom: 56px;
+  
+  @media (max-width: 767px) {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+  
+    @media (max-width: 374px) {
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    a {
+      color: colors.$primary-700;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      @include styles.text-md;
+      @include weights.semibold;
+          
+      @media (max-width: 374px) {
+        justify-content: start;
+      }      
+    }
+
+    h2 {
+      color: light.$color;
+      @include styles.display-xs;
+      @include weights.semibold;
+
+    
+      @media (max-width: 767px) {
+        @include styles.text-xl;
+      }      
+    }
+  }
+
+  .all.videos {
+    margin-top: 32px;
+    display: flex;
+    gap: 32px;
+    
+    @media (max-width: 767px) {
+      flex-direction: column;
+    }
+  }
+}
+
+.dark .blog.video.list {
+  border-top: 0.5px solid colors.$gray-700;
+
+  .heading {
+    a {
+      color: colors.$primary-300;
+    }
+
+    h2 {
+      color: dark.$color;
+    }
+  }
+}

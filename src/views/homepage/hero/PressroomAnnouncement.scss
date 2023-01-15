@@ -1,0 +1,81 @@
+@use "../../../design-system/utils";
+@use "../../../design-system/colors";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/theme/light";
+@use "../../../design-system/theme/dark";
+
+.pressroom.announcement {
+    a.styled.link {
+        max-width: 100%;
+
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 4px 10px 4px 4px;
+        gap: 12px;
+        border-radius: 9999px;
+        background-color: colors.$primary-50;
+
+        @include styles.text-sm;
+        @include weights.medium;
+    }
+
+    .category {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 2px 10px;
+        border-radius: 9999px;
+        color: colors.$primary-700;
+        background-color: colors.$white;
+    }
+
+    .text {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0px;
+        gap: 4px;
+        color: colors.$primary-700;
+
+        flex: 1;
+        min-width: 0;
+
+        >span {
+            @include utils.ellipsis;
+        }
+
+        svg {
+            flex-shrink: 0;
+            color: colors.$primary-500;
+            height: 16px;
+            width: 16px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        display: none;
+    }
+
+}
+
+.dark .pressroom.announcement {
+
+    a.styled.link {
+        background-color: colors.$gray-600;
+    }
+
+    .category {
+        color: colors.$white;
+        background-color: colors.$gray-700;
+    }
+
+    .text {
+        color: colors.$gray-25;
+
+        svg {
+            color: colors.$white;
+        }
+    }
+}

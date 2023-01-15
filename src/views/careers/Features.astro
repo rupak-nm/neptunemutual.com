@@ -1,0 +1,19 @@
+---
+import FeaturedIcon from "../../elements/FeaturedIcon.astro";
+
+import { features } from "../../data/careers";
+
+const t = (x: string): string => x;
+---
+
+<div class="ui career feature list">
+  {
+    features.map(({ title, icon, content }) => (
+      <div class="item">
+        <FeaturedIcon variant={icon} size={"md"} />
+        <h3 class="title">{title}</h3>
+        <p class="content">{content}</p>
+      </div>
+    ))
+  }
+</div>

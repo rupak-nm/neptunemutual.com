@@ -1,0 +1,61 @@
+---
+import DetailedListView from "../components/DetailedListView.astro";
+import HeaderSection from "../components/HeaderSection.astro";
+import NewsletterSignupForm from "../components/NewsletterSignupForm.astro";
+
+interface Props {
+  programs: Program[];
+}
+
+const t = (x: string): string => x;
+
+const { programs } = Astro.props;
+
+const title = t("Active Campaigns and Promotions");
+const subtitle = t(
+  " Partners that provide value and increase adoption and usage of Neptune Mutual will be handsomely compensated for their efforts."
+);
+
+const items: DetailedListViewItem[] = programs.map((x) => {
+  return {
+    title: x.title,
+    intro: x.intro,
+    href: `/grants-and-bounties/${x.slug}/`,
+    icon: x.icon,
+    category: x.category,
+    badges: JSON.parse(x.badges),
+  };
+});
+---
+
+<div class="grants and bounties container">
+  <HeaderSection
+    alignment={"left"}
+    color={"basic"}
+    heading={t("Grants and Bounties")}
+    hero={{
+      src: "/assets/images/hero/grants-hero.webp",
+      alt: "A banner illustration of a blue vault full with gold bullion coins, with a few more coins outside.",
+    }}
+  >
+    <Fragment slot="supporting-text">
+      Join the Neptunite community and contribute to our goal of defending,
+      safeguarding, and covering DeFi, CeFi, and Metaverse ecosystem against
+      exploitation, hacking, and other forms of online attacks. We strive to
+      strengthen and expand our community outreach and exposure via our
+      community programs. The Neptune Mutual team will promote and reward users
+      that participate in and contribute to the development of the protocol via
+      the various community activities that are presently taking place. Partners
+      that provide value and increase adoption and usage of Neptune Mutual will
+      be handsomely compensated for their efforts.
+    </Fragment>
+  </HeaderSection>
+
+  <DetailedListView title={title} subtitle={subtitle} items={items} />
+
+  <NewsletterSignupForm
+    heading="Sign up for our newsletter"
+    text="Be the first to know about releases and industry news and insights."
+    showFeedButtons={false}
+  />
+</div>
