@@ -1,10 +1,50 @@
 ---
+import {
+  localeNames,
+  availableLocales,
+  currentLocale,
+} from "../../../util/locale";
+import Button from "../../elements/buttons/Button.astro";
 import Icon from "../../elements/Icon.astro";
+import InputWithIcon from "../../elements/InputWithIcon.astro";
 ---
 
 <div class="language select container">
-  <button class="selected language">
+  <button class="select language toggle" data-open="false">
     <Icon size={"md"} variant="globe-01" />
-    <span>English</span>
+    <span>{localeNames[currentLocale] || "English"}</span>
   </button>
+
+  <div class="language dropdown container" data-open="false">
+    <div class="search container">
+      <Button classname={"back button"} iconLeading={"arrow-left"}>Back</Button>
+      <InputWithIcon
+        placeholder="Search Language"
+        iconProps={{ variant: "search-md", size: "md" }}
+        className="container"
+        value=""
+      />
+    </div>
+
+    <ul class="language options">
+      {
+        availableLocales.map((locale) => {
+          if (locale !== currentLocale)
+            return (
+              <li data-value={locale} data-show="true">
+                <a href={`#`}>{localeNames[locale] || locale}</a>
+              </li>
+            );
+        })
+      }
+      <li data-value={"no-match"} data-show="false">
+        <i>No match !</i>
+      </li>
+    </ul>
+
+    <div class="selected language">
+      <span>{localeNames[currentLocale]}</span>
+      <Icon variant="check-circle" size="md" />
+    </div>
+  </div>
 </div>

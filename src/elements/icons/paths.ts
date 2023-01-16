@@ -82,5 +82,7 @@ export const paths: Record<string, any> = {
   'metamask-dark': import('./custom/Brands/dark/SvgMetamaskDark.svg?raw'),
   'okx-wallet-dark': import('./custom/Brands/dark/SvgOkxWalletDark.svg?raw'),
   'gnosis-wallet-dark': import('./custom/Brands/dark/SvgGnosisWalletDark.svg?raw'),
-  'wallet-connect-dark': import('./custom/Brands/dark/SvgWalletConnectDark.svg?raw')
+  'wallet-connect-dark': import('./custom/Brands/dark/SvgWalletConnectDark.svg?raw'),
+  'search-md': import('./variants/General/search-md.svg?raw'),
+  'check-circle': import('./variants/General/check-circle.svg?raw')
 }
