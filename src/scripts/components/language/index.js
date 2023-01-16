@@ -80,7 +80,8 @@ function updateOptions (val = '') {
     if (_val.includes(val)) return true
     return false
   })
-  const filteredArray = filtered.map(f => Object.keys(f)[0]).filter(f => f !== currentLocale)
+  const currentLocaleCode = currentLocale.split('-')[0]
+  const filteredArray = filtered.map(f => Object.keys(f)[0]).filter(f => f !== currentLocaleCode)
 
   listItems.forEach(listItem => {
     const key = listItem.getAttribute('data-value')
