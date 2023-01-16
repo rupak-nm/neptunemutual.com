@@ -10,7 +10,7 @@ const { variant, size } = Astro.props;
 
 let innerHTML = null;
 
-if (variant !== undefined) {
+if (variant !== undefined && paths[variant]) {
   innerHTML = await paths[variant].then((x: any) => x.default);
 }
 ---
