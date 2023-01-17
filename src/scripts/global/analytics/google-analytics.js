@@ -1,10 +1,4 @@
 function addGoogleAnalytics () {
-  const ID = 'ga-script'
-
-  if (document.getElementById(ID)) {
-    return
-  }
-
   // Global site tag (gtag.js) - Google Analytics
   const gtagSource = `https://www.googletagmanager.com/gtag/js?id=${window.googleAnalyticsId}`
   const globalScript = document.createElement('script')
@@ -12,17 +6,12 @@ function addGoogleAnalytics () {
   globalScript.setAttribute('src', gtagSource)
   document.head.appendChild(globalScript)
 
-  const googleAnalyticsScriptText = `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      
-      gtag('config', '${window.googleAnalyticsId}');
-      `
-  const script = document.createElement('script')
-  script.id = ID
-  script.textContent = googleAnalyticsScriptText
-  document.head.appendChild(script)
+  window.dataLayer = window.dataLayer || []
+  window.gtag = function () {
+    window.dataLayer.push(arguments)
+  }
+  window.gtag('js', new Date())
+  window.gtag('config', window.googleAnalyticsId)
 }
 
 export { addGoogleAnalytics }

@@ -1,20 +1,16 @@
 function addClarityAnalytics () {
-  const ID = 'ms-clarity'
+  window.clarity =
+    window.clarity ||
+    function () {
+      (window.clarity.q = window.clarity.q || []).push(arguments)
+    }
 
-  if (document.getElementById(ID)) {
-    return
-  }
+  const element = document.createElement('script')
+  element.async = 1
+  element.src = 'https://www.clarity.ms/tag/' + window.clarityTrackingCode
 
-  const script = document.createElement('script')
-  script.id = ID
-  script.textContent = `
-            (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "${window.clarityTrackingCode}");
-          `
-  document.head.appendChild(script)
+  const firstScript = document.getElementsByTagName('script')[0]
+  firstScript.parentNode.insertBefore(element, firstScript)
 }
 
 export { addClarityAnalytics }
