@@ -6,13 +6,13 @@ const cookieCloseButton = document.querySelector('.cookie.popup .close.button')
 const popup = document.querySelector('.cookie.popup.container')
 
 function showPopup () {
-  if(!popup) return
+  if (!popup) return
 
   popup.classList.remove('initially', 'hidden')
 }
 
 function hidePopup () {
-  if(!popup) return
+  if (!popup) return
 
   popup.classList.add('initially', 'hidden')
 }
