@@ -127,6 +127,7 @@ const state = {
   touchstartX: 0,
   touchendX: 0
 }
+const MIN_THRESHOLD = 60
 
 storyContainer.addEventListener('touchstart', (e) => {
   state.touchstartX = e.changedTouches[0].screenX
@@ -140,11 +141,11 @@ storyContainer.addEventListener('touchend', (e) => {
   const isLastIndex = currentIndex === (itemCount - 1)
   const isFirstIndex = currentIndex === 0
 
-  if ((state.touchendX < state.touchstartX) && !isLastIndex) {
+  if (((state.touchendX + MIN_THRESHOLD) < state.touchstartX) && !isLastIndex) {
     selectSlide(currentIndex + 1)
   }
 
-  if ((state.touchendX > state.touchstartX) && !isFirstIndex) {
+  if ((state.touchendX > (state.touchstartX + MIN_THRESHOLD)) && !isFirstIndex) {
     selectSlide(currentIndex - 1)
   }
 

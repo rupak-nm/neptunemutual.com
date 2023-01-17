@@ -60,6 +60,7 @@
         touchstartX: 0,
         touchendX: 0
       }
+      const MIN_THRESHOLD = 60
 
       const elements = {
         sliderContainer: document.querySelector(selectors.sliderContainer),
@@ -108,11 +109,11 @@
         elements.sliderContainer.addEventListener('touchend', (e) => {
           state.touchendX = e.changedTouches[0].screenX
 
-          if (state.touchendX < state.touchstartX) {
+          if ((state.touchendX + MIN_THRESHOLD) < state.touchstartX) {
             scrollSlider(positions.offset * -1)
           }
 
-          if (state.touchendX > state.touchstartX) {
+          if (state.touchendX > (state.touchstartX + MIN_THRESHOLD)) {
             scrollSlider(positions.offset)
           }
         }, { passive: true })
