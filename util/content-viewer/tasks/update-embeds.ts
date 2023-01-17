@@ -20,8 +20,6 @@ const run = async ($: CheerioAPI): Promise<CheerioAPI> => {
       }
 
       if (embedType === 'youtube') {
-        console.log(oEmbed)
-
         const { string: dataStr } = await request.get(oEmbed, 'youtube', {})
         const data = JSON.parse(dataStr)
 

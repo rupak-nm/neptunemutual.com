@@ -8,18 +8,21 @@ interface Props {
   title: string;
   subtitle: string;
   items: DetailedListViewItem[];
+  showArrow?: boolean;
 }
 
 const { props } = Astro;
 ---
 
 <div class="ui detailed list view full width container">
-  <div class="header">
-    <h2>{props.title}</h2>
-    <div class="sub heading">
-      {props.subtitle}
-    </div>
-  </div>
+  {
+    (props.title || props.subtitle) && (
+      <div class="header">
+        {props.title && <h2>{props.title}</h2>}
+        {props.subtitle && <div class="sub heading">{props.subtitle}</div>}
+      </div>
+    )
+  }
 
   <div class="ui list view">
     {
@@ -38,9 +41,17 @@ const { props } = Astro;
               <div class="intro">{item.intro}</div>
             </div>
 
-            <div class="item and category">
-              {item.icon && <Icon variant={item.icon} size={"lg"} />}
-              <div class="category">{item.category}</div>
+            <div class="meta">
+              <div class="item and category">
+                {item.icon && <Icon variant={item.icon} size={"lg"} />}
+                <div class="category">{item.category}</div>
+              </div>
+
+              {props.showArrow && (
+                <div class="arrow container">
+                  <Icon variant="arrow-right" />
+                </div>
+              )}
             </div>
           </a>
         );

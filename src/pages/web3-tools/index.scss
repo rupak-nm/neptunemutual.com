@@ -7,6 +7,7 @@
 @import "../../elements/Message.scss";
 @import "../../elements/Input.scss";
 @import "../../elements/Hint.scss";
+@import "../../elements/Tags.scss";
 
 @import "../../components/Footer.scss";
 @import "../../components/VideoModal.scss";
@@ -25,5 +26,6 @@
 @import "../../components/Header/MobileMenu.scss";
 @import "../../components/Header/MobileSection.scss";
 @import "../../components/CookiePopup.scss";
-@import "../../views/web3-tools/ToolsList.scss";
+@import "../../components/DetailedListView.scss";
 
+@import "../../views/Web3Tools.scss";
