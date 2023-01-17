@@ -54,6 +54,10 @@
       padding-bottom:32px;
       padding-top:24px;
 
+      @media (max-width: 767px) {
+        margin: 0 -16px;
+      }
+
       &:not(:first-of-type) {
         border-top: 1px solid colors.$gray-200;
       }
@@ -69,6 +73,7 @@
 
         .title.with.badge {
           display: flex;
+          flex-wrap: wrap;
           gap: 8px;
           align-items: center;
 

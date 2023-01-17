@@ -1,37 +1,45 @@
+import { addAnalytics } from './analytics'
+
 const cookieAcceptButton = document.querySelector('.cookie.popup .accept.button')
 const cookieDeclineButton = document.querySelector('.cookie.popup .decline.button')
 const cookieCloseButton = document.querySelector('.cookie.popup .close.button')
+const popup = document.querySelector('.cookie.popup.container')
 
 function showPopup () {
-  const popup = document.querySelector(
-    '.cookie.popup.container.initially.hidden'
-  )
-  if (popup) {
-    popup.classList.remove('initially', 'hidden')
-  }
+  if (!popup) return
+
+  popup.classList.remove('initially', 'hidden')
 }
 
 function hidePopup () {
-  const popup = document.querySelector('.cookie.popup.container')
-  if (popup) {
-    popup.classList.add('initially', 'hidden')
-  }
+  if (!popup) return
+
+  popup.classList.add('initially', 'hidden')
 }
 
-function updateCookiePopup () {
+function checkConsentOnLoad () {
   const cookiesAccepted = window.localStorage.getItem('npm-cookies-accepted')
 
+  if (cookiesAccepted === 'true') {
+    addAnalytics()
+  }
+
   if (cookiesAccepted === 'false' || cookiesAccepted === 'true') {
-    return hidePopup()
+    hidePopup()
+    return
   }
 
   showPopup()
 }
 
-updateCookiePopup()
+checkConsentOnLoad()
 
 function setNpmCookie (value) {
   if (value !== 'true' && value !== 'false') return
+
+  if (value === 'true') {
+    addAnalytics()
+  }
 
   window.localStorage.setItem('npm-cookies-accepted', value)
   hidePopup()
