@@ -37,6 +37,10 @@ checkConsentOnLoad()
 function setNpmCookie (value) {
   if (value !== 'true' && value !== 'false') return
 
+  if (value === 'true') {
+    addAnalytics()
+  }
+
   window.localStorage.setItem('npm-cookies-accepted', value)
   hidePopup()
 }
