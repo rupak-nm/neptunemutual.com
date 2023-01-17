@@ -11,6 +11,8 @@ const { headerStyle } = Astro.props;
 
 const server = env("FORMS_API_SERVER");
 const mock = env("MOCK");
+const googleAnalyticsId = env("GA_ID");
+const clarityTrackingCode = env("CLARITY_TRACKING_CODE");
 ---
 
 <!DOCTYPE html>
@@ -24,7 +26,7 @@ const mock = env("MOCK");
     <script
       type="text/javascript"
       nonce="j+h4QPo2G1leKJxLFUVrGw=="
-      define:vars={{ server, mock }}
+      define:vars={{ server, mock, googleAnalyticsId, clarityTrackingCode }}
     >
       const loadTheme = async (el) => {
         const theme = getTheme();
@@ -60,6 +62,8 @@ const mock = env("MOCK");
       window.loadTheme = loadTheme;
       window.server = server;
       window.mock = mock === "true";
+      window.googleAnalyticsId = googleAnalyticsId;
+      window.clarityTrackingCode = clarityTrackingCode;
     </script>
   </head>
   <body>
