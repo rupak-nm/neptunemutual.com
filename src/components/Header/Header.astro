@@ -2,7 +2,6 @@
 import CookiePopup from "../CookiePopup.astro";
 import HamburgerButton from "./HamburgerButton.astro";
 import LanguageSelect from "./LanguageSelector.astro";
-import MobileMenu from "./MobileMenu.astro";
 import Navigation from "./Navigation.astro";
 import NpmLightLogo from "../../elements/icons/custom/npm-logo-light-mode.svg?raw";
 import NpmDarkLogo from "../../elements/icons/custom/npm-logo-dark-mode.svg?raw";
@@ -30,27 +29,27 @@ const { headerStyle } = Astro.props;
 
 <header data-style={headerStyle}>
   <div class="inner container">
-    <div class="logo and nav">
+    <div class="logo and rest">
       <a class="logo" href="/">
         <span class="sr-only">Neptune Mutual</span>
         <span class="light only" set:html={NpmLightLogo} />
         <span class="dark only" set:html={NpmDarkLogo} />
       </a>
 
-      <Navigation data={data} />
-    </div>
+      <div class="nav and lt" data-open="false" id="MobileMenu">
+        <Navigation data={data} />
 
-    <div class="language and theme">
-      <LanguageSelect />
-      <ThemeSelector />
+        <div class="language and theme">
+          <LanguageSelect />
+          <ThemeSelector />
+        </div>
+
+        <SubMenu data={data} videos={updatedVideos} />
+      </div>
     </div>
 
     <HamburgerButton />
   </div>
-
-  <SubMenu data={data} videos={updatedVideos} />
-
-  <MobileMenu data={data} videos={updatedVideos} />
 </header>
 
 <CookiePopup />

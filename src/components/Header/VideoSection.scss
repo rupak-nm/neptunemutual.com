@@ -34,6 +34,10 @@
     &:hover, &:active{
       color: colors.$primary-600
     }
+
+    @media (max-width: 1023px) {
+      padding: 0 16px;
+    }
   }
 
   .content .video.container:not(.modal) {

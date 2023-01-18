@@ -1,4 +1,6 @@
 {
+  const body = document.querySelector('body')
+
   function click (event) {
     event.stopPropagation()
 
@@ -8,6 +10,7 @@
 
     mobileMenu.setAttribute('data-open', newState)
     event.currentTarget.setAttribute('data-open', newState)
+    body.style.overflowY = 'hidden'
   }
 
   document.addEventListener('click', (e) => {
@@ -20,6 +23,7 @@
     if (!e.target.closest('#MobileMenu')) {
       mobileMenu.setAttribute('data-open', 'false')
       button.setAttribute('data-open', 'false')
+      body.removeAttribute('style')
     }
   })
 
