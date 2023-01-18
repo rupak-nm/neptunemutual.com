@@ -1,14 +1,35 @@
 ---
+import DetailedListView from "../components/DetailedListView.astro";
 import HeaderSection from "../components/HeaderSection.astro";
 import NewsletterSignupForm from "../components/NewsletterSignupForm.astro";
-import ToolsList from "./web3-tools/ToolsList.astro";
+import { tools } from "../data/tools";
 
 const t = (x: string): string => x;
+const items = tools.map((tool) => {
+  return {
+    title: tool.title,
+    intro: tool.intro,
+    badges: tool.badges.map((x, i) => {
+      return {
+        ...x,
+        // For typescript only
+        id: i.toString(),
+        slug: i.toString(),
+      };
+    }),
+    tagSize: "sm",
+    category: tool.category,
+    icon: tool.icon,
+    href: `/web3-tools/${tool.slug}/`,
+  };
+});
 ---
 
 <HeaderSection color={"basic"} alignment={"center"} heading={t("Web3 Tools")} />
 
-<ToolsList />
+<div class="tools container">
+  <DetailedListView title="" subtitle="" items={items} showArrow />
+</div>
 
 <NewsletterSignupForm
   heading="Sign up for our newsletter"
