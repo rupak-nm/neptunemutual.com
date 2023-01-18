@@ -8,8 +8,6 @@ const allTimelineItems = timelineContainer.querySelectorAll('.item[data-slide-in
 const prevBtn = container.querySelector('button#PreviousRoadmapButton')
 // next button
 const nextBtn = container.querySelector('button#NextRoadmapButton')
-// story container
-const storyContainer = document.querySelector('.ui.roadmap.container .ui.timeline.story.list')
 
 const scrollToCenter = (el) => {
   el.parentNode.scrollLeft =
@@ -35,9 +33,6 @@ const selectStorySlide = (idx) => {
 
   // Set data-selected to true for the selected item
   matchedStoryItem.setAttribute('data-selected', 'true')
-
-  // update data-current-index in the container
-  storyContainer.setAttribute('data-current-index', idx)
 
   // Scroll to selected item
   scrollToCenter(matchedStoryItem)
@@ -129,14 +124,15 @@ const state = {
 }
 const MIN_THRESHOLD = 60
 
-storyContainer.addEventListener('touchstart', (e) => {
+storiesContainer.addEventListener('touchstart', (e) => {
   state.touchstartX = e.changedTouches[0].screenX
 }, { passive: true })
 
-storyContainer.addEventListener('touchend', (e) => {
+storiesContainer.addEventListener('touchend', (e) => {
   state.touchendX = e.changedTouches[0].screenX
 
-  const currentIndex = parseInt(storyContainer.getAttribute('data-current-index'))
+  const selectedEl = timelineContainer.querySelector('.item[data-selected="true"]')
+  const currentIndex = parseInt(selectedEl.getAttribute('data-slide-index'))
   const itemCount = allTimelineItems.length
   const isLastIndex = currentIndex === (itemCount - 1)
   const isFirstIndex = currentIndex === 0
