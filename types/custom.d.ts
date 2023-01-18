@@ -159,3 +159,25 @@ interface HomepageFeatureItem {
   title: string
   text: string
 }
+
+interface SitemapEnumerable {
+  type: string
+  prefix: string
+  enumerable: WithSlug[]
+}
+
+interface SitemapItem {
+  loc: string
+  changefreq?: 'daily' | 'weekly' | 'monthly'
+}
+
+interface SitemapUrl {
+  url: SitemapItem
+}
+
+interface Sitemap {
+  urlset: SitemapUrl[]
+}
+
+type WrappedPromise = (() => Promise<void>)
+type TaskWithDefinition = [string, ...WrappedPromise[]]

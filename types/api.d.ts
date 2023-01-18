@@ -20,6 +20,10 @@ declare enum EcosystemType {
   Policyholders = 'policyholders'
 }
 
+interface WithSlug {
+  slug: string
+}
+
 // ---------------------------------------------------------------------------------------------
 
 interface Media {
