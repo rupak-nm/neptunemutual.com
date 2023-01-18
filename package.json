@@ -14,6 +14,12 @@
     "check:links": "blc http://localhost:3001 -ro --exclude-external --follow --requests 250 --recursive --verbose --filter-level 3"
   },
   "license": "LicenseRef-LICENSE",
+  "ts-standard": {
+    "ignore": [
+      "dist",
+      "lib"
+    ]
+  },
   "devDependencies": {
     "@astrojs/react": "^1.2.2",
     "@ethersproject/contracts": "5.4.1",

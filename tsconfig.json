@@ -5,5 +5,7 @@
     "forceConsistentCasingInFileNames": false,
     "useUnknownInCatchVariables": false,
     "isolatedModules": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
   }
 }
