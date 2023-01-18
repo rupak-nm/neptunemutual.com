@@ -19,6 +19,15 @@
   border-top: 1px solid colors.$gray-100;
   box-shadow: shadows.$lg;
 
+  @media (max-width: 1023px) {
+    position: relative;
+    top: 0;
+    border-top: none !important;
+    max-height: none;
+    overflow: visible;
+    padding-top: 16px;
+  }
+
   .left.space {
     flex: 1;
     background-color: light.$primary-background-color;
@@ -36,6 +45,11 @@
     margin-right: auto;
     display: flex;
     flex-wrap: wrap;
+
+    @media (max-width: 1023px) {
+      gap: 24px;
+      flex-direction: column;
+    }
   }
 
   .content .non.video.sections {
@@ -44,6 +58,11 @@
     gap: 24px;
     flex: 2;
     background-color: light.$primary-background-color;
+
+    @media (max-width: 1023px) {
+      flex-direction: column;
+      padding: 0;
+    }
   }
 
   .content .video.sections {
@@ -52,13 +71,14 @@
     background-color: colors.$gray-50;
     flex: 1;
     min-width: 560px;
+
+    @media (max-width: 1023px) {
+      padding: 32px 0;
+      min-width: 200px;
+    }
   }
 
   &[data-open="false"] {
-    display: none;
-  }
-
-  @media (max-width: 1023px) {
     display: none;
   }
 }

@@ -17,6 +17,16 @@
     const button = document.querySelector('nav button[data-open="true"]')
     if (!button) return
 
+    const width = window.innerWidth
+
+    if (width < 1024) {
+      if (!e.target.closest('#MobileMenu')) {
+        subMenu.setAttribute('data-open', 'false')
+        button.setAttribute('data-open', 'false')
+      }
+      return
+    }
+
     if (!e.target.closest('.sub.menu.container')) {
       subMenu.setAttribute('data-open', 'false')
       button.setAttribute('data-open', 'false')

@@ -9,7 +9,12 @@ header nav {
   display: flex;
 
   @media (max-width: 1023px) {
-    display: none;
+    width: 100%;
+
+    ul {
+      width: 100%;
+      flex-direction: column;
+    }
   }
 
   ul {
@@ -18,6 +23,10 @@ header nav {
     list-style: none;
     margin: 0;
     padding: 0;
+
+    @media (max-width: 1023px) {
+      gap: 8px;
+    }
   }
 
   ul li > a, ul li > button {
@@ -38,12 +47,37 @@ header nav {
       color: light.$color;
       text-decoration: none;
     }
-  
+
+    @media (max-width: 1023px) {
+      color: light.$color;
+      margin: 0;
+      border-radius: 0;
+      width: 100%;
+      justify-content: space-between;
+      @include styles.text-md;
+      @include weights.semibold;
+    
+      &:hover {
+        background-color: colors.$primary-600;
+        color: colors.$white;
+
+        h3 {
+          color: colors.$white;
+        }
+
+        p {
+          color: colors.$gray-50;
+        }
+      }
+    }
   }
-  
-  ul li > a {
-    svg {
-      color: colors.$primary-600
+
+  ul li > button {
+    @media (max-width: 1023px) {
+      &:hover {
+        color: light.$color;
+        background-color: colors.$gray-50;
+      }
     }
   }
 
@@ -61,11 +95,23 @@ header nav {
       color: dark.$color;
     }
 
+    @media (max-width: 1023px) {
+      color: dark.$color;
+    }
   }
   
   ul li > a {
     svg {
       color: colors.$primary-500;
+    }
+  }
+
+  ul li > button {
+    @media (max-width: 1023px) {
+      &:hover {
+        color: dark.$color;
+        background-color: colors.$gray-700;
+      }
     }
   }
 }

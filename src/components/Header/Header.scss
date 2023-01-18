@@ -27,14 +27,60 @@ header {
     justify-content: space-between;
     align-items: center;
     
-    .logo.and.nav, .language.and.theme {
+    .logo.and.rest, .language.and.theme.only, .nav.with.language.and.theme {
       display: flex;
       align-items: center;
       gap: 12px;
     }
     
-    .logo.and.nav {
+    .logo.and.rest {
       gap: 40px;
+      width: 100%;
+    }
+
+    .language.and.theme.only {
+      @media (max-width: 1023px) {
+        
+        border-bottom: 1px solid colors.$gray-100;
+        @include utils.full-width-container;
+
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        padding: 24px 16px;
+      }
+    }
+
+    .nav.with.language.and.theme {
+      justify-content: space-between;
+      flex: 1;
+      background-color: light.$primary-background-color;
+      
+      @media (max-width: 1023px) {
+        & > *:nth-child(1) { order: 2; }
+        & > *:nth-child(2) { order: 1; }
+        & > *:nth-child(3) { order: 3; }
+        
+        flex-direction: column;
+        flex: auto;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 8px;
+        border-top: 1px solid colors.$gray-100;
+
+        position: fixed;
+        top: var(--header-height);
+        left: 0px;
+        bottom: 0px;
+        z-index: 2;
+        width: 100%;
+        overflow-x: hidden;
+
+        &[data-open="false"] {
+          display: none;
+        }
+      }
     }
   
     .logo.light {
@@ -43,12 +89,6 @@ header {
   
     .logo.dark {
       display: flex;
-    }
-
-    .language.and.theme {
-      @media (max-width: 1025px) {
-        display: none;
-      }
     }
   }
 
@@ -64,6 +104,23 @@ header {
 .dark header {
   border-bottom: 1px solid colors.$gray-700;
   background-color: dark.$primary-background-color;
+
+  .inner.container {
+    .nav.with.language.and.theme {
+      background-color: dark.$primary-background-color;
+    }
+
+    @media (max-width: 1023px) {
+      .nav.with.language.and.theme {
+        border-top: 1px solid colors.$gray-700;
+      }
+  
+      .language.and.theme.only {
+        border-bottom: 1px solid colors.$gray-700;
+      }
+    }
+  }
+
 
   &[data-style="colored"] {
     background-color: colors.$gray-900;
