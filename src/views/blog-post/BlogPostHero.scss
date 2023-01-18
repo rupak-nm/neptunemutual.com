@@ -52,19 +52,15 @@
     }
   
     @media (max-width: 767px) {
-      display: none;
+      padding: 0 16px;
     }
     
     span {
       @include styles.text-md;
       @include weights.semibold;
 
-
       color: colors.$gray-500;
-    
-      @media (max-width: 767px) {
-        display: none;
-      }    
+  
     }
   }
 
