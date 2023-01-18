@@ -42,8 +42,9 @@ import {
       const formConverterClassList = formConverter.classList
       formConverterClassList.remove('simple', 'extended')
       formConverterClassList.add(selected)
-
-      convert(inputtedData.type, inputtedData.value, selected)
+      if (inputtedData?.value > 0) {
+        convert(inputtedData.type, inputtedData.value, selected)
+      }
     })
   })
 }
