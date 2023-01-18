@@ -116,3 +116,35 @@ window.addEventListener('resize', function () {
   const clickedIndex = selectedEl.getAttribute('data-slide-index')
   selectSlide(parseInt(clickedIndex))
 })
+
+// handling drag/swipe event for mobile devices
+const state = {
+  touchstartX: 0,
+  touchendX: 0
+}
+const MIN_THRESHOLD = 60
+
+storiesContainer.addEventListener('touchstart', (e) => {
+  state.touchstartX = e.changedTouches[0].screenX
+}, { passive: true })
+
+storiesContainer.addEventListener('touchend', (e) => {
+  state.touchendX = e.changedTouches[0].screenX
+
+  const selectedEl = timelineContainer.querySelector('.item[data-selected="true"]')
+  const currentIndex = parseInt(selectedEl.getAttribute('data-slide-index'))
+  const itemCount = allTimelineItems.length
+  const isLastIndex = currentIndex === (itemCount - 1)
+  const isFirstIndex = currentIndex === 0
+
+  if (((state.touchendX + MIN_THRESHOLD) < state.touchstartX) && !isLastIndex) {
+    selectSlide(currentIndex + 1)
+  }
+
+  if ((state.touchendX > (state.touchstartX + MIN_THRESHOLD)) && !isFirstIndex) {
+    selectSlide(currentIndex - 1)
+  }
+
+  state.touchstartX = 0
+  state.touchendX = 0
+}, { passive: true })
