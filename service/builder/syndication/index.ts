@@ -10,6 +10,4 @@ const generate = async (): Promise<void> => {
   await Promise.allSettled(tasks)
 }
 
-await generate()
-
 export { generate }
