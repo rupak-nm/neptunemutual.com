@@ -39,7 +39,7 @@ header {
     }
 
     .language.and.theme.only {
-      @media (max-width: 1025px) {
+      @media (max-width: 1023px) {
         
         border-bottom: 1px solid colors.$gray-100;
         @include utils.full-width-container;
