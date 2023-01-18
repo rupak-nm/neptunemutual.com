@@ -1,0 +1,179 @@
+@use "../design-system/utils";
+@use "../design-system/colors";
+@use "../design-system/typography/styles";
+@use "../design-system/typography/weights";
+@use "../design-system/theme/light";
+@use "../design-system/theme/dark";
+
+@mixin input-fields {
+  div {
+    
+    label {
+      @include styles.text-sm;
+      @include weights.medium;
+    }
+
+    input {
+      margin-top: 6px;
+    }
+  }
+}
+
+.ethereum.unit.converter {
+  @include utils.full-width-container;
+
+  padding-top: 56px;
+  padding-bottom: 96px;
+  display: flex;
+  gap: 64px;
+  align-items: flex-start;
+
+  ol {
+    margin-top: 0;
+  }
+
+  @media screen and (max-width: 767px) {
+    padding-top: 32px;
+    padding-bottom: 64px;
+    flex-direction: column-reverse;
+    gap: 0;
+  }
+
+  .left.container {
+    width: 754px;
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+
+    .desktop.header {
+      h2 {
+        margin-top: 32px;
+
+        @include styles.display-sm;
+        @include weights.semibold;
+      }
+
+      @media screen and (max-width: 767px) {
+        display: none;
+      }
+    }
+
+    form {
+      margin-top: 32px;
+
+      &.simple {
+        @include input-fields;
+
+        .inputs.simple {
+          display: block;
+        }
+      }
+
+      &.extended {
+        @include input-fields;
+
+        .inputs.extended {
+          display: block;
+        }
+      }
+
+      label {
+        color: colors.$gray-700;
+      }
+
+      & > div {
+        display: none;
+        
+        > :not(:first-child) {
+          margin-top: 32px;
+        } 
+      
+      }
+    }
+  }
+
+  .right.container {
+    border-radius: 8px;
+    width: 398px;
+    padding: 24px;
+    border: 1px solid colors.$gray-300;
+
+    @media screen and (max-width: 767px) {
+      padding: 16px;
+      width: 100%;
+    }
+
+    .option.container {
+
+      legend {
+        @include styles.text-lg;
+        @include weights.semibold;
+      }
+
+      .options {
+        display: flex;
+        gap: 16px;
+        padding-top: 16px;
+
+        @media screen and (max-width: 767px) {
+          padding-top: 8px;
+        }
+  
+        .option {
+          display: flex;
+          label {
+            margin-left: 8px;
+            color: colors.$gray-700;
+
+            @include weights.medium;
+            @include styles.text-sm;
+          }
+        }
+      }
+    }
+  }
+
+  .mobile.header {
+    display: none;
+
+    @media screen and (max-width: 767px) {
+      display: block;
+      h2 {
+        margin: 32px 0;
+        color: colors.$gray-900;
+        @include styles.display-xs;
+        @include weights.semibold;
+      }
+    }
+  }
+}
+
+.dark {
+  .ethereum.unit.converter {
+    .header{
+      h2 {
+        color: white;
+      }
+    }
+
+    .left.container {
+      form {
+        label {
+          color: colors.$gray-300;
+        }
+      }
+    }
+
+    .right.container {
+      border: 1px solid colors.$gray-500;
+      .option.container {
+        .option {
+          label {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}

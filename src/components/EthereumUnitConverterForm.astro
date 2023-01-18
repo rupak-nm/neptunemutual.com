@@ -1,0 +1,106 @@
+---
+import {
+  extendedFields,
+  simpleFields,
+} from "../data/ethereum-unit-converter-fields";
+
+import Breadcrumb from "../elements/Breadcrumb.astro";
+
+const DEFAULT_CHECKED = "extended";
+const t = (x: string): string => x;
+const items = [
+  {
+    link: "/",
+    name: "Home",
+  },
+  {
+    link: "/web3-tools/",
+    name: t("Web3 Tools"),
+  },
+  {
+    link: `#`,
+    name: t("Ethereum Unit Converter"),
+  },
+];
+---
+
+<div class="ethereum unit converter">
+  <div class="left container">
+    <div class="desktop header">
+      <Breadcrumb items={items} />
+      <h2>{t("Convert Ethereum Denominations")}</h2>
+    </div>
+    <form class={`form ${DEFAULT_CHECKED}`}>
+      <div class="inputs extended">
+        {
+          extendedFields.map((field, i) => {
+            return (
+              <div>
+                <label for={`extended-${i}`}>{field.name}</label>
+                <div class="input container">
+                  <input
+                    id={`extended-${i}`}
+                    data-type={field.type}
+                    data-option="extended"
+                    value={field?.value}
+                    placeholder={field.placeHolder}
+                  />
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+      <div class="inputs simple">
+        {
+          simpleFields.map((field, i) => {
+            return (
+              <div>
+                <label for={`simple-${i}`}>{field.name}</label>
+                <div class="input container">
+                  <input
+                    id={`simple-${i}`}
+                    data-type={field.type}
+                    data-option="simple"
+                    value={field?.value}
+                    placeholder={field.placeHolder}
+                  />
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </form>
+  </div>
+  <div class="right container">
+    <div class="option container">
+      <legend>Options</legend>
+      <div class="options">
+        <div class="option">
+          <input
+            type="radio"
+            name="option_type"
+            id="simple-radio"
+            value="simple"
+          />
+          <label for="simple-radio">Simple Converter</label>
+        </div>
+        <div class="option">
+          <input
+            type="radio"
+            name="option_type"
+            id="extended-radio"
+            value="extended"
+            checked
+          />
+          <label for="extended-radio">Extended Converter</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mobile header">
+    <Breadcrumb items={items} />
+    <h2>{t("Convert Ethereum Denominations")}</h2>
+  </div>
+</div>
