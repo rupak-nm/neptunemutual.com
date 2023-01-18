@@ -7,7 +7,6 @@ import {
 
 import Breadcrumb from "../elements/Breadcrumb.astro";
 
-const DEFAULT_CHECKED = "extended";
 const t = (x: string): string => x;
 ---
 
@@ -17,7 +16,7 @@ const t = (x: string): string => x;
       <Breadcrumb items={crumbs} />
       <h2>{t("Convert Ethereum Denominations")}</h2>
     </div>
-    <form class={`form ${DEFAULT_CHECKED}`}>
+    <form class={`form extended`}>
       <div class="inputs extended">
         {
           extendedFields.map((field, i) => {
