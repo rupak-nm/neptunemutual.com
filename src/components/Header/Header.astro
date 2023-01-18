@@ -1,7 +1,7 @@
 ---
 import CookiePopup from "../CookiePopup.astro";
 import HamburgerButton from "./HamburgerButton.astro";
-import LanguageSelect from "./LanguageSelector.astro";
+// import LanguageSelect from "./LanguageSelector.astro";
 import Navigation from "./Navigation.astro";
 import NpmLightLogo from "../../elements/icons/custom/npm-logo-light-mode.svg?raw";
 import NpmDarkLogo from "../../elements/icons/custom/npm-logo-dark-mode.svg?raw";
@@ -36,11 +36,15 @@ const { headerStyle } = Astro.props;
         <span class="dark only" set:html={NpmDarkLogo} />
       </a>
 
-      <div class="nav and lt" data-open="false" id="MobileMenu">
+      <div
+        class="nav with language and theme"
+        data-open="false"
+        id="MobileMenu"
+      >
         <Navigation data={data} />
 
-        <div class="language and theme">
-          <LanguageSelect />
+        <div class="language and theme only">
+          <!-- <LanguageSelect /> -->
           <ThemeSelector />
         </div>
 

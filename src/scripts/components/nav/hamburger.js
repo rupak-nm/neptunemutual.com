@@ -10,7 +10,8 @@
 
     mobileMenu.setAttribute('data-open', newState)
     event.currentTarget.setAttribute('data-open', newState)
-    body.style.overflowY = 'hidden'
+
+    body.style.overflowY = newState === 'true' ? 'hidden' : 'visible'
   }
 
   document.addEventListener('click', (e) => {
@@ -23,7 +24,7 @@
     if (!e.target.closest('#MobileMenu')) {
       mobileMenu.setAttribute('data-open', 'false')
       button.setAttribute('data-open', 'false')
-      body.removeAttribute('style')
+      body.style.overflowY = 'visible'
     }
   })
 

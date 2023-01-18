@@ -27,7 +27,7 @@ header {
     justify-content: space-between;
     align-items: center;
     
-    .logo.and.rest, .language.and.theme, .nav.and.lt {
+    .logo.and.rest, .language.and.theme.only, .nav.with.language.and.theme {
       display: flex;
       align-items: center;
       gap: 12px;
@@ -38,19 +38,21 @@ header {
       width: 100%;
     }
 
-    .language.and.theme {
+    .language.and.theme.only {
       @media (max-width: 1025px) {
+        
         border-bottom: 1px solid colors.$gray-100;
         @include utils.full-width-container;
 
         width: 100%;
         display: flex;
         justify-content: space-between;
+
         padding: 24px 16px;
       }
     }
 
-    .nav.and.lt {
+    .nav.with.language.and.theme {
       justify-content: space-between;
       flex: 1;
       background-color: light.$primary-background-color;
@@ -88,12 +90,6 @@ header {
     .logo.dark {
       display: flex;
     }
-
-    // .language.and.theme {
-    //   @media (max-width: 1025px) {
-    //     display: none;
-    //   }
-    // }
   }
 
   .sr-only {
@@ -110,16 +106,16 @@ header {
   background-color: dark.$primary-background-color;
 
   .inner.container {
-    .nav.and.lt {
+    .nav.with.language.and.theme {
       background-color: dark.$primary-background-color;
     }
 
     @media (max-width: 1023px) {
-      .nav.and.lt {
+      .nav.with.language.and.theme {
         border-top: 1px solid colors.$gray-700;
       }
   
-      .language.and.theme {
+      .language.and.theme.only {
         border-bottom: 1px solid colors.$gray-700;
       }
     }
