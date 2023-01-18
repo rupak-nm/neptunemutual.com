@@ -40,6 +40,8 @@ const items = [
                 <div class="input container">
                   <input
                     id={`extended-${i}`}
+                    type="number"
+                    min="0"
                     data-type={field.type}
                     data-option="extended"
                     value={field?.value}
@@ -60,6 +62,8 @@ const items = [
                 <div class="input container">
                   <input
                     id={`simple-${i}`}
+                    type="number"
+                    min="0"
                     data-type={field.type}
                     data-option="simple"
                     value={field?.value}

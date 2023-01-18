@@ -11,9 +11,9 @@ import {
 
   const convert = (type, value, option) => {
     const _wei = convertToWei(type, value)
-    const inputTypes = document.querySelectorAll(`.inputs.${option} input`);
+    const inputTypes = document.querySelectorAll(`.inputs.${option} input`)
 
-    [].forEach.call(inputTypes, (type) => {
+    inputTypes.forEach((type) => {
       if (!value) {
         type.value = ''
         return
@@ -22,19 +22,21 @@ import {
     })
   }
 
-  [].forEach.call(inputs, (input) => {
+  inputs.forEach((input) => {
     input.addEventListener('keyup', (e) => {
       const target = e.target
       const dataset = target.dataset
 
-      convert(dataset.type, target.value, dataset.option)
+      if (target.value > 0) {
+        convert(dataset.type, target.value, dataset.option)
+      }
 
       inputtedData.value = target.value
       inputtedData.type = dataset.type
     })
-  });
+  })
 
-  [].forEach.call(options, (option) => {
+  options.forEach((option) => {
     option.addEventListener('change', (e) => {
       const selected = e.target.value
       const formConverterClassList = formConverter.classList
