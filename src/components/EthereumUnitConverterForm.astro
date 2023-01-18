@@ -2,32 +2,19 @@
 import {
   extendedFields,
   simpleFields,
+  crumbs,
 } from "../data/ethereum-unit-converter-fields";
 
 import Breadcrumb from "../elements/Breadcrumb.astro";
 
 const DEFAULT_CHECKED = "extended";
 const t = (x: string): string => x;
-const items = [
-  {
-    link: "/",
-    name: "Home",
-  },
-  {
-    link: "/web3-tools/",
-    name: t("Web3 Tools"),
-  },
-  {
-    link: `#`,
-    name: t("Ethereum Unit Converter"),
-  },
-];
 ---
 
 <div class="ethereum unit converter">
   <div class="left container">
     <div class="desktop header">
-      <Breadcrumb items={items} />
+      <Breadcrumb items={crumbs} />
       <h2>{t("Convert Ethereum Denominations")}</h2>
     </div>
     <form class={`form ${DEFAULT_CHECKED}`}>
