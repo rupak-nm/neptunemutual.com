@@ -1,6 +1,19 @@
+
 const allowed = ['blog', 'pressroom']
 
-const toTagsWithHref = (prefix: string, tags: Tag[] | undefined): TagWithHref[] => {
+const toTagHref = (prefix: 'blog' | 'pressroom', tag?: string): string | undefined => {
+  if (tag === undefined) {
+    return undefined
+  }
+
+  if (tag === undefined || tag === null) {
+    return `/${prefix}`
+  }
+
+  return `/${prefix}/tag/${tag}/#${tag}`
+}
+
+const toTagsWithHref = (prefix: 'blog' | 'pressroom', tags: Tag[] | undefined): TagWithHref[] => {
   const withHrefs: TagWithHref[] = []
 
   if (tags === undefined || tags === null || tags.length === 0) {
@@ -9,7 +22,7 @@ const toTagsWithHref = (prefix: string, tags: Tag[] | undefined): TagWithHref[] 
 
   for (const tag of tags) {
     withHrefs.push({
-      href: allowed.includes(prefix) ? `/${prefix}/tag/${tag.slug}#${tag.slug}` : undefined,
+      href: allowed.includes(prefix) ? toTagHref(prefix, tag.slug) : undefined,
       ...tag
     })
   }
@@ -17,4 +30,4 @@ const toTagsWithHref = (prefix: string, tags: Tag[] | undefined): TagWithHref[] 
   return withHrefs
 }
 
-export { toTagsWithHref }
+export { toTagHref, toTagsWithHref }

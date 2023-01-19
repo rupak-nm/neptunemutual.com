@@ -1,4 +1,4 @@
-import { addAnalytics } from './analytics'
+import { addAnalytics } from './external'
 
 const cookieAcceptButton = document.querySelector('.cookie.popup .accept.button')
 const cookieDeclineButton = document.querySelector('.cookie.popup .decline.button')

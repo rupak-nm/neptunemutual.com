@@ -1,6 +1,6 @@
 import { AstroGlobal } from 'astro'
 
-const landingPage = '/blog'
+const landingPage = '/blog/'
 
 const isActive = (Astro: AstroGlobal, filter: Filter): string => {
   const { value } = filter
@@ -12,18 +12,20 @@ const isActive = (Astro: AstroGlobal, filter: Filter): string => {
     }
   }
 
-  return ['/blog/tag', filter.value].join('/') === pathname ? 'on' : 'off'
+  return ['/blog/tag', filter.value, ''].join('/') === pathname ? 'on' : 'off'
 }
 
-const toHref = (Astro: AstroGlobal, filter: Filter): string => {
+const hrefFromFilter = (Astro: AstroGlobal, prefix: 'blog' | 'pressroom', filter: Filter, defaultValue?: string): string => {
   const { value } = filter
   const { pathname } = Astro.url
 
   if (value === undefined && pathname === landingPage) {
-    return ''
+    return [landingPage, defaultValue].join('#')
   }
 
-  return value !== undefined ? `/blog/tag/${value}` : landingPage
+  const tag = value ?? defaultValue as string
+
+  return value !== undefined ? `/${prefix}/tag/${tag}/#${tag}` : [landingPage, defaultValue].join('#')
 }
 
-export { isActive, toHref }
+export { hrefFromFilter, isActive }
