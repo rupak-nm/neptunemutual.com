@@ -181,3 +181,8 @@ interface Sitemap {
 
 type WrappedPromise = (() => Promise<void>)
 type TaskWithDefinition = [string, ...WrappedPromise[]]
+
+interface Crumb {
+  link: string,
+  name: string
+}
