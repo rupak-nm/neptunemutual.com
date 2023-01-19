@@ -1,7 +1,7 @@
 ---
 import HeaderSection from "../components/HeaderSection.astro";
 import NewsletterSignupForm from "../components/NewsletterSignupForm.astro";
-import UnitConverterForm from "../react-code/UnitConverterForm";
+import UnitConverterForm from "../components/EthereumUnitConverterForm.astro";
 
 const t = (x: string): string => x;
 ---
@@ -20,13 +20,7 @@ const t = (x: string): string => x;
   </Fragment>
 </HeaderSection>
 
-<UnitConverterForm
-  client:only
-  crumbs={[
-    { name: "Home", link: "/" },
-    { name: "Web3 Tools", link: "/web3-tools" },
-  ]}
-/>
+<UnitConverterForm />
 
 <NewsletterSignupForm
   heading="Sign up for our newsletter"

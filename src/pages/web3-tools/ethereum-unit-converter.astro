@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import EthUnitConverter from "../../views/EthUnitConverter.astro";
+import EthereumUnitConverter from "../../views/EthereumUnitConverter.astro";
 import Seo from "../../components/Seo.astro";
 
 import styles from "./ethereum-unit-converter.scss?inline";
@@ -17,9 +17,10 @@ import styles from "./ethereum-unit-converter.scss?inline";
     }}
   />
   <style slot="header" is:inline set:html={styles}></style>
-  <EthUnitConverter />
+  <EthereumUnitConverter />
 
   <Fragment slot="footer">
-    <script src="../../scripts/react/index.js"></script>
+    <script src="../../scripts/web3-tools/ethereum-unit-converter/index.js"
+    ></script>
   </Fragment>
 </BaseLayout>

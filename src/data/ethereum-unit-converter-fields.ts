@@ -89,4 +89,19 @@ const simpleFields: ConversionField[] = [
   }
 ]
 
-export { extendedFields, simpleFields }
+const crumbs: Crumb[] = [
+  {
+    link: '/',
+    name: 'Home'
+  },
+  {
+    link: '/web3-tools/',
+    name: 'Web3 Tools'
+  },
+  {
+    link: '#',
+    name: 'Ethereum Unit Converter'
+  }
+]
+
+export { crumbs, extendedFields, simpleFields }

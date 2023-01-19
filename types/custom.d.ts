@@ -114,7 +114,7 @@ interface ConversionField {
   value: string
 }
 
-type ConversionUnits = 'kWei' | 'mWei' | 'gWei' | 'szabo' | 'finney' | 'ether' | 'kEther' | 'mEther' | 'gEther' | 'tEther'
+type EthereumUnit = 'kWei' | 'mWei' | 'gWei' | 'szabo' | 'finney' | 'ether' | 'kEther' | 'mEther' | 'gEther' | 'tEther'
 
 interface CatchAllRedirectPageProps {
   redirect: true
@@ -181,3 +181,8 @@ interface Sitemap {
 
 type WrappedPromise = (() => Promise<void>)
 type TaskWithDefinition = [string, ...WrappedPromise[]]
+
+interface Crumb {
+  link: string,
+  name: string
+}
