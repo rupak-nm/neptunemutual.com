@@ -183,6 +183,6 @@ type WrappedPromise = (() => Promise<void>)
 type TaskWithDefinition = [string, ...WrappedPromise[]]
 
 interface Crumb {
-  link: string,
+  link: string
   name: string
 }

@@ -1,5 +1,7 @@
 import { Item } from 'feed'
 
+import { fixImagePaths } from './media'
+
 const toFeedItem = (slug: string, page: Article): Item | undefined => {
   try {
     const link = `https://neptunemutual.com/${slug}/${page.slug as string}/`
@@ -11,7 +13,7 @@ const toFeedItem = (slug: string, page: Article): Item | undefined => {
       date: new Date(page.publishedAt as Date),
       published: new Date(page.publishedAt as Date),
       description: page.intro,
-      content: page.contentHtml,
+      content: fixImagePaths(page.contentHtml),
       copyright: `All rights reserved ${new Date().getFullYear()}, Neptune Mutual`,
       image: `https://neptunemutual.com/cdn/images/${page.cover.filename}`,
       author: [{
