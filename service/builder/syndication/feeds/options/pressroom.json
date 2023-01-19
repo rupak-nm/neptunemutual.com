@@ -1,0 +1,18 @@
+{
+  "title": "Neptune Mutual Pressroom Feed",
+  "description": "Together, let’s build a safer Ethereum DeFi ecosystem for everyone by decentralizing and democratizing crypto-native insurance.",
+  "id": "https://neptunemutual.com/pressroom/",
+  "link": "https://neptunemutual.com/pressroom/",
+  "language": "en",
+  "image": "https://neptunemutual.com/assets/images/meta/og/pressroom.png",
+  "favicon": "https://neptunemutual.com/assets/images/meta/favicons/favicon-96x96.webp",
+  "generator": "Neptune Mutual CMS",
+  "feedLinks": {
+    "atom": "https://neptunemutual.com/feeds/pressroom/atom.xml",
+    "rss": "https://neptunemutual.com/feeds/pressroom/rss.xml"
+  },
+  "author": {
+    "name": "Neptune Mutual",
+    "link": "https://neptunemutual.com/"
+  }
+}
