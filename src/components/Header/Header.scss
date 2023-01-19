@@ -98,6 +98,12 @@ header {
 
   &[data-style="colored"] {
     background-color: colors.$primary-25;
+    
+    @media (min-width: 1024px) {
+      .inner.container .nav.with.language.and.theme {
+        background-color: colors.$primary-25;
+      }
+    }
   }
 }
 
@@ -124,5 +130,11 @@ header {
 
   &[data-style="colored"] {
     background-color: colors.$gray-900;
+
+    @media (min-width: 1024px) {
+      .inner.container .nav.with.language.and.theme {
+        background-color: colors.$gray-900;
+      }
+    }
   }
 }
