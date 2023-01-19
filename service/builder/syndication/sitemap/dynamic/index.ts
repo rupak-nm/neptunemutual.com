@@ -1,7 +1,6 @@
 import * as enumerable from './enumerable'
 
 const get = async (): Promise<SitemapItem[]> => {
-  console.time('Sitemap')
   const result = []
 
   const items = await enumerable.resolve()
@@ -15,7 +14,6 @@ const get = async (): Promise<SitemapItem[]> => {
     }
   }
 
-  console.timeEnd('Sitemap')
   return result
 }
 

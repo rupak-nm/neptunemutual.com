@@ -4,6 +4,7 @@ import pages from './pages.json'
 import { persist } from './storage'
 
 const generate = async (): Promise<void> => {
+  console.time('Generating Sitemap')
   const fromDb = await dynamic.get()
   const result = [...pages, ...fromDb] as SitemapItem[]
 
@@ -12,6 +13,7 @@ const generate = async (): Promise<void> => {
   }
 
   await persist(result)
+  console.timeEnd('Generating Sitemap')
 }
 
 export { generate }
