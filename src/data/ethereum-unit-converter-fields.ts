@@ -89,7 +89,7 @@ const simpleFields: ConversionField[] = [
   }
 ]
 
-const crumbs: Crumb[] = [
+const crumbs: BreadcrumbItem[] = [
   {
     link: '/',
     name: 'Home'
