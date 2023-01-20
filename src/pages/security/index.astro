@@ -1,4 +1,5 @@
 ---
+import Enumerable from "linq";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Security from "../../views/Security.astro";
 import Seo from "../../components/Seo.astro";
@@ -6,7 +7,12 @@ import Seo from "../../components/Seo.astro";
 import * as api from "../../../service/api";
 import styles from "./index.scss?inline";
 
-const audits = await api.getEnumerable<Audit>("audits", 1000, 0);
+const result = await api.getEnumerable<Audit>("audits", 1000, 0);
+
+const audits = Enumerable.from(result)
+  .orderBy((x) => Date.parse(x.endDate))
+  .thenByDescending((x) => x.title)
+  .toArray();
 ---
 
 <BaseLayout>
