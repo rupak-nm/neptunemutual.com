@@ -53,9 +53,9 @@ const getFooterData = async (): Promise<FooterData> => {
       title: 'Resources',
       links: [
         {
-          href: 'https://app.neptunemutual.net',
+          href: '/marketplace',
           text: 'Marketplace',
-          isExternal: true
+          isExternal: false
         },
         { href: '/blog/', text: 'Blog', isExternal: false },
         { href: '/pressroom/', text: 'Press Room', isExternal: false },

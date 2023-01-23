@@ -1,0 +1,27 @@
+---
+import NewsletterSignupForm from "../components/NewsletterSignupForm.astro";
+import HeaderSection from "../components/HeaderSection.astro";
+import MarketplaceOptions from "./marketplace/MarketplaceOptions.astro";
+
+const t = (x: string): string => x;
+---
+
+<>
+  <HeaderSection
+    color={"basic"}
+    alignment={"center"}
+    heading={t("Neptune Mutual Marketplace")}
+  >
+    <Fragment slot="supporting-text">
+      {t("Neptune Mutual Marketplace App for Ethereum and Arbitrum")}
+    </Fragment>
+  </HeaderSection>
+
+  <MarketplaceOptions />
+
+  <NewsletterSignupForm
+    heading="Sign up for our newsletter"
+    text="Be the first to know about releases and industry news and insights."
+    showFeedButtons={false}
+  />
+</>

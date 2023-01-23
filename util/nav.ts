@@ -46,7 +46,7 @@ export const data: linkNav[] = [
         type: 'section',
         title: 'Resources',
         links: [
-          { title: 'Explore Marketplace', href: 'https://app.neptunemutual.net', description: 'Explore the marketplace, purchase policies, and pool liquidity', icon: 'bank', isExternal: true },
+          { title: 'Explore Marketplace', href: '/marketplace', description: 'Explore the marketplace, purchase policies, and pool liquidity', icon: 'bank' },
           { title: 'Blog ', href: '/blog/', description: 'Visit our blog', icon: 'edit-03' },
           { title: 'Press Room', href: '/pressroom/', description: 'The source for news about Neptune Mutual', icon: 'annotation-dots' },
           { title: 'Ecosystem', href: '/ecosystem/', description: 'Learn how you can participate in our marketplace', icon: 'database-01' },
