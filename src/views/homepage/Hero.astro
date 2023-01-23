@@ -1,6 +1,7 @@
 ---
 import Button from "../../elements/buttons/Button.astro";
 import PressroomAnnouncement from "./hero/PressroomAnnouncement.astro";
+import LaunchApp from "../homepage/launch-app/popup.astro"
 
 const t = (x: string): string => x;
 ---
@@ -27,11 +28,12 @@ const t = (x: string): string => x;
             }
         </p>
         <div class="button container">
+            <LaunchApp />
             <Button
-                type={"anchor"}
-                href="https://app.neptunemutual.net"
+                href="#"
                 rel="noopener"
                 target={"_blank"}
+                id={"toggle-launch-app"}
                 size={"2xl"}
                 iconVariant="arrow-narrow-right"
                 variant={"primary"}

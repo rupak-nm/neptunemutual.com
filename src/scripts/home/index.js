@@ -7,3 +7,4 @@ import '../global/index'
 // Global End
 import '../components/temp/slider'
 import './features'
+import './launch-app'
