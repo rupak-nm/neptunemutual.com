@@ -15,7 +15,7 @@ interface Props {
 
 const { articles, totalPages, currentPage, tag } = Astro.props;
 
-const heading = tag?.name || "Recent Posts";
+const heading = tag?.name || "All Stories";
 const slug = tag?.slug ?? slugify(heading);
 ---
 
