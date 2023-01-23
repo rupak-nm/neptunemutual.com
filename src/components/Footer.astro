@@ -40,7 +40,14 @@ const { lists, socials } = await getFooterData();
                           <a href={normalizeUrl(link.href)}>{link.text}</a>
                         )}
 
-                        {link.badge && <div class="badge">{link.badge}</div>}
+                        {link.badge && (
+                          <div
+                            data-color={link?.badgeColor || "info"}
+                            class="badge"
+                          >
+                            {link.badge}
+                          </div>
+                        )}
                       </li>
                     );
                   })}

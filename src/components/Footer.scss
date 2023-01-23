@@ -112,11 +112,19 @@ footer {
     .badge {
       @include styles.text-sm;
       @include weights.medium;
-      color: colors.$blue-dark-700;
-      background: colors.$blue-dark-100;
       padding: 2px 10px;
       border-radius: 16px;
       margin-left: 8px;
+
+      &[data-color="info"] {
+        color: colors.$blue-dark-700;
+        background: colors.$blue-dark-100;
+      }
+
+      &[data-color="success"] {
+        color: colors.$success-700;
+        background: colors.$success-50;
+      }
     }
   }
 
@@ -179,8 +187,15 @@ footer {
     }
 
     .badge {
-      color: colors.$blue-dark-50;
-      background-color: colors.$blue-dark-700;
+      &[data-color="info"] {
+        color: colors.$blue-dark-50;
+        background-color: colors.$blue-dark-700;
+      }
+
+      &[data-color="success"] {
+        color: colors.$white;
+        background-color: colors.$success-600;
+      }
     }
   }
 

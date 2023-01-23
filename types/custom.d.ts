@@ -30,6 +30,7 @@ interface NavLinkList {
     text: string
     isExternal: boolean
     badge?: string
+    badgeColor?: 'success' | 'info'
   }>
 }
 

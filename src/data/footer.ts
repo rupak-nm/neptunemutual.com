@@ -55,7 +55,9 @@ const getFooterData = async (): Promise<FooterData> => {
         {
           href: '/marketplace',
           text: 'Marketplace',
-          isExternal: false
+          isExternal: false,
+          badge: 'New!',
+          badgeColor: 'success'
         },
         { href: '/blog/', text: 'Blog', isExternal: false },
         { href: '/pressroom/', text: 'Press Room', isExternal: false },
