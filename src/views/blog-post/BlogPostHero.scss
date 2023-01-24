@@ -21,14 +21,17 @@
     align-items: stretch;
   }
 
-  .header {
+  >.header {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 
   h1 {
-    margin-top: 16px;
-    @include styles.display-xl;
+    @include styles.display-lg;
     @include weights.semibold;
+    color: colors.$gray-900;
 
     @media (max-width: 767px) {
       margin: 0;
@@ -38,10 +41,15 @@
     }
   }
 
+  p.intro {
+    @include styles.text-xl;
+    @include weights.regular;
+    color: colors.$gray-600;
+  }
+
   .blog.info{
     display: flex;
     align-items:center; 
-    margin-bottom: 16px;
     gap: 8px; 
 
 
@@ -99,6 +107,14 @@
     span {
       color: colors.$gray-200;
     }
+  }
+
+  h1 {
+    color: colors.$gray-100;
+  }
+
+  p.intro {
+    color: colors.$gray-300;
   }
 
   time {
