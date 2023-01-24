@@ -7,7 +7,8 @@
 import { env } from '../../../util/env.js'
 import { get } from './request.js'
 
-const resources = [
+const resources: ApiResource[] = [
+  ['contracts', 'https://api.neptunemutual.net/protocol/contracts', true],
   ['media', 'api/media?limit=1000'],
   ['blog', 'api/articles?limit=1000'],
   ['pressroom', 'api/pressroom?limit=1000'],
@@ -25,10 +26,11 @@ const build = (): Array<Promise<{ url: string, identifier: string, string: strin
   const promises: Array<Promise<{ url: string, identifier: string, string: string }>> = []
 
   for (const resource of resources) {
-    const [identifier, path] = resource
+    const [identifier, path, fqu] = resource
     const origin: string = env('WEBSITE_API_ORIGIN')
 
-    const url = `${origin}/${path}`
+    // fully qualified uri
+    const url = fqu === undefined ? `${origin}/${path}` : path
 
     promises.push(get(url, identifier))
   }

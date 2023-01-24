@@ -9,7 +9,7 @@ import { getApiHeaders } from './headers'
 
 const get = async (url: string, identifier: string, headers = getApiHeaders()): Promise<{ url: string, identifier: string, string: string }> => {
   const urlObj = new URL(url)
-  console.log('Requesting: %s', identifier)
+  console.log('Requesting: %s: %s', identifier, url)
 
   const httpCore = urlObj.protocol === 'http:' ? http : https
 

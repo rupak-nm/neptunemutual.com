@@ -232,3 +232,32 @@ interface Vacancy extends Content {
   updatedAt?: Date
   publishedAt?: Date
 }
+
+interface ApiResponse<T> {
+  message: string
+  code: string
+  data: T
+}
+
+interface CxToken {
+  coverKey: string
+  productKey: string
+  value: string
+  expiry: Date
+}
+
+interface KeyValuePair<T> {
+  key: string
+  value: T
+}
+
+interface ProtocolContracts {
+  chainId: number
+  network: string
+  contracts: Array<KeyValuePair<string>>
+  coverKeys: string[]
+  pods: Array<KeyValuePair<string>>
+  tokens: Array<KeyValuePair<string>>
+  pairs: Array<KeyValuePair<string>>
+  cxTokens: CxToken[]
+}

@@ -8,6 +8,8 @@ declare module '*.svg?raw' {
   export default content
 }
 
+type ApiResource = [string, string, boolean?]
+
 interface FileDownloadArgs {
   remote: string
   local: string
