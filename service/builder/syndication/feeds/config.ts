@@ -1,5 +1,7 @@
+import { Api } from '../../../../types/enum'
+
 const config = {
-  allowed: ['blog', 'pressroom'],
+  allowed: [Api.Blog, Api.Pressroom],
   root: 'public/feeds'
 }
 

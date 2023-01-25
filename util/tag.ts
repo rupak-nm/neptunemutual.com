@@ -1,7 +1,11 @@
+import {
+  Api,
+  BlogOrPressroom
+} from '../types/enum'
 
-const allowed = ['blog', 'pressroom']
+const allowed = [Api.Blog, Api.Pressroom]
 
-const toTagHref = (prefix: 'blog' | 'pressroom', tag?: string): string | undefined => {
+const toTagHref = (prefix: BlogOrPressroom, tag?: string): string | undefined => {
   if (tag === undefined) {
     return undefined
   }
@@ -13,7 +17,7 @@ const toTagHref = (prefix: 'blog' | 'pressroom', tag?: string): string | undefin
   return `/${prefix}/tag/${tag}/#${tag}`
 }
 
-const toTagsWithHref = (prefix: 'blog' | 'pressroom', tags: Tag[] | undefined): TagWithHref[] => {
+const toTagsWithHref = (prefix: BlogOrPressroom, tags: Tag[] | undefined): TagWithHref[] => {
   const withHrefs: TagWithHref[] = []
 
   if (tags === undefined || tags === null || tags.length === 0) {

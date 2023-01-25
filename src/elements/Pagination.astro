@@ -3,9 +3,10 @@ import Button from "./buttons/Button.astro";
 
 import { getPagination } from "../../util/pagination";
 import { normalizeUrl } from "../../util/url";
+import { BlogOrPressroom } from "../../types/enum";
 
 interface Props {
-  type: "blog" | "pressroom";
+  type: BlogOrPressroom;
   tag?: Tag;
   totalPages?: number;
   currentPage?: number;

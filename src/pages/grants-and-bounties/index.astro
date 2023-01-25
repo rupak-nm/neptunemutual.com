@@ -5,8 +5,9 @@ import Seo from "../../components/Seo.astro";
 
 import styles from "./index.scss?inline";
 import * as api from "../../../service/api";
+import { Api } from "../../../types/enum";
 
-const programs = await api.getEnumerable<Program>("programs", 1000, 0);
+const programs = await api.getEnumerable<Program>(Api.Program, 1000, 0);
 ---
 
 <BaseLayout>

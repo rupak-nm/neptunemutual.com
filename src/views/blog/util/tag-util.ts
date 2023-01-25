@@ -1,5 +1,7 @@
 import { AstroGlobal } from 'astro'
 
+import { BlogOrPressroom } from '../../../../types/enum'
+
 const landingPage = '/blog/'
 
 const isActive = (Astro: AstroGlobal, filter: Filter): string => {
@@ -15,7 +17,7 @@ const isActive = (Astro: AstroGlobal, filter: Filter): string => {
   return ['/blog/tag', filter.value, ''].join('/') === pathname ? 'on' : 'off'
 }
 
-const hrefFromFilter = (Astro: AstroGlobal, prefix: 'blog' | 'pressroom', filter: Filter, defaultValue?: string): string => {
+const hrefFromFilter = (Astro: AstroGlobal, prefix: BlogOrPressroom, filter: Filter, defaultValue?: string): string => {
   const { value } = filter
   const { pathname } = Astro.url
 

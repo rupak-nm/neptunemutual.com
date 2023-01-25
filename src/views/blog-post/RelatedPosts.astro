@@ -2,11 +2,12 @@
 import ArticleCard from "../../components/ArticleCard.astro";
 import Button from "../../elements/buttons/Button.astro";
 import { toTagHref } from "../../../util/tag";
+import { BlogOrPressroom } from "../../../types/enum";
 
 const t = (x: string): string => x;
 
 interface Props {
-  type: "blog" | "pressroom";
+  type: BlogOrPressroom;
   tagSlug?: string;
   relatedPosts: Content[];
 }

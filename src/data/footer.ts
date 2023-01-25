@@ -1,4 +1,5 @@
 import * as api from '../../service/api'
+import { Api } from '../../types/enum'
 
 const socials: FooterData['socials'] = [
   {
@@ -46,7 +47,7 @@ const socials: FooterData['socials'] = [
 ]
 
 const getFooterData = async (): Promise<FooterData> => {
-  const pages = await api.getEnumerable<Page>('pages', 10, 0)
+  const policies = await api.getEnumerable<Page>(Api.Policy, 10, 0)
 
   const lists: NavLinkList[] = [
     {
@@ -91,7 +92,7 @@ const getFooterData = async (): Promise<FooterData> => {
     },
     {
       title: 'Policies',
-      links: pages.sort((a, b) => a.sort - b.sort).map((page) => {
+      links: policies.sort((a, b) => a.sort - b.sort).map((page) => {
         return {
           href: `/policies/${page.slug}/`,
           text: page.title,

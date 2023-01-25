@@ -1,6 +1,7 @@
 import { Feed } from 'feed'
 import path from 'path'
 
+import { Api } from '../../../../types/enum'
 import { saveToDiskRaw } from '../../../../util/io'
 import { config } from './config'
 import * as content from './content'
@@ -14,7 +15,7 @@ const write = async (file: string, content: string): Promise<void> => {
   console.log('Done %s', file)
 }
 
-const build = async (slug: string): Promise<void> => {
+const build = async (slug: Api): Promise<void> => {
   try {
     console.time(`Generating Feed For "${slug}"`)
     const result = await content.get(slug)

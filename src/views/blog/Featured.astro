@@ -1,5 +1,6 @@
 ---
 import ArticleCard from "../../components/ArticleCard.astro";
+import { Api } from "../../../types/enum";
 
 const t = (x: string): string => x;
 
@@ -14,6 +15,6 @@ const { posts } = Astro.props;
   <h2>{t("Recent Posts")}</h2>
 
   <div class="grid container">
-    {posts.map((post: any) => <ArticleCard type="blog" post={post} />)}
+    {posts.map((post: any) => <ArticleCard type={Api.Blog} post={post} />)}
   </div>
 </div>

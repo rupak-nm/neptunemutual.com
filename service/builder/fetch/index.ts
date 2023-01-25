@@ -4,22 +4,23 @@
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 
+import { Api } from '../../../types/enum.js'
 import { env } from '../../../util/env.js'
 import { get } from './request.js'
 
 const resources: ApiResource[] = [
-  ['contracts', 'https://api.neptunemutual.net/protocol/contracts', true],
-  ['media', 'api/media?limit=1000'],
-  ['blog', 'api/articles?limit=1000'],
-  ['pressroom', 'api/pressroom?limit=1000'],
-  ['ecosystems', 'api/ecosystems?limit=1000'],
-  ['pages', 'api/pages?limit=1000'],
-  ['roadmap', 'api/roadmap?limit=1000'],
-  ['vacancies', 'api/vacancies?limit=1000'],
-  ['audits', 'api/audits?limit=1000'],
-  ['news', 'api/news?limit=1000'],
-  ['programs', 'api/programs?limit=1000'],
-  ['videos', 'api/videos?limit=1000']
+  [Api.Contract, 'https://api.neptunemutual.net/protocol/contracts', true],
+  [Api.Media, 'api/media?limit=1000'],
+  [Api.Blog, 'api/articles?limit=1000'],
+  [Api.Pressroom, 'api/pressroom?limit=1000'],
+  [Api.Ecosystem, 'api/ecosystems?limit=1000'],
+  [Api.Policy, 'api/pages?limit=1000'],
+  [Api.Roadmap, 'api/roadmap?limit=1000'],
+  [Api.Vacancy, 'api/vacancies?limit=1000'],
+  [Api.Audit, 'api/audits?limit=1000'],
+  [Api.News, 'api/news?limit=1000'],
+  [Api.Program, 'api/programs?limit=1000'],
+  [Api.Video, 'api/videos?limit=1000']
 ]
 
 const build = (): Array<Promise<{ url: string, identifier: string, string: string }>> => {

@@ -5,10 +5,11 @@ import Seo from "../../../components/Seo.astro";
 
 import * as api from "../../../../service/api";
 import styles from "./page.scss?inline";
+import { Api } from "../../../../types/enum";
 
 export async function getStaticPaths() {
   const POSTS_PER_PAGE = 9;
-  const paginated = await api.getPaginated<Article>("blog", POSTS_PER_PAGE);
+  const paginated = await api.getPaginated<Article>(Api.Blog, POSTS_PER_PAGE);
 
   const nums = Object.keys(paginated.pages);
 

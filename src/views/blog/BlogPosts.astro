@@ -3,6 +3,7 @@ import ArticleCard from "../../components/ArticleCard.astro";
 import Pagination from "../../elements/Pagination.astro";
 import TagFilters from "./TagFilters.astro";
 import TagFilterDropdown from "./TagFilterDropdown.astro";
+import { Api } from "../../../types/enum";
 
 import { slugify } from "../../../util/slug";
 
@@ -38,13 +39,13 @@ const slug = tag?.slug ?? slugify(heading);
       {
         articles.map((post) => (
           <div class="single card">
-            <ArticleCard type="blog" post={post} />
+            <ArticleCard type={Api.Blog} post={post} />
           </div>
         ))
       }
     </div>
     <Pagination
-      type="blog"
+      type={Api.Blog}
       tag={tag}
       currentPage={currentPage}
       totalPages={totalPages}

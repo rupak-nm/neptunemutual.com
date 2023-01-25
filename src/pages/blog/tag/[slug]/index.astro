@@ -5,10 +5,11 @@ import Seo from "../../../../components/Seo.astro";
 
 import * as api from "../../../../../service/api/blog";
 import styles from "./page.scss?inline";
+import { Api } from "../../../../../types/enum";
 
 export async function getStaticPaths() {
   const POSTS_PER_PAGE = 9;
-  const tagsData = await api.getPaginatedByTags("blog", POSTS_PER_PAGE);
+  const tagsData = await api.getPaginatedByTags(Api.Blog, POSTS_PER_PAGE);
 
   return tagsData.map((data) => {
     return {

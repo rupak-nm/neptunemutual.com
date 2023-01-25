@@ -5,16 +5,17 @@
 import Enumerable from 'linq'
 import path from 'path'
 
+import { Api } from '../../types/enum'
 import * as io from '../../util/io'
 import { config } from './config'
 
-const getApi = async <T>(type: string): Promise<ApiResult<T>> => {
-  if (!config.allowed.includes(type)) {
-    throw new Error(`Invalid type ${type}`)
+const getApi = async <T>(api: Api): Promise<ApiResult<T>> => {
+  if (!Object.values(Api).includes(api)) {
+    throw new Error(`Invalid type ${api}`)
   }
 
   try {
-    const file = path.join(config.root, `${type}.json`)
+    const file = path.join(config.root, `${api}.json`)
     const contents = await io.readFile(file)
     const result = JSON.parse(contents)
     return result
@@ -38,9 +39,9 @@ const getApi = async <T>(type: string): Promise<ApiResult<T>> => {
   return result
 }
 
-const getEnumerable = async <T>(type: string, limit: number, skip: number): Promise<T[]> => {
+const getEnumerable = async <T>(api: Api, limit: number, skip: number): Promise<T[]> => {
   try {
-    const result = await getApi<T>(type)
+    const result = await getApi<T>(api)
 
     let enumerable = Enumerable.from(result.docs)
 
@@ -62,9 +63,9 @@ const getEnumerable = async <T>(type: string, limit: number, skip: number): Prom
   return []
 }
 
-const getPaginated = async<T>(type: string, pageSize: number = 12): Promise<PaginatedResult<T>> => {
+const getPaginated = async<T>(api: Api, pageSize: number = 12): Promise<PaginatedResult<T>> => {
   try {
-    const { docs } = await getApi<T>(type)
+    const { docs } = await getApi<T>(api)
 
     const records = docs.length
     const totalPages = Math.ceil(records / pageSize)
@@ -93,9 +94,9 @@ const getPaginated = async<T>(type: string, pageSize: number = 12): Promise<Pagi
   return { pages: {} }
 }
 
-const getPaginatedByTags = async (type: string, pageSize: number = 12): Promise<Array<PaginatedByTagsResult<Article>>> => {
+const getPaginatedByTags = async (api: Api, pageSize: number = 12): Promise<Array<PaginatedByTagsResult<Article>>> => {
   try {
-    const { docs } = await getApi<Article>(type)
+    const { docs } = await getApi<Article>(api)
 
     const allTags = docs.map((doc) => doc.tags).flat()
     const uniqueTags = [...new Map(allTags.map((tag: any) => [tag.id, tag])).values()]

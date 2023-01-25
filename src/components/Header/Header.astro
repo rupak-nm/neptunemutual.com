@@ -11,8 +11,10 @@ import VideoModal from "../VideoModal.astro";
 
 import { data } from "../../../util/nav";
 import * as api from "../../../service/api";
+import { Api } from "../../../types/enum";
 
-const videos = await api.getEnumerable<Video>("videos", 4, 0);
+const videos = await api.getEnumerable<Video>(Api.Video, 4, 0);
+
 const updatedVideos: Video[] = videos.map((video) => ({
   ...video,
   thumbnail: { ...video.thumbnail, url: "" },

@@ -1,10 +1,11 @@
 ---
 import Button from "../../elements/buttons/Button.astro";
 import { getEnumerable } from "../../../service/api";
+import { Api } from "../../../types/enum";
 
 const t = (x: string): string => x;
 
-const roadmap = (await getEnumerable<Roadmap>("roadmap", 1000, 0)).sort(
+const roadmap = (await getEnumerable<Roadmap>(Api.Roadmap, 1000, 0)).sort(
   (a, b) => a.sort - b.sort
 );
 

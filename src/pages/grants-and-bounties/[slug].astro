@@ -6,13 +6,14 @@ import Seo from "../../components/Seo.astro";
 import * as api from "../../../service/api";
 import styles from "./slug.scss?inline";
 import * as dns from "../../../util/dns";
+import { Api } from "../../../types/enum";
 
 interface Props {
   program: Program;
 }
 
 export async function getStaticPaths() {
-  const programs = await api.getEnumerable<Program>("programs", 1000, 0);
+  const programs = await api.getEnumerable<Program>(Api.Program, 1000, 0);
 
   return programs.map((program) => {
     return {

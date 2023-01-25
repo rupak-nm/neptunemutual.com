@@ -9,6 +9,7 @@ import Videos from "./blog/Videos.astro";
 import * as api from "../../service/api";
 import Enumerable from "linq";
 import { getEnumerable } from "../../service/api";
+import { Api } from "../../types/enum";
 
 interface Props {
   articles: Article[];
@@ -17,7 +18,7 @@ interface Props {
   tag?: Tag;
 }
 
-const posts = await getEnumerable<Article>("blog", 10000, 0);
+const posts = await getEnumerable<Article>(Api.Blog, 10000, 0);
 
 const t = (x: string): string => x;
 const { articles, currentPage, totalPages, tag } = Astro.props;
@@ -27,7 +28,7 @@ const latest = Enumerable.from(posts)
   .take(3)
   .toArray();
 
-const videos = await api.getEnumerable<Video>("videos", 3, 0);
+const videos = await api.getEnumerable<Video>(Api.Video, 3, 0);
 ---
 
 <HeaderSection
