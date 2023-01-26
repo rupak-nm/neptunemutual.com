@@ -1,0 +1,41 @@
+---
+import Icon from "../../elements/Icon.astro";
+
+interface Props {
+  toc: TableOfContentsProp;
+}
+
+const {
+  toc: { items },
+} = Astro.props;
+const activeItem = items.find((item) => item.active) ?? items[0];
+---
+
+<div class="protocol network select container">
+  <div class="button container">
+    <button type="button" id="NetworkSelectButton">
+      <div>
+        <Icon variant={activeItem.icon} size="lg" />
+        <span>{activeItem.text}</span>
+      </div>
+      <Icon variant="chevron-down" size="lg" />
+    </button>
+
+    <div class="menu" data-open="false">
+      <ul>
+        {
+          items.map(({ text, icon, href }) => {
+            return (
+              <li tabindex="0">
+                <a href={href}>
+                  <Icon variant={icon} />
+                  <span>{text}</span>
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </div>
+</div>

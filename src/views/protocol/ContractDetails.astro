@@ -1,0 +1,74 @@
+---
+import {
+  getContractData,
+  getExplorerUrl,
+  protocolDomains,
+  protocolLabels,
+  protocolTitles,
+} from "../../../util/protocol";
+import Tabs from "../../components/Tabs.astro";
+import Icon from "../../elements/Icon.astro";
+import InputWithIcon from "../../elements/InputWithIcon.astro";
+import { getTabs } from "./data";
+
+interface Props extends ContractProps {}
+
+const { networkId, type, data } = Astro.props;
+
+const contracts = getContractData(data[type], type);
+---
+
+<div
+  class="contract details container"
+  data-network={networkId}
+  data-type={type}
+>
+  <div class="titles container">
+    <h1>{protocolTitles[networkId]}</h1>
+    <a href={protocolDomains[networkId]} target="_blank">
+      {protocolDomains[networkId]}
+    </a>
+  </div>
+
+  <Tabs items={getTabs(type)} />
+
+  <p class="details title">
+    {protocolLabels[type]}
+  </p>
+
+  <InputWithIcon
+    className="search input"
+    iconProps={{
+      variant: "search-lg",
+      size: "lg",
+    }}
+    placeholder="Search"
+    value=""
+  />
+
+  <div class="results container">
+    {
+      contracts.map(({ name, address }, i) => (
+        <div class="result item" data-show="true" data-index={i}>
+          <p class="contract name">{name ?? ""}</p>
+
+          <p class="contract address">{address}</p>
+
+          <div class="icons">
+            <a
+              href={getExplorerUrl(networkId, address)}
+              target="_blank"
+              rel="nofollow"
+            >
+              <Icon variant={"link-03"} />
+            </a>
+
+            <a href={"#"}>
+              <Icon variant={"arrow-circle-right"} />
+            </a>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>

@@ -1,0 +1,27 @@
+---
+import { Networks } from "../../../util/protocol";
+import TableOfContents from "../../components/TableOfContents.astro";
+import ContractDetails from "./ContractDetails.astro";
+import { getToc } from "./data";
+import NetworkSelect from "./NetworkSelect.astro";
+
+interface Props extends ContractProps {}
+
+const { networkId, type, data } = Astro.props;
+---
+
+<div class="neptune protocol contracts">
+  <div class="protocol inner container">
+    <TableOfContents
+      toc={getToc(networkId)}
+      showLabel={false}
+      showTitle={false}
+    />
+
+    <div class="toc mobile">
+      <NetworkSelect toc={getToc(networkId)} />
+    </div>
+
+    <ContractDetails networkId={networkId} type={type} data={data} />
+  </div>
+</div>

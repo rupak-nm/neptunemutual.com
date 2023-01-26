@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Seo from "../../../components/Seo.astro";
+
+import styles from "./contracts.scss?inline";
+
+import * as api from "../../../../service/api";
+import { Api } from "../../../../types/enum";
+import HeaderSection from "../../../components/HeaderSection.astro";
+import ProtocolContracts from "../../../views/protocol/ProtocolContracts.astro";
+
+const paginated = await api.getContracts(Api.Contract);
+
+const t = (x: string) => x;
+---
+
+<script define:vars={{ paginated }}>
+  console.log({ paginated });
+</script>
+
+<BaseLayout headerStyle={"colored"}>
+  <Seo
+    slot="seo"
+    title="Neptune Mutual Protocol Contracts / Neptune Mutual"
+    description="Neptune Mutual Protocol Contracts"
+    og={{
+      image: "/assets/images/meta/og/home.png",
+      imageAlt: "Neptune Mutual Protocol Contracts",
+    }}
+    noindex
+  />
+  <style slot="header" is:inline set:html={styles}></style>
+
+  <HeaderSection
+    color={"basic"}
+    alignment={"center"}
+    heading={t("Neptune Mutual Protocol Contracts")}
+  />
+
+  <ProtocolContracts networkId={1} type={"contracts"} data={paginated.data} />
+
+  <Fragment slot="footer">
+    <script src="../../../scripts/protocol/index.js"></script>
+  </Fragment>
+</BaseLayout>

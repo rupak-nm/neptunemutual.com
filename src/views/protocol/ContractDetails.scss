@@ -1,0 +1,149 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+@use "../../design-system/blurs";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+
+.contract.details.container {
+  & > *:not(:first-child) {
+    margin-top: 24px;
+  }
+
+  .titles.container {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    h1 {
+      @include styles.display-sm;
+      @include weights.semibold;
+      color: colors.$gray-900;
+    }
+
+    a {
+      @include styles.text-md;
+      @include weights.semibold;
+      color: colors.$primary-600;
+    }
+  }
+
+  .details.title {
+    @include styles.text-xl;
+    @include weights.semibold;
+    color: colors.$gray-600;
+  }
+
+  .search.input {
+    @include styles.text-md;
+    @include weights.regular;
+    color: colors.$gray-500;
+  }
+
+  .results.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+    }
+
+    .result.item {
+      padding: 14px;
+      border-radius: 12px;
+
+      &:hover {
+        background-color: colors.$primary-50;
+      }
+
+      & > *:not(:first-child) {
+        margin-top: 8px;
+      }
+
+      .contract.name {
+        @include styles.text-md;
+        @include weights.medium;
+        color: colors.$gray-900;
+      }
+
+      .contract.address {
+        @include styles.text-md;
+        @include weights.regular;
+        color: colors.$gray-600;
+        word-break: break-all;
+      }
+
+      .icons {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        svg {
+          color: colors.$gray-700 !important;
+          width: 16px;
+          height: 16px;
+
+          &:hover {
+            color: colors.$primary-700 !important;
+          }
+        }
+      }
+
+      &[data-show="false"] {
+        display: none;
+      }
+    }
+  }
+}
+
+.dark .contract.details.container {
+  .titles.container {
+    h1 {
+      color: colors.$white;
+    }
+
+    a {
+      color: colors.$primary-200;
+    }
+  }
+
+  .details.title {
+    color: colors.$gray-25;
+  }
+
+  .search.input {
+    background: colors.$gray-600;
+    border-color: colors.$gray-500;
+    color: colors.$gray-25;
+
+    input, ::placeholder, svg {
+      color: colors.$gray-25;
+    }
+  }
+
+  .results.container .result.item {
+    &:hover {
+      background-color: colors.$gray-700;
+    }
+
+    .contract.name {
+      color: colors.$white;
+    }
+
+    .contract.address {
+      color: colors.$gray-25;
+    }
+
+    svg {
+      color: colors.$gray-400 !important;
+
+      &:hover {
+        color: colors.$white !important;
+      }
+    }
+  }
+}

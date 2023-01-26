@@ -1,0 +1,43 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+@use "../../design-system/blurs";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+
+.neptune.protocol.contracts {
+  @include utils.full-width-container;
+  padding-top: 48px;
+  padding-bottom: 180px;
+
+  .protocol.inner.container {
+    padding: 0 32px;
+    display: flex;
+    gap: 48px;
+
+    .table.of.contents.container {
+      min-width: 268px;
+
+      @media (max-width: 1023px) {
+        display: none;
+      }
+    }
+
+    .toc.mobile {
+      @media (min-width: 1024px) {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1025px) {
+      flex-direction: column;
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 1025px) {
+    padding-top: 24px;
+    padding-bottom: 64px;
+  }
+}
