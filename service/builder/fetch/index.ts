@@ -10,6 +10,8 @@ import { get } from './request.js'
 
 const resources: ApiResource[] = [
   [Api.Contract, 'https://api.neptunemutual.net/protocol/contracts', true],
+  [Api.ContractArbitrum, 'https://api.neptunemutual.net/protocol/contracts/arbitrum', true],
+  [Api.ContractFuji, 'https://api.neptunemutual.net/protocol/contracts/fuji', true],
   [Api.Media, 'api/media?limit=1000'],
   [Api.Blog, 'api/articles?limit=1000'],
   [Api.Pressroom, 'api/pressroom?limit=1000'],

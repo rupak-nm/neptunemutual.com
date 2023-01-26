@@ -2,6 +2,8 @@ enum Api {
   Audit = 'audits',
   Blog = 'blog',
   Contract = 'contracts',
+  ContractArbitrum = 'contracts.arbitrum',
+  ContractFuji = 'contracts.fuji',
   Ecosystem = 'ecosystems',
   Media = 'media',
   News = 'news',
