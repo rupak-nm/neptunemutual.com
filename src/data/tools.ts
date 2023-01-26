@@ -26,6 +26,14 @@ const tools = [
     category: 'Ethereum',
     icon: 'code-square-01',
     badges: []
+  },
+  {
+    slug: 'protocol/ethereum/contracts',
+    title: 'Neptune Mutual Protocol Contracts',
+    intro: 'Documented events and actions in Neptune Mutual’s web application.',
+    category: 'Protocol Contracts',
+    icon: 'code-square-01',
+    badges: []
   }
 ]
 
