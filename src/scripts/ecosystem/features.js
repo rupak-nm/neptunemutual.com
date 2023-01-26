@@ -69,8 +69,7 @@
     buttonSpans.forEach((span) => {
       const tag = span.getAttribute('data-tag')
 
-      if (tag === selectedTag) span.setAttribute('data-selected', 'true')
-      else span.setAttribute('data-selected', 'false')
+      span.setAttribute('data-selected', tag === selectedTag ? 'true' : 'false')
     })
   }
 

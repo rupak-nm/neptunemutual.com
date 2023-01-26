@@ -1,0 +1,17 @@
+---
+interface Props {
+  items: TabProp[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="tabs component container">
+  {
+    items.map(({ text, href, active }) => (
+      <a data-active={Boolean(active).toString()} class="tab item" href={href}>
+        {text}
+      </a>
+    ))
+  }
+</div>

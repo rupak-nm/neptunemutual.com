@@ -1,0 +1,54 @@
+@use "../design-system/utils";
+@use "../design-system/colors";
+@use "../design-system/theme/light";
+@use "../design-system/theme/dark";
+@use "../design-system/blurs";
+@use "../design-system/typography/styles";
+@use "../design-system/typography/weights";
+
+.tabs.component.container {
+  display: flex;
+
+  a.tab.item {
+    display: block;
+    padding: 10px 16px;
+
+    @include styles.text-sm;
+    @include weights.semibold;
+    border: 1px solid colors.$gray-300;
+    background-color: colors.$white;
+    color: colors.$gray-700;
+
+    &:first-of-type {
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+
+    &:last-of-type {
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+    
+    &:not(:last-of-type) {
+      border-right-color: transparent;  
+    }
+
+    &[data-active="true"] {
+      background-color: colors.$gray-100;
+      color: colors.$gray-800;
+    }
+  }
+}
+
+.dark .tabs.component.container {
+  a.tab.item {
+    border: 1px solid colors.$gray-500;
+    background-color: colors.$gray-600;
+    color: colors.$gray-300;
+    
+    &[data-active="true"] {
+      background-color: colors.$gray-700;
+      color: colors.$white;
+    }
+  }
+}

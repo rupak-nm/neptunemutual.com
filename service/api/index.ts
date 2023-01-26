@@ -39,6 +39,39 @@ const getApi = async <T>(api: Api): Promise<ApiResult<T>> => {
   return result
 }
 
+const getContracts = async (api: (Api.Contract | Api.ContractArbitrum | Api.ContractFuji)): Promise<ApiResponse<ProtocolContracts>> => {
+  const contracts = [Api.Contract, Api.ContractArbitrum, Api.ContractFuji]
+  if (!contracts.includes(api)) {
+    throw new Error(`Invalid type ${api} for contract`)
+  }
+
+  try {
+    const file = path.join(config.root, `${api}.json`)
+    const contents = await io.readFile(file)
+    const result = JSON.parse(contents)
+    return result
+  } catch (error) {
+    console.error(error)
+  }
+
+  const result: ApiResponse<ProtocolContracts> = {
+    message: '',
+    code: '404',
+    data: {
+      chainId: 1,
+      network: '1',
+      contracts: [],
+      coverKeys: [],
+      pods: [],
+      tokens: [],
+      pairs: [],
+      cxTokens: []
+    }
+  }
+
+  return result
+}
+
 const getEnumerable = async <T>(api: Api, limit: number, skip: number): Promise<T[]> => {
   try {
     const result = await getApi<T>(api)
@@ -138,4 +171,4 @@ const getPaginatedByTags = async (api: Api, pageSize: number = 12): Promise<Arra
   return []
 }
 
-export { getApi, getEnumerable, getPaginated, getPaginatedByTags }
+export { getApi, getContracts, getEnumerable, getPaginated, getPaginatedByTags }

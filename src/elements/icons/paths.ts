@@ -53,6 +53,8 @@ export const paths: Record<string, any> = {
   avalanche: import('./custom/Brands/default/SvgAvalanche.svg?raw'),
   bnbchain: import('./custom/Brands/default/SvgBNBChain.svg?raw'),
   polygon: import('./custom/Brands/default/SvgPolygon.svg?raw'),
+  'ethereum-round': import('./custom/Brands/default/SvgEthereumRound.svg?raw'),
+  'arbitrum-round': import('./custom/Brands/default/SvgArbitrumRound.svg?raw'),
   'globe-01': import('./variants/MapsAndTravel/globe-01.svg?raw'),
   'sun-filled': import('./custom/sun-filled.svg?raw'),
   'moon-star-filled': import('./custom/moon-star-filled.svg?raw'),
@@ -82,5 +84,8 @@ export const paths: Record<string, any> = {
   'metamask-dark': import('./custom/Brands/dark/SvgMetamaskDark.svg?raw'),
   'okx-wallet-dark': import('./custom/Brands/dark/SvgOkxWalletDark.svg?raw'),
   'gnosis-wallet-dark': import('./custom/Brands/dark/SvgGnosisWalletDark.svg?raw'),
-  'wallet-connect-dark': import('./custom/Brands/dark/SvgWalletConnectDark.svg?raw')
+  'wallet-connect-dark': import('./custom/Brands/dark/SvgWalletConnectDark.svg?raw'),
+  'search-lg': import('./variants/General/search-lg.svg?raw'),
+  'link-03': import('./variants/General/link-03.svg?raw'),
+  'arrow-circle-right': import('./variants/Arrows/arrow-circle-right.svg?raw')
 }
