@@ -243,7 +243,7 @@ interface CxToken {
   coverKey: string
   productKey: string
   value: string
-  expiry: Date
+  expiry: string
 }
 
 interface KeyValuePair<T> {

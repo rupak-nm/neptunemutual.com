@@ -2,19 +2,21 @@ import { constants } from 'ethers'
 
 import { parseBytes32String } from '@ethersproject/strings'
 
+import { getMonthName } from './date'
+
 export enum Networks {
   Ethereum = 1,
   Arbitrum = 42161,
   Fuji = 43113
 }
 
-export const protocolTitles: Record<number, string> = {
+export const title: Record<number, string> = {
   [Networks.Ethereum]: 'Neptune Mutual on Ethereum',
   [Networks.Arbitrum]: 'Neptune Mutual on Arbitrum',
   [Networks.Fuji]: 'Neptune Mutual on Fuji (Testnet)'
 }
 
-export const protocolDomains: Record<number, string> = {
+export const domains: Record<number, string> = {
   [Networks.Ethereum]: 'https://ethereum.neptunemutual.net',
   [Networks.Arbitrum]: 'https://arbitrum.neptunemutual.net',
   [Networks.Fuji]: 'https://test.neptunemutual.net'
@@ -38,68 +40,14 @@ export const getExplorerUrl = (networkId: number, address: string): string => {
   return `${baseUrl}/address/${address}`
 }
 
-interface ContractData {
-  data: Array<{
-    name: string
-    address: string
-    expired?: boolean
-  }>
-  expiredCount: number
-  activeCount: number
-}
+export const getKeyValuePairFrom = (cxToken: CxToken): KeyValuePair<string> => {
+  const name: Array<string | undefined> = [bytes32ToString(cxToken.coverKey)]
+  name.push(cxToken?.productKey !== constants.HashZero ? bytes32ToString(cxToken?.productKey) : undefined)
 
-const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-]
-
-export const getContractData = (data: Array<KeyValuePair<string>> | CxToken[], type: string): ContractData => {
-  const result = data.map(val => {
-    let expired = false
-
-    if (type === 'contracts') {
-      return {
-        name: val?.key,
-        address: val?.value,
-        expired
-      }
-    }
-
-    let name = ''
-    if (type === 'cxTokens') {
-      name = bytes32ToString(val?.coverKey)
-      let productName = ''
-      if (val?.productKey !== constants.HashZero) {
-        productName = bytes32ToString(val?.productKey)
-      }
-
-      if (productName !== '') name = `${name}:${productName}`
-
-      const currentTimestamp = new Date().getTime()
-      const expireTimestamp = parseInt(val?.expiry) * 1000
-      expired = expireTimestamp < currentTimestamp
-
-      const monthIndex = parseInt(new Date(expireTimestamp).toISOString().split('-')[1]) - 1
-      const month = monthNames[monthIndex].toLowerCase()
-      name = `${name}:${month}`
-    }
-
-    if (type === 'pods') {
-      name = bytes32ToString(val?.key)
-    }
-
-    return {
-      name,
-      address: val?.value,
-      expired
-    }
-  })
-
-  const expiredCount = result.filter(r => r.expired).length
-
+  name.push(getMonthName(cxToken.expiry))
   return {
-    data: result,
-    expiredCount,
-    activeCount: result.length - expiredCount
+    key: name.filter(x => x !== undefined).join(':'),
+    value: cxToken.value
   }
 }
 

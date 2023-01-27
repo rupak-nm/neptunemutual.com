@@ -1,29 +1,47 @@
 ---
 interface Props {
-  tabs: Array<{
-    text: string;
-    badge?: string | number;
-    active?: boolean;
-    filter?: string;
-  }>;
+  cxTokens: CxToken[];
+
   className?: string;
 }
 
-const { tabs, className } = Astro.props;
+const { cxTokens, className } = Astro.props;
 
 const t = (x: string) => x;
+
+// @todo: move this to data folder
+const expired = cxTokens
+  .map(
+    (x) => new Date().getTime() > new Date(parseInt(x.expiry) * 1000).getTime()
+  )
+  .filter((x) => x === true).length;
+
+const active = cxTokens.length - expired;
+
+const items = [
+  {
+    key: "active",
+    text: t("Active"),
+    count: active,
+  },
+  {
+    key: "expired",
+    text: t("Expired"),
+    count: expired,
+  },
+];
 ---
 
 <div class={`filter tabs container ${className || ""}`}>
   {
-    tabs.map(({ text, filter, badge, active }) => (
+    items.map((item) => (
       <button
         class="filter tab item"
-        data-active={active ? "true" : "false"}
-        data-filter={filter || ""}
+        data-active={item.key === "active" ? "true" : "false"}
+        data-filter={item.key}
       >
-        <span class="text">{text}</span>
-        <span class="badge">{badge}</span>
+        <span class="text">{item.text}</span>
+        <span class="badge">{item.count}</span>
       </button>
     ))
   }

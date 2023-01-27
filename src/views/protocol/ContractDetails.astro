@@ -1,26 +1,20 @@
 ---
 import {
-  getContractData,
-  getExplorerUrl,
-  protocolDomains,
+  getKeyValuePairFrom,
+  domains,
   protocolLabels,
-  protocolTitles,
+  title,
 } from "../../../util/protocol";
 import FilterTabs from "../../components/FilterTabs.astro";
 import Tabs from "../../components/Tabs.astro";
-import Icon from "../../elements/Icon.astro";
 import InputWithIcon from "../../elements/InputWithIcon.astro";
-import { getFilterTabs, getTabs } from "./data";
+import Contract from "./Contract.astro";
+import { getTabs } from "./data";
 
 interface Props extends ContractProps {}
 
 const { networkId, type, data } = Astro.props;
-
-const {
-  data: contracts,
-  activeCount,
-  expiredCount,
-} = getContractData(data[type], type);
+console.log(type);
 ---
 
 <div
@@ -30,9 +24,9 @@ const {
   data-filter={"active"}
 >
   <div class="titles container">
-    <h1>{protocolTitles[networkId]}</h1>
-    <a href={protocolDomains[networkId]} target="_blank">
-      {protocolDomains[networkId]}
+    <h1>{title[networkId]}</h1>
+    <a href={domains[networkId]} target="_blank">
+      {domains[networkId]}
     </a>
   </div>
 
@@ -54,40 +48,39 @@ const {
 
   {
     type === "cxTokens" && (
-      <FilterTabs
-        className={"cxToken contract"}
-        tabs={getFilterTabs(activeCount, expiredCount)}
-      />
+      <FilterTabs className={"cxToken contract"} cxTokens={data.cxTokens} />
     )
   }
 
   <div class="results container">
     {
-      contracts.map(({ name, address, expired }, i) => (
-        <div
-          class="result item"
-          data-show={!expired ? "true" : "false"}
-          data-index={i}
-        >
-          <p class="contract name">{name ?? ""}</p>
+      type === "contracts" &&
+        data.contracts.map((contract, i) => (
+          <Contract contract={contract} networkId={networkId} i={i} />
+        ))
+    }
 
-          <p class="contract address">{address}</p>
+    {
+      type === "pods" &&
+        data.pods.map((contract, i) => (
+          <Contract
+            contract={contract}
+            networkId={networkId}
+            i={i}
+            convertBytes32={true}
+          />
+        ))
+    }
 
-          <div class="icons">
-            <a
-              href={getExplorerUrl(networkId, address)}
-              target="_blank"
-              rel="nofollow"
-            >
-              <Icon variant={"link-03"} />
-            </a>
-
-            <a href={"#"}>
-              <Icon variant={"arrow-circle-right"} />
-            </a>
-          </div>
-        </div>
-      ))
+    {
+      type === "cxTokens" &&
+        data.cxTokens.map((cxTokens, i) => (
+          <Contract
+            contract={getKeyValuePairFrom(cxTokens)}
+            networkId={networkId}
+            i={i}
+          />
+        ))
     }
   </div>
 </div>

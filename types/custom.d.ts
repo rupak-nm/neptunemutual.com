@@ -197,9 +197,10 @@ interface TableOfContentsProp {
   }>
 }
 
+type ProtocolContractType = 'contracts' | 'cxTokens' | 'pods'
 interface ContractProps {
   networkId: number
-  type: 'contracts' | 'cxTokens' | 'pods'
+  type: ProtocolContractType
   data: ProtocolContracts
 }
 
