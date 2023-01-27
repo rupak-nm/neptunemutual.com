@@ -33,7 +33,7 @@ const t = (x: string) => x;
     heading={t("Neptune Mutual Protocol Contracts")}
   />
 
-  <ProtocolContracts networkId={1} type={"pods"} data={paginated.data} />
+  <ProtocolContracts network={1} type={"pods"} data={paginated.data} />
 
   <Fragment slot="footer">
     <script src="../../../scripts/protocol/index.js"></script>

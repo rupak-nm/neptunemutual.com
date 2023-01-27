@@ -7,4 +7,8 @@ const getMonthName = (unixTimestamp: string): string => {
   return months[i]
 }
 
-export { getMonthName }
+const isExpired = (unixTimestamp: string): boolean => {
+  return new Date().getTime() > new Date(parseInt(unixTimestamp) * 1000).getTime()
+}
+
+export { getMonthName, isExpired }

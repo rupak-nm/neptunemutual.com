@@ -1,14 +1,15 @@
 ---
-import { bytes32ToString, getExplorerUrl } from "../../../util/protocol";
+import { bytes32ToString } from "../../../util/protocol";
 import Icon from "../../elements/Icon.astro";
+import { config } from "../../data/protocol";
 
 interface Props {
   contract: KeyValuePair<string>;
-  networkId: number;
+  network: number;
   convertBytes32?: boolean;
 }
 
-const { contract, networkId, convertBytes32 } = Astro.props;
+const { contract, network, convertBytes32 } = Astro.props;
 const name = convertBytes32 ? bytes32ToString(contract.key) : contract.key;
 ---
 
@@ -19,7 +20,7 @@ const name = convertBytes32 ? bytes32ToString(contract.key) : contract.key;
 
   <div class="icons">
     <a
-      href={getExplorerUrl(networkId, contract.value)}
+      href={`${config[network].explorer}${contract.value}`}
       target="_blank"
       rel="nofollow"
     >

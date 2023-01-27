@@ -199,7 +199,7 @@ interface TableOfContentsProp {
 
 type ProtocolContractType = 'contracts' | 'cxTokens' | 'pods'
 interface ContractProps {
-  networkId: number
+  network: number
   type: ProtocolContractType
   data: ProtocolContracts
 }
@@ -208,4 +208,13 @@ interface TabProp {
   text: string
   href: string
   active?: boolean
+}
+
+interface NetworkConfig {
+  [key: number]: {
+    id: number
+    title: string
+    app: string
+    explorer: string
+  }
 }

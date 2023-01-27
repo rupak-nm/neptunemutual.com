@@ -1,19 +1,14 @@
 ---
-import {
-  getKeyValuePairFrom,
-  domains,
-  protocolLabels,
-  title,
-} from "../../../util/protocol";
-import FilterTabs from "../../components/FilterTabs.astro";
+import { getKeyValuePairFrom } from "../../../util/protocol";
+import FilterTabs from "./FilterTabs.astro";
 import Tabs from "../../components/Tabs.astro";
 import InputWithIcon from "../../elements/InputWithIcon.astro";
 import Contract from "./Contract.astro";
-import { getTabs } from "./data";
+import { config, getTabs, Labels } from "../../data/protocol";
 
 interface Props extends ContractProps {}
 
-const { networkId, type, data } = Astro.props;
+const { network, type, data } = Astro.props;
 
 const iterable =
   type === "cxTokens" ? getKeyValuePairFrom(data[type]) : data[type];
@@ -22,21 +17,21 @@ const convertBytes32 = type === "pods" ? true : false;
 
 <div
   class="contract details container"
-  data-network={networkId}
+  data-network={network}
   data-type={type}
   data-filter={"active"}
 >
   <div class="titles container">
-    <h1>{title[networkId]}</h1>
-    <a href={domains[networkId]} target="_blank">
-      {domains[networkId]}
+    <h1>{config[network].title}</h1>
+    <a href={config[network].app} target="_blank">
+      {config[network].app}
     </a>
   </div>
 
-  <Tabs items={getTabs(networkId, type)} />
+  <Tabs items={getTabs(network, type)} />
 
   <p class="details title">
-    {protocolLabels[type]}
+    {Labels[type]}
   </p>
 
   <InputWithIcon
@@ -60,7 +55,7 @@ const convertBytes32 = type === "pods" ? true : false;
       iterable.map((item) => (
         <Contract
           contract={item}
-          networkId={networkId}
+          network={network}
           convertBytes32={convertBytes32}
         />
       ))

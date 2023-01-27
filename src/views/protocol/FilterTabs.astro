@@ -1,4 +1,6 @@
 ---
+import { isExpired } from "../../../util/date";
+
 interface Props {
   cxTokens: CxToken[];
 
@@ -10,11 +12,7 @@ const { cxTokens, className } = Astro.props;
 const t = (x: string) => x;
 
 // @todo: move this to data folder
-const expired = cxTokens
-  .map(
-    (x) => new Date().getTime() > new Date(parseInt(x.expiry) * 1000).getTime()
-  )
-  .filter((x) => x === true).length;
+const expired = cxTokens.filter((x) => isExpired(x.expiry)).length;
 
 const active = cxTokens.length - expired;
 
