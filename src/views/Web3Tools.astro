@@ -20,7 +20,7 @@ const items = tools.map((tool) => {
     tagSize: "sm",
     category: tool.category,
     icon: tool.icon,
-    href: `/web3-tools/${tool.slug}/`,
+    href: tool.path || `/web3-tools/${tool.slug}/`,
   };
 });
 ---
