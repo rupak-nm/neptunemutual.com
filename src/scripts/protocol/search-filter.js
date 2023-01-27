@@ -5,9 +5,8 @@
   const showAll = () => items.forEach(x => x.classList.remove('hidden'))
   const hideAll = () => items.forEach(x => x.classList.add('hidden'))
 
-  const onInput = ({ srcElement }) => {
-    const { value } = srcElement
-    const search = (value || '').trim().toLowerCase()
+  const onInput = (e) => {
+    const search = (e.srcElement.value ?? '').trim().toLowerCase()
 
     if (!search) {
       showAll()
@@ -17,9 +16,9 @@
     hideAll()
 
     items.forEach(x => {
-      const { textContent } = x
+      const text = x.textContent.toLowerCase()
 
-      if (textContent.toLowerCase().indexOf(search) > -1) {
+      if (text.includes(search)) {
         x.classList.remove('hidden')
       }
     })
