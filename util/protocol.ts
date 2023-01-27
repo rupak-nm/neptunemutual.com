@@ -48,7 +48,11 @@ interface ContractData {
   activeCount: number
 }
 
-export const getContractData = (data: Array<KeyValuePair<string>> | CxToken[], type: string) => {
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+
+export const getContractData = (data: KeyValuePair<string>[] | CxToken[], type: string) => {
   const result = data.map(val => {
     let expired = false
 
@@ -60,20 +64,29 @@ export const getContractData = (data: Array<KeyValuePair<string>> | CxToken[], t
       }
     }
 
-    let _key = ''
+    let name = ''
     if (type === 'cxTokens') {
-      _key = val?.productKey && val?.productKey !== constants.HashZero ? val?.productKey : val?.coverKey
+      name = bytes32ToString(val?.coverKey)
+      let productName = ''
+      if (val?.productKey !== constants.HashZero) {
+        productName = bytes32ToString(val?.productKey)
+      }
+
+      if (productName) name = `${name}:${productName}`
 
       const currentTimestamp = new Date().getTime()
       const expireTimestamp = parseInt(val?.expiry) * 1000
       expired = expireTimestamp < currentTimestamp
+
+      const monthIndex = new Date(expireTimestamp).getMonth()
+      const month = monthNames[monthIndex].toLowerCase()
+      name = `${name}:${month}`
     }
 
     if (type === 'pods') {
-      _key = val?.key
+      name = bytes32ToString(val?.key)
     }
 
-    const name = bytes32ToString(_key)
     return {
       name,
       address: val?.value,
