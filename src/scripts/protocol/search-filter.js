@@ -5,13 +5,13 @@ import { getContractData } from '../../../util/protocol'
   const input = document.querySelector('.contract.details .search.input input')
   const resultSections = document.querySelectorAll('.contract.details .result.item[data-show][data-index]')
 
-  const filterButtons = document.querySelectorAll(".cxToken.contract.filter.tabs button")
+  const filterButtons = document.querySelectorAll('.cxToken.contract.filter.tabs button')
 
   const dataset = container.dataset
-  const networkId = dataset.network || "1"
-  const type = dataset.type || "contracts"
+  const networkId = dataset.network || '1'
+  const type = dataset.type || 'contracts'
 
-  const getContracts = async (networkId = 1, type = "contracts") => {
+  const getContracts = async (networkId = 1, type = 'contracts') => {
     const urls = {
       1: '/cache/contracts.json',
       42161: '/cache/contracts.arbitrum.json',
@@ -31,7 +31,7 @@ import { getContractData } from '../../../util/protocol'
     return []
   }
 
-  const filterItems = (query = "", filterBy = "active") => {
+  const filterItems = (query = '', filterBy = 'active') => {
     const filteredIndexes = contracts.reduce((prev, curr, index) => {
       const _name = curr.name.toLowerCase()
       const _address = curr.address.toLowerCase()
@@ -41,8 +41,8 @@ import { getContractData } from '../../../util/protocol'
           _address.includes(query)
         ) &&
         (
-          (filterBy === "active" && !curr.expired) ||
-          (filterBy === "expired" && curr.expired)
+          (filterBy === 'active' && !curr.expired) ||
+          (filterBy === 'expired' && curr.expired)
         )
       ) prev.push(index)
       return prev
@@ -78,15 +78,14 @@ import { getContractData } from '../../../util/protocol'
 
     filterButtons.forEach(filterButton => {
       const buttonFilter = filterButton.getAttribute('data-filter')
-      filterButton.setAttribute("data-active", buttonFilter === filterBy ? "true" : "false")
+      filterButton.setAttribute('data-active', buttonFilter === filterBy ? 'true' : 'false')
 
-      const count = 0
-      const badgeElement = filterButton.querySelector("span.badge")
-      if (buttonFilter === "active") badgeElement.textContent = activeCount
-      if (buttonFilter === "expired") badgeElement.textContent = expiredCount
+      const badgeElement = filterButton.querySelector('span.badge')
+      if (buttonFilter === 'active') badgeElement.textContent = activeCount
+      if (buttonFilter === 'expired') badgeElement.textContent = expiredCount
     })
 
-    container.setAttribute("data-filter", filterBy)
+    container.setAttribute('data-filter', filterBy)
   }
 
   const _contracts = await getContracts(networkId, type)

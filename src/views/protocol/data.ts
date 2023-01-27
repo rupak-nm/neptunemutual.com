@@ -55,18 +55,23 @@ export const getTabs = (networkId: number, type: string): TabProp[] => {
   ]
 }
 
-export const getFilterTabs = (active: number, expired: number) => {
+export const getFilterTabs = (active: number, expired: number): Array<{
+  text: string
+  badge?: string | number
+  active?: boolean
+  filter?: string
+}> => {
   return [
     {
-      text: "Active",
+      text: 'Active',
       badge: active,
-      filter: "active",
-      active: true,
+      filter: 'active',
+      active: true
     },
     {
-      text: "Expired",
+      text: 'Expired',
       badge: expired,
-      filter: "expired",
-    },
+      filter: 'expired'
+    }
   ]
 }

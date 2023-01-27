@@ -40,19 +40,19 @@ export const getExplorerUrl = (networkId: number, address: string): string => {
 
 interface ContractData {
   data: Array<{
-    name: string,
-    address: string,
+    name: string
+    address: string
     expired?: boolean
   }>
-  expiredCount: number,
+  expiredCount: number
   activeCount: number
 }
 
-const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-];
+const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+]
 
-export const getContractData = (data: KeyValuePair<string>[] | CxToken[], type: string) => {
+export const getContractData = (data: Array<KeyValuePair<string>> | CxToken[], type: string): ContractData => {
   const result = data.map(val => {
     let expired = false
 
@@ -72,7 +72,7 @@ export const getContractData = (data: KeyValuePair<string>[] | CxToken[], type: 
         productName = bytes32ToString(val?.productKey)
       }
 
-      if (productName) name = `${name}:${productName}`
+      if (productName !== '') name = `${name}:${productName}`
 
       const currentTimestamp = new Date().getTime()
       const expireTimestamp = parseInt(val?.expiry) * 1000
@@ -98,12 +98,12 @@ export const getContractData = (data: KeyValuePair<string>[] | CxToken[], type: 
 
   return {
     data: result,
-    expiredCount: expiredCount,
+    expiredCount,
     activeCount: result.length - expiredCount
   }
 }
 
-export function bytes32ToString(bytes32Str: string): string {
+export function bytes32ToString (bytes32Str: string): string {
   try {
     return parseBytes32String(bytes32Str)
   } catch (error) {
