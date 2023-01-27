@@ -45,7 +45,7 @@
     color: colors.$gray-500;
   }
 
-  .results.container {
+  .ui.contracts.list.view {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
@@ -54,9 +54,13 @@
       grid-template-columns: 1fr;
     }
 
-    .result.item {
+    .item {
       padding: 14px;
       border-radius: 12px;
+
+      &.hidden {
+        display: none;
+      }
 
       &:hover {
         background-color: colors.$primary-50;
@@ -95,9 +99,6 @@
         }
       }
 
-      &[data-show="false"] {
-        display: none;
-      }
     }
   }
 }
@@ -127,7 +128,7 @@
     }
   }
 
-  .results.container .result.item {
+  .ui.contracts.list.view .item {
     &:hover {
       background-color: colors.$gray-700;
     }

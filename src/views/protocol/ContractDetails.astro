@@ -14,7 +14,10 @@ import { getTabs } from "./data";
 interface Props extends ContractProps {}
 
 const { networkId, type, data } = Astro.props;
-console.log(type);
+
+const iterable =
+  type === "cxTokens" ? getKeyValuePairFrom(data[type]) : data[type];
+const convertBytes32 = type === "pods" ? true : false;
 ---
 
 <div
@@ -52,35 +55,15 @@ console.log(type);
     )
   }
 
-  <div class="results container">
+  <div class="ui contracts list view">
     {
-      type === "contracts" &&
-        data.contracts.map((contract, i) => (
-          <Contract contract={contract} networkId={networkId} i={i} />
-        ))
-    }
-
-    {
-      type === "pods" &&
-        data.pods.map((contract, i) => (
-          <Contract
-            contract={contract}
-            networkId={networkId}
-            i={i}
-            convertBytes32={true}
-          />
-        ))
-    }
-
-    {
-      type === "cxTokens" &&
-        data.cxTokens.map((cxTokens, i) => (
-          <Contract
-            contract={getKeyValuePairFrom(cxTokens)}
-            networkId={networkId}
-            i={i}
-          />
-        ))
+      iterable.map((item) => (
+        <Contract
+          contract={item}
+          networkId={networkId}
+          convertBytes32={convertBytes32}
+        />
+      ))
     }
   </div>
 </div>

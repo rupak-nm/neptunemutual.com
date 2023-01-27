@@ -40,18 +40,20 @@ export const getExplorerUrl = (networkId: number, address: string): string => {
   return `${baseUrl}/address/${address}`
 }
 
-export const getKeyValuePairFrom = (cxToken: CxToken): KeyValuePair<string> => {
-  const name: Array<string | undefined> = [bytes32ToString(cxToken.coverKey)]
-  name.push(cxToken?.productKey !== constants.HashZero ? bytes32ToString(cxToken?.productKey) : undefined)
+export const getKeyValuePairFrom = (cxTokens: CxToken[]): Array<KeyValuePair<string>> => {
+  return cxTokens.map(cxToken => {
+    const name: Array<string | undefined> = [bytes32ToString(cxToken.coverKey)]
+    name.push(cxToken?.productKey !== constants.HashZero ? bytes32ToString(cxToken?.productKey) : undefined)
 
-  name.push(getMonthName(cxToken.expiry))
-  return {
-    key: name.filter(x => x !== undefined).join(':'),
-    value: cxToken.value
-  }
+    name.push(getMonthName(cxToken.expiry))
+    return {
+      key: name.filter(x => x !== undefined).join(':'),
+      value: cxToken.value
+    }
+  })
 }
 
-export function bytes32ToString(bytes32Str: string): string {
+export function bytes32ToString (bytes32Str: string): string {
   try {
     return parseBytes32String(bytes32Str)
   } catch (error) {

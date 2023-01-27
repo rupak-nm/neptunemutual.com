@@ -9,7 +9,7 @@ import { Api } from "../../../../types/enum";
 import HeaderSection from "../../../components/HeaderSection.astro";
 import ProtocolContracts from "../../../views/protocol/ProtocolContracts.astro";
 
-const paginated = await api.getContracts(Api.Contract);
+const paginated = await api.getContracts(Api.ContractArbitrum);
 
 const t = (x: string) => x;
 ---

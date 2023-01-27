@@ -6,14 +6,13 @@ interface Props {
   contract: KeyValuePair<string>;
   networkId: number;
   convertBytes32?: boolean;
-  i: number;
 }
 
-const { contract, networkId, i, convertBytes32 } = Astro.props;
+const { contract, networkId, convertBytes32 } = Astro.props;
 const name = convertBytes32 ? bytes32ToString(contract.key) : contract.key;
 ---
 
-<div class="result item" data-index={i}>
+<div class="item">
   <p class="contract name">{name}</p>
 
   <p class="contract address">{contract.value}</p>
