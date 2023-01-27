@@ -1,0 +1,30 @@
+---
+interface Props {
+  tabs: Array<{
+    text: string;
+    badge?: string | number;
+    active?: boolean;
+    filter?: string;
+  }>;
+  className?: string;
+}
+
+const { tabs, className } = Astro.props;
+
+const t = (x: string) => x;
+---
+
+<div class={`filter tabs container ${className || ""}`}>
+  {
+    tabs.map(({ text, filter, badge, active }) => (
+      <button
+        class="filter tab item"
+        data-active={active ? "true" : "false"}
+        data-filter={filter || ""}
+      >
+        <span class="text">{text}</span>
+        <span class="badge">{badge}</span>
+      </button>
+    ))
+  }
+</div>

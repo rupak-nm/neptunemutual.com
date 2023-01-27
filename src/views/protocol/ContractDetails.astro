@@ -6,22 +6,28 @@ import {
   protocolLabels,
   protocolTitles,
 } from "../../../util/protocol";
+import FilterTabs from "../../components/FilterTabs.astro";
 import Tabs from "../../components/Tabs.astro";
 import Icon from "../../elements/Icon.astro";
 import InputWithIcon from "../../elements/InputWithIcon.astro";
-import { getTabs } from "./data";
+import { getFilterTabs, getTabs } from "./data";
 
 interface Props extends ContractProps {}
 
 const { networkId, type, data } = Astro.props;
 
-const contracts = getContractData(data[type], type);
+const {
+  data: contracts,
+  activeCount,
+  expiredCount,
+} = getContractData(data[type], type);
 ---
 
 <div
   class="contract details container"
   data-network={networkId}
   data-type={type}
+  data-filter={"active"}
 >
   <div class="titles container">
     <h1>{protocolTitles[networkId]}</h1>
@@ -46,10 +52,23 @@ const contracts = getContractData(data[type], type);
     value=""
   />
 
+  {
+    type === "cxTokens" && (
+      <FilterTabs
+        className={"cxToken contract"}
+        tabs={getFilterTabs(activeCount, expiredCount)}
+      />
+    )
+  }
+
   <div class="results container">
     {
-      contracts.map(({ name, address }, i) => (
-        <div class="result item" data-show="true" data-index={i}>
+      contracts.map(({ name, address, expired }, i) => (
+        <div
+          class="result item"
+          data-show={!expired ? "true" : "false"}
+          data-index={i}
+        >
           <p class="contract name">{name ?? ""}</p>
 
           <p class="contract address">{address}</p>

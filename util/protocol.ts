@@ -38,18 +38,35 @@ export const getExplorerUrl = (networkId: number, address: string): string => {
   return `${baseUrl}/address/${address}`
 }
 
-export const getContractData = (data: Array<KeyValuePair<string>> | CxToken[], type: string): Array<{ name: string, address: string }> => {
+interface ContractData {
+  data: Array<{
+    name: string,
+    address: string,
+    expired?: boolean
+  }>
+  expiredCount: number,
+  activeCount: number
+}
+
+export const getContractData = (data: Array<KeyValuePair<string>> | CxToken[], type: string) => {
   const result = data.map(val => {
+    let expired = false
+
     if (type === 'contracts') {
       return {
         name: val?.key,
-        address: val?.value
+        address: val?.value,
+        expired
       }
     }
 
     let _key = ''
     if (type === 'cxTokens') {
       _key = val?.productKey && val?.productKey !== constants.HashZero ? val?.productKey : val?.coverKey
+
+      const currentTimestamp = new Date().getTime()
+      const expireTimestamp = parseInt(val?.expiry) * 1000
+      expired = expireTimestamp < currentTimestamp
     }
 
     if (type === 'pods') {
@@ -59,11 +76,18 @@ export const getContractData = (data: Array<KeyValuePair<string>> | CxToken[], t
     const name = bytes32ToString(_key)
     return {
       name,
-      address: val?.value
+      address: val?.value,
+      expired
     }
   })
 
-  return result
+  const expiredCount = result.filter(r => r.expired).length
+
+  return {
+    data: result,
+    expiredCount: expiredCount,
+    activeCount: result.length - expiredCount
+  }
 }
 
 export function bytes32ToString(bytes32Str: string): string {
