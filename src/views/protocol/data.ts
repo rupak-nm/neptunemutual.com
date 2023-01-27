@@ -28,21 +28,28 @@ export const getToc = (networkId: number): TableOfContentsProp => {
   }
 }
 
-export const getTabs = (type: string): TabProp[] => {
+export const getTabs = (networkId: number, type: string): TabProp[] => {
+  const networkSlugs: Record<number, string> = {
+    [Networks.Ethereum]: 'ethereum',
+    [Networks.Arbitrum]: 'arbitrum',
+    [Networks.Fuji]: 'fuji'
+
+  }
+
   return [
     {
       text: 'Contracts',
-      href: '/contracts',
+      href: `/protocol/${networkSlugs[networkId]}/contracts`,
       active: type === 'contracts'
     },
     {
       text: 'cxTokens',
-      href: '/cxtokens',
+      href: `/protocol/${networkSlugs[networkId]}/cx-tokens`,
       active: type === 'cxTokens'
     },
     {
       text: 'PODs',
-      href: '/pods',
+      href: `/protocol/${networkSlugs[networkId]}/pods`,
       active: type === 'pods'
     }
   ]

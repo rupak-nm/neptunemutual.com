@@ -1,3 +1,5 @@
+import { constants } from 'ethers'
+
 import { parseBytes32String } from '@ethersproject/strings'
 
 export enum Networks {
@@ -25,9 +27,9 @@ export const protocolLabels: Record<string, string> = {
 }
 
 const baseExplorerUrl: Record<number, string> = {
-  [Networks.Ethereum]: 'https://etherscan.io/',
-  [Networks.Arbitrum]: 'https://arbiscan.io/',
-  [Networks.Fuji]: 'https://testnet.snowtrace.io/'
+  [Networks.Ethereum]: 'https://etherscan.io',
+  [Networks.Arbitrum]: 'https://arbiscan.io',
+  [Networks.Fuji]: 'https://testnet.snowtrace.io'
 }
 
 export const getExplorerUrl = (networkId: number, address: string): string => {
@@ -45,7 +47,16 @@ export const getContractData = (data: Array<KeyValuePair<string>> | CxToken[], t
       }
     }
 
-    const name = bytes32ToString(val?.productKey || val?.coverKey)
+    let _key = ''
+    if (type === 'cxTokens') {
+      _key = val?.productKey && val?.productKey !== constants.HashZero ? val?.productKey : val?.coverKey
+    }
+
+    if (type === 'pods') {
+      _key = val?.key
+    }
+
+    const name = bytes32ToString(_key)
     return {
       name,
       address: val?.value
@@ -55,7 +66,7 @@ export const getContractData = (data: Array<KeyValuePair<string>> | CxToken[], t
   return result
 }
 
-export function bytes32ToString (bytes32Str: string): string {
+export function bytes32ToString(bytes32Str: string): string {
   try {
     return parseBytes32String(bytes32Str)
   } catch (error) {

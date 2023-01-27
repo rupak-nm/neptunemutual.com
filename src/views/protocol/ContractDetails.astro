@@ -30,7 +30,7 @@ const contracts = getContractData(data[type], type);
     </a>
   </div>
 
-  <Tabs items={getTabs(type)} />
+  <Tabs items={getTabs(networkId, type)} />
 
   <p class="details title">
     {protocolLabels[type]}
