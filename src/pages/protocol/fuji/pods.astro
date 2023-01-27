@@ -9,7 +9,7 @@ import { Api } from "../../../../types/enum";
 import HeaderSection from "../../../components/HeaderSection.astro";
 import ProtocolContracts from "../../../views/protocol/ProtocolContracts.astro";
 
-const paginated = await api.getContracts(Api.Contract);
+const paginated = await api.getContracts(Api.ContractFuji);
 
 const t = (x: string) => x;
 ---
@@ -33,7 +33,7 @@ const t = (x: string) => x;
     heading={t("Neptune Mutual Protocol Contracts")}
   />
 
-  <ProtocolContracts networkId={1} type={"contracts"} data={paginated.data} />
+  <ProtocolContracts networkId={43113} type={"pods"} data={paginated.data} />
 
   <Fragment slot="footer">
     <script src="../../../scripts/protocol/index.js"></script>
