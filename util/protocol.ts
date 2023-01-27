@@ -78,7 +78,7 @@ export const getContractData = (data: Array<KeyValuePair<string>> | CxToken[], t
       const expireTimestamp = parseInt(val?.expiry) * 1000
       expired = expireTimestamp < currentTimestamp
 
-      const monthIndex = new Date(expireTimestamp).getMonth()
+      const monthIndex = parseInt(new Date(expireTimestamp).toISOString().split('-')[1]) - 1
       const month = monthNames[monthIndex].toLowerCase()
       name = `${name}:${month}`
     }
@@ -103,7 +103,7 @@ export const getContractData = (data: Array<KeyValuePair<string>> | CxToken[], t
   }
 }
 
-export function bytes32ToString (bytes32Str: string): string {
+export function bytes32ToString(bytes32Str: string): string {
   try {
     return parseBytes32String(bytes32Str)
   } catch (error) {
