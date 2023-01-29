@@ -1,17 +1,28 @@
 ---
+import Button from "../elements/buttons/Button.astro";
+
 interface Props {
   tabItems: TabItem[];
 }
 
+// @todo: this should be called `OutlinedButtonList.astro` not `Tabs.astro`
+// This component can be used on on solidity abi encoder and many other places
 const { tabItems } = Astro.props;
 ---
 
-<div class="ui outlined tab list">
+<div class="ui outlined button list">
   {
     tabItems.map(({ text, href, active }) => (
-      <a class={`${active ? "active" : ""} item`.trim()} href={href}>
-        {text}
-      </a>
+      <>
+        <Button
+          variant={"link-gray"}
+          type="anchor"
+          classname={`${active ? "active" : ""} item`.trim()}
+          href={href}
+        >
+          {text}
+        </Button>
+      </>
     ))
   }
 </div>
