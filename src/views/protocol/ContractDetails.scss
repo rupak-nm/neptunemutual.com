@@ -57,6 +57,7 @@
     .item {
       padding: 14px;
       border-radius: 12px;
+      border: 1px solid transparent;
 
       &.hidden {
         display: none;
@@ -64,6 +65,7 @@
 
       &:hover {
         background-color: colors.$primary-50;
+        border-color: colors.$primary-100;
       }
 
       & > *:not(:first-child) {
@@ -77,10 +79,12 @@
       }
 
       .contract.address {
-        @include styles.text-md;
+        @include styles.text-xs;
         @include weights.regular;
         color: colors.$gray-600;
         word-break: break-all;
+        font-feature-settings: "salt", "tnum", "ss02", "ccmp", "kern";
+        -webkit-font-smoothing: subpixel-antialiased;
       }
 
       .icons {
@@ -131,6 +135,7 @@
   .ui.contracts.list.view .item {
     &:hover {
       background-color: colors.$gray-700;
+      border-color: colors.$gray-600;
     }
 
     .contract.name {

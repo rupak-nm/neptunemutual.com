@@ -7,32 +7,32 @@
 @use "../design-system/typography/weights";
 
 .ui.outlined.tab.list {
-  display: flex;
+  display: inline-flex;
+  border: 1px solid colors.$gray-300;
+  border-radius: 8px;
 
   .item {
     display: block;
     padding: 10px 16px;
-
-    @include styles.text-sm;
-    @include weights.semibold;
-    border: 1px solid colors.$gray-300;
-    background-color: colors.$white;
-    color: colors.$gray-700;
+    border: 0px solid colors.$gray-300;
 
     &:first-of-type {
-      border-top-left-radius: 8px;
-      border-bottom-left-radius: 8px;
+      border-radius: 8px 0 0 8px;
+      border-width: 0 1px 0 0;
     }
 
     &:last-of-type {
-      border-top-right-radius: 8px;
-      border-bottom-right-radius: 8px;
-    }
-    
-    &:not(:last-of-type) {
-      border-right-color: transparent;  
+      border-radius: 0 8px 8px 0;
+      border-width: 0 0 0 1px;
     }
 
+
+    @include styles.text-sm;
+    @include weights.semibold;
+
+    background-color: colors.$white;
+    color: colors.$gray-700;
+    
     &.active {
       background-color: colors.$gray-100;
       color: colors.$gray-800;
@@ -41,8 +41,10 @@
 }
 
 .dark .ui.outlined.tab.list {
+  border-color: colors.$gray-500;
+
   .item {
-    border: 1px solid colors.$gray-500;
+    border-color: colors.$gray-500;
     background-color: colors.$gray-600;
     color: colors.$gray-300;
     

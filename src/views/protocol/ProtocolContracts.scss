@@ -81,3 +81,21 @@
     padding-bottom: 64px;
   }
 }
+
+.dark .neptune.protocol.contracts {
+  .protocol.inner.container {
+    .ui.tab.list.view {
+      .item {
+        color: colors.$gray-300;
+
+        &.active {
+          background: colors.$gray-700;
+        }
+
+        &:hover {
+          background: colors.$gray-600;
+        }
+      }
+    }  
+  }
+}

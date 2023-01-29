@@ -67,7 +67,7 @@
       background-color: colors.$gray-500;
     }
 
-    &[data-active="true"] {
+    &.active {
       background-color: colors.$gray-600;
 
       .text {
