@@ -6,6 +6,11 @@
 @use "../../design-system/typography/styles";
 @use "../../design-system/typography/weights";
 
+
+.hero > .container > .content {
+  max-width: 1024px!important;
+}
+
 .filter.tabs.container {
   display: flex;
   align-items: center;

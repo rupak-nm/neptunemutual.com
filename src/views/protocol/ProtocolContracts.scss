@@ -16,15 +16,46 @@
     display: flex;
     gap: 48px;
 
-    .table.of.contents.container {
-      min-width: 268px;
+    .ui.tab.list.view {
+      min-width: 292px;
+      display: flex;
+      gap: 4px;
+
+      &.vertical {
+        flex-direction: column;
+      }
+
+      .item {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 8px 12px;
+        margin-left:12px;
+        border-radius: 8px;
+        color: colors.$gray-500;
+        @include weights.semibold;
+        @include styles.text-sm;
+        flex-wrap: wrap;
+
+        i {
+          svg {
+            height: 16px;
+            width: 16px;
+          }
+        }
+
+        &:hover {
+          background-color: colors.$primary-50;
+          color: colors.$primary-700;
+        }
+      }
 
       @media (max-width: 1023px) {
         display: none;
       }
     }
 
-    .toc.mobile {
+    .mobile.tab.items {
       @media (min-width: 1024px) {
         display: none;
       }

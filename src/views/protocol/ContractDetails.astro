@@ -4,11 +4,16 @@ import FilterTabs from "./FilterTabs.astro";
 import Tabs from "../../components/Tabs.astro";
 import InputWithIcon from "../../elements/InputWithIcon.astro";
 import Contract from "./Contract.astro";
-import { config, getTabs, Labels } from "../../data/protocol";
+import { labels } from "../../data/protocol";
 
-interface Props extends ContractProps {}
+interface Props {
+  network: NetworkConfig;
+  tabItems: TabItem[];
+  type: ProtocolContractType;
+  data: ProtocolContracts;
+}
 
-const { network, type, data } = Astro.props;
+const { network, tabItems, type, data } = Astro.props;
 
 const iterable =
   type === "cxTokens" ? getKeyValuePairFrom(data[type]) : data[type];
@@ -22,16 +27,16 @@ const convertBytes32 = type === "pods" ? true : false;
   data-filter={"active"}
 >
   <div class="titles container">
-    <h1>{config[network].title}</h1>
-    <a href={config[network].app} target="_blank">
-      {config[network].app}
+    <h1>{network.title}</h1>
+    <a href={network.app} target="_blank">
+      {network.app}
     </a>
   </div>
 
-  <Tabs items={getTabs(network, type)} />
+  <Tabs tabItems={tabItems} />
 
   <p class="details title">
-    {Labels[type]}
+    {labels[type]}
   </p>
 
   <InputWithIcon

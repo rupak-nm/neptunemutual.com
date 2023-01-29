@@ -1,34 +1,29 @@
 import { Network } from '../../types/enum'
 
-const getToc = (networkId: number): TableOfContentsProp => {
-  return {
-    items: [
-      {
-        text: 'Main Ethereum Network',
-        icon: 'ethereum-round',
-        type: 0,
-        href: '/protocol/ethereum/contracts',
-        active: networkId === Network.Ethereum
-      },
-      {
-        text: 'Arbitrum One',
-        icon: 'arbitrum-round',
-        type: 0,
-        href: '/protocol/arbitrum/contracts',
-        active: networkId === Network.Arbitrum
-      },
-      {
-        text: 'Avalanche C-Chain Testnet (Fuji)',
-        icon: 'avalanche',
-        type: 0,
-        href: '/protocol/fuji/contracts',
-        active: networkId === Network.Fuji
-      }
-    ]
-  }
+const getVerticalTabItems = (networkId: number): TabItem[] => {
+  return [
+    {
+      text: 'Main Ethereum Network',
+      icon: 'ethereum-round',
+      href: '/protocol/ethereum/contracts',
+      active: networkId === Network.Ethereum
+    },
+    {
+      text: 'Arbitrum One',
+      icon: 'arbitrum-round',
+      href: '/protocol/arbitrum/contracts',
+      active: networkId === Network.Arbitrum
+    },
+    {
+      text: 'Avalanche C-Chain Testnet (Fuji)',
+      icon: 'avalanche',
+      href: '/protocol/fuji/contracts',
+      active: networkId === Network.Fuji
+    }
+  ]
 }
 
-const getTabs = (networkId: number, type: string): TabProp[] => {
+const getTabItems = (networkId: number, type: string): TabItem[] => {
   const networkSlugs: Record<number, string> = {
     [Network.Ethereum]: 'ethereum',
     [Network.Arbitrum]: 'arbitrum',
@@ -55,7 +50,7 @@ const getTabs = (networkId: number, type: string): TabProp[] => {
   ]
 }
 
-const config: NetworkConfig = {
+const config: NetworkConfigs = {
   [Network.Ethereum]: {
     id: Network.Ethereum,
     title: 'Neptune Mutual on Ethereum',
@@ -76,15 +71,10 @@ const config: NetworkConfig = {
   }
 }
 
-interface LabelsType {
-  [key: string]: string
-}
-
-const Labels: LabelsType = {
+const labels: Record<string, string> = {
   contracts: 'Protocol Contracts & Tokens',
   cxTokens: 'cxTokens',
-  pods: 'PODs (Vault Contracts)',
-  fdf: '3232'
+  pods: 'PODs (Vault Contracts)'
 }
 
-export { config, getTabs, getToc, Labels }
+export { config, getTabItems, getVerticalTabItems, labels }

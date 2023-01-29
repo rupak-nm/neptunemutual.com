@@ -185,36 +185,23 @@ interface Sitemap {
 type WrappedPromise = (() => Promise<void>)
 type TaskWithDefinition = [string, ...WrappedPromise[]]
 
-interface TableOfContentsProp {
-  title?: string
-  items: Array<{
-    text: string
-    icon?: any
-    id?: string
-    href?: string
-    type: number
-    active?: boolean
-  }>
-}
-
-type ProtocolContractType = 'contracts' | 'cxTokens' | 'pods'
-interface ContractProps {
-  network: number
-  type: ProtocolContractType
-  data: ProtocolContracts
-}
-
-interface TabProp {
+interface TabItem {
   text: string
   href: string
   active?: boolean
+  icon?: any
+  id?: string
 }
 
+type ProtocolContractType = 'contracts' | 'cxTokens' | 'pods'
+
 interface NetworkConfig {
-  [key: number]: {
-    id: number
-    title: string
-    app: string
-    explorer: string
-  }
+  id: number
+  title: string
+  app: string
+  explorer: string
+}
+
+interface NetworkConfigs {
+  [key: number]: NetworkConfig
 }

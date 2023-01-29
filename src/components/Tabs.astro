@@ -1,14 +1,14 @@
 ---
 interface Props {
-  items: TabProp[];
+  tabItems: TabItem[];
 }
 
-const { items } = Astro.props;
+const { tabItems } = Astro.props;
 ---
 
 <div class="tabs component container">
   {
-    items.map(({ text, href, active }) => (
+    tabItems.map(({ text, href, active }) => (
       <a data-active={Boolean(active).toString()} class="tab item" href={href}>
         {text}
       </a>
