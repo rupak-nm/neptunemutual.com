@@ -11,14 +11,13 @@ const { cxTokens, className } = Astro.props;
 
 const t = (x: string) => x;
 
-// @todo: move this to data folder
 const expired = cxTokens.filter((x) => isExpired(x.expiry)).length;
 
 const active = cxTokens.length - expired;
 
 const items = [
   {
-    key: "active",
+    key: "regular",
     text: t("Active"),
     count: active,
   },
@@ -34,9 +33,8 @@ const items = [
   {
     items.map((item) => (
       <button
-        class="item"
-        data-active={item.key === "active" ? "true" : "false"}
-        data-filter={item.key}
+        class={`${item.key === "regular" ? "active" : ""} item`.trim()}
+        data-scope={item.key}
       >
         <span class="text">{item.text}</span>
         <span class="badge">{item.count}</span>

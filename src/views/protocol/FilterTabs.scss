@@ -40,7 +40,7 @@
       border-radius: 16px;
     }
 
-    &[data-active="true"] {
+    &.active {
       background-color: colors.$primary-50;
 
       .text {

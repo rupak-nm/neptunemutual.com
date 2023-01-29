@@ -16,7 +16,11 @@ interface Props {
 const { network, tabItems, type, data } = Astro.props;
 
 const iterable =
-  type === "cxTokens" ? getKeyValuePairFrom(data[type]) : data[type];
+  type === "cxTokens" ? getKeyValuePairFrom(data[type], "active") : data[type];
+
+const expired =
+  type === "cxTokens" ? getKeyValuePairFrom(data[type], "expired") : [];
+
 const convertBytes32 = type === "pods" ? true : false;
 ---
 
@@ -55,7 +59,7 @@ const convertBytes32 = type === "pods" ? true : false;
     )
   }
 
-  <div class="ui contracts list view">
+  <div data-scope="regular" class="ui contracts list view">
     {
       iterable.map((item) => (
         <Contract
@@ -66,4 +70,23 @@ const convertBytes32 = type === "pods" ? true : false;
       ))
     }
   </div>
+
+  {
+    expired.length > 0 && (
+      <>
+        <div
+          data-scope="expired"
+          class="ui initially hidden contracts list view"
+        >
+          {expired.map((item) => (
+            <Contract
+              contract={item}
+              network={network}
+              convertBytes32={convertBytes32}
+            />
+          ))}
+        </div>
+      </>
+    )
+  }
 </div>

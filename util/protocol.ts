@@ -2,13 +2,20 @@ import { parseBytes32String } from '@ethersproject/strings'
 
 import { getMonthName } from './date'
 
-const getKeyValuePairFrom = (cxTokens: CxToken[]): Array<KeyValuePair<string>> => {
-  return cxTokens.map(x => ({
-    key: [bytes32ToString(x.coverKey), bytes32ToString(x.productKey), getMonthName(x.expiry)]
-      .filter(y => y !== '')
-      .join(':'),
-    value: x.value
-  }))
+const getKeyValuePairFrom = (cxTokens: CxToken[], status: 'active' | 'expired'): Array<KeyValuePair<string>> => {
+  const items = cxTokens
+    .filter(x => status === 'active'
+      ? parseInt(x.expiry) * 1000 > new Date().getTime()
+      : parseInt(x.expiry) * 1000 <= new Date().getTime()
+    )
+
+  return items
+    .map(x => ({
+      key: [bytes32ToString(x.coverKey), bytes32ToString(x.productKey), getMonthName(x.expiry)]
+        .filter(y => y !== '')
+        .join(':'),
+      value: x.value
+    }))
 }
 
 const bytes32ToString = (bytes32Str: string): string => {
