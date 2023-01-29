@@ -201,7 +201,3 @@ interface NetworkConfig {
   app: string
   explorer: string
 }
-
-interface NetworkConfigs {
-  [key: number]: NetworkConfig
-}

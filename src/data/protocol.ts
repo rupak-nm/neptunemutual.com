@@ -50,7 +50,7 @@ const getTabItems = (networkId: number, type: string): TabItem[] => {
   ]
 }
 
-const config: NetworkConfigs = {
+const config: Record<number, NetworkConfig> = {
   [Network.Ethereum]: {
     id: Network.Ethereum,
     title: 'Neptune Mutual on Ethereum',

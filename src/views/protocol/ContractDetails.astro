@@ -24,12 +24,7 @@ const expired =
 const convertBytes32 = type === "pods" ? true : false;
 ---
 
-<div
-  class="contract details container"
-  data-network={network}
-  data-type={type}
-  data-filter={"active"}
->
+<div class="contract details container">
   <div class="titles container">
     <h1>{network.title}</h1>
     <a href={network.app} target="_blank">
