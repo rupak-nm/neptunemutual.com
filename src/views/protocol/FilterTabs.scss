@@ -11,12 +11,12 @@
   max-width: 1024px!important;
 }
 
-.filter.tabs.container {
+.ui.filter.tab.list {
   display: flex;
   align-items: center;
   gap: 8px;
 
-  .filter.tab.item {
+  .item {
     padding: 7px 12px;
     border-radius: 6px;
     background-color: transparent;
@@ -56,8 +56,8 @@
   }
 }
 
-.dark .filter.tabs.container {
-  .filter.tab.item {
+.dark .ui.filter.tab.list {
+  .item {
     .text {
       color: colors.$gray-300;
     }

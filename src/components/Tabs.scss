@@ -6,10 +6,10 @@
 @use "../design-system/typography/styles";
 @use "../design-system/typography/weights";
 
-.tabs.component.container {
+.ui.outlined.tab.list {
   display: flex;
 
-  a.tab.item {
+  .item {
     display: block;
     padding: 10px 16px;
 
@@ -40,8 +40,8 @@
   }
 }
 
-.dark .tabs.component.container {
-  a.tab.item {
+.dark .ui.outlined.tab.list {
+  .item {
     border: 1px solid colors.$gray-500;
     background-color: colors.$gray-600;
     color: colors.$gray-300;

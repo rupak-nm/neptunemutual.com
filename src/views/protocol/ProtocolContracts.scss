@@ -16,6 +16,10 @@
     display: flex;
     gap: 48px;
 
+    @media (max-width:1023px) {
+      padding: 0;      
+    }
+
     .ui.tab.list.view {
       min-width: 292px;
       display: flex;

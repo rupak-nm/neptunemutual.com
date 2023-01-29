@@ -30,11 +30,11 @@ const items = [
 ];
 ---
 
-<div class={`filter tabs container ${className || ""}`}>
+<div class={`ui filter tab list ${className || ""}`}>
   {
     items.map((item) => (
       <button
-        class="filter tab item"
+        class="item"
         data-active={item.key === "active" ? "true" : "false"}
         data-filter={item.key}
       >

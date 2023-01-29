@@ -6,10 +6,10 @@ interface Props {
 const { tabItems } = Astro.props;
 ---
 
-<div class="tabs component container">
+<div class="ui outlined tab list">
   {
     tabItems.map(({ text, href, active }) => (
-      <a data-active={Boolean(active).toString()} class="tab item" href={href}>
+      <a data-active={Boolean(active).toString()} class="item" href={href}>
         {text}
       </a>
     ))
