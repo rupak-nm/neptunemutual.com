@@ -592,6 +592,12 @@
   z-index: 9999;
 }
 
-.dark .medium-zoom-image {
-  filter: invert(100%);
+.dark {
+  .medium-zoom-image {
+    filter: invert(100%);
+  }
+
+  .medium-zoom-overlay {
+    background-color: dark.$primary-background-color !important;
+  }
 }

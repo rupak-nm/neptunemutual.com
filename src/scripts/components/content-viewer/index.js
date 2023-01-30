@@ -1,3 +1,5 @@
+import './image-zoom.min'
+
 {
   function click () {
     document.querySelectorAll('.table.of.contents.container a.active.item').forEach(x => x.classList.remove('active'))
