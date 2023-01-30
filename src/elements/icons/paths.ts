@@ -1,4 +1,4 @@
-export const paths: Record<string, any> = {
+const paths: Record<string, any> = {
   'arrow-left': import('./variants/Arrows/arrow-left.svg?raw'),
   'arrow-right': import('./variants/Arrows/arrow-right.svg?raw'),
   'arrow-narrow-left': import('./variants/Arrows/arrow-narrow-left.svg?raw'),
@@ -89,3 +89,5 @@ export const paths: Record<string, any> = {
   'link-03': import('./variants/General/link-03.svg?raw'),
   'arrow-circle-right': import('./variants/Arrows/arrow-circle-right.svg?raw')
 }
+
+export { paths }

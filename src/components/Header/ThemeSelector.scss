@@ -29,11 +29,11 @@
         transform: translate(-100%, -50%);
       }
 
-      i#sun-filled {
+      i#SunFilled {
         display: inherit;
       }
       
-      i#moon-star-filled {
+      i#MoonStarFilled {
         display: none;
       }
     } 
@@ -72,11 +72,11 @@
       color: colors.$white !important;
     }
 
-    i#sun-filled {
+    i#SunFilled {
       display: none;
     }
     
-    i#moon-star-filled {
+    i#MoonStarFilled {
       display: inherit;
     }
   }

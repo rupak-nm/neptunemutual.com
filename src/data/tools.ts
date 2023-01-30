@@ -1,17 +1,3 @@
-interface Web3ToolItem {
-  slug?: string
-  path?: string
-  title: string
-  intro: string
-  category: string
-  icon: string
-  badges: Array<{
-    color: string
-    icon: string
-    text: string
-  }>
-}
-
 const tools: Web3ToolItem[] = [
   {
     slug: 'string-to-bytes32-converter',

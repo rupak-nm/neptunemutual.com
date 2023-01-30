@@ -155,12 +155,18 @@ interface TeamMember {
   }
 }
 
-interface HomepageFeatureItem {
-  id: number
+interface FeatureItem {
   icon: string
-  image: SVGElement
   title: string
   text: string
+  href?: string
+  badge?: string
+  isExternal?: boolean
+}
+
+interface HomepageFeatureItem extends FeatureItem {
+  id: number
+  image: SVGElement
 }
 
 interface SitemapEnumerable {
@@ -200,4 +206,34 @@ interface NetworkConfig {
   title: string
   app: string
   explorer: string
+}
+
+interface NavSection {
+  type: 'section' | 'videos-section'
+  title: string
+  links?: FeatureItem[]
+  more?: {
+    title: string
+    href: string
+  }
+}
+
+interface LinkNav {
+  title: string
+  href?: string
+  children?: NavSection[]
+}
+
+interface Web3ToolItem {
+  slug?: string
+  path?: string
+  title: string
+  intro: string
+  category: string
+  icon: string
+  badges: Array<{
+    color: string
+    icon: string
+    text: string
+  }>
 }

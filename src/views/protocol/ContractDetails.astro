@@ -1,7 +1,7 @@
 ---
 import { getKeyValuePairFrom } from "../../../util/protocol";
 import FilterTabs from "./FilterTabs.astro";
-import Tabs from "../../components/Tabs.astro";
+import OutlinedButtonList from "../../components/OutlinedButtonList.astro";
 import InputWithIcon from "../../elements/InputWithIcon.astro";
 import Contract from "./Contract.astro";
 import { labels } from "../../data/protocol";
@@ -32,7 +32,7 @@ const convertBytes32 = type === "pods" ? true : false;
     </a>
   </div>
 
-  <Tabs tabItems={tabItems} />
+  <OutlinedButtonList tabItems={tabItems} />
 
   <p class="details title">
     {labels[type]}

@@ -222,6 +222,7 @@
     .button:hover {
       color: colors.$white !important;
       background: colors.$gray-600 !important;
+      cursor: pointer;
     }
 
     .button:focus {
