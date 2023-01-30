@@ -1,3 +1,5 @@
+import './image-zoom.min'
+
 {
   function click () {
     document.querySelectorAll('.table.of.contents.container a.active.item').forEach(x => x.classList.remove('active'))
@@ -55,4 +57,14 @@
       }, 1000)
     })
   }
+}
+
+{
+  const images = [
+    ...document.querySelectorAll('.content.viewer img'),
+    ...document.querySelectorAll('[data-zoomable]')
+  ]
+
+  // eslint-disable-next-line no-undef
+  mediumZoom(images)
 }

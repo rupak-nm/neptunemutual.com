@@ -587,3 +587,17 @@
     background-color: colors.$gray-700;
   }
 }
+
+.medium-zoom--opened .medium-zoom-overlay, .medium-zoom-image {
+  z-index: 9999;
+}
+
+.dark {
+  .medium-zoom-image {
+    filter: invert(100%);
+  }
+
+  .medium-zoom-overlay {
+    background-color: dark.$primary-background-color !important;
+  }
+}
