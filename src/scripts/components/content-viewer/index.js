@@ -1,4 +1,4 @@
-import './image-zoom.min'
+import mediumZoom from './image-zoom.min'
 
 {
   function click () {
@@ -61,10 +61,8 @@ import './image-zoom.min'
 
 {
   const images = [
-    ...document.querySelectorAll('.content.viewer img'),
-    ...document.querySelectorAll('[data-zoomable]')
+    ...document.querySelectorAll('.content.viewer img')
   ]
 
-  // eslint-disable-next-line no-undef
   mediumZoom(images)
 }
