@@ -1,0 +1,33 @@
+---
+import { bytes32ToString } from "../../../util/protocol";
+import Icon from "../../elements/Icon.astro";
+
+interface Props {
+  contract: KeyValuePair<string>;
+  network: NetworkConfig;
+  convertBytes32?: boolean;
+}
+
+const { contract, network, convertBytes32 } = Astro.props;
+const name = convertBytes32 ? bytes32ToString(contract.key) : contract.key;
+---
+
+<div class="contract card item">
+  <p class="contract name">{name}</p>
+
+  <p class="contract address">{contract.value}</p>
+
+  <div class="icons">
+    <a
+      href={`${network.explorer}${contract.value}`}
+      target="_blank"
+      rel="nofollow"
+    >
+      <Icon variant={"link-03"} />
+    </a>
+
+    <!-- <a href={"#"}>
+      <Icon variant={"arrow-circle-right"} />
+    </a> -->
+  </div>
+</div>

@@ -7,8 +7,6 @@ interface KeyValuePair {
   value: string;
 }
 
-// @todo: fix typescript errors
-
 interface Props {
   id?: string;
   placeholder: string;
@@ -75,7 +73,7 @@ const {
   }
 
   {
-    ["textarea", "select"].includes(type ?? "") === false && (
+    !(type === "textarea" || type === "select") && (
       <input
         id={id}
         data-member={Astro.props["data-member"]}

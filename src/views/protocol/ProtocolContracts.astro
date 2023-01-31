@@ -1,0 +1,36 @@
+---
+import VerticalTab from "../../components/VerticalTab.astro";
+import ContractDetails from "./ContractDetails.astro";
+import { getTabItems, getVerticalTabItems } from "../../data/protocol";
+import NetworkSelect from "./NetworkSelect.astro";
+import { config } from "../../data/protocol";
+
+interface Props {
+  networkId: number;
+  type: ProtocolContractType;
+  data: ProtocolContracts;
+}
+
+const { networkId, type, data } = Astro.props;
+
+const network = config[networkId];
+const verticalTabItems = getVerticalTabItems(networkId);
+const tabItems = getTabItems(networkId, type);
+---
+
+<div class="neptune protocol contracts">
+  <div class="protocol inner container">
+    <VerticalTab tabItems={verticalTabItems} />
+
+    <div class="mobile tab items">
+      <NetworkSelect tabItems={verticalTabItems} />
+    </div>
+
+    <ContractDetails
+      tabItems={tabItems}
+      network={network}
+      type={type}
+      data={data}
+    />
+  </div>
+</div>

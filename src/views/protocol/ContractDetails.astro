@@ -1,0 +1,87 @@
+---
+import { getKeyValuePairFrom } from "../../../util/protocol";
+import FilterTabs from "./FilterTabs.astro";
+import OutlinedButtonList from "../../components/OutlinedButtonList.astro";
+import InputWithIcon from "../../elements/InputWithIcon.astro";
+import Contract from "./Contract.astro";
+import { labels } from "../../data/protocol";
+
+interface Props {
+  network: NetworkConfig;
+  tabItems: TabItem[];
+  type: ProtocolContractType;
+  data: ProtocolContracts;
+}
+
+const { network, tabItems, type, data } = Astro.props;
+
+const iterable =
+  type === "cxTokens" ? getKeyValuePairFrom(data[type], "active") : data[type];
+
+const expired =
+  type === "cxTokens" ? getKeyValuePairFrom(data[type], "expired") : [];
+
+const convertBytes32 = type === "pods" ? true : false;
+---
+
+<div class="contract details container">
+  <div class="titles container">
+    <h1>{network.title}</h1>
+    <a href={network.app} target="_blank">
+      {network.app}
+    </a>
+  </div>
+
+  <OutlinedButtonList tabItems={tabItems} />
+
+  <p class="details title">
+    {labels[type]}
+  </p>
+
+  <InputWithIcon
+    className="search input"
+    iconProps={{
+      variant: "search-lg",
+      size: "lg",
+    }}
+    placeholder="Search"
+    value=""
+  />
+
+  {
+    type === "cxTokens" && (
+      <FilterTabs className={"cxToken contract"} cxTokens={data.cxTokens} />
+    )
+  }
+
+  <div data-scope="regular" class="ui contracts list view">
+    {
+      iterable.map((item) => (
+        <Contract
+          contract={item}
+          network={network}
+          convertBytes32={convertBytes32}
+        />
+      ))
+    }
+  </div>
+
+  {
+    expired.length > 0 && (
+      <>
+        <div
+          data-scope="expired"
+          class="ui initially hidden contracts list view"
+        >
+          {expired.map((item) => (
+            <Contract
+              contract={item}
+              network={network}
+              convertBytes32={convertBytes32}
+            />
+          ))}
+        </div>
+      </>
+    )
+  }
+</div>

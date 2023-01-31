@@ -1,7 +1,7 @@
 import DedicatedCovers from './images/dedicated-cover-mockup.svg?raw'
 import DiversifiedCovers from './images/diversified-cover-mockup.svg?raw'
 
-export const features: HomepageFeatureItem[] = [
+const features: HomepageFeatureItem[] = [
   {
     id: 0,
     icon: 'cube-01',
@@ -18,3 +18,5 @@ export const features: HomepageFeatureItem[] = [
     text: 'Created to enable liquidity providers to diversify the risk of their capital across a portfolio of projects.  This enables the Neptune Mutual marketplace to offer cover policies to a wider variety of projects in DeFi, CeFi and Metaverse.'
   }
 ]
+
+export { features }

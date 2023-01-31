@@ -45,6 +45,10 @@
     @include styles.text-xl;
     @include weights.regular;
     color: colors.$gray-600;
+
+    @media (max-width: 767px) {
+      padding-left: 16px;
+    }
   }
 
   .blog.info{

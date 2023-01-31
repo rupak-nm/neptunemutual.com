@@ -300,6 +300,9 @@
 
     figcaption a {
       color: colors.$gray-500;
+
+      display: inline-flex;
+      align-items: center;
     }
 
     figcaption a:hover {

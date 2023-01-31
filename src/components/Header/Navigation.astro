@@ -1,11 +1,10 @@
 ---
 import Icon from "../../elements/Icon.astro";
 
-import { linkNav } from "../../../util/nav";
 import { normalizeUrl } from "../../../util/url";
 
 interface Props {
-  data: linkNav[]; // @todo: incorrect casing of type
+  data: LinkNav[];
 }
 const { data } = Astro.props;
 ---

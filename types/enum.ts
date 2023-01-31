@@ -17,4 +17,10 @@ enum Api {
 
 type BlogOrPressroom = Api.Blog | Api.Pressroom
 
-export { Api, BlogOrPressroom }
+enum Network {
+  Ethereum = 1,
+  Arbitrum = 42161,
+  Fuji = 43113
+}
+
+export { Api, BlogOrPressroom, Network }
