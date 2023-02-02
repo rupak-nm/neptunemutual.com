@@ -87,7 +87,9 @@ const paths: Record<string, any> = {
   'wallet-connect-dark': import('./custom/Brands/dark/SvgWalletConnectDark.svg?raw'),
   'search-lg': import('./variants/General/search-lg.svg?raw'),
   'link-03': import('./variants/General/link-03.svg?raw'),
-  'arrow-circle-right': import('./variants/Arrows/arrow-circle-right.svg?raw')
+  'arrow-circle-right': import('./variants/Arrows/arrow-circle-right.svg?raw'),
+  'trash-01': import('./variants/General/trash-01.svg?raw'),
+  minus: import('./variants/General/minus.svg?raw')
 }
 
 export { paths }
