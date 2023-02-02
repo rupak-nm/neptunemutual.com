@@ -74,7 +74,7 @@ for (let idx = 0; idx < roadmap.length; idx++) {
           return (
             <div class="story item" data-slide-index={idx}>
               <h3 class="title">{item.title}</h3>
-              <div class="text" set:html={item.contentHtml} />
+              <div class="text" set:html={item.html} />
             </div>
           );
         })

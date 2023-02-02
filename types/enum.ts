@@ -12,7 +12,8 @@ enum Api {
   Program = 'programs',
   Roadmap = 'roadmap',
   Vacancy = 'vacancies',
-  Video = 'videos'
+  Video = 'videos',
+  Hack = 'hacks'
 }
 
 type BlogOrPressroom = Api.Blog | Api.Pressroom

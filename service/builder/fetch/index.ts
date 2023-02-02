@@ -22,7 +22,8 @@ const resources: ApiResource[] = [
   [Api.Audit, 'api/audits?limit=1000'],
   [Api.News, 'api/news?limit=1000'],
   [Api.Program, 'api/programs?limit=1000'],
-  [Api.Video, 'api/videos?limit=1000']
+  [Api.Video, 'api/videos?limit=1000'],
+  [Api.Hack, 'api/hacks?limit=10000']
 ]
 
 const build = (): Array<Promise<{ url: string, identifier: string, string: string }>> => {

@@ -13,9 +13,9 @@ const toFeedItem = (slug: string, page: Article): Item | undefined => {
       date: new Date(page.publishedAt as Date),
       published: new Date(page.publishedAt as Date),
       description: page.intro,
-      content: fixImagePaths(page.contentHtml),
+      content: fixImagePaths(page.html),
       copyright: `All rights reserved ${new Date().getFullYear()}, Neptune Mutual`,
-      image: `https://neptunemutual.com/cdn/images/${page.cover.filename}`,
+      image: `https://neptunemutual.com/cdn/${page.cover.filename}`,
       author: [{
         name: 'Neptune Mutual',
         link: 'https://neptunemutual.com'
