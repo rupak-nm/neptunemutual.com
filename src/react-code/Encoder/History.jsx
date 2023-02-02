@@ -1,16 +1,67 @@
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import { Button } from '../components/Button'
+import { Icon } from '../components/Icon'
+
 import {
   colors,
   primaryColorKey
 } from '../styles/colors'
 import { typography } from '../styles/typography'
 
-const History = ({ contracts, download, restore, restorationFailed, restoreSpecificCallback }) => {
-  const restoreSpecificContract = (key) => {
+const STORAGE_KEY = 'abis'
+
+const History = ({ contracts, setContracts, download, restore, restorationFailed, restoreSpecificCallback }) => {
+  const [forDeletion, setForDeletion] = useState([])
+
+  const restoreSpecificContract = (e) => {
+    const { key } = e.target.dataset
     const { abi, contract_name: contractName, address } = contracts[key]
     restoreSpecificCallback({ abi, contractName, address })
+  }
+
+  const selected = (e) => {
+    const { key } = e.target.dataset
+    const cKeys = [...forDeletion]
+    const _contracts = [...contracts]
+
+    const index = cKeys.indexOf(key)
+    index === -1 ? cKeys.push(key) : cKeys.splice(index, 1)
+
+    _contracts[key].isSelected = e.target.checked
+
+    setContracts(_contracts)
+    setForDeletion(cKeys)
+  }
+
+  const deleteContracts = (e) => {
+    const leftOverContracts = contracts.filter((_, i) => !forDeletion.includes(`${i}`))
+    setContracts(leftOverContracts)
+    setForDeletion([])
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(leftOverContracts))
+  }
+
+  const selectAll = (e) => {
+    const keysForDeletions = []
+
+    const _contracts = contracts.map((contract, i) => {
+      if (e.target.checked) {
+        keysForDeletions.push(`${i}`)
+      }
+
+      return { ...contract, isSelected: e.target.checked }
+    })
+
+    setContracts(_contracts)
+    setForDeletion(keysForDeletions)
+  }
+
+  const toggleItemAddress = (key) => {
+    const _contracts = [...contracts]
+
+    _contracts[key].showAddress = !(_contracts[key]?.showAddress || false)
+    setContracts(_contracts)
   }
 
   return (
@@ -35,12 +86,37 @@ const History = ({ contracts, download, restore, restorationFailed, restoreSpeci
         >Restore
         </Button>
       </HistoryCTA>
+      {contracts.length > 0 &&
+        <DeleteSection>
+          <Checkbox onClick={selectAll} />
+          {forDeletion.length > 0 && (
+            <DeleteButton onClick={deleteContracts}>
+              <Icon variant='trash-01' size='15' />
+            </DeleteButton>
+          )}
+        </DeleteSection>}
+
       <HistoryList>
         {contracts.length > 0 && contracts.map((contract, i) => {
           return (
-            <HistoryListItem key={`contract-${i}`} onClick={() => { return restoreSpecificContract(i) }}>
-              {contract.contract_name || 'Untitled'}
-            </HistoryListItem>
+            <React.Fragment key={`contract-${i}`}>
+              <HistoryListItem>
+                <Checkbox checked={contract?.isSelected || false} onChange={selected} data-key={i} />
+                <Item data-key={i} onClick={restoreSpecificContract}>{contract.contract_name || 'Untitled'}</Item>
+
+                <BtnAddress onClick={() => toggleItemAddress(i)}>
+                  <Icon variant={contract.showAddress ? 'chevron-up' : 'chevron-down'} size='15' />
+                </BtnAddress>
+              </HistoryListItem>
+              {
+                contract.showAddress && (
+                  <HistoryListItemAddress>
+                    {contract.address}
+                  </HistoryListItemAddress>
+                )
+              }
+
+            </React.Fragment>
           )
         })}
       </HistoryList>
@@ -50,7 +126,7 @@ const History = ({ contracts, download, restore, restorationFailed, restoreSpeci
 }
 
 const Container = styled.div`
-  padding: 24px 0px 24px 24px;
+  padding: 24px;
   border: 1px solid ${colors.gray[300]};
   border-radius: 8px;
   height: 302px;
@@ -64,7 +140,6 @@ const Container = styled.div`
   .dark & {
     border: 1px solid ${colors.gray[500]};
   }
-
 `
 
 const HistoryTitle = styled.h2`
@@ -77,16 +152,84 @@ const HistoryTitle = styled.h2`
   }
 `
 
+const DeleteSection = styled.div`
+  border-bottom: 1px solid ${colors.gray[300]};
+  margin-top: 16px;
+  padding: 4px 0 12px 0;
+  display: flex;
+  gap: 14px;
+
+  input {
+    height: 15px;
+    margin: 0;
+  }
+`
+
+const BtnAddress = styled.button``
+
+const DeleteButton = styled.button`
+
+  i {
+    color: ${colors.primary[700]};
+
+    .dark & {
+      color: ${colors.white};
+    }
+  }
+`
+
 const HistoryList = styled.ul`
   width: 342px;
-  
+  padding: 0;
+  margin-top: 8px;
+
+  @media (min-width: 768px) {
+    width: 100%;
+  }
+
 `
 const HistoryListItem = styled.li`
   word-wrap: break-word;
-  ${typography.weights.medium}
-  ${typography.styles.textSm}
   color: ${colors.gray[900]};
   cursor: pointer;
+  list-style-type: none;
+  display: flex;
+  margin-bottom: 8px;
+  gap: 8px;
+
+  ${typography.weights.medium}
+  ${typography.styles.textSm}
+
+  .dark & {
+    color: ${colors.white};
+  }
+`
+
+const HistoryListItemAddress = styled.span`
+  display: inline-block;
+  padding: 10px;
+  margin-bottom: 8px;
+  width: 100%;
+  word-wrap: break-word;
+
+  background-color: ${colors[primaryColorKey][25]};
+  border-bottom: 1px solid ${colors.gray[200]};
+
+  .dark & {
+    background-color: ${colors.gray[900]};
+    border-bottom: 1px solid ${colors.gray[700]};
+  }
+`
+
+const Checkbox = styled.input.attrs({ type: 'checkbox' })`
+  cursor: pointer;
+`
+
+const Item = styled.span`
+  width: 100%;
+  color: ${colors.gray[900]};
+
+  ${typography.weights.regular}
 
   .dark & {
     color: ${colors.white};
