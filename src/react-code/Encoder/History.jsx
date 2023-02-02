@@ -38,6 +38,7 @@ const History = ({ contracts, setContracts, download, restore, restorationFailed
   const deleteContracts = (e) => {
     const leftOverContracts = contracts.filter((_, i) => !forDeletion.includes(`${i}`))
     setContracts(leftOverContracts)
+    setForDeletion([])
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(leftOverContracts))
   }
 
@@ -85,14 +86,16 @@ const History = ({ contracts, setContracts, download, restore, restorationFailed
         >Restore
         </Button>
       </HistoryCTA>
-      <DeleteSection>
-        {contracts.length > 0 && <Checkbox onClick={selectAll} />}
-        {contracts.length > 0 && forDeletion.length > 0 && (
-          <DeleteButton onClick={deleteContracts}>
-            <Icon variant='trash-01' size='15' />
-          </DeleteButton>
-        )}
-      </DeleteSection>
+      {contracts.length > 0 &&
+        <DeleteSection>
+          <Checkbox onClick={selectAll} />
+          {forDeletion.length > 0 && (
+            <DeleteButton onClick={deleteContracts}>
+              <Icon variant='trash-01' size='15' />
+            </DeleteButton>
+          )}
+        </DeleteSection>}
+
       <HistoryList>
         {contracts.length > 0 && contracts.map((contract, i) => {
           return (
