@@ -29,7 +29,7 @@ const {
   timeToRead,
   featuredImage,
   alt,
-} = await parseContent(type, ["contentHtml", "html"], post);
+} = await parseContent(type, ["html"], post);
 
 const publishDate = new Date(createdAt || (publishedAt as Date));
 ---

@@ -36,8 +36,6 @@ const run = async ($: CheerioAPI): Promise<CheerioAPI> => {
 
     const rewritten = rewrite(src)
 
-    console.log('%s --> %s', src, rewritten)
-
     $(this).attr('src', rewritten)
     $(this).removeAttr('srcset')
     $(this).removeAttr('width')

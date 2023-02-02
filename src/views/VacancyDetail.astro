@@ -15,7 +15,7 @@ const { vacancy } = Astro.props;
 
 const { title, intro, toc, parsedHtml, pageUrl } = await parseContent(
   "careers",
-  ["descriptionHtml"],
+  ["html"],
   vacancy
 );
 

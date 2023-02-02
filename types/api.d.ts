@@ -76,8 +76,7 @@ interface Roadmap extends Content {
   slug: string
   current: boolean
   sort: number
-  content: []
-  contentHtml: string
+  html: string
   _status: DocumentStatus
   createdAt?: Date
   updatedAt?: Date
@@ -90,8 +89,7 @@ interface Article extends Content {
   slug?: string
   intro: string
   cover: Media
-  content: any[]
-  contentHtml: string
+  html: string
   featured?: true
   tags?: Tag[]
   meta: Meta
@@ -119,8 +117,7 @@ interface Page extends Content {
   sort: number
   title: string
   slug: string
-  content: any[]
-  contentHtml?: string
+  html: string
   _status: DocumentStatus
   createdAt?: Date
   updatedAt?: Date
@@ -136,8 +133,7 @@ interface Program {
   slug: string
   icon: string
   badges: string
-  content: any[]
-  contentHtml?: string
+  html: string
   _status: DocumentStatus
   createdAt?: Date
   updatedAt?: Date
@@ -155,8 +151,7 @@ interface Video {
   sort: number
   length: number
   thumbnail: Media
-  description: any[]
-  descriptionHtml: string
+  html: string
   _status: DocumentStatus
   createdAt?: Date
   updatedAt?: Date
@@ -185,8 +180,7 @@ interface Audit {
   startDate: string
   endDate: string
   report: Media
-  description: any[]
-  descriptionHtml: string
+  html: string
   meta: Meta
   _status: DocumentStatus
   createdAt?: Date
@@ -224,8 +218,7 @@ interface Vacancy extends Content {
   department: string
   badges: string
   form: string
-  description: any[]
-  descriptionHtml: string
+  html: string
   meta: Meta
   _status: DocumentStatus
   createdAt?: Date
@@ -260,4 +253,23 @@ interface ProtocolContracts {
   tokens: Array<KeyValuePair<string>>
   pairs: Array<KeyValuePair<string>>
   cxTokens: CxToken[]
+}
+
+interface Chain {
+  slug: string
+  chainid?: number
+  title: string
+  shortName: string
+  nativeCurrency: string
+  html: string
+}
+
+interface Hack {
+  name: string
+  date: Date
+  amountLost: string
+  chains: Chain[]
+  techniques: string
+  description?: string
+  link: string
 }
