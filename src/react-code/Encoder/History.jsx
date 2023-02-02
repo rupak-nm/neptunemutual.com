@@ -86,8 +86,8 @@ const History = ({ contracts, setContracts, download, restore, restorationFailed
         </Button>
       </HistoryCTA>
       <DeleteSection>
-        <Checkbox onClick={selectAll} />
-        {forDeletion.length > 0 && (
+        {contracts.length > 0 && <Checkbox onClick={selectAll} />}
+        {contracts.length > 0 && forDeletion.length > 0 && (
           <DeleteButton onClick={deleteContracts}>
             <Icon variant='trash-01' size='15' />
           </DeleteButton>
