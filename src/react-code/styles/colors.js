@@ -1,6 +1,6 @@
-export const primaryColorKey = 'indigo'
+const primaryColorKey = 'indigo'
 
-export const colors = {
+const colors = {
   white: '#ffffff',
   black: '#000000',
   gray: {
@@ -383,3 +383,5 @@ export const colors = {
     900: '#713b12'
   }
 }
+
+export { colors, primaryColorKey }
