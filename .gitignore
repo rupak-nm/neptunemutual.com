@@ -26,3 +26,7 @@ public/pressroom/atom.xml
 public/pressroom/rss.xml
 public/feeds/*
 public/sitemap.xml
+
+# eslint configurations
+!.eslintrc.js
+!.eslintignore
