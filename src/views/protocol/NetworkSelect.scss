@@ -11,56 +11,61 @@
   .button.container {
     position: relative;
     width: 100%;
-    
+
     button {
       border-radius: 6px;
       cursor: pointer;
       justify-content: space-between;
       width: 100%;
       padding: 16px;
-      background-color: colors.$gray-100;
+      background-color: colors.$primary-50;
+      color: colors.$gray-600;
 
       @include styles.text-lg;
       @include weights.semibold;
-      color: colors.$gray-600;
-  
-      &, & > div {
+
+      &,
+      &>div {
         display: flex;
         align-items: center;
         gap: 28px;
+      }
+
+      span {
+        color: colors.$primary-700;
       }
 
       svg {
         width: 20px;
         height: 20px;
       }
-  
-      & > div svg {
+
+      &>div svg {
         width: 24px;
         height: 24px;
       }
-  
+
       @media (max-width: 767px) {
         min-width: 100%;
       }
     }
-  
+
     .menu {
       display: none;
-      width: 100%;
+      min-width: 100%;
       position: absolute;
       top: calc(100% + 8px);
-      z-index: 10;
+      z-index: 1000;
       background-color: colors.$white;
       border-radius: 6px;
       border: 1px solid colors.$gray-300;
       box-shadow: shadows.$lg;
-  
+
       ul {
         list-style: none;
         margin: 0;
         padding: 6px 0;
-  
+
         li a {
           display: flex;
           gap: 8px;
@@ -82,7 +87,7 @@
           }
         }
       }
-  
+
       &[data-open="true"] {
         display: block;
       }
@@ -94,9 +99,13 @@
   .button.container {
     button {
       background-color: colors.$gray-700;
-      color: colors.$gray-25;
+
+      &,
+      span {
+        color: colors.$gray-25;
+      }
     }
-    
+
     .menu {
       background-color: colors.$gray-700;
       border: 1px solid colors.$gray-600;

@@ -25,7 +25,7 @@ const activeItem = tabItems.find((item) => item.active) ?? tabItems[0];
         {
           tabItems.map(({ text, icon, href }) => {
             return (
-              <li tabindex="0">
+              <li tabindex="-1">
                 <a href={href}>
                   <Icon variant={icon} />
                   <span>{text}</span>
