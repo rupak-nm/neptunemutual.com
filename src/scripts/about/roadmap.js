@@ -27,7 +27,7 @@ const selectStorySlide = (idx) => {
   // Set data-selected to false for all others
   storiesContainer
     .querySelectorAll('.item[data-selected="true"]')
-    .forEach(function (el) {
+    .forEach((el) => {
       el.setAttribute('data-selected', 'false')
     })
 
@@ -48,7 +48,7 @@ const selectTimelineSlide = (idx) => {
   // Set data-selected to false for all others
   timelineContainer
     .querySelectorAll('.item[data-selected="true"]')
-    .forEach(function (el) {
+    .forEach((el) => {
       el.setAttribute('data-selected', 'false')
     })
 
@@ -86,7 +86,7 @@ const currentTimelineSlide = timelineContainer.querySelector('.item.current')
 selectSlide(currentTimelineSlide.getAttribute('data-slide-index'))
 
 // Add event listeners to all items
-allTimelineItems.forEach(function (el) {
+allTimelineItems.forEach((el) => {
   el.addEventListener('click', function (ev) {
     if (!ev.target) return
 
@@ -97,21 +97,21 @@ allTimelineItems.forEach(function (el) {
 })
 
 // Add event listeners to buttons
-prevBtn.addEventListener('click', function () {
+prevBtn.addEventListener('click', () => {
   const selectedEl = timelineContainer.querySelector('.item[data-selected="true"]')
 
   const clickedIndex = selectedEl.getAttribute('data-slide-index')
   selectSlide(parseInt(clickedIndex) - 1)
 })
 
-nextBtn.addEventListener('click', function () {
+nextBtn.addEventListener('click', () => {
   const selectedEl = timelineContainer.querySelector('.item[data-selected="true"]')
 
   const clickedIndex = selectedEl.getAttribute('data-slide-index')
   selectSlide(parseInt(clickedIndex) + 1)
 })
 
-window.addEventListener('resize', function () {
+window.addEventListener('resize', () => {
   const selectedEl = timelineContainer.querySelector('.item[data-selected="true"]')
   const clickedIndex = selectedEl.getAttribute('data-slide-index')
   selectSlide(parseInt(clickedIndex))
