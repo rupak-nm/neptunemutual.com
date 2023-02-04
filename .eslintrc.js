@@ -15,6 +15,7 @@ module.exports = {
     'prefer-arrow-callback': 'error',
     'import/group-exports': 'error',
     'import/exports-last': 'error',
+    'import/no-default-export': 'error',
     '@typescript-eslint/key-spacing': 0,
     '@typescript-eslint/consistent-type-imports': 0,
     '@typescript-eslint/consistent-type-exports': 0,
