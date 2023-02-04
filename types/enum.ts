@@ -5,6 +5,7 @@ enum Api {
   ContractArbitrum = 'contracts.arbitrum',
   ContractFuji = 'contracts.fuji',
   Ecosystem = 'ecosystems',
+  Doc = 'docs',
   Media = 'media',
   News = 'news',
   Policy = 'pages',

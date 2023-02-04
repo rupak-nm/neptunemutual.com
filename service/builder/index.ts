@@ -31,4 +31,4 @@ const builder = {
   }
 }
 
-export default builder
+export { builder }

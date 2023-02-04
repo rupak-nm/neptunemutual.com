@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 
 import react from '@astrojs/react'
 
-import builder from './service/builder'
+import { builder } from './service/builder'
 import { env } from './util/env'
 
 dotenv.config()
@@ -13,7 +13,7 @@ const common = [react()]
 const integrations = production ? [builder, ...common] : [...common]
 
 /** @type {import('astro').AstroUserConfig} */
-export default defineConfig({
+const config = defineConfig({
   integrations,
   server: {
     port: 3001,
@@ -28,3 +28,5 @@ export default defineConfig({
     }
   }
 })
+
+export default config // eslint-disable-line
