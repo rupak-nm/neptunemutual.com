@@ -1,4 +1,4 @@
 declare module '*.svg' {
   const content: SVGElement
-  export { content }
+  export default content // eslint-disable-line
 }
