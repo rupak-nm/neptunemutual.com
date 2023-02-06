@@ -14,6 +14,7 @@ const resources: ApiResource[] = [
   [Api.ContractFuji, 'https://api.neptunemutual.net/protocol/contracts/fuji', true],
   [Api.Media, 'api/media?limit=1000'],
   [Api.Blog, 'api/articles?limit=1000'],
+  [Api.Doc, 'api/docs?limit=1000'],
   [Api.Pressroom, 'api/pressroom?limit=1000'],
   [Api.Ecosystem, 'api/ecosystems?limit=1000'],
   [Api.Policy, 'api/pages?limit=1000'],

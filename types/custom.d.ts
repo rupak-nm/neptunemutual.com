@@ -1,13 +1,3 @@
-declare module '*.svg' {
-  const content: SVGElement
-  export default content
-}
-
-declare module '*.svg?raw' {
-  const content: SVGElement
-  export default content
-}
-
 type ApiResource = [string, string, boolean?]
 
 interface FileDownloadArgs {
