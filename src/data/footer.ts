@@ -68,7 +68,8 @@ const getFooterData = async (): Promise<FooterData> => {
           text: 'Documentation',
           isExternal: true
         },
-        { href: '/web3-tools/', text: 'Web3 Tools', isExternal: false }
+        { href: '/web3-tools/', text: 'Web3 Tools', isExternal: false },
+        { href: '/hack-database/', text: 'Blockchain Hack Database', isExternal: false }
       ]
     },
     {

@@ -6,7 +6,7 @@ import { normalizeUrl } from "../../util/url";
 import { BlogOrPressroom } from "../../types/enum";
 
 interface Props {
-  type: BlogOrPressroom;
+  type?: BlogOrPressroom;
   tag?: Tag;
   totalPages?: number;
   currentPage?: number;
@@ -30,7 +30,8 @@ const t = (x: string): string => x;
   <div class="container">
     <Button
       type={"anchor"}
-      href={normalizeUrl(previousHref)}
+      classname={"previous page"}
+      href={type ? normalizeUrl(previousHref) : "#"}
       variant={"link-color"}
       iconLeading="arrow-left"
       disabled={parseInt((currentPage || 0).toString()) <= 1}
@@ -46,11 +47,11 @@ const t = (x: string): string => x;
               <Button
                 classname={
                   parseInt((currentPage || 0).toString()) === page
-                    ? "active"
-                    : ""
+                    ? "active page"
+                    : "page"
                 }
                 type={"anchor"}
-                href={`/${prefix}/${page}/`}
+                href={type ? `/${prefix}/${page}/` : "#"}
                 variant={"link-color"}
               >
                 {page}
@@ -64,7 +65,8 @@ const t = (x: string): string => x;
 
     <Button
       type={"anchor"}
-      href={normalizeUrl(nextHref)}
+      classname={"next page"}
+      href={type ? normalizeUrl(nextHref) : "#"}
       variant={"link-color"}
       iconTrailing="arrow-right"
       disabled={parseInt((currentPage || 0).toString()) ===

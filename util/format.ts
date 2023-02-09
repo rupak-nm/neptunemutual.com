@@ -39,4 +39,22 @@ const getFormattedDate = (x: string): string => {
   })
 }
 
-export { convertSecondsToWords, convertWordsToMinutes, getFormattedDate }
+const getNumericDate = (x: string): string => {
+  // Safari doesn't like dashes
+  const normalized = x.replace(/-/g, '/')
+
+  const date = new Date(normalized)
+
+  const yyyy = date.getFullYear()
+  let mm: number | string = date.getMonth() + 1 // Months start at 0!
+  let dd: number | string = date.getDate()
+
+  if (dd < 10) dd = '0' + dd.toString()
+  if (mm < 10) mm = '0' + mm.toString()
+
+  const numericDate = (dd as string) + '/' + (mm as string) + '/' + yyyy.toString()
+
+  return numericDate
+}
+
+export { convertSecondsToWords, convertWordsToMinutes, getFormattedDate, getNumericDate }
