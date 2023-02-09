@@ -1,5 +1,6 @@
 const paths: Record<string, any> = {
   'arrow-left': import('./variants/Arrows/arrow-left.svg?raw'),
+  'arrow-down': import('./variants/Arrows/arrow-down.svg?raw'),
   'arrow-right': import('./variants/Arrows/arrow-right.svg?raw'),
   'arrow-narrow-left': import('./variants/Arrows/arrow-narrow-left.svg?raw'),
   'arrow-narrow-right': import('./variants/Arrows/arrow-narrow-right.svg?raw'),

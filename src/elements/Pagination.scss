@@ -9,6 +9,10 @@
 .ui.pagination {
   padding-top: 64px;
 
+  &.no.padding {
+    padding-top: 0;
+  }
+
   @media (max-width: 767px) {
     padding-top: 64px;
   }

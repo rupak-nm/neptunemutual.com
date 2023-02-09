@@ -237,3 +237,12 @@ interface Web3ToolItem {
     text: string
   }>
 }
+
+interface TableRenderConfig<T> {
+  label: string;
+  render: (item: T) => string;
+  sortable?: boolean;
+  searchable?: boolean;
+  isDescription?: boolean;
+  isLink?: boolean;
+}

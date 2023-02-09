@@ -1,0 +1,97 @@
+---
+import HeaderSection from "../components/HeaderSection.astro";
+import NewsletterSignupForm from "../components/NewsletterSignupForm.astro";
+import Table from "../components/Table.astro";
+import Icon from "../elements/Icon.astro";
+import InputWithIcon from "../elements/InputWithIcon.astro";
+import Tags from "../elements/Tags.astro";
+
+interface Props {
+  hacks: Hack[];
+}
+
+const { hacks } = Astro.props;
+
+const tableRenderConfig: TableRenderConfig<Hack>[] = [
+  {
+    label: "Name",
+    render: (hack) => hack.name,
+    sortable: true,
+  },
+  {
+    label: "Date",
+    render: (hack) => hack.date.toString(),
+    sortable: true,
+  },
+  {
+    label: "Amount Lost",
+    render: (hack) => hack.amountLost,
+  },
+  {
+    label: "Chains",
+    render: (hack) => hack.chains.map((chain) => chain.title).join(",") || "-",
+  },
+  {
+    label: "Technique",
+    render: (hack) => hack.techniques,
+  },
+  {
+    label: "Description",
+    render: (hack) => hack.description ?? "",
+    isDescription: true,
+  },
+  {
+    label: "Link",
+    render: (hack) => hack.link,
+    isLink: true,
+  },
+];
+---
+
+<HeaderSection
+  color={"basic"}
+  alignment={"center"}
+  heading="DeFi and Cryptocurrency Hacks"
+>
+  <Fragment slot="supporting-text">
+    The DeFi hack database provides a summary of major cryptocurrency hacks,
+    exploits, smart contract vulnerabilities, and much more.
+  </Fragment>
+</HeaderSection>
+
+<div class="hackdatabase announcement full width container">
+  <Table renderConfig={tableRenderConfig} data={hacks}>
+    <Fragment slot="table-prefix">
+      <div class="prefix container">
+        <div>
+          <div class="prefix header">DeFi Hack Database</div>
+          <p class="prefix subtitle">
+            Total Events
+            <span class="hack counter">
+              {hacks.length}
+            </span>
+          </p>
+        </div>
+        <div>
+          <InputWithIcon
+            className="search input"
+            iconProps={{
+              variant: "search-lg",
+              size: "lg",
+            }}
+            placeholder="Search"
+            value=""
+          />
+        </div>
+      </div>
+    </Fragment>
+  </Table>
+</div>
+
+<NewsletterSignupForm
+  heading="Sign Up for Our Newsletter"
+  text="Be the first to know about releases and industry news and insights."
+  showFeedButtons
+  atomLink="/feeds/pressroom/atom.xml"
+  rssLink="/feeds/pressroom/rss.xml"
+/>
