@@ -20,12 +20,18 @@ const html = await processor.process(page.html);
     <div class="ui sidebar menu">
       {
         items.map((item) => {
-          return (
+          return item.unlinked ? (
+            <div
+              class={normalize(
+                `${item.slug === page.slug ? "current" : ""} header item`
+              )}
+            >
+              {item.navigationLabel}
+            </div>
+          ) : (
             <a
               class={normalize(
-                `${item.unlinked ? "header" : ""} ${
-                  item.slug === page.slug ? "current" : ""
-                } item`
+                `${item.slug === page.slug ? "current" : ""} item`
               )}
               href={`/docs/${item.slug}/`}
             >

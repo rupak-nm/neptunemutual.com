@@ -18,7 +18,8 @@ const run = async ($: CheerioAPI): Promise<CheerioAPI> => {
 }
 
 const process = async (html: string): Promise<string> => {
-  const $ = await run(load(html, null, false))
+  const expression = /<p>&nbsp;<\/p>/d
+  const $ = await run(load(html.replace(expression, ''), null, false))
   return $.html()
 }
 
