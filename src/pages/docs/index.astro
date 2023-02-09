@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Docs from "../../views/Docs.astro";
+import Seo from "../../components/Seo.astro";
+
+import * as api from "../../../service/api";
+import styles from "./index.scss?inline";
+import { Api } from "../../../types/enum";
+import Enumerable from "linq";
+
+const enumerable = await api.getEnumerable<Documentation>(Api.Doc, 1000, 0);
+const pages = Enumerable.from(enumerable)
+  .orderBy((x) => x.order)
+  .toArray();
+
+const [page] = pages;
+---
+
+<BaseLayout headerStyle={"default"}>
+  <Seo
+    slot="seo"
+    title="Policies / Neptune Mutual"
+    description="Have a look at our standard terms and conditions, terms of use, risk factors, and other disclaimers."
+    og={{
+      image: "/assets/images/meta/og/policy.png",
+      imageAlt: "Neptune Mutual Policies",
+    }}
+  />
+  <style slot="header" is:inline set:html={styles}></style>
+  <Docs items={pages} page={page} />
+
+  <Fragment slot="footer">
+    <script src="../../scripts/policies/index.js"></script>
+  </Fragment>
+</BaseLayout>

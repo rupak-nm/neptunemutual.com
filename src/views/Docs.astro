@@ -1,0 +1,76 @@
+---
+import { parseContent } from "../../util/content-viewer";
+import { normalize } from "../../util/css-class";
+import { slugify } from "../../util/slug";
+import * as processor from "../../util/html-processor";
+import Input from "../elements/Input.astro";
+import Icon from "../elements/Icon.astro";
+
+interface Props {
+  items: Documentation[];
+  page: Documentation;
+}
+
+const { items, page } = Astro.props;
+const html = await processor.process(page.html);
+---
+
+<div class="documentation container">
+  <div class="full width container">
+    <div class="ui sidebar menu">
+      {
+        items.map((item) => {
+          return (
+            <a
+              class={normalize(
+                `${item.unlinked ? "header" : ""} ${
+                  item.slug === page.slug ? "current" : ""
+                } item`
+              )}
+              href={`/docs/${item.slug}/`}
+            >
+              {item.navigationLabel}
+            </a>
+          );
+        })
+      }
+    </div>
+
+    <div class="story">
+      <div class="meta">
+        <div class="breadcrumb">Breadcrumb</div>
+        <div class="script only search">
+          <Input
+            type={"search"}
+            id="SearchInputSearch"
+            placeholder="Search ..."
+          />
+        </div>
+      </div>
+      <h1 class="ui header" id={slugify(page.title)}>
+        <div class="title">{page.title}</div>
+        {page.subtitle && <div class="sub title">{page.subtitle}</div>}
+      </h1>
+      <div set:html={html} />
+    </div>
+  </div>
+</div>
+
+<div class="initially hidden dimmer">
+  <div class="ui search modal">
+    <div class="search header input">
+      <Icon size={"xl"} variant={"search-lg"} />
+      <input type="search" />
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  document.getElementById("SearchInputSearch").addEventListener(
+    "focus",
+    () => {
+      document.querySelector(".dimmer").classList.toggle("hidden");
+    },
+    { passive: true }
+  );
+</script>
