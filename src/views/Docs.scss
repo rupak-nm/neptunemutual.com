@@ -15,13 +15,15 @@
     padding-bottom: 32px;
 
     input {
-      width: 320px;
+      width: 200px;
       @include styles.text-sm;
       padding: 8px 16px;
 
-      &:hover, &:active, &:focus {
+      &:hover,
+      &:active,
+      &:focus {
         background-color: unset;
-        box-shadow: none!important;
+        box-shadow: none !important;
         border-color: colors.$primary-700;
       }
     }
@@ -29,12 +31,12 @@
 
   .full.width.container {
     display: flex;
-    gap: 32px;
+    gap: 96px;
   }
 
   .ui.sidebar.menu {
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding-top: 32px;
+    padding-bottom: 32px;
     width: 300px;
     display: flex;
     flex-direction: column;
@@ -66,20 +68,16 @@
       @include weights.regular;
       color: colors.$gray-600;
 
-     &.current {
-        background-color: colors.$gray-100;        
-        color: colors.$gray-700;        
+      &.current {
+        background-color: colors.$gray-100;
+        color: colors.$gray-700;
       }
 
       &:hover {
-        background-color: colors.$primary-100;        
-        color: colors.$primary-700;        
+        background-color: colors.$primary-100;
+        color: colors.$primary-700;
       }
     }
-  }
-
-  .story {
-    width: calc(100% - 350px);
   }
 }
 
@@ -88,9 +86,10 @@
   @include weights.regular;
   @include styles.text-md;
   color: colors.$gray-700;
-  width: 768px;
   overflow: hidden;
-  padding-top: 24px;
+  padding-top: 32px;
+  padding-bottom: 64px;
+  width: 600px;
 
   strong {
     @include weights.semibold;
@@ -104,7 +103,7 @@
   a {
     color: colors.$primary-500;
     @include weights.semibold;
-    display: flex;
+    display: inline-flex;
     align-items: center;
 
 
@@ -120,35 +119,50 @@
   }
 
 
-  p:not(table p), ol, ul, table, .ui.error, .ui.info {
-    line-height: 1.6!important;
-    margin-top:0.15em;
+  p:not(table p),
+  ol,
+  ul,
+  table,
+  .ui.error,
+  .ui.info {
+    line-height: 1.6 !important;
+    margin-top: 0.15em;
     margin-bottom: 1.5em;
-}
+  }
 
-  ul, ol {
+  ul,
+  ol {
     li {
-      margin-top:0.15em;
+      margin-top: 0.15em;
       margin-bottom: 0.25em;
     }
   }
 
-  h2, h3, h4, h5, h6 {
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     margin-top: 1em;
   }
 
-  h1, h2, h3, h4, h5, h6 {  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     margin-bottom: 1em;
 
     @include weights.semibold;
-    color: colors.$gray-700;  
+    color: colors.$gray-700;
 
     .sub.title {
       margin-top: 0.5em;
 
       @include weights.regular;
       color: colors.$gray-400;
-      @include styles.text-xl;  
+      @include styles.text-xl;
     }
 
     .heading.anchor {
@@ -159,7 +173,8 @@
       margin-left: 0.5rem;
     }
 
-    &:hover .heading.anchor, &:active .heading.anchor {
+    &:hover .heading.anchor,
+    &:active .heading.anchor {
       display: inline-block;
     }
   }
@@ -198,7 +213,7 @@
 
   table {
     border-spacing: 0;
-    border-collapse: separate!important;
+    border-collapse: separate !important;
     border-radius: 10px;
     border: 1px solid colors.$gray-200;
 
@@ -218,7 +233,8 @@
     }
 
 
-    th, td {
+    th,
+    td {
       padding: 12px 24px;
     }
 
@@ -239,36 +255,44 @@
     thead:not(:last-child),
     tbody:not(:last-child),
     tfoot:not(:last-child) {
-     border-bottom: 1px solid colors.$gray-200;
+      border-bottom: 1px solid colors.$gray-200;
     }
 
 
     @media (max-width: 767px) {
-      table, thead, tbody, th, td, tr { 
+
+      table,
+      thead,
+      tbody,
+      th,
+      td,
+      tr {
         display: block;
         border: unset !important;
-      }	
-    
-      table th, table td {
-        border: 1px solid colors.$gray-200!important;
+      }
+
+      table th,
+      table td {
+        border: 1px solid colors.$gray-200 !important;
         word-break: break-all;
       }
-    
+
       table {
         tr:first-child {
           background-color: colors.$white;
-    
-          td, th {
+
+          td,
+          th {
             background-color: colors.$gray-50;
-            border-radius: 0!important;
+            border-radius: 0 !important;
           }
-    
+
           td:first-child,
           th:first-child {
-            border-radius: 10px 10px 0 0!important;
+            border-radius: 10px 10px 0 0 !important;
           }
-        }    
-      }      
+        }
+      }
     }
   }
 
@@ -300,8 +324,7 @@
   .ui.error,
   .ui.info,
   .ui.message,
-  .ui.warning
-   {
+  .ui.warning {
     padding: 16px;
     border-radius: 12px;
     @include styles.text-sm;
@@ -314,14 +337,22 @@
       text-decoration: underline;
     }
 
-    p:last-child, li:last-child, ul {
+    p:last-child,
+    li:last-child,
+    ul {
       padding-top: 0;
       padding-bottom: 0;
       margin-top: 0;
       margin-bottom: 0;
     }
 
-    .header, h1, h2, h3, h4, h5, h6 {
+    .header,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       @include styles.text-md;
       @include weights.semibold;
       padding-bottom: 1em;
@@ -329,7 +360,8 @@
 
     &::before {
       content: "";
-      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_4431_71690)'%3E%3Cpath d='M9.99935 6.66797V10.0013M9.99935 13.3346H10.0077M18.3327 10.0013C18.3327 14.6037 14.6017 18.3346 9.99935 18.3346C5.39698 18.3346 1.66602 14.6037 1.66602 10.0013C1.66602 5.39893 5.39698 1.66797 9.99935 1.66797C14.6017 1.66797 18.3327 5.39893 18.3327 10.0013Z' stroke='currentColor' stroke-width='1.66667' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_4431_71690'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");      height: 20px;
+      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_4431_71690)'%3E%3Cpath d='M9.99935 6.66797V10.0013M9.99935 13.3346H10.0077M18.3327 10.0013C18.3327 14.6037 14.6017 18.3346 9.99935 18.3346C5.39698 18.3346 1.66602 14.6037 1.66602 10.0013C1.66602 5.39893 5.39698 1.66797 9.99935 1.66797C14.6017 1.66797 18.3327 5.39893 18.3327 10.0013Z' stroke='currentColor' stroke-width='1.66667' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_4431_71690'%3E%3Crect width='20' height='20' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+      height: 20px;
       width: 20px;
       top: 16px;
       margin-left: -40px;
@@ -338,9 +370,9 @@
     }
   }
 
-  
 
-  
+
+
 }
 
 .dimmer {
@@ -353,34 +385,93 @@
   left: 0;
   top: 0;
   overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.8); 
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.8);
 
   .ui.search.modal {
     width: 720px;
-    height: 400px;
+    min-height: 300px;
+    max-height: 80vh;
+    overflow: auto;
     background-color: colors.$white;
     border: 1px solid colors.$gray-300;
     border-radius: 8px;
     margin: auto;
 
-    
+
     .search.input {
       display: flex;
       border-bottom: 1px solid colors.$gray-200;
       align-items: center;
       margin: 0 14px;
-  
+
       .icon {
         color: colors.$gray-500;
       }
-  
+
       input {
         @include styles.text-md;
         @include weights.regular;
         width: 100%;
         padding: 12px 8px;
         outline: none;
+      }
+    }
+
+    .search.result {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 8px;
+      margin: 8px;
+      
+      .highlighted {
+        background-color: colors.$teal-50;
+      }
+
+      .match {
+        @include weights.bold;
+        color: colors.$rose-500;
+      }
+
+      .item {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 4px 0;
+        color: colors.$gray-700;
+        border-radius: 8px;
+        border: 1px solid transparent;
+
+        &:hover, &:hover:has(.highlighted) .highlighted {
+          background-color: colors.$teal-50;  
+        }
+
+        &:hover {
+          border-color: colors.$teal-100;  
+        }
+
+
+        .header {
+          display: flex;
+          gap: 12px;
+          padding: 4px;
+          @include styles.text-md;
+          @include weights.medium;
+
+          .icon {
+            background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.6663 1.89252V5.33464C11.6663 5.80135 11.6663 6.0347 11.7572 6.21296C11.8371 6.36976 11.9645 6.49725 12.1213 6.57714C12.2996 6.66797 12.533 6.66797 12.9997 6.66797H16.4418M16.6663 8.32482V14.3346C16.6663 15.7348 16.6663 16.4348 16.3939 16.9696C16.1542 17.44 15.7717 17.8225 15.3013 18.0622C14.7665 18.3346 14.0665 18.3346 12.6663 18.3346H7.33301C5.93288 18.3346 5.23281 18.3346 4.69803 18.0622C4.22763 17.8225 3.84517 17.44 3.60549 16.9696C3.33301 16.4348 3.33301 15.7348 3.33301 14.3346V5.66797C3.33301 4.26784 3.33301 3.56777 3.60549 3.03299C3.84517 2.56259 4.22763 2.18014 4.69803 1.94045C5.23281 1.66797 5.93288 1.66797 7.33301 1.66797H10.0095C10.621 1.66797 10.9267 1.66797 11.2144 1.73704C11.4695 1.79829 11.7134 1.8993 11.9371 2.03637C12.1893 2.19097 12.4055 2.40716 12.8379 2.83954L15.4948 5.4964C15.9271 5.92878 16.1433 6.14497 16.2979 6.39726C16.435 6.62094 16.536 6.8648 16.5973 7.11989C16.6663 7.40761 16.6663 7.71335 16.6663 8.32482Z' stroke='%23667085' stroke-width='1.66667' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            height: 20px;
+            width: 20px;
+          }
+        }
+
+        .content {
+          padding: 4px;
+          margin-left: 36px;
+          @include styles.text-sm;
+          @include weights.regular;
+        }
       }
     }
   }

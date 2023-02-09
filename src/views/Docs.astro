@@ -66,17 +66,9 @@ const html = await processor.process(page.html);
   <div class="ui search modal">
     <div class="search header input">
       <Icon size={"xl"} variant={"search-lg"} />
-      <input type="search" />
+      <input type="search" id="ModalSearchInputSearch" />
     </div>
+
+    <div class="search result"></div>
   </div>
 </div>
-
-<script type="text/javascript">
-  document.getElementById("SearchInputSearch").addEventListener(
-    "focus",
-    () => {
-      document.querySelector(".dimmer").classList.toggle("hidden");
-    },
-    { passive: true }
-  );
-</script>
