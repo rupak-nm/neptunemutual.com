@@ -6,14 +6,32 @@ import * as processor from "../../util/html-processor";
 import Input from "../elements/Input.astro";
 import Icon from "../elements/Icon.astro";
 import Breadcrumb from "../elements/Breadcrumb.astro";
+import Enumerable from "linq";
 
 interface Props {
   items: Documentation[];
   page: Documentation;
-  slug: string;
 }
 
-const { items, page, slug: pageSlug } = Astro.props;
+const { items, page } = Astro.props;
+
+const getSlug = (x: Documentation) =>
+  x.parent ? `${x.parent.slug}/${x.slug}` : x.slug;
+
+const slug = getSlug(page);
+
+const [next] = Enumerable.from(items)
+  .where((x) => x.order > page.order && !x.unlinked)
+  .orderBy((x) => x.order)
+  .take(1)
+  .toArray();
+
+const [previous] = Enumerable.from(items)
+  .where((x) => x.order < page.order && !x.unlinked)
+  .orderByDescending((x) => x.order)
+  .take(1)
+  .toArray();
+
 const html = await processor.process(page.html);
 
 const breadcrumbs = [
@@ -27,7 +45,7 @@ const breadcrumbs = [
   },
   {
     name: page.title,
-    link: pageSlug,
+    link: slug,
   },
 ].filter(Boolean);
 ---
@@ -44,16 +62,14 @@ const breadcrumbs = [
           return item.unlinked ? (
             <div
               class={normalize(
-                `${itemSlug === pageSlug ? "current" : ""} header item`
+                `${itemSlug === slug ? "current" : ""} header item`
               )}
             >
               {item.navigationLabel}
             </div>
           ) : (
             <a
-              class={normalize(
-                `${itemSlug === pageSlug ? "current" : ""} item`
-              )}
+              class={normalize(`${itemSlug === slug ? "current" : ""} item`)}
               href={`/docs/${itemSlug}/`}
             >
               {item.navigationLabel}
@@ -80,6 +96,31 @@ const breadcrumbs = [
           {page.subtitle && <div class="sub title">{page.subtitle}</div>}
         </h1>
         <div class="content" set:html={html} />
+      </div>
+
+      <div class="ui more stories">
+        {
+          previous && (
+            <a href={`/docs/${getSlug(previous)}`} class="previous story">
+              <Icon size={"xl"} variant={"arrow-left"} />
+              <div class="content">
+                <div class="title">Previous</div>
+                <div class="sub title">{previous.title}</div>
+              </div>
+            </a>
+          )
+        }
+        {
+          next && (
+            <a href={`/docs/${getSlug(next)}`} class="next story">
+              <div class="content">
+                <div class="title">Next</div>
+                <div class="sub title">{next.navigationLabel}</div>
+              </div>
+              <Icon size={"xl"} variant={"arrow-right"} />
+            </a>
+          )
+        }
       </div>
     </div>
   </div>

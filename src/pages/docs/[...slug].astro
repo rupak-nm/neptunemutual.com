@@ -25,12 +25,12 @@ export async function getStaticPaths() {
 
     return {
       params: { slug },
-      props: { pages, page, slug },
+      props: { pages, page },
     };
   });
 }
 
-const { pages, page, slug } = Astro.props;
+const { pages, page } = Astro.props;
 
 const ogImageUrl = page.meta.image?.url
   ? new URL(`cdn/${page.meta.image.url.split("/").pop()}`, dns.getDns())
@@ -49,7 +49,7 @@ const ogImageUrl = page.meta.image?.url
     }}
   />
   <style slot="header" is:inline set:html={styles}></style>
-  <Docs items={pages} page={page} slug={slug} />
+  <Docs items={pages} page={page} />
 
   <Fragment slot="footer">
     <script src="../../scripts/docs/index.js"></script>
