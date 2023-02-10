@@ -5,14 +5,31 @@ import { slugify } from "../../util/slug";
 import * as processor from "../../util/html-processor";
 import Input from "../elements/Input.astro";
 import Icon from "../elements/Icon.astro";
+import Breadcrumb from "../elements/Breadcrumb.astro";
 
 interface Props {
   items: Documentation[];
   page: Documentation;
+  slug: string;
 }
 
-const { items, page } = Astro.props;
+const { items, page, slug: pageSlug } = Astro.props;
 const html = await processor.process(page.html);
+
+const breadcrumbs = [
+  {
+    name: "Docs",
+    link: "/docs",
+  },
+  page.parent && {
+    name: page.parent.navigationLabel,
+    link: "/docs/" + page.parent.slug,
+  },
+  {
+    name: page.title,
+    link: pageSlug,
+  },
+].filter(Boolean);
 ---
 
 <div class="documentation container">
@@ -20,10 +37,14 @@ const html = await processor.process(page.html);
     <div class="ui sidebar menu">
       {
         items.map((item) => {
+          const itemSlug = item.parent
+            ? `${item.parent.slug}/${item.slug}`
+            : item.slug;
+
           return item.unlinked ? (
             <div
               class={normalize(
-                `${item.slug === page.slug ? "current" : ""} header item`
+                `${itemSlug === pageSlug ? "current" : ""} header item`
               )}
             >
               {item.navigationLabel}
@@ -31,9 +52,9 @@ const html = await processor.process(page.html);
           ) : (
             <a
               class={normalize(
-                `${item.slug === page.slug ? "current" : ""} item`
+                `${itemSlug === pageSlug ? "current" : ""} item`
               )}
-              href={`/docs/${item.slug}/`}
+              href={`/docs/${itemSlug}/`}
             >
               {item.navigationLabel}
             </a>
@@ -42,9 +63,9 @@ const html = await processor.process(page.html);
       }
     </div>
 
-    <div class="story">
+    <div class="story container">
       <div class="meta">
-        <div class="breadcrumb">Breadcrumb</div>
+        <Breadcrumb items={breadcrumbs} />
         <div class="script only search">
           <Input
             type={"search"}
@@ -53,11 +74,13 @@ const html = await processor.process(page.html);
           />
         </div>
       </div>
-      <h1 class="ui header" id={slugify(page.title)}>
-        <div class="title">{page.title}</div>
-        {page.subtitle && <div class="sub title">{page.subtitle}</div>}
-      </h1>
-      <div set:html={html} />
+      <div class="story">
+        <h1 class="ui header" id={slugify(page.title)}>
+          <div class="title">{page.title}</div>
+          {page.subtitle && <div class="sub title">{page.subtitle}</div>}
+        </h1>
+        <div class="content" set:html={html} />
+      </div>
     </div>
   </div>
 </div>
