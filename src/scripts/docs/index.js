@@ -8,9 +8,11 @@ import '../global/index'
 import { getDocs } from './request'
 import { search } from './search'
 
+const key = 'docs__cache'
+
 const onActivate = async () => {
   document.querySelector('.dimmer').classList.toggle('hidden')
-  window.docs = await getDocs()
+  window.docs = await getDocs(key)
 }
 
 const onSearch = async (e) => {
@@ -21,5 +23,3 @@ const onSearch = async (e) => {
 
 document.getElementById('SearchInputSearch').addEventListener('focus', onActivate, { passive: true })
 document.getElementById('ModalSearchInputSearch').addEventListener('input', onSearch, { passive: true })
-
-localStorage.removeItem('docs__cache')

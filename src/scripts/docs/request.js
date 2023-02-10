@@ -1,13 +1,11 @@
 import {
   cache,
-  emptyCache,
   fromCache
-} from './cache'
+} from '../util/cache'
 
-const key = 'docs__cache'
 const SECONDS = 100
 const DAYS = 24 * 60 * 60 * SECONDS
-const expires = 7 * DAYS
+const duration = 7 * DAYS
 
 const request = async () => {
   try {
@@ -30,27 +28,21 @@ const request = async () => {
   return null
 }
 
-const getDocs = async () => {
+const getDocs = async (key) => {
   const cached = await fromCache(key)
 
   if (!cached) {
-    console.log('Cache is empty. Requesting a copy.')
+    console.debug('Cache is empty. Requesting a copy.')
     const docs = await request()
 
-    console.log('Request successful. Caching this response.')
-    await cache(docs, key)
+    console.debug('Request successful. Caching this response.')
+    const expiry = new Date().getTime() + duration
+    await cache(docs, key, expiry)
 
     return docs
   }
 
-  const { on, docs } = cached
-
-  if (on + expires < new Date().getTime()) {
-    await emptyCache(key)
-    console.log('The cache has expired. Reset complete.')
-  }
-
-  return docs
+  return cached
 }
 
 export { getDocs }

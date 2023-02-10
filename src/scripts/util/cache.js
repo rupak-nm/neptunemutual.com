@@ -4,10 +4,10 @@ import {
   set
 } from 'idb-keyval'
 
-const cache = async (docs, key) => {
+const cache = async (data, key, expires) => {
   const value = {
-    on: new Date().getTime(),
-    docs
+    expires,
+    data
   }
 
   await set(key, JSON.stringify(value))
@@ -17,7 +17,14 @@ const fromCache = async (key) => {
   const content = await get(key)
 
   if (content) {
-    return JSON.parse(content)
+    const { data, expires } = JSON.parse(content)
+
+    if (expires < new Date().getTime()) {
+      console.debug('Cache expired')
+      await emptyCache(key)
+    }
+
+    return data
   }
 
   return null
