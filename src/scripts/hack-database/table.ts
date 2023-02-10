@@ -152,11 +152,9 @@ const filterHackData = async (
         (import.meta as any).env.PUBLIC_HACKS_API_ORIGIN + `?limit=20&page=${(page ?? 1).toString()}${currentSortKey.length !== 0 ? '&sort=' + currentSortKey : ''
         }${searchQuery.length > 0
           ? '&' +
-          encodeURIComponent(
-            'where[or][0][techniques][like]=' + searchQuery
-          ) +
+          'where[or][0][techniques][like]=' + searchQuery +
           '&' +
-          encodeURIComponent('where[or][1][name][like]=' + searchQuery)
+          'where[or][1][name][like]=' + searchQuery
           : ''
         }`
       )
