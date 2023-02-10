@@ -1,5 +1,6 @@
 import {
   cache,
+  emptyCache,
   fromCache
 } from './cache'
 
@@ -30,14 +31,14 @@ const request = async () => {
 }
 
 const getDocs = async () => {
-  const cached = fromCache(key)
+  const cached = await fromCache(key)
 
   if (!cached) {
     console.log('Cache is empty. Requesting a copy.')
     const docs = await request()
 
     console.log('Request successful. Caching this response.')
-    cache(docs, key)
+    await cache(docs, key)
 
     return docs
   }
@@ -45,7 +46,7 @@ const getDocs = async () => {
   const { on, docs } = cached
 
   if (on + expires < new Date().getTime()) {
-    localStorage.removeItem(key)
+    await emptyCache(key)
     console.log('The cache has expired. Reset complete.')
   }
 

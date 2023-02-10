@@ -51,5 +51,8 @@
   "volta": {
     "node": "16.13.1",
     "yarn": "1.22.19"
+  },
+  "dependencies": {
+    "idb-keyval": "^6.2.0"
   }
 }

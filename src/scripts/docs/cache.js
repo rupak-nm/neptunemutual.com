@@ -1,15 +1,20 @@
+import {
+  del,
+  get,
+  set
+} from 'idb-keyval'
 
-const cache = (docs, key) => {
+const cache = async (docs, key) => {
   const value = {
     on: new Date().getTime(),
     docs
   }
 
-  localStorage.setItem(key, JSON.stringify(value))
+  await set(key, JSON.stringify(value))
 }
 
-const fromCache = (key) => {
-  const content = localStorage.getItem(key)
+const fromCache = async (key) => {
+  const content = await get(key)
 
   if (content) {
     return JSON.parse(content)
@@ -18,4 +23,8 @@ const fromCache = (key) => {
   return null
 }
 
-export { cache, fromCache }
+const emptyCache = async (key) => {
+  await del(key)
+}
+
+export { cache, emptyCache, fromCache }
