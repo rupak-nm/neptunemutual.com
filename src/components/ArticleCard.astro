@@ -28,7 +28,7 @@ const coverImage = dns.fromCdnUnqualified(post.cover?.filename);
   <div class="image container">
     <img
       src={coverImage}
-      alt={post.cover?.alt.toLowerCase() === post.title.toLowerCase()
+      alt={post.cover?.alt?.toLowerCase() === post.title.toLowerCase()
         ? ""
         : post.cover?.alt}
       loading="lazy"

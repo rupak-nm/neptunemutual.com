@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js'
 import { ethers } from 'ethers'
 import Joi from 'joi'
 
-export const getPlaceholder = (type) => {
+const getPlaceholder = (type) => {
   const _getPlaceholder = (_type) => {
     let _val = ''
     switch (_type) {
@@ -36,7 +36,7 @@ export const getPlaceholder = (type) => {
   return _getPlaceholder(type)
 }
 
-export const getJoiType = (type) => {
+const getJoiType = (type) => {
   const _getType = (_type) => {
     let _joiType = Joi.string()
     switch (_type) {
@@ -99,7 +99,7 @@ export const getJoiType = (type) => {
     : joiType
 }
 
-export const createJoiSchema = inputs => {
+const createJoiSchema = inputs => {
   if (inputs?.length) {
     const _joiSchema = {}
 
@@ -112,7 +112,7 @@ export const createJoiSchema = inputs => {
   }
 }
 
-export const checkInputErrors = (_schema, _inputData) => {
+const checkInputErrors = (_schema, _inputData) => {
   if (_schema && _inputData) {
     const { error: _error } = _schema.validate(_inputData)
     if (_error) return true
@@ -121,11 +121,19 @@ export const checkInputErrors = (_schema, _inputData) => {
   return false
 }
 
-export const isInputError = (_schema, _inputData, _field) => {
+const isInputError = (_schema, _inputData, _field) => {
   if (_schema && _inputData[_field]) {
     const { error: _error } = _schema.validate(_inputData, { abortEarly: false })
 
     if (_error && _error.details.find(d => d.path.includes(_field))) return true
   }
   return false
+}
+
+export {
+  checkInputErrors,
+  createJoiSchema,
+  getJoiType,
+  getPlaceholder,
+  isInputError
 }

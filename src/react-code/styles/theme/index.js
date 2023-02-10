@@ -1,6 +1,6 @@
 import { colors } from '../colors'
 
-export const lightTheme = {
+const lightTheme = {
   name: 'light',
   isLightMode: true,
   colorScheme: 'light',
@@ -10,7 +10,7 @@ export const lightTheme = {
   tertiaryColor: colors.gray['600']
 }
 
-export const darkTheme = {
+const darkTheme = {
   name: 'dark',
   isLightMode: false,
   colorScheme: 'dark',
@@ -19,3 +19,5 @@ export const darkTheme = {
   secondaryColor: colors.gray['25'],
   tertiaryColor: colors.gray['300']
 }
+
+export { darkTheme, lightTheme }
