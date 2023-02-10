@@ -47,7 +47,7 @@
       &.active > span,
       &:focus-visible > span
       {
-        background-color: colors.$gray-50;
+        background-color: colors.$gray-100;
         color: colors.$gray-800;
       }
 

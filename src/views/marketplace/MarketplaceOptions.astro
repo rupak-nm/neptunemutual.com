@@ -8,7 +8,7 @@ const t = (x: string): string => x;
   <div class="inner container">
     {
       networks.map(({ name, src, srcDark, link, text }) => (
-        <a class="network item" href={link} target="_blank">
+        <a class="network item" href={link}>
           <i data-mode="light">
             <Fragment set:html={src || name} />
           </i>

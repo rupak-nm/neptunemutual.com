@@ -78,6 +78,7 @@
     .description {
       margin-top: 4px;
       color: light.$secondary-color;
+      padding-right: 12px;
     
       @include styles.text-sm;
       @include weights.regular;

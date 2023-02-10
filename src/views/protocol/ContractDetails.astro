@@ -5,6 +5,7 @@ import OutlinedButtonList from "../../components/OutlinedButtonList.astro";
 import InputWithIcon from "../../elements/InputWithIcon.astro";
 import Contract from "./Contract.astro";
 import { labels } from "../../data/protocol";
+import Breadcrumb from "../../elements/Breadcrumb.astro";
 
 interface Props {
   network: NetworkConfig;
@@ -22,9 +23,26 @@ const expired =
   type === "cxTokens" ? getKeyValuePairFrom(data[type], "expired") : [];
 
 const convertBytes32 = type === "pods" ? true : false;
+
+const items = [
+  {
+    link: "/",
+    name: "Home",
+  },
+  {
+    link: "/web3-tools/",
+    name: "Web3 Tools",
+  },
+  {
+    link: "#",
+    name: "Protocol Contracts",
+  },
+];
 ---
 
 <div class="contract details container">
+  <Breadcrumb items={items} className="no margin" />
+
   <div class="titles container">
     <h1>{network.title}</h1>
     <a href={network.app} target="_blank">

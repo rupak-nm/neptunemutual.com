@@ -10,6 +10,10 @@ ol.breadcrumb.trail {
   list-style: none;
   padding-left: 0;
 
+  &.no.margin {
+    margin-top: 0;
+  }
+
 
   svg {
     color: colors.$gray-300;
