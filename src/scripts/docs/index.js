@@ -7,6 +7,7 @@ import '../global/index'
 
 import { getDocs } from './request'
 import { search } from './search'
+import mediumZoom from '../utils/image-zoom.min'
 
 const key = 'docs__cache'
 
@@ -23,3 +24,11 @@ const onSearch = async (e) => {
 
 document.getElementById('SearchInputSearch').addEventListener('focus', onActivate, { passive: true })
 document.getElementById('ModalSearchInputSearch').addEventListener('input', onSearch, { passive: true })
+
+{
+  const images = [
+    ...document.querySelectorAll('.story .content img')
+  ]
+
+  mediumZoom(images)
+}

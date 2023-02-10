@@ -14,6 +14,10 @@
     justify-content: space-between;
     padding-bottom: 32px;
 
+    .breadcrumb.trail {
+      margin-top: 0;
+    }
+
     input {
       width: 200px;
       @include styles.text-sm;
@@ -82,13 +86,16 @@
 }
 
 // Content Styles
-.documentation.container .story {
+.documentation.container .story.container {
+  padding-top: 32px;
+  padding-bottom: 64px;
+}
+
+.documentation.container .story.container .story {
   @include weights.regular;
   @include styles.text-md;
   color: colors.$gray-700;
   overflow: hidden;
-  padding-top: 32px;
-  padding-bottom: 64px;
   width: 600px;
 
   strong {
