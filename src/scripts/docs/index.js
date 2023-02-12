@@ -9,6 +9,8 @@ import { getDocs } from './request'
 import { search } from './search'
 import mediumZoom from '../utils/image-zoom.min'
 
+import hljs from 'highlight.js'
+
 const key = 'docs__cache'
 
 const onActivate = async () => {
@@ -32,3 +34,8 @@ document.getElementById('ModalSearchInputSearch').addEventListener('input', onSe
 
   mediumZoom(images)
 }
+
+;(function () {
+  console.log('test')
+  hljs.highlightAll()
+})()

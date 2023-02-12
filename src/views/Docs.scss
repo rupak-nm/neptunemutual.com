@@ -6,6 +6,8 @@
 @use "../design-system/theme/light";
 @use "../design-system/theme/dark";
 
+@import "./Docs-code";
+
 $sidebar-width: 300px;
 
 .documentation.container {
@@ -193,7 +195,7 @@ $sidebar-width: 300px;
 .documentation.container .story.container {
   padding-top: 32px;
   padding-bottom: 64px;
-  width: calc(100% - $sidebar-width - 32px);
+  width: calc(100% - $sidebar-width - 128px);
 
   @media (max-width: 1023px) {
     width: 100%;
@@ -208,6 +210,7 @@ $sidebar-width: 300px;
   overflow: hidden;
 
   pre {
+    font-family: Consolas, Monaco, monospace;
     max-width: 100%;
     overflow: auto;
   }
