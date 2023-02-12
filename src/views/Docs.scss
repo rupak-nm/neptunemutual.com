@@ -165,7 +165,7 @@ $sidebar-width: 300px;
     a {
       padding: 1em;
 
-      @include styles.text-xl;
+      @include styles.text-md;
       @include weights.semibold;
       color: colors.$gray-600!important;
       justify-content: flex-start;
@@ -213,6 +213,50 @@ $sidebar-width: 300px;
     font-family: Consolas, Monaco, monospace;
     max-width: 100%;
     overflow: auto;
+    @include weights.regular;
+    @include styles.text-sm;
+    color: colors.$gray-800;
+    background-color: colors.$gray-25;
+    margin-bottom: 1em;
+
+    &:hover code {
+      border-color: colors.$gray-200; 
+      background-color: colors.$gray-50;
+    }  
+
+
+    code {
+      border: 1px solid colors.$gray-100; 
+      background-color: colors.$gray-25;
+      color: colors.$gray-800;
+      padding: 2em;
+      display: block;
+    }
+
+
+    .hljs {
+      color: colors.$gray-700;
+    }
+
+    .hljs-variable {
+      color: colors.$blue-700;
+    }
+
+    .hljs-string {
+      color: colors.$orange-800;
+    }
+
+    .hljs-keyword, .hljs-built_in {
+      color: colors.$orange-dark-700;
+    }
+
+    .hljs-title {
+      color: colors.$blue-800;
+    }
+    
+    .hljs-comment {
+      color: colors.$gray-400;
+    }
   }
 
   blockquote {
@@ -278,7 +322,8 @@ $sidebar-width: 300px;
   table,
   .ui.error,
   .ui.info {
-    line-height: 1.6 !important;
+    @include styles.text-md;
+    @include weights.regular;  
     margin-top: 0.15em;
     margin-bottom: 1.5em;
   }
@@ -515,9 +560,14 @@ $sidebar-width: 300px;
     h4,
     h5,
     h6 {
-      @include styles.text-md;
+      @include styles.text-lg;
       @include weights.semibold;
       padding-bottom: 1em;
+
+      p {
+        font-size: inherit;
+        font-weight: inherit;
+      }
     }
 
     &::before {
@@ -535,6 +585,55 @@ $sidebar-width: 300px;
 
 
 
+}
+
+.dark .documentation.container .story.container .story {
+  pre {
+    font-family: Consolas, Monaco, monospace;
+    max-width: 100%;
+    overflow: auto;
+    @include weights.regular;
+    @include styles.text-sm;
+    color: colors.$gray-300;
+    background-color: colors.$gray-800;
+
+    &:hover code {
+      background-color: colors.$gray-900;
+    }
+
+    code {
+      border: 1px solid colors.$gray-700; 
+      background-color: colors.$gray-800;
+      color: colors.$gray-300;
+      padding: 2em;
+      display: block;
+    }
+
+    .hljs {
+      color: colors.$gray-300;
+    }
+
+    .hljs-variable {
+      color: colors.$blue-200;
+    }
+
+    .hljs-string {
+      color: colors.$orange-200;
+    }
+
+    .hljs-keyword, .hljs-built_in {
+      color: colors.$orange-dark-400;
+      @include weights.semibold;
+    }
+
+    .hljs-title {
+      color: colors.$blue-dark-100;
+    }
+    
+    .hljs-comment {
+      color: colors.$gray-500;
+    }
+  }
 }
 
 .dimmer {
