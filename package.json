@@ -53,6 +53,7 @@
     "yarn": "1.22.19"
   },
   "dependencies": {
+    "highlight.js": "^11.7.0",
     "idb-keyval": "^6.2.0"
   }
 }
