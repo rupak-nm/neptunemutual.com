@@ -33,6 +33,10 @@
     }
   }
 
+  ol.breadcrumb.trail {
+    margin-top: 0;
+  }
+
   .details.title {
     @include styles.text-xl;
     @include weights.semibold;
