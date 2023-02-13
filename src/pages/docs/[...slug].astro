@@ -16,11 +16,16 @@ interface Props {
 
 export async function getStaticPaths() {
   const enumerable = await api.getEnumerable<Documentation>(Api.Doc, 1000, 0);
+
   const pages = Enumerable.from(enumerable)
     .orderBy((x) => x.order)
     .toArray();
 
-  return pages.map((page) => {
+  const paths = Enumerable.from(pages)
+    .where((x) => !x.unlinked)
+    .toArray();
+
+  return paths.map((page) => {
     const slug = page.parent ? `${page.parent.slug}/${page.slug}` : page.slug;
 
     return {

@@ -5,11 +5,11 @@ import '../global/cookie'
 import '../global/video'
 import '../global/index'
 
+import hljs from 'highlight.js'
+
+import mediumZoom from '../utils/image-zoom.min'
 import { getDocs } from './request'
 import { search } from './search'
-import mediumZoom from '../utils/image-zoom.min'
-
-import hljs from 'highlight.js'
 
 const key = 'docs__cache'
 
@@ -36,6 +36,5 @@ document.getElementById('ModalSearchInputSearch').addEventListener('input', onSe
 }
 
 ;(function () {
-  console.log('test')
   hljs.highlightAll()
 })()
