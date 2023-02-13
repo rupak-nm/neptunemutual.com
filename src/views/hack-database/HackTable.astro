@@ -1,5 +1,5 @@
 ---
-import { getNumericDate } from "../../../util/format";
+import { formatDate } from "../../../util/format";
 import { stripTags } from "../../../util/strip-tags";
 import { chainIconMapping } from "../../data/chain-icon-mapping";
 import Icon from "../../elements/Icon.astro";
@@ -16,7 +16,11 @@ const availableChainIcons = Object.keys(chainIconMapping);
 
 const renderers: Record<string, (hack: Hack) => string> = {
   Name: (hack: Hack) => hack.name,
-  Date: (hack: Hack) => getNumericDate(new Date(hack.date).toUTCString()),
+  Date: (hack: Hack) =>
+    formatDate(new Date(hack.date), "en-GB", {
+      dateStyle: "short",
+      timeZone: "GMT",
+    }),
   "Amount Lost": (hack: Hack) => hack.amountLost,
   Chains: (hack: Hack) =>
     hack.chains

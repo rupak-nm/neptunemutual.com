@@ -1,53 +1,51 @@
 
 import { debounce } from '../../../util/debounce'
-import { getNumericDate } from '../../../util/format'
+import { formatDate } from '../../../util/format'
 import { getPagination } from '../../../util/pagination'
 import { stripTags } from '../../../util/strip-tags'
 import { chainIconMapping } from '../../data/chain-icon-mapping'
 
-let togglers: NodeListOf<Element> | [] = []
-
 const setupTogglers = (): void => {
-  togglers = document.querySelectorAll('td[data-index]')
+  const togglers = document.querySelectorAll('td[data-index]')
   // Add event listeners to fire confetti when a button is clicked.
   togglers.forEach((toggler) => {
     toggler.addEventListener('click', () => {
       toggler.classList.toggle('inverted')
       toggleDescription((toggler as HTMLElement).dataset.index ?? '')
-    })
+    }, { passive: true })
   })
 }
 
 const getTextNodeHeight = (textNode: Node): number => {
-  let height = 0
   const range = document.createRange()
   range.selectNodeContents(textNode)
   const rect = range.getBoundingClientRect()
-  height = rect.bottom - rect.top
-  return height
+  return rect.bottom - rect.top
 }
 
 const toggleDescription = (index: string): void => {
   const descriptionRow = document.querySelector(`tr[data-index="${index}"]`)
   const togglerRow = document.querySelector(`td[data-index="${index}"]`)
 
-  if (descriptionRow?.classList.contains('hidden') ?? false) {
-    const descriptionRows = document.querySelectorAll('tr[data-index]')
-
-    descriptionRows.forEach((row) => {
-      row.classList.add('hidden')
-    })
-
-    togglers.forEach((row) => {
-      row.classList.remove('inverted')
-    })
-
-    togglerRow?.classList.add('inverted')
-    descriptionRow?.classList.remove('hidden')
-  } else {
+  if (!(descriptionRow?.classList.contains('hidden') ?? false)) {
     descriptionRow?.classList.add('hidden')
     return
   }
+
+  const descriptionRows = document.querySelectorAll('tr[data-index]')
+
+  descriptionRows.forEach((row) => {
+    row.classList.add('hidden')
+  })
+
+  const togglers = document.querySelectorAll('td[data-index]')
+
+  togglers.forEach((row) => {
+    row.classList.remove('inverted')
+  })
+
+  togglerRow?.classList.add('inverted')
+  descriptionRow?.classList.remove('hidden')
 
   const descriptionWrapper = descriptionRow?.querySelector(
     '.description.wrapper'
@@ -62,7 +60,7 @@ const availableChainIcons = Object.keys(chainIconMapping)
 
 const renderers: Record<string, (hack: Hack) => string> = {
   Name: (hack: Hack) => hack.name,
-  Date: (hack: Hack) => getNumericDate(new Date(hack.date).toUTCString()),
+  Date: (hack: Hack) => formatDate(new Date(hack.date), 'en-GB', { dateStyle: 'short', timeZone: 'GMT' }),
   'Amount Lost': (hack: Hack) => hack.amountLost,
   Chains: (hack: Hack) => `
   <div class="chain icon group">
@@ -89,49 +87,55 @@ const columns = Object.keys(renderers)
 const isDescription = (col: string): boolean => col === 'Description'
 const isLink = (col: string): boolean => col === 'Link'
 
+const getTableRow = (hack: Hack, index: number): string => `
+  <tr>
+    ${columns
+    .map((column) => {
+      if (isDescription(column)) {
+        return `
+          <td data-index="${index}">
+            <i class="icon chevron down" />
+          </td>`
+      }
+
+      if (isLink(column)) {
+        return `
+          <td>
+            <a href="${renderers[column](hack)}" target="_blank">
+              <i class="icon external link"></i>
+            </a>
+          </td>`
+      }
+
+      return `
+          <td>
+            <span>${renderers[column](hack)}</span>
+          </td>`
+    })
+    .join('\n')}
+  </tr>
+
+  <tr class="description initially hidden" data-index="${index}">
+    <td colspan="${columns.length}">
+      <div class="description wrapper">
+        <div
+          class="description content">
+          ${stripTags(hack.description ?? '')}
+        </div>
+      </div>
+    </td>
+  </tr>
+`
+
 const getTableRows = (hacks: Hack[]): string =>
   hacks
     .map(
-      (hack, index) => `
-              <tr>
-                ${columns
-          .map((column) => {
-            if (isDescription(column)) {
-              return `<td data-index="${index}">
-                  <i class="icon chevron down" />
-                </td>`
-            }
-
-            if (isLink(column)) {
-              return `<td>
-                        <a href="${renderers[column](hack)}" target="_blank">
-                          <i class="icon external link"></i>
-                        </a>
-                      </td>`
-            }
-
-            return `<td>
-                <span>${renderers[column](hack)}</span>
-              </td>`
-          })
-          .join('\n')}
-              </tr>
-              <tr class="description initially hidden" data-index="${index}">
-                <td colspan="${columns.length}">
-                  <div class="description wrapper">
-                    <div
-                      class="description content">
-                      ${stripTags(hack.description ?? '')}
-                    </div>
-                  </div>
-                </td>
-              </tr>
-`
+      getTableRow
     )
     .join('\n')
 
 const filterHackData = async (
-  page?: string | number,
+  page?: number,
   initial: boolean = false
 ): Promise<void> => {
   try {
@@ -140,7 +144,7 @@ const filterHackData = async (
     const tbody = table?.querySelector('tbody')
     const tablePrefixHeader = document.querySelector('.prefix.header')
     const hackCounter = document.querySelector('.hack.counter')
-    page = page != null ? page : (table?.dataset.page)
+    page = page ?? parseInt(table?.dataset?.page ?? '1')
 
     const currentSortKey = table?.dataset.sortKey ?? ''
 
@@ -149,7 +153,10 @@ const filterHackData = async (
     const response = await (
       await fetch(
         // eslint-disable-next-line
-        (import.meta as any).env.PUBLIC_HACKS_API_ORIGIN + `?limit=20&page=${(page ?? 1).toString()}${currentSortKey.length !== 0 ? '&sort=' + currentSortKey : ''
+        (import.meta as any).env.PUBLIC_HACKS_API_ORIGIN +
+        `?limit=20
+        &page=${(page ?? 1).toString()}
+        ${currentSortKey.length !== 0 ? '&sort=' + currentSortKey : ''
         }${searchQuery.length > 0
           ? '&' +
           'where[or][0][techniques][like]=' + searchQuery +
@@ -176,7 +183,7 @@ const filterHackData = async (
       tablePrefixHeader.scrollIntoView({ behavior: 'smooth' })
     }
   } catch (err) {
-    console.log(err)
+    console.error(err)
   }
 }
 
@@ -240,7 +247,7 @@ const setupPagination = (totalPages: number, currentPage: number): void => {
     e.preventDefault()
 
     if (pagination.previous != null) {
-      filterHackData(parseInt(table?.dataset.page ?? '2') - 1).catch(console.log)
+      filterHackData(parseInt(table?.dataset.page ?? '2') - 1).catch(console.error)
     }
   }
 
@@ -248,16 +255,16 @@ const setupPagination = (totalPages: number, currentPage: number): void => {
     e.preventDefault()
 
     if (pagination.next != null) {
-      filterHackData(parseInt(table?.dataset.page ?? '0') + 1).catch(console.log)
+      filterHackData(parseInt(table?.dataset.page ?? '0') + 1).catch(console.error)
     }
   }
 
   if (previousPage != null) {
-    previousPage.addEventListener('click', previousPageEventListener)
+    previousPage.addEventListener('click', previousPageEventListener, { passive: true })
   }
 
   if (nextPage != null) {
-    nextPage.addEventListener('click', nextPageEventListener)
+    nextPage.addEventListener('click', nextPageEventListener, { passive: true })
   }
 
   pages.forEach((page) => {
@@ -268,9 +275,9 @@ const setupPagination = (totalPages: number, currentPage: number): void => {
         !page.classList.contains('next') &&
         !page.classList.contains('previous')
       ) {
-        filterHackData(parseInt(page.textContent ?? '1')).catch(console.log)
+        filterHackData(parseInt(page.textContent ?? '1')).catch(console.error)
       }
-    })
+    }, { passive: true })
   })
 }
 
@@ -282,7 +289,7 @@ const setupDebounce = (): void => {
   const inputDebounce = debounce((searchQuery: string) => {
     if (previousSearchQuery !== searchQuery) {
       previousSearchQuery = searchQuery
-      filterHackData(1).catch(console.log)
+      filterHackData(1).catch(console.error)
     }
   }, 500)
 
@@ -291,7 +298,7 @@ const setupDebounce = (): void => {
     inputDebounce(inputValue)
   }
 
-  input?.addEventListener('keyup', onKeyup)
+  input?.addEventListener('keyup', onKeyup, { passive: true })
 }
 
 const setupSorting = (): void => {
@@ -324,15 +331,15 @@ const setupSorting = (): void => {
         table.dataset.sortKey = newSortKey
       }
 
-      filterHackData(1).catch(console.log)
-    })
+      filterHackData(1).catch(console.error)
+    }, { passive: true })
   })
 };
 
 // self executing function here
 (function () {
   setupTogglers()
-  filterHackData(1, true).catch(console.log)
+  filterHackData(1, true).catch(console.error)
   setupDebounce()
   setupSorting()
 })()

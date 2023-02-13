@@ -38,23 +38,8 @@ const getFormattedDate = (x: string): string => {
     day: '2-digit'
   })
 }
-
-const getNumericDate = (x: string): string => {
-  // Safari doesn't like dashes
-  const normalized = x.replace(/-/g, '/')
-
-  const date = new Date(normalized)
-
-  const yyyy = date.getFullYear()
-  let mm: number | string = date.getMonth() + 1 // Months start at 0!
-  let dd: number | string = date.getDate()
-
-  if (dd < 10) dd = '0' + dd.toString()
-  if (mm < 10) mm = '0' + mm.toString()
-
-  const numericDate = (dd as string) + '/' + (mm as string) + '/' + yyyy.toString()
-
-  return numericDate
+const formatDate = (date: Date, locale: string, options: Intl.DateTimeFormatOptions): string => {
+  return Intl.DateTimeFormat(locale, options).format(date)
 }
 
-export { convertSecondsToWords, convertWordsToMinutes, getFormattedDate, getNumericDate }
+export { convertSecondsToWords, convertWordsToMinutes, getFormattedDate, formatDate }
