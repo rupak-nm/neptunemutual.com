@@ -21,8 +21,7 @@ export const team: TeamMember[] = [
     title: 'Co-Founder',
     links: {
       linkedIn: 'https://www.linkedin.com/in/ryall/',
-      twitter: 'https://twitter.com/edward_ryall',
-      facebook: 'https://www.facebook.com/edward.ryall'
+      twitter: 'https://twitter.com/edward_ryall'
     }
   },
   {
