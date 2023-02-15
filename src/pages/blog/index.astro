@@ -24,7 +24,7 @@ const { totalPages, pages } = paginated;
     }}
   />
   <style slot="header" is:inline set:html={styles}></style>
-  <Blog articles={pages[1]} currentPage={1} totalPages={totalPages} />
+  <Blog articles={pages[1].slice(3)} currentPage={1} totalPages={totalPages} />
 
   <Fragment slot="footer">
     <script src="../../scripts/blog/index.js"></script>
