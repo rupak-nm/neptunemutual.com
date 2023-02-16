@@ -5,6 +5,8 @@ import '../global/cookie'
 import '../global/video'
 import '../global/index'
 
+import './sidebar'
+
 import hljs from 'highlight.js'
 
 import mediumZoom from '../utils/image-zoom.min'

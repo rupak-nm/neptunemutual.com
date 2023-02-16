@@ -194,6 +194,11 @@ $sidebar-width: 300px;
     text-transform: uppercase;
     @include styles.text-md;
     @include weights.semibold;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 }
 
