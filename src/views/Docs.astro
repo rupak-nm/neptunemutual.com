@@ -49,9 +49,17 @@ const breadcrumbs = [
 ].filter(Boolean);
 ---
 
+<div class="docs content menu">
+  <button>
+    <p>Content Menu</p>
+    <Icon variant={"chevron-right"} size={"md"} />
+  </button>
+</div>
+
 <div class="documentation container">
   <div class="full width container">
-    <div class="ui sidebar menu">
+    <div class="initially hidden dimmer sidebar"></div>
+    <div class="ui sidebar menu" data-open="false">
       {
         items.map((item) => {
           const itemSlug = item.parent

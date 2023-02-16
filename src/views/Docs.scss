@@ -166,6 +166,46 @@ $sidebar-width: 300px;
 }
 
 
+.docs.content.menu {
+  display: flex;
+  justify-content: flex-start;
+  border: 1px solid;
+  border-width: 1px 0px;
+  border-color: colors.$gray-200;
+  margin-top: 9px;
+
+  @include utils.full-width-container;
+  padding-top: 16px;
+  padding-bottom: 16px;
+
+  @media (max-width: 767px) {
+    margin-top: 1px;
+  }
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: colors.$gray-500;
+    text-transform: uppercase;
+    @include styles.text-md;
+    @include weights.semibold;
+  }
+}
+
+.dark .docs.content.menu {
+  border-color: colors.$gray-600;
+
+  button {
+    color: colors.$gray-300;
+  }
+}
+
+
 .documentation.container {
   .meta {
     display: flex;
@@ -743,6 +783,14 @@ $sidebar-width: 300px;
     }
   }
 
+  .sidebar.dimmer {
+    z-index: 999;
+
+    @media (min-width: 1024px) {
+      display: none;
+    }
+  }
+
   .ui.sidebar.menu {
     padding-top: 32px;
     padding-bottom: 32px;
@@ -750,6 +798,7 @@ $sidebar-width: 300px;
     display: flex;
     flex-direction: column;
     gap: 8px;
+    background-color: light.$primary-background-color;
     border-right: 1px solid colors.$gray-200;
     height: 100vh;
     position: sticky;
@@ -757,12 +806,23 @@ $sidebar-width: 300px;
     overflow: auto;
 
     @media (max-width: 1023px) {
-      position: unset;
-      width: 100%;
-      height: unset;
-      padding-top: 1em;
-      padding-bottom: 1em;
-      border-right: none;
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      padding: 16px;
+      z-index: 999;
+      max-height: 100vh;
+      overflow-y: auto;
+      width: 316px;
+      transition: transform 300ms ease;
+      
+      &[data-open='false'] {
+        transform: translateX(-100%);
+      }
+      
+      &[data-open='true'] {
+        transform: translateX(0%);
+      }
     }
 
 
@@ -994,6 +1054,8 @@ $sidebar-width: 300px;
 
   .ui.sidebar.menu {
     border-right: 1px solid colors.$gray-700;
+    background-color: dark.$primary-background-color;
+
     .item:not(.header) {
       color: colors.$gray-200;
 
