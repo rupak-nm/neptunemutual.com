@@ -811,22 +811,30 @@ $sidebar-width: 300px;
     overflow: auto;
 
     @media (max-width: 1023px) {
-      position: fixed;
-      top: 0px;
-      left: 0px;
-      padding: 16px;
-      z-index: 999;
-      max-height: 100vh;
-      overflow-y: auto;
-      width: 316px;
-      transition: transform 300ms ease;
-      
-      &[data-open='false'] {
-        transform: translateX(-100%);
+      &:not(&[data-noscript]) {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        padding: 16px;
+        z-index: 999;
+        max-height: 100vh;
+        overflow-y: auto;
+        width: 316px;
+        transition: transform 300ms ease;
+        
+        &[data-open='false'] {
+          transform: translateX(-100%);
+        }
+        
+        &[data-open='true'] {
+          transform: translateX(0%);
+        }
       }
-      
-      &[data-open='true'] {
-        transform: translateX(0%);
+
+      &[data-noscript] {
+        position: relative;
+        height: auto;
+        border: 0;
       }
     }
 

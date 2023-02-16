@@ -49,7 +49,7 @@ const breadcrumbs = [
 ].filter(Boolean);
 ---
 
-<div class="docs content menu">
+<div class="docs content menu script only">
   <button>
     <p>Content Menu</p>
     <Icon variant={"chevron-right"} size={"lg"} />
@@ -59,7 +59,7 @@ const breadcrumbs = [
 <div class="documentation container">
   <div class="full width container">
     <div class="initially hidden dimmer sidebar"></div>
-    <div class="ui sidebar menu" data-open="false">
+    <div class="ui sidebar menu" data-open="false" data-noscript>
       {
         items.map((item) => {
           const itemSlug = item.parent
@@ -133,7 +133,7 @@ const breadcrumbs = [
   </div>
 </div>
 
-<div class="initially hidden dimmer">
+<div class="initially hidden search dimmer">
   <div class="ui search modal">
     <div class="search header input">
       <Icon size={"xl"} variant={"search-lg"} />
