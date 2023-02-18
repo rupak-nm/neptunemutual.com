@@ -5,6 +5,8 @@ import '../global/cookie'
 import '../global/video'
 import '../global/index'
 
+import './sidebar'
+
 import hljs from 'highlight.js'
 
 import mediumZoom from '../utils/image-zoom.min'
@@ -13,9 +15,24 @@ import { search } from './search'
 
 const key = 'docs__cache'
 
+const searchOverlay = document.querySelector('.search.dimmer')
+
 const onActivate = async () => {
-  document.querySelector('.dimmer').classList.toggle('hidden')
+  searchOverlay.classList.toggle('hidden')
   window.docs = await getDocs(key)
+
+  document.getElementById('ModalSearchInputSearch').focus()
+
+  searchOverlay.addEventListener('click', handleClick)
+}
+
+function handleClick (e) {
+  const clickedOutside = !e.target.closest('.ui.search.modal')
+
+  if (clickedOutside) {
+    searchOverlay.classList.add('hidden')
+    searchOverlay.removeEventListener('click', handleClick)
+  }
 }
 
 const onSearch = async (e) => {
