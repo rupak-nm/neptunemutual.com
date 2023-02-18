@@ -273,3 +273,19 @@ interface Hack {
   description?: string
   link: string
 }
+
+interface Documentation extends Content {
+  id: string
+  navigationLabel: string
+  title: string
+  subtitle?: string
+  order: number
+  parent: Documentation
+  slug: string
+  unlinked: boolean
+  html: string
+  _status: string
+  createdAt: Date
+  updatedAt: Date
+  meta: Meta
+}

@@ -1,9 +1,10 @@
 import { parse } from './content-viewer/html'
-import * as tasks from './content-viewer/tasks'
 import * as toc from './content-viewer/toc'
 import { fromCdnUnqualified } from './dns'
 import { convertWordsToMinutes } from './format'
+import * as tasks from './html-processor'
 
+// @obsolete: This function is not required
 const getHtml = (content: Content, props: string[]): string => {
   type ObjectKey = keyof typeof content
 
@@ -22,10 +23,11 @@ const parseContent = async (type: string, htmlProperties: string[], content: Con
   const html: string = getHtml(content, htmlProperties)
 
   let $ = parse(html)
-  const headers = await toc.get($)
 
   $ = await tasks.run($)
   const parsedHtml = $.html()
+
+  const headers = await toc.get($)
 
   const pageUrl = content?.slug === undefined ? '' : `/${type}/${content?.slug}`
   const timeToRead = convertWordsToMinutes($.text().trim())

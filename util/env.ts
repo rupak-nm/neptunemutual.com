@@ -1,7 +1,7 @@
 const env = (key: string, fallback?: string): string => {
   const value: string = process.env[key] as string
 
-  if (value !== null || value !== undefined) {
+  if (value !== undefined) {
     return value
   }
 

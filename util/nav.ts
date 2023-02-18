@@ -22,7 +22,7 @@ const data: LinkNav[] = [
           { title: 'Blog ', href: '/blog/', text: 'Visit our blog', icon: 'edit-03' },
           { title: 'Press Room', href: '/pressroom/', text: 'The source for news about Neptune Mutual', icon: 'annotation-dots' },
           { title: 'Ecosystem', href: '/ecosystem/', text: 'Learn how you can participate in our marketplace', icon: 'database-01' },
-          { title: 'Documentation', href: 'https://docs.neptunemutual.com', text: 'Learn more about decentralized insurance and Neptune Mutual protocol', icon: 'file-code-01', isExternal: true },
+          { title: 'Documentation', href: '/docs/', text: 'Learn more about decentralized insurance and Neptune Mutual protocol', icon: 'file-code-01', isExternal: false },
           { title: 'Web3 Tools', href: '/web3-tools/', text: 'Free and easy to use web3 online tools', icon: 'tool-01' }
         ]
       },
