@@ -4,6 +4,8 @@ import Docs from "../../views/Docs.astro";
 import Seo from "../../components/Seo.astro";
 
 import * as api from "../../../service/api";
+import * as dns from "../../../util/dns";
+
 import styles from "./index.scss?inline";
 import { Api } from "../../../types/enum";
 import Enumerable from "linq";
@@ -14,18 +16,22 @@ const pages = Enumerable.from(enumerable)
   .toArray();
 
 const [page] = pages;
+const ogImageUrl = page.meta.image?.url
+  ? new URL(`cdn/${page.meta.image.url.split("/").pop()}`, dns.getDns())
+      .pathname
+  : "/assets/images/meta/og/home.png";
 ---
 
 <BaseLayout headerStyle={"default"}>
   <Seo
     slot="seo"
-    title="Policies / Neptune Mutual"
-    description="Have a look at our standard terms and conditions, terms of use, risk factors, and other disclaimers."
-    canonical={`docs/${page.slug}/`}
+    title={page.meta.title}
+    description={page.meta.description}
     og={{
-      image: "/assets/images/meta/og/policy.png",
-      imageAlt: "Neptune Mutual Policies",
+      image: ogImageUrl,
+      imageAlt: page.meta.image?.alt,
     }}
+    canonical={`docs/${page.slug}/`}
   />
   <style slot="header" is:inline set:html={styles}></style>
   <Docs items={pages} page={page} />
