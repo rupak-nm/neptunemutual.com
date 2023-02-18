@@ -18,6 +18,7 @@ const search = (searchTerm) => {
 
   for (const result of results) {
     const text = result.text
+    const url = ['/docs', result.parent, result.slug].filter(x => x !== undefined).join('/')
 
     const pos = text.toLowerCase().indexOf(searchTerm.toLowerCase())
     const start = text.substring(0, pos - OFFSET).split(' ').slice(0, -1).join(' ').length
@@ -28,7 +29,7 @@ const search = (searchTerm) => {
       .substring(start, end)
       .replace(pattern, `<span class='match'>${searchTerm}</span>`) + ' ...'
 
-    compose('#', result.title, html)
+    compose(url, result.title, html)
   }
 }
 

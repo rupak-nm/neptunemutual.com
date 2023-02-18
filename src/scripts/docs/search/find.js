@@ -1,27 +1,17 @@
-const dictionary = ['a', 'an', 'the']
-
-const infer = (x) => {
-  for (const item of dictionary) {
-    x = (x || '')
-      .replaceAll(` ${item} `, ' ')
-
-    x = (x || '')
-      .replaceAll(` ${item[0].toUpperCase() + item.slice(1)} `, ' ')
-  }
-
-  return x.trim()
+const coalesce = (x, or) => {
+  return x ?? or
 }
 
 const find = (searchTerm) => {
-  searchTerm = infer(searchTerm)
+  searchTerm = coalesce(searchTerm, '')
 
   const results = window.docs.filter((x) => {
     return (
-      (infer(x.title) || '').toLowerCase().indexOf(searchTerm.toLowerCase()) >
+      coalesce(x.title, '').toLowerCase().indexOf(searchTerm.toLowerCase()) >
         -1 ||
-      (infer(x.subtitle) || '').toLowerCase().indexOf(searchTerm.toLowerCase()) >
+      coalesce(x.subtitle, '').toLowerCase().indexOf(searchTerm.toLowerCase()) >
         -1 ||
-      (infer(x.text) || '').toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
+      coalesce(x.text, '').toLowerCase().indexOf(searchTerm.toLowerCase()) > -1
     )
   })
 

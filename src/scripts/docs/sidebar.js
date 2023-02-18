@@ -3,8 +3,6 @@
   const sidebar = document.querySelector('.documentation .ui.sidebar.menu[data-open]')
   const sidebarOverlay = document.querySelector('.documentation .dimmer.sidebar')
 
-  sidebar.removeAttribute('data-noscript')
-
   const toggleSidebarAndOverlay = (overlayClick = false) => {
     const currentState = sidebar.getAttribute('data-open')
     const newState = currentState === 'false' ? 'true' : 'false'

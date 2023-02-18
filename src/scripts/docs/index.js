@@ -4,7 +4,6 @@ import '../components/nav/hamburger'
 import '../global/cookie'
 import '../global/video'
 import '../global/index'
-
 import './sidebar'
 
 import hljs from 'highlight.js'
