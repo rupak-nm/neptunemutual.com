@@ -108,7 +108,7 @@ const breadcrumbs = [
       <div class="ui more stories">
         {
           previous && (
-            <a href={`/docs/${getSlug(previous)}`} class="previous story">
+            <a href={`/docs/${getSlug(previous)}/`} class="previous story">
               <Icon size={"xl"} variant={"arrow-left"} />
               <div class="content">
                 <div class="title">Previous</div>
@@ -119,7 +119,7 @@ const breadcrumbs = [
         }
         {
           next && (
-            <a href={`/docs/${getSlug(next)}`} class="next story">
+            <a href={`/docs/${getSlug(next)}/`} class="next story">
               <div class="content">
                 <div class="title">Next</div>
                 <div class="sub title">{next.navigationLabel}</div>
