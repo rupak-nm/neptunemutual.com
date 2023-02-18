@@ -17,15 +17,19 @@ interface Props {
     image?: string;
     imageAlt?: string;
   };
+  canonical?: string;
 }
 
-const { title, description, noindex, twitter, og } = Astro.props;
+const { title, description, noindex, twitter, og, canonical } = Astro.props;
+const canonicalUrl = canonical
+  ? dns.qualifyURL(canonical)
+  : dns.getCanonical(Astro);
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
 
-<link rel="canonical" href={dns.getCanonical(Astro)} />
+<link rel="canonical" href={canonicalUrl} />
 <meta property="og:locale" content={og?.locale || "en"} />
 <meta property="og:type" content={og?.type || "website"} />
 <meta property="og:title" content={title} />
