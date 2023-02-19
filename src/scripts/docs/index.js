@@ -23,6 +23,9 @@ const onActivate = async () => {
   document.getElementById('ModalSearchInputSearch').focus()
 
   searchOverlay.addEventListener('click', handleClick)
+
+  // disable page scrolling
+  document.querySelector('html body').classList.add('no', 'vertical', 'scroll')
 }
 
 function handleClick (e) {
@@ -31,6 +34,9 @@ function handleClick (e) {
   if (clickedOutside) {
     searchOverlay.classList.add('hidden')
     searchOverlay.removeEventListener('click', handleClick)
+
+    // enable page scrolling
+    document.querySelector('html body').classList.remove('no', 'vertical', 'scroll')
   }
 }
 
