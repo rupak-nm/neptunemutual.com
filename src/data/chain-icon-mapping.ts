@@ -4,7 +4,8 @@ const chainIconMapping: Record<string, string> = {
   ETH: 'eth chain icon',
   ARB: 'arb chain icon',
   MATIC: 'matic chain icon',
-  NEAR: 'near chain icon'
+  NEAR: 'near chain icon',
+  SOL: 'sol chain icon'
 }
 
 export { chainIconMapping }
