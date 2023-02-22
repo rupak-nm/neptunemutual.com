@@ -19,8 +19,8 @@ const prefix = [null, type, tag?.slug ? "tag" : null, tag?.slug, "page"]
   .join("/");
 
 const { previous, pages, next } = getPagination(totalPages, currentPage);
-const previousHref = previous ? `/${prefix}/${previous}` : undefined;
-const nextHref = next ? `/${prefix}/${next}` : undefined;
+const previousHref = previous ? `/${prefix}/${previous}${tag?.slug ? '#' + tag.slug : '' }` : undefined;
+const nextHref = next ? `/${prefix}/${next}${tag?.slug ? '#' + tag.slug : '' }` : undefined;
 
 const t = (x: string): string => x;
 ---
@@ -49,7 +49,7 @@ const t = (x: string): string => x;
                     : ""
                 }
                 type={"anchor"}
-                href={`/${prefix}/${page}/`}
+                href={`/${prefix}/${page}${tag?.slug ? '#' + tag.slug : '' } `}
                 variant={"link-color"}
               >
                 {page}

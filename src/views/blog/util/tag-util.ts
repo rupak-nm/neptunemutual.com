@@ -13,8 +13,8 @@ const isActive = (Astro: AstroGlobal, filter: Filter): string => {
       return 'on'
     }
   }
-
-  return ['/blog/tag', filter.value, ''].join('/') === pathname ? 'on' : 'off'
+  const splitPaths = pathname.split('/')
+  return splitPaths[3] === filter.value ? 'on' : 'off'
 }
 
 const hrefFromFilter = (Astro: AstroGlobal, prefix: BlogOrPressroom, filter: Filter, defaultValue?: string): string => {
