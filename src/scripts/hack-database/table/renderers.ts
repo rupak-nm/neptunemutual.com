@@ -11,13 +11,13 @@ const renderers: Record<string, (hack: Hack) => string> = {
   Chains: (hack: Hack) => `
   <div class="chain icon group">
     ${hack.chains.length === 0 ? '-' : ''}
-    ${hack.chains.map(c => c.shortName).map((name) =>
-    availableChainIcons.includes(name)
+    ${hack.chains.map((chain) =>
+    availableChainIcons.includes(chain.shortName)
       ? (
-        `<i class="${name.toLowerCase() + ' chain icon'}" title="${name}"></i>`
+        `<i class="${chain.shortName.toLowerCase() + ' chain icon'}" title="${chain.title}"></i>`
       )
       : (
-        `<div class="random chain icon" title="${name}">${name[0]}</div>`
+        `<div class="random chain icon" title="${chain.title}">${chain.shortName[0]}</div>`
       )
   ).join('\n')
     }

@@ -24,13 +24,12 @@ const renderers: Record<string, (hack: Hack) => string> = {
   "Amount Lost": (hack: Hack) => hack.amountLost,
   Chains: (hack: Hack) =>
     hack.chains
-      .map((c) => c.shortName)
-      .map((name) =>
-        availableChainIcons.includes(name)
+      .map((chain) =>
+        availableChainIcons.includes(chain.shortName)
           ? `<i class="${
-              name.toLowerCase() + " chain icon"
-            }" title="${name}"></i>`
-          : `<div class="random chain icon" title="${name}">${name[0]}</div>`
+              chain.shortName.toLowerCase() + " chain icon"
+            }" title="${chain.title}"></i>`
+          : `<div class="random chain icon" title="${chain.title}">${chain.shortName[0]}</div>`
       )
       .join("\n"),
   Technique: (hack: Hack) => hack.techniques,
