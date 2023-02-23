@@ -8,11 +8,6 @@ const isActive = (Astro: AstroGlobal, filter: Filter): string => {
   const { value } = filter
   const { pathname } = Astro.url
 
-  if (value === undefined) {
-    if (pathname === landingPage) {
-      return 'on'
-    }
-  }
   return pathname.split('/')[3] === value ? 'on' : 'off'
 }
 
