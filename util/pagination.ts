@@ -1,4 +1,32 @@
-import Enumerable from 'linq'
+const EDGE_COUNT = 1
+const MIDDLE_COUNT = 5
+
+const getMiddlePages = (currentPage: number, count: number): number[] => {
+  const pages: number[] = [currentPage]
+
+  for (let i = 1; i <= Math.floor(count / 2); i++) {
+    pages.push(currentPage + i)
+    pages.unshift(currentPage - i)
+  }
+
+  return pages
+}
+
+const getPreviousPage = (currentPage: number, totalPages: number): (number | undefined) => {
+  if (currentPage <= 1) return undefined
+
+  if (currentPage > totalPages) return totalPages
+
+  return currentPage - 1
+}
+
+const getNextPage = (currentPage: number, totalPages: number): (number | undefined) => {
+  if (currentPage >= totalPages) return undefined
+
+  if (currentPage < 1) return 1
+
+  return currentPage + 1
+}
 
 const getPagination = (totalPages?: number, currentPage?: number): PaginationResult => {
   if (totalPages === null || totalPages === undefined) {
@@ -24,31 +52,35 @@ const getPagination = (totalPages?: number, currentPage?: number): PaginationRes
    * Don't change the above lines
    */
 
-  if (currentPage > totalPages) {
-    currentPage = totalPages
+  const previous = getPreviousPage(currentPage, totalPages)
+  const next = getNextPage(currentPage, totalPages)
+
+  const allPagesArray = Array(totalPages)
+    .fill(0)
+    .map((_, i) => i + 1)
+
+  if (allPagesArray.length <= (2 * EDGE_COUNT)) {
+    return { previous, pages: allPagesArray, next }
   }
 
-  const start = currentPage - 3 > 3 ? currentPage - 2 : currentPage
-  const end = currentPage + 3 < totalPages ? currentPage + 2 : totalPages
-  const count = end - start + 1
+  const firstSlice = allPagesArray.slice(0, EDGE_COUNT)
+  const lastSlice = allPagesArray.slice(-EDGE_COUNT)
+  const middleSlice = getMiddlePages(currentPage, MIDDLE_COUNT)
 
-  const pages: Array<number | null> = Enumerable.range(start, count).toArray()
+  const set = new Set([...firstSlice, ...middleSlice, ...lastSlice])
+  const uniquePagesArray = Array.from(set).sort((a, b) => a - b)
 
-  if (end < totalPages - 1) {
-    pages.push(...[null, totalPages])
-  }
-
-  if (currentPage - 3 < 5) {
-    const left = Enumerable.range(1, currentPage - 1).toArray()
-    pages.unshift(...left)
-  }
-
-  if (currentPage - 3 >= 5) {
-    pages.unshift(1, null)
-  }
-
-  const previous = currentPage === 1 ? undefined : currentPage - 1
-  const next = currentPage === totalPages ? undefined : currentPage + 1
+  const pages = uniquePagesArray.reduce(
+    (acc: Array<number | null>, curr: number) => {
+      if (allPagesArray.includes(curr)) {
+        const prevItem = acc.at(-1)
+        if (typeof prevItem === 'number' && curr - prevItem > 1) acc.push(null)
+        acc.push(curr)
+      }
+      return acc
+    },
+    []
+  )
 
   return { previous, pages, next }
 }
