@@ -3,7 +3,7 @@ import {
   bytes32ToString,
   numberToBytes32,
   stringToBytes32
-} from '../../../react-code/helpers/web3-tools/index'
+} from './web3-type-transformers'
 
 const transformWeb3Types = (input, from, to, addPadding) => {
   if (input.length === 0) {

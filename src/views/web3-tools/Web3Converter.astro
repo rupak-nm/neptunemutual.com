@@ -81,7 +81,7 @@ const getOptionLink = (option: "string" | "number") => {
           <div class="input container">
             <input
               pattern={from === "Bytes32"
-                ? `^0x[0-9ABCDEFabcde]{${to === "String" ? "64" : "1,"}}$`
+                ? `^0x[0-9A-Fa-f]{${to === "String" ? "64" : "1,"}}$`
                 : from === "String"
                 ? ".{0,31}"
                 : undefined}
