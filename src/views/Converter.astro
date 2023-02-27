@@ -1,16 +1,16 @@
 ---
 import HeaderSection from "../components/HeaderSection.astro";
 import NewsletterSignupForm from "../components/NewsletterSignupForm.astro";
-
-import { Web3Converter } from "../react-code/Web3Converter";
+import Web3Converter from "./web3-tools/Web3Converter.astro";
 
 const t = (x: string): string => x;
+const { shortTitle } = Astro.props;
 ---
 
 <HeaderSection
   color={"basic"}
   alignment={"center"}
-  heading={t("Bytes32 to String Converter Online")}
+  heading={t(shortTitle + " Converter Online")}
 >
   <Fragment slot="supporting-text">
     {
@@ -21,14 +21,7 @@ const t = (x: string): string => x;
   </Fragment>
 </HeaderSection>
 
-<Web3Converter
-  client:only
-  slug={"bytes32-to-string"}
-  crumbs={[
-    { name: "Home", link: "/" },
-    { name: "Web3 Tools", link: "/web3-tools" },
-  ]}
-/>
+<Web3Converter shortTitle={shortTitle} />
 
 <NewsletterSignupForm
   heading="Sign up for our newsletter"

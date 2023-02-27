@@ -119,21 +119,21 @@
   textarea,
   select {
     color: colors.$gray-300;
-    background-color: colors.$gray-800;
+    background-color: colors.$gray-600;
     border: 1px solid colors.$gray-500;
 
 
-    ::placeholder {
+    &::placeholder {
       /* Chrome, Firefox, Opera, Safari 10.1+ */
       color: colors.$gray-300;
     }
 
-    :-ms-input-placeholder {
+    &:-ms-input-placeholder {
       /* Internet Explorer 10-11 */
       color: colors.$gray-300;
     }
 
-    ::-ms-input-placeholder {
+    &::-ms-input-placeholder {
       /* Microsoft Edge */
       color: colors.$gray-300;
     }

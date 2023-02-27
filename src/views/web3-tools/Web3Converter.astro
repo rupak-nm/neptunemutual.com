@@ -1,0 +1,196 @@
+---
+import Breadcrumb from "../../elements/Breadcrumb.astro";
+import Button from "../../elements/buttons/Button.astro";
+import Icon from "../../elements/Icon.astro";
+
+interface Props {
+  shortTitle: string;
+}
+
+const { shortTitle } = Astro.props;
+
+const title = "Convert " + shortTitle.split("Bytes32").join("Solidity Bytes32");
+
+const [from, to] = shortTitle.split(" to ");
+
+const items = [
+  {
+    link: "/",
+    name: "Home",
+  },
+  {
+    link: "/web3-tools",
+    name: "Web3 Tools",
+  },
+  {
+    link: `#`,
+    name: shortTitle,
+  },
+];
+
+const exampleInputs: Record<string, string> = {
+  String: "Example: foobar",
+  Number: "Example: 123.456",
+  Bytes32: "Example: 0x7465737400000000000000000000000000000000000000000000000",
+};
+
+const exampleResults: Record<string, string> = {
+  String: "foobar",
+  Number: "123.456",
+  Bytes32: "0x",
+};
+
+const toBytes32 = to === "Bytes32";
+const currentOption = (toBytes32 ? from : to).toLowerCase();
+
+const switchLink = `/web3-tools/${to.toLowerCase()}-to-${from.toLowerCase()}-converter/`;
+
+const getOptionLink = (option: "string" | "number") => {
+  if (currentOption === option) {
+    return "#";
+  }
+
+  if (toBytes32) {
+    return `/web3-tools/${option}-to-${to.toLowerCase()}-converter/`;
+  } else {
+    return `/web3-tools/${from.toLowerCase()}-to-${option}-converter/`;
+  }
+};
+---
+
+<div class="web3 tools full width container">
+  <div class="left container">
+    <div class="desktop header">
+      <Breadcrumb items={items} />
+      <div class="title container">
+        <h2>{title}</h2>
+        <div class="button container">
+          <a href={switchLink}>
+            <Button>
+              <Icon variant="switch-horizontal-02" />
+              {to} to {from}
+            </Button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <form>
+      <div class="inputs">
+        <div>
+          <label for="input">Enter Your {from} Value</label>
+          <div class="input container">
+            <input
+              pattern={from === "Bytes32"
+                ? `^0x[0-9ABCDEFabcde]{${to === "String" ? "64" : "1,"}}$`
+                : from === "String"
+                ? ".{0,31}"
+                : undefined}
+              title={from === "Bytes32"
+                ? "Please input a valid bytes32 string"
+                : undefined}
+              type="text"
+              id="input"
+              placeholder={exampleInputs[from]}
+              required={false}
+            />
+          </div>
+        </div>
+        <div>
+          <label for="result">Result</label>
+          <div class="input container">
+            <textarea
+              id="result"
+              disabled
+              placeholder={exampleResults[to]}
+              required={false}></textarea>
+
+            <div class="copy button container">
+              <Button disabled>
+                <Icon variant="copy-01" /> Copy Result
+              </Button>
+            </div>
+
+            <div class="copied button container">
+              <Button>
+                <Icon variant="check" /> Copied
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="button container mobile only visible">
+      <a href={switchLink}>
+        <Button>
+          <Icon variant="switch-horizontal-02" /> Bytes32 to String
+        </Button>
+      </a>
+    </div>
+  </div>
+  <div class="right container">
+    <div class="option container">
+      <legend>Options</legend>
+      <div class="sub legend">
+        Convert Values {toBytes32 ? "From" : "To"}
+      </div>
+      <div class="options">
+        <a href={getOptionLink("string")}>
+          <div class="option">
+            <input
+              type="radio"
+              name="option_type"
+              id="string-radio"
+              value="string"
+              checked={currentOption === "string"}
+            />
+            <label for="string-radio">String</label>
+          </div>
+        </a>
+        <a href={getOptionLink("number")}>
+          <div class="option">
+            <input
+              type="radio"
+              name="option_type"
+              id="number-radio"
+              value="number"
+              checked={currentOption === "number"}
+            />
+            <label for="number-radio">Number</label>
+          </div>
+        </a>
+      </div>
+      {
+        from === "String" && toBytes32 && (
+          <button class="padding container">
+            <div>
+              <p class="padding label">Add Padding</p>
+              <p class="padding info">
+                Add trailing zeros to fill up the entire storage space
+              </p>
+            </div>
+            <div class="checkbox container">
+              <input
+                class="checkbox"
+                type="checkbox"
+                id="padding-switch"
+                checked
+              />
+
+              <label for="padding-switch" class="ml-3 align-middle">
+                Add Padding Checkbox
+              </label>
+            </div>
+          </button>
+        )
+      }
+    </div>
+  </div>
+
+  <div class="mobile header">
+    <Breadcrumb items={items} />
+    <h2>{title}</h2>
+  </div>
+</div>
+
+<script></script>
