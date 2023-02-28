@@ -94,6 +94,7 @@ const getOptionLink = (option: "string" | "number") => {
               required={false}
             />
             <button
+              type="button"
               class="help icon"
               data-tooltip={`Enter value in ${from.toLowerCase()} to convert into ${to.toLowerCase()}`}
             >
@@ -124,13 +125,13 @@ const getOptionLink = (option: "string" | "number") => {
               required={false}></textarea>
 
             <div class="copy button container">
-              <Button disabled>
+              <Button type="button" disabled>
                 <Icon variant="copy-01" /> Copy Result
               </Button>
             </div>
 
             <div class="copied button container">
-              <Button>
+              <Button type="button">
                 <Icon variant="check" /> Copied
               </Button>
             </div>
@@ -141,7 +142,7 @@ const getOptionLink = (option: "string" | "number") => {
 
     <div class="button container mobile only visible">
       <a href={switchLink}>
-        <Button>
+        <Button type="button">
           <Icon variant="switch-horizontal-02" /> Bytes32 to String
         </Button>
       </a>
