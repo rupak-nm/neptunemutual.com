@@ -8,13 +8,7 @@ const isActive = (Astro: AstroGlobal, filter: Filter): string => {
   const { value } = filter
   const { pathname } = Astro.url
 
-  if (value === undefined) {
-    if (pathname === landingPage) {
-      return 'on'
-    }
-  }
-
-  return ['/blog/tag', filter.value, ''].join('/') === pathname ? 'on' : 'off'
+  return pathname.split('/')[3] === value ? 'on' : 'off'
 }
 
 const hrefFromFilter = (Astro: AstroGlobal, prefix: BlogOrPressroom, filter: Filter, defaultValue?: string): string => {

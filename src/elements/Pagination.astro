@@ -19,9 +19,11 @@ const prefix = [null, type, tag?.slug ? "tag" : null, tag?.slug, "page"]
   .filter((x) => !!x)
   .join("/");
 
+const postfix = tag?.slug ? "#" + tag.slug : "";
+
 const { previous, pages, next } = getPagination(totalPages, currentPage);
-const previousHref = previous ? `/${prefix}/${previous}` : undefined;
-const nextHref = next ? `/${prefix}/${next}` : undefined;
+const previousHref = previous ? `/${prefix}/${previous}${postfix}` : undefined;
+const nextHref = next ? `/${prefix}/${next}${postfix}` : undefined;
 
 const t = (x: string): string => x;
 ---
@@ -51,7 +53,7 @@ const t = (x: string): string => x;
                     : "page"
                 }
                 type={"anchor"}
-                href={type ? `/${prefix}/${page}/` : "#"}
+                href={`/${prefix}/${page}${postfix}`}
                 variant={"link-color"}
               >
                 {page}
