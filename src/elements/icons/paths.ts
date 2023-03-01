@@ -90,6 +90,7 @@ const paths: Record<string, any> = {
   'link-03': import('./variants/General/link-03.svg?raw'),
   'arrow-circle-right': import('./variants/Arrows/arrow-circle-right.svg?raw'),
   'trash-01': import('./variants/General/trash-01.svg?raw'),
+  'help-cirlce': import('./variants/General/help-circle.svg?raw'),
   minus: import('./variants/General/minus.svg?raw')
 }
 
