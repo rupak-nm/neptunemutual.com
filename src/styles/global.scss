@@ -86,3 +86,7 @@ main {
 button {
   cursor: pointer;
 }
+
+.no.vertical.scroll {
+  overflow-y: hidden;
+}

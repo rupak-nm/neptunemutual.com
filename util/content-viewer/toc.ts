@@ -18,7 +18,7 @@ const get = async ($: CheerioAPI): Promise<TableOfContentEntry[]> => {
     const { tagName } = this
 
     const id = $(this).attr('id')
-    const text = $(this).text().replace(/^(\s)+|(\s)+$/g, '')
+    const [text] = $(this).text().split('#')
 
     for (const tag of tags) {
       const [name, type] = tag

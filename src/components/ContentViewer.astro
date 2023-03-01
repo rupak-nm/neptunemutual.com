@@ -4,11 +4,12 @@ import Tags from "../elements/Tags.astro";
 
 import { slugify } from "../../util/slug";
 import { toTagsWithHref } from "../../util/tag";
+import { BlogOrPressroom } from "../../types/enum";
 
 const t = (x:string):string=>x;
 
 interface Props {
-  type: string
+  type: BlogOrPressroom
   title: string 
   intro: string 
   toc: TableOfContentEntry[]

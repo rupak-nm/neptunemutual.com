@@ -1,4 +1,4 @@
-import mediumZoom from './image-zoom.min'
+import mediumZoom from '../../utils/image-zoom.min'
 
 {
   function click () {

@@ -18,7 +18,10 @@ export async function getStaticPaths() {
       params: { page: num },
       props: {
         currentPage: num,
-        data: paginated.pages[num],
+        data:
+          parseInt(num) === 1
+            ? paginated.pages[num].slice(3)
+            : paginated.pages[num],
         totalPages: paginated.totalPages,
       },
     };

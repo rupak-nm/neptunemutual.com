@@ -121,7 +121,10 @@ const sortableColumns = Object.keys(sortKeys);
                   if (isLink(column)) {
                     return (
                       <td>
-                        <a href={hack.link} target="_blank">
+                        <a
+                          href={hack.link ? hack.link : undefined}
+                          target="_blank"
+                        >
                           <i class="icon external link" />
                         </a>
                       </td>

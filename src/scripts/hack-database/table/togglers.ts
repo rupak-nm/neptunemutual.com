@@ -3,15 +3,20 @@ const setupTogglers = (): void => {
   // Add event listeners to fire confetti when a button is clicked.
   togglers.forEach((toggler) => {
     toggler.addEventListener('click', () => {
-      toggler.classList.toggle('inverted')
-      toggleDescription((toggler as HTMLElement).dataset.index ?? '')
+      toggleDescription((toggler as HTMLElement).dataset.index ?? '', toggler)
     }, { passive: true })
   })
 }
 
-const toggleDescription = (index: string): void => {
+const toggleDescription = (index: string, toggler: Element): void => {
   const descriptionRow = document.querySelector(`tr[data-index="${index}"]`)
   const togglerRow = document.querySelector(`td[data-index="${index}"]`)
+
+  if ((descriptionRow?.textContent?.trim() ?? '').length === 0) {
+    return
+  }
+
+  toggler.classList.toggle('inverted')
 
   if (!(descriptionRow?.classList.contains('hidden') ?? false)) {
     descriptionRow?.classList.add('hidden')

@@ -35,16 +35,19 @@ const isLink = (col: string): boolean => col === 'Link'
 
 const getTableCell = (column: string, index: number, hack: Hack): string => {
   if (isDescription(column)) {
+    const description = renderers[column](hack)
+
     return `
     <td data-index="${index}">
-      <i class="icon chevron down" />
+      <i class="icon chevron down${description.length > 0 ? '' : ' disabled'}" />
     </td>`
   }
 
   if (isLink(column)) {
+    const link = renderers[column](hack)
     return `
     <td>
-      <a href="${renderers[column](hack)}" target="_blank">
+      <a ${link.length > 0 ? `href="${link}"` : 'class="disabled"'} target = "_blank" >
         <i class="icon external link"></i>
       </a>
     </td>`
