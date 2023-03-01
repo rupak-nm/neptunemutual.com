@@ -1,0 +1,159 @@
+---
+import { formatDate } from "../../../util/format";
+import { stripTags } from "../../../util/strip-tags";
+import { chainIconMapping } from "../../data/chain-icon-mapping";
+import Icon from "../../elements/Icon.astro";
+import InputWithIcon from "../../elements/InputWithIcon.astro";
+import Pagination from "../../elements/Pagination.astro";
+
+interface Props {
+  hacks: Hack[];
+}
+
+const { hacks } = Astro.props;
+
+const availableChainIcons = Object.keys(chainIconMapping);
+
+const renderers: Record<string, (hack: Hack) => string> = {
+  Name: (hack: Hack) => hack.name,
+  Date: (hack: Hack) =>
+    formatDate(new Date(hack.date), "en-GB", {
+      dateStyle: "short",
+      timeZone: "GMT",
+    }),
+  "Amount Lost": (hack: Hack) => hack.amountLost,
+  Chains: (hack: Hack) =>
+    hack.chains
+      .map((chain) =>
+        availableChainIcons.includes(chain.shortName)
+          ? `<i class="${
+              chain.shortName.toLowerCase() + " chain icon"
+            }" title="${chain.title}"></i>`
+          : `<div class="random chain icon" title="${chain.title}">${chain.shortName[0]}</div>`
+      )
+      .join("\n"),
+  Technique: (hack: Hack) => hack.techniques,
+  Description: (hack: Hack) => hack.description ?? "",
+  Link: (hack: Hack) => hack.link,
+};
+
+const columns = Object.keys(renderers);
+
+const isDescription = (col: string) => col === "Description";
+const isLink = (col: string) => col === "Link";
+
+const sortKeys: Record<string, string> = {
+  Name: "name",
+  Date: "date",
+};
+
+const initialSortKey = "-date";
+
+const sortableColumns = Object.keys(sortKeys);
+---
+
+<div class="hack table container">
+  <div class="table wrapper">
+    <div class="table prefix">
+      <div class="prefix container">
+        <div>
+          <div class="prefix header">DeFi Hack Database</div>
+          <p class="prefix subtitle">
+            Total Events
+            <span class="hack counter">
+              {hacks.length}
+            </span>
+          </p>
+        </div>
+        <div class="script only">
+          <InputWithIcon
+            className="hack search input"
+            iconProps={{
+              variant: "search-lg",
+              size: "lg",
+            }}
+            placeholder="Search"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+    <table data-page="1" data-sort-key={initialSortKey}>
+      <thead>
+        <tr>
+          {
+            columns.map((column) => {
+              return (
+                <th>
+                  {sortableColumns.includes(column) ? (
+                    <button
+                      data-sorting-key={sortKeys[column]}
+                      class={
+                        initialSortKey.includes(sortKeys[column]) ? "desc" : ""
+                      }
+                    >
+                      <span>{column}</span>
+                      <Icon variant="arrow-down" />
+                    </button>
+                  ) : (
+                    <span>{column}</span>
+                  )}
+                </th>
+              );
+            })
+          }
+        </tr>
+      </thead>
+      <tbody>
+        {
+          hacks.map((hack, index) => (
+            <>
+              <tr>
+                {columns.map((column) => {
+                  if (isDescription(column)) {
+                    return (
+                      <td data-index={index}>
+                        <i class="icon chevron down" />
+                      </td>
+                    );
+                  }
+
+                  if (isLink(column)) {
+                    return (
+                      <td>
+                        <a
+                          href={hack.link ? hack.link : undefined}
+                          target="_blank"
+                        >
+                          <i class="icon external link" />
+                        </a>
+                      </td>
+                    );
+                  }
+
+                  return (
+                    <td>
+                      <span set:html={renderers[column](hack)} />
+                    </td>
+                  );
+                })}
+              </tr>
+              <tr class="description initially hidden" data-index={index}>
+                <td colspan={columns.length}>
+                  <div class="description wrapper">
+                    <div class="description content">
+                      {stripTags(hack.description ?? "")}
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </>
+          ))
+        }
+      </tbody>
+    </table>
+    <div class="table footer">
+      <Pagination className="no padding" currentPage={1} totalPages={1} />
+    </div>
+  </div>
+</div>
