@@ -1,9 +1,9 @@
 // Container
 const container = document.querySelector('.ui.roadmap.container')
+const timelineContainer = container.querySelector('.ui.checked.timeline.list')
+const storiesContainer = container.querySelector('.ui.story.timeline.list')
 // Timeline items
-const allTimelineItems = container.querySelectorAll(
-  '.ui.checked.timeline.list .item[data-slide-index]'
-)
+const allTimelineItems = timelineContainer.querySelectorAll('.item[data-slide-index]')
 // prev button
 const prevBtn = container.querySelector('button#PreviousRoadmapButton')
 // next button
@@ -18,18 +18,16 @@ const scrollToCenter = (el) => {
 }
 
 const selectStorySlide = (idx) => {
-  const matchedStoryItem = container.querySelector(
-    `.story.list .item[data-slide-index="${idx}"]`
-  )
+  const matchedStoryItem = storiesContainer.querySelector(`.item[data-slide-index="${idx}"]`)
 
   if (!matchedStoryItem) {
     throw Error('Invalid selection')
   }
 
   // Set data-selected to false for all others
-  container
-    .querySelectorAll('.story.list .item[data-selected="true"]')
-    .forEach(function (el) {
+  storiesContainer
+    .querySelectorAll('.item[data-selected="true"]')
+    .forEach((el) => {
       el.setAttribute('data-selected', 'false')
     })
 
@@ -41,18 +39,16 @@ const selectStorySlide = (idx) => {
 }
 
 const selectTimelineSlide = (idx) => {
-  const matchedTimelineItem = container.querySelector(
-    `.timeline.list .item[data-slide-index="${idx}"]`
-  )
+  const matchedTimelineItem = timelineContainer.querySelector(`.item[data-slide-index="${idx}"]`)
 
   if (!matchedTimelineItem) {
     throw Error('Invalid selection')
   }
 
   // Set data-selected to false for all others
-  container
-    .querySelectorAll('.timeline.list .item[data-selected="true"]')
-    .forEach(function (el) {
+  timelineContainer
+    .querySelectorAll('.item[data-selected="true"]')
+    .forEach((el) => {
       el.setAttribute('data-selected', 'false')
     })
 
@@ -85,14 +81,12 @@ const selectSlide = (idx) => {
 container.classList.add('js-enabled')
 
 // After load, scroll to correct timeline slide and story slide
-const currentTimelineSlide = container.querySelector(
-  '.timeline.list .item.current'
-)
+const currentTimelineSlide = timelineContainer.querySelector('.item.current')
 
 selectSlide(currentTimelineSlide.getAttribute('data-slide-index'))
 
 // Add event listeners to all items
-allTimelineItems.forEach(function (el) {
+allTimelineItems.forEach((el) => {
   el.addEventListener('click', function (ev) {
     if (!ev.target) return
 
@@ -103,19 +97,54 @@ allTimelineItems.forEach(function (el) {
 })
 
 // Add event listeners to buttons
-prevBtn.addEventListener('click', function () {
-  const selectedEl = container.querySelector(
-    '.timeline.list .item[data-selected="true"]'
-  )
+prevBtn.addEventListener('click', () => {
+  const selectedEl = timelineContainer.querySelector('.item[data-selected="true"]')
 
   const clickedIndex = selectedEl.getAttribute('data-slide-index')
   selectSlide(parseInt(clickedIndex) - 1)
 })
-nextBtn.addEventListener('click', function () {
-  const selectedEl = container.querySelector(
-    '.timeline.list .item[data-selected="true"]'
-  )
+
+nextBtn.addEventListener('click', () => {
+  const selectedEl = timelineContainer.querySelector('.item[data-selected="true"]')
 
   const clickedIndex = selectedEl.getAttribute('data-slide-index')
   selectSlide(parseInt(clickedIndex) + 1)
 })
+
+window.addEventListener('resize', () => {
+  const selectedEl = timelineContainer.querySelector('.item[data-selected="true"]')
+  const clickedIndex = selectedEl.getAttribute('data-slide-index')
+  selectSlide(parseInt(clickedIndex))
+})
+
+// handling drag/swipe event for mobile devices
+const state = {
+  touchstartX: 0,
+  touchendX: 0
+}
+const MIN_THRESHOLD = 60
+
+storiesContainer.addEventListener('touchstart', (e) => {
+  state.touchstartX = e.changedTouches[0].screenX
+}, { passive: true })
+
+storiesContainer.addEventListener('touchend', (e) => {
+  state.touchendX = e.changedTouches[0].screenX
+
+  const selectedEl = timelineContainer.querySelector('.item[data-selected="true"]')
+  const currentIndex = parseInt(selectedEl.getAttribute('data-slide-index'))
+  const itemCount = allTimelineItems.length
+  const isLastIndex = currentIndex === (itemCount - 1)
+  const isFirstIndex = currentIndex === 0
+
+  if (((state.touchendX + MIN_THRESHOLD) < state.touchstartX) && !isLastIndex) {
+    selectSlide(currentIndex + 1)
+  }
+
+  if ((state.touchendX > (state.touchstartX + MIN_THRESHOLD)) && !isFirstIndex) {
+    selectSlide(currentIndex - 1)
+  }
+
+  state.touchstartX = 0
+  state.touchendX = 0
+}, { passive: true })

@@ -1,0 +1,114 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+
+
+.marketplace.options.container {
+  @include utils.full-width-container;
+  margin-bottom: 96px;
+
+  .inner.container {
+    padding: 96px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    
+    @media (max-width: 767px) {
+      gap: 16px;
+      flex-direction: column;
+    }
+
+    .network.item {
+      border-radius: 12px;
+      padding: 48px 16px;
+      
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+
+      &:hover, &:focus-visible {
+        background-color: colors.$gray-100;
+      }
+
+      svg {
+        width: 112px;
+        height: 112px;
+      }
+
+      @media (max-width: 767px) {
+        padding: 16px 8px;
+
+        svg {
+          width: 80px;
+          height: 80px;
+        }
+      }
+
+      i[data-mode="light"] {
+        display: block;
+      }
+
+      i[data-mode="dark"] {
+        display: none;
+      }
+
+      .text.container {
+        text-align: center;
+        padding: 0 14px;
+
+        p.name {
+          @include styles.display-xs;
+          @include weights.semibold;
+          color: colors.$black;
+          
+          @media (max-width: 767px) {
+            @include styles.text-lg;
+          }
+        }
+        
+        p.text {
+          @include styles.text-sm;
+          @include weights.regular;
+          color: colors.$gray-900;
+          margin-top: 4px;
+        }
+      }
+    }
+  }
+}
+
+.dark .marketplace.options.container {
+
+  .inner.container {
+    .network.item {
+      &:hover, &:focus-visible {
+        background-color: colors.$gray-700;
+      }
+
+      i[data-mode="light"] {
+        display: none;
+      }
+
+      i[data-mode="dark"] {
+        display: block;
+      }
+
+      .text.container {
+        p.name {
+          color: colors.$white;
+        }
+        
+        p.text {
+          color: colors.$gray-25;
+        }
+      }
+    }
+  }
+
+}

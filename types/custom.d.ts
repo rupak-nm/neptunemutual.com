@@ -1,12 +1,4 @@
-declare module '*.svg' {
-  const content: SVGElement
-  export default content
-}
-
-declare module '*.svg?raw' {
-  const content: SVGElement
-  export default content
-}
+type ApiResource = [string, string, boolean?]
 
 interface FileDownloadArgs {
   remote: string
@@ -30,6 +22,7 @@ interface NavLinkList {
     text: string
     isExternal: boolean
     badge?: string
+    badgeColor?: 'success' | 'info'
   }>
 }
 
@@ -114,7 +107,7 @@ interface ConversionField {
   value: string
 }
 
-type ConversionUnits = 'kWei' | 'mWei' | 'gWei' | 'szabo' | 'finney' | 'ether' | 'kEther' | 'mEther' | 'gEther' | 'tEther'
+type EthereumUnit = 'kWei' | 'mWei' | 'gWei' | 'szabo' | 'finney' | 'ether' | 'kEther' | 'mEther' | 'gEther' | 'tEther'
 
 interface CatchAllRedirectPageProps {
   redirect: true
@@ -152,10 +145,94 @@ interface TeamMember {
   }
 }
 
-interface HomepageFeatureItem {
-  id: number
+interface FeatureItem {
   icon: string
-  image: SVGElement
   title: string
   text: string
+  href?: string
+  badge?: string
+  isExternal?: boolean
+}
+
+interface HomepageFeatureItem extends FeatureItem {
+  id: number
+  image: SVGElement
+}
+
+interface SitemapEnumerable {
+  type: string
+  prefix: string
+  enumerable: WithSlug[]
+}
+
+interface SitemapItem {
+  loc: string
+  changefreq?: 'daily' | 'weekly' | 'monthly'
+}
+
+interface SitemapUrl {
+  url: SitemapItem
+}
+
+interface Sitemap {
+  urlset: SitemapUrl[]
+}
+
+type WrappedPromise = (() => Promise<void>)
+type TaskWithDefinition = [string, ...WrappedPromise[]]
+
+interface TabItem {
+  text: string
+  href: string
+  active?: boolean
+  icon?: any
+  id?: string
+}
+
+type ProtocolContractType = 'contracts' | 'cxTokens' | 'pods'
+
+interface NetworkConfig {
+  id: number
+  title: string
+  app: string
+  explorer: string
+}
+
+interface NavSection {
+  type: 'section' | 'videos-section'
+  title: string
+  links?: FeatureItem[]
+  more?: {
+    title: string
+    href: string
+  }
+}
+
+interface LinkNav {
+  title: string
+  href?: string
+  children?: NavSection[]
+}
+
+interface Web3ToolItem {
+  slug?: string
+  path?: string
+  title: string
+  intro: string
+  category: string
+  icon: string
+  badges: Array<{
+    color: string
+    icon: string
+    text: string
+  }>
+}
+
+interface TableRenderConfig<T> {
+  label: string
+  render: (item: T) => string
+  sortable?: boolean
+  searchable?: boolean
+  isDescription?: boolean
+  isLink?: boolean
 }

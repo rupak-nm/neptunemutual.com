@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 
-export const isJSON = (string) => {
+const isJSON = (string) => {
   try {
     JSON.parse(string)
     return true
@@ -9,7 +9,7 @@ export const isJSON = (string) => {
   }
 }
 
-export const isArray = (string) => {
+const isArray = (string) => {
   try {
     const res = JSON.parse(string)
     return Array.isArray(res)
@@ -18,7 +18,7 @@ export const isArray = (string) => {
   }
 }
 
-export const isValidAbi = (string) => {
+const isValidAbi = (string) => {
   try {
     const res = JSON.parse(string)
     if (Array.isArray(res)) {
@@ -28,3 +28,5 @@ export const isValidAbi = (string) => {
   } catch {}
   return false
 }
+
+export { isArray, isJSON, isValidAbi }

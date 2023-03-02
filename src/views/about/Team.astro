@@ -31,15 +31,17 @@ const t = (x: string): string => x;
       }
     </p>
   </div>
-  <Slider gap={16}>
-    <div class="team member list container">
-      <div class="ui team member list">
-        {
-          team.map((member) => {
-            return <Member className="with slider" member={member} />;
-          })
-        }
+  <div class="team members center">
+    <Slider gap={8}>
+      <div class="team member list container">
+        <div class="ui team member list">
+          {
+            team.map((member) => {
+              return <Member className="with slider" member={member} />;
+            })
+          }
+        </div>
       </div>
-    </div>
-  </Slider>
+    </Slider>
+  </div>
 </div>

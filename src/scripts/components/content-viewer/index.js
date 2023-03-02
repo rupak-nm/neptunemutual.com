@@ -1,3 +1,5 @@
+import mediumZoom from '../../utils/image-zoom.min'
+
 {
   function click () {
     document.querySelectorAll('.table.of.contents.container a.active.item').forEach(x => x.classList.remove('active'))
@@ -55,4 +57,12 @@
       }, 1000)
     })
   }
+}
+
+{
+  const images = [
+    ...document.querySelectorAll('.content.viewer img')
+  ]
+
+  mediumZoom(images)
 }

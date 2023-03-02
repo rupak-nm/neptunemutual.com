@@ -1,60 +1,63 @@
 ---
 import Button from "../../elements/buttons/Button.astro";
 import PressroomAnnouncement from "./hero/PressroomAnnouncement.astro";
+import LaunchApp from "../homepage/launch-app/popup.astro";
 
 const t = (x: string): string => x;
+
+import * as logo from "../../data/structured/logo";
+const jsonld = JSON.stringify(logo.enhancement);
 ---
 
 <div class="hero container">
-    <div class="text and cta">
-        <PressroomAnnouncement />
+  <div class="text and cta">
+    <PressroomAnnouncement />
 
-        <h1 id="neptune-mutual-decentralized-insurance-protocol">
-            {t("Neptune Mutual Decentralized Insurance Protocol")}
-        </h1>
-        <p class="sub title">
-            {
-                t(
-                    "Neptune Mutual is the first parametric insurance protocol for Ethereum. Launch the app, choose an insurance pool, and enter your coverage amount."
-                )
-            }
-        </p>
-        <p class="sub title">
-            {
-                t(
-                    "After incident resolution, instantly get payouts in stablecoin. No need to provide personal info, loss proof, or wait."
-                )
-            }
-        </p>
-        <div class="button container">
-            <Button
-                type={"anchor"}
-                href="https://app.neptunemutual.net"
-                rel="noopener"
-                target={"_blank"}
-                size={"2xl"}
-                iconVariant="arrow-narrow-right"
-                variant={"primary"}
-            >
-                {t("Launch App")}
-            </Button>
-        </div>
+    <h1 id="neptune-mutual-decentralized-insurance-protocol">
+      Decentralized Insurance Protocol for Ethereum
+    </h1>
+    <p class="sub title">
+      Neptune Mutual is the first parametric insurance protocol created for
+      Ethereum. Unlike other protocols, it makes no difference if one user or
+      one million users are filing claims at the same time; we are already
+      scalable.
+    </p>
+    <p class="sub title">
+      Launch the app, choose an insurance pool, and enter your coverage amount.
+      Following successful incident resolution, <strong
+        >collect stablecoin payouts immediately</strong
+      >. No need to provide personally identifiable information, loss evidence,
+      or wait for a verdict. No need to spend valuable gas evaluating on each
+      claim. No discrimination--everyone is treated equally.
+    </p>
+    <div class="button container">
+      <LaunchApp />
+      <Button
+        href="#"
+        classname={"launch app"}
+        rel="noopener"
+        target={"_blank"}
+        id={"toggle-launch-app"}
+        size={"2xl"}
+        iconVariant="arrow-narrow-right"
+        variant={"primary"}
+      >
+        {t("Launch App")}
+      </Button>
     </div>
+  </div>
 
-    <div class="image container">
-        <img
-            src="/assets/images/hero/home-cover.webp"
-            alt="A portrait of the god Neptune holding a trident."
-            loading="eager"
-        />
-    </div>
+  <div class="image container">
+    <img
+      src="/assets/images/hero/home-cover.webp"
+      alt="A portrait of the god Neptune holding a trident."
+      loading="eager"
+    />
+  </div>
 </div>
 
-<script nonce="rB42p7Q3aSWYNZnxB12Ztw==" type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "url": "https://neptunemutual.com",
-    "logo": "https://neptunemutual.com/assets/images/logos/neptune-mutual.svg"
-  }
-</script>
+<script
+  nonce="rB42p7Q3aSWYNZnxB12Ztw=="
+  type="application/ld+json"
+  set:html={jsonld}
+></script>

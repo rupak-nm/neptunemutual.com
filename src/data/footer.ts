@@ -1,4 +1,5 @@
 import * as api from '../../service/api'
+import { Api } from '../../types/enum'
 
 const socials: FooterData['socials'] = [
   {
@@ -46,26 +47,25 @@ const socials: FooterData['socials'] = [
 ]
 
 const getFooterData = async (): Promise<FooterData> => {
-  const pages = await api.getEnumerable<Page>('pages', 10, 0)
+  const policies = await api.getEnumerable<Page>(Api.Policy, 10, 0)
 
   const lists: NavLinkList[] = [
     {
       title: 'Resources',
       links: [
         {
-          href: 'https://app.neptunemutual.net',
+          href: '/marketplace',
           text: 'Marketplace',
-          isExternal: true
+          isExternal: false,
+          badge: 'New!',
+          badgeColor: 'success'
         },
         { href: '/blog/', text: 'Blog', isExternal: false },
         { href: '/pressroom/', text: 'Press Room', isExternal: false },
         { href: '/ecosystem/', text: 'Ecosystem', isExternal: false },
-        {
-          href: 'https://docs.neptunemutual.com',
-          text: 'Documentation',
-          isExternal: true
-        },
-        { href: '/web3-tools/', text: 'Web3 Tools', isExternal: false }
+        { href: '/docs/', text: 'Documentation', isExternal: false },
+        { href: '/web3-tools/', text: 'Web3 Tools', isExternal: false },
+        { href: '/hack-database/', text: 'Blockchain Hack Database', isExternal: false }
       ]
     },
     {
@@ -89,7 +89,7 @@ const getFooterData = async (): Promise<FooterData> => {
     },
     {
       title: 'Policies',
-      links: pages.sort((a, b) => a.sort - b.sort).map((page) => {
+      links: policies.sort((a, b) => a.sort - b.sort).map((page) => {
         return {
           href: `/policies/${page.slug}/`,
           text: page.title,

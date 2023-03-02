@@ -1,5 +1,6 @@
-export const paths: Record<string, any> = {
+const paths: Record<string, any> = {
   'arrow-left': import('./variants/Arrows/arrow-left.svg?raw'),
+  'arrow-down': import('./variants/Arrows/arrow-down.svg?raw'),
   'arrow-right': import('./variants/Arrows/arrow-right.svg?raw'),
   'arrow-narrow-left': import('./variants/Arrows/arrow-narrow-left.svg?raw'),
   'arrow-narrow-right': import('./variants/Arrows/arrow-narrow-right.svg?raw'),
@@ -53,6 +54,8 @@ export const paths: Record<string, any> = {
   avalanche: import('./custom/Brands/default/SvgAvalanche.svg?raw'),
   bnbchain: import('./custom/Brands/default/SvgBNBChain.svg?raw'),
   polygon: import('./custom/Brands/default/SvgPolygon.svg?raw'),
+  'ethereum-round': import('./custom/Brands/default/SvgEthereumRound.svg?raw'),
+  'arbitrum-round': import('./custom/Brands/default/SvgArbitrumRound.svg?raw'),
   'globe-01': import('./variants/MapsAndTravel/globe-01.svg?raw'),
   'sun-filled': import('./custom/sun-filled.svg?raw'),
   'moon-star-filled': import('./custom/moon-star-filled.svg?raw'),
@@ -84,5 +87,13 @@ export const paths: Record<string, any> = {
   'gnosis-wallet-dark': import('./custom/Brands/dark/SvgGnosisWalletDark.svg?raw'),
   'wallet-connect-dark': import('./custom/Brands/dark/SvgWalletConnectDark.svg?raw'),
   'search-md': import('./variants/General/search-md.svg?raw'),
-  'check-circle': import('./variants/General/check-circle.svg?raw')
+  'check-circle': import('./variants/General/check-circle.svg?raw'),
+  'search-lg': import('./variants/General/search-lg.svg?raw'),
+  'link-03': import('./variants/General/link-03.svg?raw'),
+  'arrow-circle-right': import('./variants/Arrows/arrow-circle-right.svg?raw'),
+  'trash-01': import('./variants/General/trash-01.svg?raw'),
+  table: import('./variants/Layout/table.svg?raw'),
+  minus: import('./variants/General/minus.svg?raw')
 }
+
+export { paths }

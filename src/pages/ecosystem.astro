@@ -5,8 +5,9 @@ import Seo from "../components/Seo.astro";
 
 import * as api from "../../service/api";
 import styles from "./ecosystem.scss?inline";
+import { Api } from "../../types/enum";
 
-const items = await api.getEnumerable<Ecosystem>("ecosystems", 1000, 0);
+const items = await api.getEnumerable<Ecosystem>(Api.Ecosystem, 1000, 0);
 ---
 
 <BaseLayout headerStyle={"default"}>

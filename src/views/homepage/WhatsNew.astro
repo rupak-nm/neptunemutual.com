@@ -4,8 +4,9 @@ import Button from "../../elements/buttons/Button.astro";
 import Slider from "../../components/Slider.astro";
 
 import * as api from "../../../service/api";
+import { Api } from "../../../types/enum";
 
-const posts = await api.getEnumerable<Article>("blog", 5, 0);
+const posts = await api.getEnumerable<Article>(Api.Blog, 5, 0);
 const t = (x: string): string => x;
 ---
 
@@ -30,7 +31,11 @@ const t = (x: string): string => x;
           {
             posts.map((post) => {
               return (
-                <ArticleCard className="with slider" type="blog" post={post} />
+                <ArticleCard
+                  className="with slider"
+                  type={Api.Blog}
+                  post={post}
+                />
               );
             })
           }

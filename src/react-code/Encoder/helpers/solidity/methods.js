@@ -5,9 +5,9 @@ BigNumber.config({
   DECIMAL_PLACES: 80
 })
 
-export const GAS_MARGIN_MULTIPLIER = 1.5
+const GAS_MARGIN_MULTIPLIER = 1.5
 
-export const getErrorMessage = (_error) => {
+const getErrorMessage = (_error) => {
   try {
     const error = _error.error || _error
     if (!error || !error.message) {
@@ -30,14 +30,14 @@ export const getErrorMessage = (_error) => {
   }
 }
 
-export const calculateGasMargin = (value) => {
+const calculateGasMargin = (value) => {
   return new BigNumber(value.toString())
     .multipliedBy(GAS_MARGIN_MULTIPLIER)
     .decimalPlaces(0)
     .toString()
 }
 
-export const encodeData = (encodeInterface, methodName, methodArgs = [], onError = () => {}) => {
+const encodeData = (encodeInterface, methodName, methodArgs = [], onError = () => {}) => {
   if (!encodeInterface || !methodName) return
 
   try {
@@ -49,11 +49,19 @@ export const encodeData = (encodeInterface, methodName, methodArgs = [], onError
   }
 }
 
-export const getFunctionSignature = (_function) => {
+const getFunctionSignature = (_function) => {
   const _isTuple = _function.inputs[0]?.type === 'tuple'
   const inputs = _function?.inputs?.[0]?.components || _function?.inputs
 
   const argsSignature = inputs.map(_inp => _inp.type).join(', ')
   const args = _isTuple ? `(${argsSignature})` : argsSignature
   return `${_function.name}(${args})`
+}
+
+export {
+  calculateGasMargin,
+  encodeData,
+  GAS_MARGIN_MULTIPLIER,
+  getErrorMessage,
+  getFunctionSignature
 }

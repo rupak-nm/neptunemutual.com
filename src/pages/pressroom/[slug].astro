@@ -7,9 +7,10 @@ import * as api from "../../../service/api";
 import styles from "../blog/slug.scss?inline";
 import * as dns from "../../../util/dns";
 import { getRelatedPosts } from "../../../util/getRelated";
+import { Api } from "../../../types/enum";
 
 export async function getStaticPaths() {
-  const posts = await api.getEnumerable<Article>("pressroom", 1000, 0);
+  const posts = await api.getEnumerable<Article>(Api.Pressroom, 1000, 0);
 
   return posts.map((post) => {
     return {
@@ -46,7 +47,7 @@ const ogImageUrl = imgUrl
   <style slot="header" is:inline set:html={styles}></style>
   <BlogPost
     structured={"NewsArticle"}
-    type="pressroom"
+    type={Api.Pressroom}
     post={post}
     related={related}
   />

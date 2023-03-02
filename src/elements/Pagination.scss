@@ -9,6 +9,10 @@
 .ui.pagination {
   padding-top: 64px;
 
+  &.no.padding {
+    padding-top: 0;
+  }
+
   @media (max-width: 767px) {
     padding-top: 64px;
   }
@@ -47,7 +51,7 @@
       &.active > span,
       &:focus-visible > span
       {
-        background-color: colors.$gray-50;
+        background-color: colors.$gray-100;
         color: colors.$gray-800;
       }
 

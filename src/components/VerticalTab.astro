@@ -1,0 +1,29 @@
+---
+import Icon from '../elements/Icon.astro'
+
+interface Props {
+  tabItems: TabItem[]
+}
+
+const { tabItems } = Astro.props
+
+const t = (x:string) => x
+---
+
+<div class="ui vertical tab list view">
+  {
+    tabItems?.length
+      ?             
+      tabItems.map(({text,  href, icon, id, active}) => (
+      <a class={`item ${active ? "active" : ""}`} 
+          href={id ? `#${id || ''}`: `${href || ''}`}
+        >
+          {icon && <Icon variant={icon} size={'sm'} />}
+          <span>{text}</span>
+        </a>
+    ))
+
+      : <></>
+  }
+
+</div>

@@ -20,6 +20,7 @@
     align-items: center;
     overflow-wrap: break-word;
     word-break: break-all;
+    gap: 6px;
   }
 
   
@@ -170,151 +171,125 @@
   
 }
 
-.dark .tags.container {    
+.dark .tags.container {   
+  .tag[data-color] {
+    color: colors.$white;
+
+  }
     .tag[data-color=gray], .tag[data-color] {
-      color: colors.$gray-100;
       background-color:colors.$gray-700;
     }
     
     .tag[data-color=gray-blue] {
-      color: colors.$gray-blue-100;
       background-color:colors.$gray-blue-700;
     }
     
     .tag[data-color=gray-cool] {
-      color: colors.$gray-cool-100;
       background-color:colors.$gray-cool-700;
     }
     
     .tag[data-color=gray-modern] {
-      color: colors.$gray-modern-100;
       background-color:colors.$gray-modern-700;
     }
     
     .tag[data-color=gray-neutral] {
-      color: colors.$gray-neutral-100;
       background-color:colors.$gray-neutral-700;
     }
     
     .tag[data-color=gray-iron] {
-      color: colors.$gray-iron-100;
       background-color:colors.$gray-iron-700;
     }
     
     .tag[data-color=gray-true] {
-      color: colors.$gray-true-100;
       background-color:colors.$gray-true-700;
     }
     
     .tag[data-color=gray-warm] {
-      color: colors.$gray-warm-100;
       background-color:colors.$gray-warm-700;
     }
     
     .tag[data-color=moss] {
-      color: colors.$moss-100;
       background-color:colors.$moss-700;
     }
     
     .tag[data-color=green-light] {
-      color: colors.$green-light-100;
       background-color:colors.$green-light-700;
     }
     
     .tag[data-color=green] {
-      color: colors.$green-100;
       background-color:colors.$green-700;
     }
     
     .tag[data-color=teal] {
-      color: colors.$teal-100;
       background-color:colors.$teal-700;
     }
     
     .tag[data-color=cyan] {
-      color: colors.$cyan-100;
       background-color:colors.$cyan-700;
     }
     
     .tag[data-color=blue-light] {
-      color: colors.$blue-light-100;
       background-color:colors.$blue-light-700;
     }
     
     .tag[data-color=blue] {
-      color: colors.$blue-100;
       background-color:colors.$blue-700;
     }
     
     .tag[data-color=blue-dark] {
-      color: colors.$blue-dark-100;
       background-color:colors.$blue-dark-700;
     }
     
     .tag[data-color=indigo] {
-      color: colors.$indigo-100;
       background-color:colors.$indigo-700;
     }
     
     .tag[data-color=violet] {
-      color: colors.$violet-100;
       background-color:colors.$violet-700;
     }
     
     .tag[data-color=purple] {
-      color: colors.$purple-100;
-      background-color:colors.$purple-700;
+      background-color:colors.$purple-800;
     }
     
     .tag[data-color=fuchsia] {
-      color: colors.$fuchsia-100;
       background-color:colors.$fuchsia-700;
     }
     
     .tag[data-color=pink] {
-      color: colors.$pink-100;
       background-color:colors.$pink-700;
     }
     
     .tag[data-color=rose] {
-      color: colors.$rose-100;
       background-color:colors.$rose-700;
     }
     
     .tag[data-color=orange] {
-      color: colors.$orange-100;
       background-color:colors.$orange-700;
     }
     
     .tag[data-color=orange-dark] {
-      color: colors.$orange-dark-100;
       background-color:colors.$orange-dark-700;
     }
     
     .tag[data-color=yellow] {
-      color: colors.$yellow-100;
       background-color:colors.$yellow-700;
     }
     
     .tag[data-color=primary] {
-      color: colors.$primary-100;
       background-color:colors.$primary-700;
     }
     
     .tag[data-color=error] {
-      color: colors.$error-100;
       background-color:colors.$error-700;
     }
     
     .tag[data-color=warning] {
-      color: colors.$warning-100;
       background-color:colors.$warning-700;
     }
     
     .tag[data-color=success] {
-      color: colors.$success-100;
       background-color:colors.$success-700;
-    }
-    
+    }    
   }
   

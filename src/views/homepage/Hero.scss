@@ -59,6 +59,11 @@
         @media (max-width: 767px) {
             margin-top: 32px;
             display: block;
+
+            button.launch.app {
+                width: 100%;
+                padding: 12px 20px;
+            }
         }
     }
 

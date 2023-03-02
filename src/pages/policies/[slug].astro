@@ -6,6 +6,7 @@ import Seo from "../../components/Seo.astro";
 import * as dns from "../../../util/dns";
 import * as api from "../../../service/api";
 import styles from "./index.scss?inline";
+import { Api } from "../../../types/enum";
 
 interface Props {
   pages: Page[];
@@ -13,7 +14,7 @@ interface Props {
 }
 
 export async function getStaticPaths() {
-  const pages = await api.getEnumerable<Page>("pages", 1000, 0);
+  const pages = await api.getEnumerable<Page>(Api.Policy, 1000, 0);
 
   return pages.map((page) => {
     return {

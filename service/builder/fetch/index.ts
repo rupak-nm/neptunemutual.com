@@ -4,31 +4,38 @@
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 
+import { Api } from '../../../types/enum.js'
 import { env } from '../../../util/env.js'
 import { get } from './request.js'
 
-const resources = [
-  ['media', 'api/media?limit=1000'],
-  ['blog', 'api/articles?limit=1000'],
-  ['pressroom', 'api/pressroom?limit=1000'],
-  ['ecosystems', 'api/ecosystems?limit=1000'],
-  ['pages', 'api/pages?limit=1000'],
-  ['roadmap', 'api/roadmap?limit=1000'],
-  ['vacancies', 'api/vacancies?limit=1000'],
-  ['audits', 'api/audits?limit=1000'],
-  ['news', 'api/news?limit=1000'],
-  ['programs', 'api/programs?limit=1000'],
-  ['videos', 'api/videos?limit=1000']
+const resources: ApiResource[] = [
+  [Api.Contract, 'https://api.neptunemutual.net/protocol/contracts', true],
+  [Api.ContractArbitrum, 'https://api.neptunemutual.net/protocol/contracts/arbitrum', true],
+  [Api.ContractFuji, 'https://api.neptunemutual.net/protocol/contracts/fuji', true],
+  [Api.Media, 'api/media?limit=1000'],
+  [Api.Blog, 'api/articles?limit=1000'],
+  [Api.Doc, 'api/docs?limit=1000'],
+  [Api.Pressroom, 'api/pressroom?limit=1000'],
+  [Api.Ecosystem, 'api/ecosystems?limit=1000'],
+  [Api.Policy, 'api/pages?limit=1000'],
+  [Api.Roadmap, 'api/roadmap?limit=1000'],
+  [Api.Vacancy, 'api/vacancies?limit=1000'],
+  [Api.Audit, 'api/audits?limit=1000'],
+  [Api.News, 'api/news?limit=1000'],
+  [Api.Program, 'api/programs?limit=1000'],
+  [Api.Video, 'api/videos?limit=1000'],
+  [Api.Hack, 'api/hacks?limit=10000']
 ]
 
 const build = (): Array<Promise<{ url: string, identifier: string, string: string }>> => {
   const promises: Array<Promise<{ url: string, identifier: string, string: string }>> = []
 
   for (const resource of resources) {
-    const [identifier, path] = resource
+    const [identifier, path, fqu] = resource
     const origin: string = env('WEBSITE_API_ORIGIN')
 
-    const url = `${origin}/${path}`
+    // fully qualified uri
+    const url = fqu === undefined ? `${origin}/${path}` : path
 
     promises.push(get(url, identifier))
   }

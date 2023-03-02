@@ -1,0 +1,81 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+@use "../../design-system/blurs";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+
+.contract.card.item {
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+
+  &.hidden {
+    display: none;
+  }
+
+  &:hover {
+    background-color: colors.$primary-50;
+    border-color: colors.$primary-100;
+  }
+
+  & > *:not(:first-child) {
+    margin-top: 8px;
+  }
+
+  .contract.name {
+    @include styles.text-md;
+    @include weights.medium;
+    color: colors.$gray-900;
+  }
+
+  .contract.address {
+    @include styles.text-xs;
+    @include weights.regular;
+    color: colors.$gray-600;
+    word-break: break-all;
+    font-feature-settings: "salt", "tnum", "ss02", "ccmp", "kern";
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+
+  .icons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    svg {
+      color: colors.$gray-700 !important;
+      width: 16px;
+      height: 16px;
+
+      &:hover {
+        color: colors.$primary-700 !important;
+      }
+    }
+  }
+
+}
+
+.dark .contract.card.item {
+  &:hover {
+    background-color: colors.$gray-700;
+    border-color: colors.$gray-600;
+  }
+
+  .contract.name {
+    color: colors.$white;
+  }
+
+  .contract.address {
+    color: colors.$gray-25;
+  }
+
+  svg {
+    color: colors.$gray-400 !important;
+
+    &:hover {
+      color: colors.$white !important;
+    }
+  }
+}

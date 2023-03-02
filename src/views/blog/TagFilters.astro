@@ -1,15 +1,14 @@
 ---
+import { Api } from "../../../types/enum";
 import { normalizeUrl } from "../../../util/url";
 import { filters } from "./tag-filters";
-import { isActive, toHref } from "./util/tag-util";
+import { isActive, hrefFromFilter } from "./util/tag-util";
 ---
 
 <div class="tag filter container">
   {
     filters.map((filter) => {
-      const href = [toHref(Astro, filter), filter.value || "recent-posts"].join(
-        "#"
-      );
+      const href = hrefFromFilter(Astro, Api.Blog, filter, "recent-posts");
 
       return (
         <a data-active={isActive(Astro, filter)} href={normalizeUrl(href)}>

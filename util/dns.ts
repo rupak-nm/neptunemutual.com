@@ -11,12 +11,12 @@ const getCanonical = (Astro: any): string | undefined => {
   return normalizeUrl(url.href)
 }
 
-const qualifyURL = (path?: string): string => {
+const qualifyURL = (path?: string, root?: string): string => {
   if (path === undefined) {
     return ''
   }
 
-  const dns = getDns()
+  const dns = root ?? getDns()
   return new URL(path, dns).href
 }
 

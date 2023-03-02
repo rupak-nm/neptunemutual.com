@@ -1,11 +1,10 @@
 ---
 import Icon from "../../elements/Icon.astro";
 
-import { Section } from "../../../util/nav";
 import { normalizeUrl } from "../../../util/url";
 
 interface Props {
-  section: Section; // @todo: Improper name of the type
+  section: NavSection;
 }
 
 const { section } = Astro.props;
@@ -35,7 +34,7 @@ const t = (x: any) => x;
                   <Icon size={"sm"} variant="link-external-01" />
                 )}{" "}
               </h3>
-              <p class="description">{t(link.description)}</p>
+              <p class="description">{t(link.text)}</p>
             </div>
           </a>
         ))

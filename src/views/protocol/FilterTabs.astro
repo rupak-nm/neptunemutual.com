@@ -1,0 +1,44 @@
+---
+import { isExpired } from "../../../util/date";
+
+interface Props {
+  cxTokens: CxToken[];
+
+  className?: string;
+}
+
+const { cxTokens, className } = Astro.props;
+
+const t = (x: string) => x;
+
+const expired = cxTokens.filter((x) => isExpired(x.expiry)).length;
+
+const active = cxTokens.length - expired;
+
+const items = [
+  {
+    key: "regular",
+    text: t("Active"),
+    count: active,
+  },
+  {
+    key: "expired",
+    text: t("Expired"),
+    count: expired,
+  },
+];
+---
+
+<div class={`ui filter tab list ${className || ""}`}>
+  {
+    items.map((item) => (
+      <button
+        class={`${item.key === "regular" ? "active" : ""} item`.trim()}
+        data-scope={item.key}
+      >
+        <span class="text">{item.text}</span>
+        <span class="badge">{item.count}</span>
+      </button>
+    ))
+  }
+</div>

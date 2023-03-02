@@ -156,7 +156,7 @@
   h6 {
     display: flex;
 
-    .heading-anchor {
+    .heading.anchor {
       display: inline-block;
       margin-left: 0.5rem;
       opacity: 0;
@@ -165,7 +165,7 @@
       user-select: none;
     }
 
-    &:hover .heading-anchor {
+    &:hover .heading.anchor {
       opacity: 1;
       text-decoration: none;
 
@@ -300,6 +300,9 @@
 
     figcaption a {
       color: colors.$gray-500;
+
+      display: inline-flex;
+      align-items: center;
     }
 
     figcaption a:hover {
@@ -324,12 +327,6 @@
       border-radius: 1rem;
 
       transition: 0.2s;
-
-      &:hover {
-        filter: inherit;
-        transform: scale(1.075);
-        transition: 1.25s;
-      }
     }
   }
 
@@ -418,7 +415,7 @@
     h6 {
       display: flex;
 
-      &:hover .heading-anchor {
+      &:hover .heading.anchor {
         &:hover {
           color: colors.$gray-300;
         }
@@ -460,13 +457,6 @@
         color: colors.$rose-400;
       }
     }
-
-    figure {
-      img {
-        filter: invert(100%);
-      }
-    }
-
   }
 }
 
@@ -591,5 +581,15 @@
 .dark .content.wrapper .article {
   .kg-bookmark-container {
     background-color: colors.$gray-700;
+  }
+}
+
+.medium-zoom--opened .medium-zoom-overlay, .medium-zoom-image {
+  z-index: 9999;
+}
+
+.dark {
+  .medium-zoom-overlay {
+    background-color: dark.$primary-background-color !important;
   }
 }

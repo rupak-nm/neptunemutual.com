@@ -5,9 +5,10 @@ import RelatedPosts from "./RelatedPosts.astro";
 import NewsletterSignupForm from "../../components/NewsletterSignupForm.astro";
 
 import { parseContent } from "../../../util/content-viewer";
+import { BlogOrPressroom } from "../../../types/enum";
 
 interface Props {
-  type: "blog" | "pressroom";
+  type: BlogOrPressroom;
   structured: "BlogPosting" | "NewsArticle";
   post: Article;
   related: Article[];
@@ -28,7 +29,7 @@ const {
   timeToRead,
   featuredImage,
   alt,
-} = await parseContent(type, ["contentHtml", "html"], post);
+} = await parseContent(type, ["html"], post);
 
 const publishDate = new Date(createdAt || (publishedAt as Date));
 ---
@@ -38,6 +39,7 @@ const publishDate = new Date(createdAt || (publishedAt as Date));
     publishedAt={publishDate}
     timeToRead={timeToRead}
     title={title}
+    intro={intro}
     featuredImage={featuredImage}
     alt={alt}
   />

@@ -2,10 +2,8 @@
 import Section from "./Section.astro";
 import VideoSection from "./VideoSection.astro";
 
-import { linkNav } from "../../../util/nav";
-
 interface Props {
-  data: linkNav[]; // @todo: Incorrect casing
+  data: LinkNav[];
   videos: Video[];
 }
 const { data, videos } = Astro.props;
@@ -15,7 +13,7 @@ const { data, videos } = Astro.props;
   data
     .filter((nav) => nav.children)
     .map(
-      ({ title, children }) =>
+      ({ children }) =>
         children && (
           <div class="sub menu container" data-open="false">
             <div class="left space" />

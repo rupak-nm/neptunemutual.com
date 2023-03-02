@@ -1,4 +1,4 @@
-const tools = [
+const tools: Web3ToolItem[] = [
   {
     slug: 'string-to-bytes32-converter',
     title: 'Online String to Solidity Bytes32 Converter',
@@ -24,6 +24,14 @@ const tools = [
     title: 'Ethereum Unit Converter',
     intro: 'Convert the different ethereum denominations (wei, gwei, ether).',
     category: 'Ethereum',
+    icon: 'code-square-01',
+    badges: []
+  },
+  {
+    path: '/protocol/ethereum/contracts',
+    title: 'Neptune Mutual Protocol Contracts',
+    intro: 'Documented events and actions in Neptune Mutual’s web application.',
+    category: 'Protocol Contracts',
     icon: 'code-square-01',
     badges: []
   }

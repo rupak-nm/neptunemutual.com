@@ -5,15 +5,19 @@ import Seo from "../../components/Seo.astro";
 
 import * as api from "../../../service/api";
 import styles from "./index.scss?inline";
+import { Api } from "../../../types/enum";
 
 const POSTS_PER_PAGE = 4;
-const paginated = await api.getPaginated<Article>("pressroom", POSTS_PER_PAGE);
+const paginated = await api.getPaginated<Article>(
+  Api.Pressroom,
+  POSTS_PER_PAGE
+);
 const { totalPages, pages } = paginated;
 
 const currentPage = 1;
 const data = pages[currentPage];
 
-const newsPosts = await api.getEnumerable<NewsItem>("news", 1000, 0);
+const newsPosts = await api.getEnumerable<NewsItem>(Api.News, 1000, 0);
 ---
 
 <BaseLayout>

@@ -12,5 +12,12 @@ export const apps: App[] = [
   { id: 'binance', name: 'Binance', src: import('./logo/binance.svg?raw').then((x: any) => x.default) },
   { id: 'okx', name: 'OKX', src: import('./logo/okx.svg?raw').then((x: any) => x.default) },
   { id: 'uniswap', name: 'Uniswap', src: import('./logo/uniswap.svg?raw').then((x: any) => x.default) },
-  { id: 'curve', name: 'Curve', src: import('./logo/curve.svg?raw').then((x: any) => x.default) }
+  { id: 'curve', name: 'Curve', src: import('./logo/curve.svg?raw').then((x: any) => x.default) },
+  { id: '1inch', name: '1inch', src: import('./logo/1inch.svg?raw').then((x: any) => x.default) },
+  { id: 'bancor', name: 'Bancor', src: import('./logo/bancor.svg?raw').then((x: any) => x.default) },
+  { id: 'compound', name: 'Compound', src: import('./logo/compound.svg?raw').then((x: any) => x.default) },
+  { id: 'convex', name: 'Convex', src: import('./logo/convex.svg?raw').then((x: any) => x.default) },
+  { id: 'dydx', name: 'dydx', src: import('./logo/dydx.svg?raw').then((x: any) => x.default) },
+  { id: 'gmx', name: 'GMX', src: import('./logo/gmx.svg?raw').then((x: any) => x.default) },
+  { id: 'sushiswap', name: 'Sushiswap', src: import('./logo/sushiswap.svg?raw').then((x: any) => x.default) }
 ]

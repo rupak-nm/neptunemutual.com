@@ -9,11 +9,11 @@ import { getApiHeaders } from './headers'
 
 const get = async (url: string, identifier: string, headers = getApiHeaders()): Promise<{ url: string, identifier: string, string: string }> => {
   const urlObj = new URL(url)
-  console.log('Requesting: %s', identifier)
+  console.log('Requesting: %s: %s', identifier, url)
 
   const httpCore = urlObj.protocol === 'http:' ? http : https
 
-  return await new Promise(function (resolve, reject) {
+  return await new Promise((resolve, reject) => {
     const options: http.ClientRequestArgs = {
       method: 'GET',
       port: urlObj.port,
@@ -24,7 +24,7 @@ const get = async (url: string, identifier: string, headers = getApiHeaders()): 
       }
     }
 
-    const req = httpCore.request(options, function (res) {
+    const req = httpCore.request(options, (res) => {
       // reject on bad status
       if ((res.statusCode !== undefined) && (res.statusCode < 200 || res.statusCode >= 300)) {
         console.log('Failed: %s', identifier)
@@ -56,7 +56,7 @@ const get = async (url: string, identifier: string, headers = getApiHeaders()): 
       })
     })
 
-    req.on('error', function (error) {
+    req.on('error', (error) => {
       console.log('Failed: %s', identifier)
       reject(error)
     })

@@ -1,0 +1,55 @@
+[
+  {
+    "loc": "/"
+  },
+  {
+    "loc": "/blog/",
+    "changefreq": "daily"
+  },
+  {
+    "loc": "/pressroom/",
+    "changefreq": "weekly"
+  },
+  {
+    "loc": "/careers/"
+  },
+  {
+    "loc": "/ecosystem/"
+  },
+  {
+    "loc": "/contact/"
+  },
+  {
+    "loc": "/about/"
+  },
+  {
+    "loc": "/grants-and-bounties/"
+  },
+  {
+    "loc": "/security/"
+  },
+  {
+    "loc": "/web3-tools/"
+  },
+  {
+    "loc": "/web3-tools/string-to-bytes32-converter/"
+  },
+  {
+    "loc": "/web3-tools/bytes32-to-string-converter/"
+  },
+  {
+    "loc": "/web3-tools/number-to-bytes32-converter/"
+  },
+  {
+    "loc": "/web3-tools/bytes32-to-number-converter/"
+  },
+  {
+    "loc": "/web3-tools/solidity-abi-encoder-online/"
+  },
+  {
+    "loc": "/web3-tools/ethereum-unit-converter/"
+  },
+  {
+    "loc": "/policies/"
+  }
+]

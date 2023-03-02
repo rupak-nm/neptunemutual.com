@@ -1,0 +1,65 @@
+@use "../design-system/utils";
+@use "../design-system/colors";
+@use "../design-system/theme/light";
+@use "../design-system/theme/dark";
+@use "../design-system/blurs";
+@use "../design-system/typography/styles";
+@use "../design-system/typography/weights";
+
+.ui.vertical.tab.list.view {
+  min-width: 292px;
+  display: flex;
+  gap: 4px;
+
+  &.vertical {
+    flex-direction: column;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    margin-left:12px;
+    border-radius: 8px;
+    color: colors.$gray-500;
+    @include weights.semibold;
+    @include styles.text-sm;
+    flex-wrap: wrap;
+
+    i {
+      svg {
+        height: 16px;
+        width: 16px;
+      }
+    }
+
+    &.active {
+      background-color: colors.$primary-50;
+      color: colors.$primary-700;
+    }
+
+    &:hover {
+      background-color: colors.$primary-100;
+      color: colors.$primary-800;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    display: none;
+  }
+}
+
+.dark .ui.vertical.tab.list.view {
+  .item {
+    color: colors.$gray-300;
+
+    &.active {
+      background: colors.$gray-700;
+    }
+
+    &:hover {
+      background: colors.$gray-600;
+    }
+  }
+}

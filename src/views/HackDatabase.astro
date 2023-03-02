@@ -1,0 +1,34 @@
+---
+import HeaderSection from "../components/HeaderSection.astro";
+import NewsletterSignupForm from "../components/NewsletterSignupForm.astro";
+import HackTable from "./hack-database/HackTable.astro";
+
+interface Props {
+  hacks: Hack[];
+}
+
+const { hacks } = Astro.props;
+---
+
+<HeaderSection
+  color={"basic"}
+  alignment={"center"}
+  heading="DeFi and Cryptocurrency Hacks"
+>
+  <Fragment slot="supporting-text">
+    The DeFi hack database provides a summary of major cryptocurrency hacks,
+    exploits, smart contract vulnerabilities, and much more.
+  </Fragment>
+</HeaderSection>
+
+<div class="hackdatabase announcement full width container">
+  <HackTable hacks={hacks} />
+</div>
+
+<NewsletterSignupForm
+  heading="Sign Up for Our Newsletter"
+  text="Be the first to know about releases and industry news and insights."
+  showFeedButtons
+  atomLink="/feeds/pressroom/atom.xml"
+  rssLink="/feeds/pressroom/rss.xml"
+/>

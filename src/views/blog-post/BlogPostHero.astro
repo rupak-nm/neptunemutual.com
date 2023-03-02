@@ -8,11 +8,13 @@ interface Props {
   publishedAt: Date;
   timeToRead: number;
   title: string;
+  intro: string;
   featuredImage: string;
   alt: string;
 }
 
-const { publishedAt, timeToRead, title, featuredImage, alt } = Astro.props;
+const { publishedAt, timeToRead, title, intro, featuredImage, alt } =
+  Astro.props;
 ---
 
 <div class="blog post hero full width container">
@@ -30,6 +32,9 @@ const { publishedAt, timeToRead, title, featuredImage, alt } = Astro.props;
     <h1 itemprop="headline" id={slugify(title)}>
       {title}
     </h1>
+    <p class="intro">
+      {intro}
+    </p>
   </div>
   <div class="image container">
     <meta itemprop="image" content={`${featuredImage}`} />

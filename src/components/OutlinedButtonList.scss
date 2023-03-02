@@ -1,0 +1,60 @@
+@use "../design-system/utils";
+@use "../design-system/colors";
+@use "../design-system/theme/light";
+@use "../design-system/theme/dark";
+@use "../design-system/blurs";
+@use "../design-system/typography/styles";
+@use "../design-system/typography/weights";
+
+.ui.outlined.button.list {
+  display: inline-flex;
+  border: 1px solid colors.$gray-300;
+  border-radius: 8px;
+  padding:0;
+  gap: 0;
+
+  .item {
+    display: block;
+    padding: 10px 16px;
+    border: 0px solid colors.$gray-300;
+    margin: 0;
+    border-radius: 0;
+
+    &:first-of-type {
+      border-radius: 8px 0 0 8px;
+      border-width: 0 1px 0 0;
+    }
+
+    &:last-of-type {
+      border-radius: 0 8px 8px 0;
+      border-width: 0 0 0 1px;
+    }
+
+
+    @include styles.text-sm;
+    @include weights.semibold;
+
+    background-color: colors.$white;
+    color: colors.$gray-700;
+    
+    &.active {
+      background-color: colors.$gray-100;
+      color: colors.$gray-800;
+    }
+  }
+}
+
+.dark .ui.outlined.button.list {
+  border-color: colors.$gray-500;
+
+  .item {
+    border-color: colors.$gray-500;
+    background-color: colors.$gray-600;
+    color: colors.$gray-300;
+    
+    &.active {
+      background-color: colors.$gray-700;
+      color: colors.$white;
+    }
+  }
+}

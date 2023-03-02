@@ -20,6 +20,10 @@ declare enum EcosystemType {
   Policyholders = 'policyholders'
 }
 
+interface WithSlug {
+  slug: string
+}
+
 // ---------------------------------------------------------------------------------------------
 
 interface Media {
@@ -72,8 +76,7 @@ interface Roadmap extends Content {
   slug: string
   current: boolean
   sort: number
-  content: []
-  contentHtml: string
+  html: string
   _status: DocumentStatus
   createdAt?: Date
   updatedAt?: Date
@@ -86,8 +89,7 @@ interface Article extends Content {
   slug?: string
   intro: string
   cover: Media
-  content: any[]
-  contentHtml: string
+  html: string
   featured?: true
   tags?: Tag[]
   meta: Meta
@@ -115,8 +117,7 @@ interface Page extends Content {
   sort: number
   title: string
   slug: string
-  content: any[]
-  contentHtml?: string
+  html: string
   _status: DocumentStatus
   createdAt?: Date
   updatedAt?: Date
@@ -132,8 +133,7 @@ interface Program {
   slug: string
   icon: string
   badges: string
-  content: any[]
-  contentHtml?: string
+  html: string
   _status: DocumentStatus
   createdAt?: Date
   updatedAt?: Date
@@ -151,8 +151,7 @@ interface Video {
   sort: number
   length: number
   thumbnail: Media
-  description: any[]
-  descriptionHtml: string
+  html: string
   _status: DocumentStatus
   createdAt?: Date
   updatedAt?: Date
@@ -181,8 +180,7 @@ interface Audit {
   startDate: string
   endDate: string
   report: Media
-  description: any[]
-  descriptionHtml: string
+  html: string
   meta: Meta
   _status: DocumentStatus
   createdAt?: Date
@@ -220,11 +218,74 @@ interface Vacancy extends Content {
   department: string
   badges: string
   form: string
-  description: any[]
-  descriptionHtml: string
+  html: string
   meta: Meta
   _status: DocumentStatus
   createdAt?: Date
   updatedAt?: Date
   publishedAt?: Date
+}
+
+interface ApiResponse<T> {
+  message: string
+  code: string
+  data: T
+}
+
+interface CxToken {
+  coverKey: string
+  productKey: string
+  value: string
+  expiry: string
+}
+
+interface KeyValuePair<T> {
+  key: string
+  value: T
+}
+
+interface ProtocolContracts {
+  chainId: number
+  network: string
+  contracts: Array<KeyValuePair<string>>
+  coverKeys: string[]
+  pods: Array<KeyValuePair<string>>
+  tokens: Array<KeyValuePair<string>>
+  pairs: Array<KeyValuePair<string>>
+  cxTokens: CxToken[]
+}
+
+interface Chain {
+  slug: string
+  chainid?: number
+  title: string
+  shortName: string
+  nativeCurrency: string
+  html: string
+}
+
+interface Hack {
+  name: string
+  date: Date
+  amountLost: string
+  chains: Chain[]
+  techniques: string
+  description?: string
+  link: string
+}
+
+interface Documentation extends Content {
+  id: string
+  navigationLabel: string
+  title: string
+  subtitle?: string
+  order: number
+  parent: Documentation
+  slug: string
+  unlinked: boolean
+  html: string
+  _status: string
+  createdAt: Date
+  updatedAt: Date
+  meta: Meta
 }

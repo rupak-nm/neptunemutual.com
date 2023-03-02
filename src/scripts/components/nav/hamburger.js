@@ -1,4 +1,6 @@
 {
+  const body = document.querySelector('body')
+
   function click (event) {
     event.stopPropagation()
 
@@ -8,6 +10,8 @@
 
     mobileMenu.setAttribute('data-open', newState)
     event.currentTarget.setAttribute('data-open', newState)
+
+    body.style.overflowY = newState === 'true' ? 'hidden' : 'visible'
   }
 
   document.addEventListener('click', (e) => {
@@ -20,8 +24,27 @@
     if (!e.target.closest('#MobileMenu')) {
       mobileMenu.setAttribute('data-open', 'false')
       button.setAttribute('data-open', 'false')
+      body.style.overflowY = 'visible'
     }
   })
 
   document.querySelector('button.hamburger.button.container').addEventListener('click', click)
+
+  function keydown (e) {
+    const mobileMenu = document.querySelector('#MobileMenu[data-open="true"]')
+    const button = document.querySelector(
+      '.hamburger.button.container[data-open]'
+    )
+    const key = e.which || e.keyCode || e.charCode
+
+    if (key !== 27 || !mobileMenu) {
+      return
+    }
+
+    mobileMenu.setAttribute('data-open', 'false')
+    button.setAttribute('data-open', 'false')
+    body.style.overflowY = 'visible'
+  }
+
+  document.addEventListener('keydown', keydown)
 }

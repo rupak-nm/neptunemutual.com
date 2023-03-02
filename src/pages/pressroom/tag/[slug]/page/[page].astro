@@ -5,11 +5,13 @@ import Seo from "../../../../../components/Seo.astro";
 
 import * as api from "../../../../../../service/api";
 import styles from "../../../index.scss?inline";
+import { Api } from "../../../../../../types/enum";
 
 export async function getStaticPaths() {
   const POSTS_PER_PAGE = 4;
-  const tagsData = await api.getPaginatedByTags("pressroom", POSTS_PER_PAGE);
-  const news = await api.getEnumerable<NewsItem>("news", 1000, 0);
+
+  const tagsData = await api.getPaginatedByTags(Api.Pressroom, POSTS_PER_PAGE);
+  const news = await api.getEnumerable<NewsItem>(Api.News, 1000, 0);
 
   return tagsData
     .map((data) => {

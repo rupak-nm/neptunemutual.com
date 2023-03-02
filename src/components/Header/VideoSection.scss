@@ -34,6 +34,10 @@
     &:hover, &:active{
       color: colors.$primary-600
     }
+
+    @media (max-width: 1023px) {
+      padding: 0 16px;
+    }
   }
 
   .content .video.container:not(.modal) {
@@ -109,6 +113,10 @@
       flex-direction: column;
       align-items: flex-start;
       gap: 0px;
+      
+      @media (max-width: 1023px) {
+        margin: 0;
+      }
     }
 
     .video.title {

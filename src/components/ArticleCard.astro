@@ -5,13 +5,14 @@ import { getFormattedDate } from "../../util/format";
 import * as dns from "../../util/dns";
 import { toTagsWithHref } from "../../util/tag";
 import { normalizeUrl } from "../../util/url";
+import { BlogOrPressroom } from "../../types/enum";
 
 const t = (x: string): string => x;
 
 interface Props {
   post: Content;
   className?: string;
-  type: "blog" | "pressroom" | "custom";
+  type: BlogOrPressroom | "custom";
   href?: string;
   rel?: string;
   target?: "_self" | "_blank" | "_parent" | "_top" | (string & {});
@@ -27,7 +28,7 @@ const coverImage = dns.fromCdnUnqualified(post.cover?.filename);
   <div class="image container">
     <img
       src={coverImage}
-      alt={post.cover?.alt.toLowerCase() === post.title.toLowerCase()
+      alt={post.cover?.alt?.toLowerCase() === post.title.toLowerCase()
         ? ""
         : post.cover?.alt}
       loading="lazy"
@@ -50,6 +51,6 @@ const coverImage = dns.fromCdnUnqualified(post.cover?.filename);
 
     <p class="intro" set:html={post.intro} />
 
-    <Tags tags={toTagsWithHref(type, post.tags)} />
+    {type !== "custom" && <Tags tags={toTagsWithHref(type, post.tags)} />}
   </div>
 </div>

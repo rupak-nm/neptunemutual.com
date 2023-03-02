@@ -1,0 +1,84 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+@use "../../design-system/blurs";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+
+
+.hero > .container > .content {
+  max-width: 1024px!important;
+}
+
+.ui.filter.tab.list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .item {
+    padding: 7px 12px;
+    border-radius: 6px;
+    background-color: transparent;
+    
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .text {
+      color: colors.$gray-500;
+      @include styles.text-sm;
+      @include weights.semibold;
+    }
+    
+    .badge {
+      color: colors.$gray-700;
+      @include styles.text-xs;
+      @include weights.medium;
+      padding: 2px 8px;
+      background-color: colors.$gray-100;
+      border-radius: 16px;
+    }
+
+    &.active {
+      background-color: colors.$primary-50;
+
+      .text {
+        color: colors.$primary-700;
+      }
+      
+      .badge {
+        color: colors.$primary-700;
+        background-color: colors.$primary-50;
+        mix-blend-mode: multiply;
+      }
+    }
+  }
+}
+
+.dark .ui.filter.tab.list {
+  .item {
+    .text {
+      color: colors.$gray-300;
+    }
+    
+    .badge {
+      color: colors.$white;
+      background-color: colors.$gray-500;
+    }
+
+    &.active {
+      background-color: colors.$gray-600;
+
+      .text {
+        color: colors.$white;
+      }
+      
+      .badge {
+        color: colors.$white;
+        background-color: colors.$gray-500;
+        mix-blend-mode: normal;
+      }
+    }
+  }
+}

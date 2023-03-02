@@ -1,0 +1,26 @@
+---
+import Button from "../elements/buttons/Button.astro";
+
+interface Props {
+  tabItems: TabItem[];
+}
+
+const { tabItems } = Astro.props;
+---
+
+<div class="ui outlined button list">
+  {
+    tabItems.map(({ text, href, active }) => (
+      <>
+        <Button
+          variant={"link-gray"}
+          type="anchor"
+          classname={`${active ? "active" : ""} item`.trim()}
+          href={href}
+        >
+          {text}
+        </Button>
+      </>
+    ))
+  }
+</div>

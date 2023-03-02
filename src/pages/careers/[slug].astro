@@ -6,9 +6,10 @@ import VacancyDetail from "../../views/VacancyDetail.astro";
 import styles from "./slug.scss?inline";
 import * as api from "../../../service/api";
 import * as dns from "../../../util/dns";
+import { Api } from "../../../types/enum";
 
 export async function getStaticPaths() {
-  const vacancies = await api.getEnumerable<Vacancy>("vacancies", 1000, 0);
+  const vacancies = await api.getEnumerable<Vacancy>(Api.Vacancy, 1000, 0);
 
   return vacancies.map((vacancy) => {
     return {

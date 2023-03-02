@@ -1,0 +1,87 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+@use "../../design-system/blurs";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+
+.contract.details.container {
+  width: 100%;
+
+  & > *:not(:first-child) {
+    margin-top: 24px;
+  }
+
+  .titles.container {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    h1 {
+      @include styles.display-sm;
+      @include weights.semibold;
+      color: colors.$gray-900;
+    }
+
+    a {
+      @include styles.text-md;
+      @include weights.semibold;
+      color: colors.$primary-600;
+    }
+  }
+
+  ol.breadcrumb.trail {
+    margin-top: 0;
+  }
+
+  .details.title {
+    @include styles.text-xl;
+    @include weights.semibold;
+    color: colors.$gray-600;
+  }
+
+  .search.input {
+    @include styles.text-md;
+    @include weights.regular;
+    color: colors.$gray-500;
+  }
+
+  .ui.contracts.list.view {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+
+    @media (max-width: 767px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.dark .contract.details.container {
+  .titles.container {
+    h1 {
+      color: colors.$white;
+    }
+
+    a {
+      color: colors.$primary-200;
+    }
+  }
+
+  .details.title {
+    color: colors.$gray-25;
+  }
+
+  .search.input {
+    background: colors.$gray-600;
+    border-color: colors.$gray-500;
+    color: colors.$gray-25;
+
+    input, ::placeholder, svg {
+      color: colors.$gray-25;
+    }
+  }
+}

@@ -34,6 +34,8 @@ const Encoder = () => {
   const [abiInvalidFormat, setAbiInvalidFormat] = useState(false)
   const [isSaveable, setIsSaveable] = useState(false)
   const [restorationFailed, setRestorationFailed] = useState(false)
+  const [contractNameExist, setContractNameExist] = useState(false)
+  const [forUpdate, setForUpdate] = useState(false)
 
   const [contractName, setContractName] = useState('')
   const [address, setAddress] = useState('')
@@ -48,6 +50,14 @@ const Encoder = () => {
     }
   }, [])
 
+  useEffect(() => {
+    if (contractNameExist) {
+      setTimeout(() => {
+        setContractNameExist(false)
+      }, 5000)
+    }
+  }, [contractNameExist])
+
   const restoreSpecificCallback = (data) => {
     const { abi, contractName, address } = data
     const form = formRef.current
@@ -58,6 +68,7 @@ const Encoder = () => {
     setAddress(address)
     setAbi(abi)
     setIsSaveable(true)
+    setForUpdate(true)
     validateABI({ target: { value: abi } })
   }
 
@@ -78,13 +89,27 @@ const Encoder = () => {
       abis = JSON.parse(storageData) || []
     }
 
+    const existingContractKey = abis.findIndex(abi => {
+      return abi.contract_name.toLowerCase() === form.contract_name.value.toLowerCase()
+    })
+
+    if (!forUpdate && existingContractKey >= 0) {
+      setContractNameExist(true)
+      return true
+    }
+
     const data = {
       abi: form.abi.value,
       contract_name: form.contract_name.value,
       address: form.address.value
     }
 
-    abis.push(data)
+    if (existingContractKey >= 0) {
+      abis[existingContractKey] = { ...abis[existingContractKey], ...data }
+    } else {
+      abis.push(data)
+    }
+
     setContracts(abis)
 
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(abis))
@@ -180,6 +205,7 @@ const Encoder = () => {
               placeholder='Contract or interface name'
               id='contract_name'
               onChange={(e) => { return setContractName(e.target.value) }}
+              error={contractNameExist ? 'Contract name already exist!' : ''}
             >
               <InputHint>
                 Enter the contract name or an easy way to remember name for this contract
@@ -235,6 +261,7 @@ const Encoder = () => {
 
         <History
           contracts={contracts}
+          setContracts={setContracts}
           download={download}
           restore={restore}
           restorationFailed={restorationFailed}

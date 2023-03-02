@@ -1,0 +1,60 @@
+---
+import Icon from "../../../elements/Icon.astro";
+import Button from "../../../elements/buttons/Button.astro";
+
+const t = (x: string): string => x;
+---
+
+<div id="launch-app-modal" class="modal container launch-app" data-open="false">
+  <div id="modal-content" class="content">
+    <button id="launch-modal-close" class="close button">
+      <Icon variant="x-close" size={"xs"} />
+    </button>
+    <div class="header">
+      <h2>{t(`Choose Your Marketplace`)}</h2>
+    </div>
+
+    <div class="options">
+      <div class="option">
+        <input
+          type="radio"
+          checked
+          name="application-type"
+          value="Arbitrum"
+          id="arbitrum"
+          data-href="https://arbitrum.neptunemutual.net"
+        />
+        <label for="arbitrum">
+          Arbitrum <span class="link">(arbitrum.neptunemutual.net)</span>
+        </label>
+      </div>
+      <div class="option">
+        <input
+          type="radio"
+          name="application-type"
+          value="Ethereum"
+          id="ethereum"
+          data-href="https://ethereum.neptunemutual.net"
+        />
+        <label for="ethereum">
+          Ethereum <span class="link">(ethereum.neptunemutual.net)</span>
+        </label>
+      </div>
+    </div>
+    <div class="buttons container">
+      <Button
+        type={"anchor"}
+        classname={"accept button"}
+        id={"launch-app"}
+        href={"https://arbitrum.neptunemutual.net"}
+        target={"_blank"}
+        variant={"primary"}
+        size="xl"
+      >
+        Launch App on <span id="btn-app-type-text" class="app type"
+          >Arbitrum</span
+        >
+      </Button>
+    </div>
+  </div>
+</div>

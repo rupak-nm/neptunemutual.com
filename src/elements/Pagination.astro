@@ -3,32 +3,37 @@ import Button from "./buttons/Button.astro";
 
 import { getPagination } from "../../util/pagination";
 import { normalizeUrl } from "../../util/url";
+import { BlogOrPressroom } from "../../types/enum";
 
 interface Props {
-  type: "blog" | "pressroom";
+  type?: BlogOrPressroom;
   tag?: Tag;
   totalPages?: number;
   currentPage?: number;
+  className?: string;
 }
 
-const { type, tag, totalPages, currentPage } = Astro.props;
+const { type, tag, totalPages, currentPage, className } = Astro.props;
 
 const prefix = [null, type, tag?.slug ? "tag" : null, tag?.slug, "page"]
   .filter((x) => !!x)
   .join("/");
 
+const postfix = tag?.slug ? "#" + tag.slug : "";
+
 const { previous, pages, next } = getPagination(totalPages, currentPage);
-const previousHref = previous ? `/${prefix}/${previous}` : undefined;
-const nextHref = next ? `/${prefix}/${next}` : undefined;
+const previousHref = previous ? `/${prefix}/${previous}${postfix}` : undefined;
+const nextHref = next ? `/${prefix}/${next}${postfix}` : undefined;
 
 const t = (x: string): string => x;
 ---
 
-<div class="ui pagination">
+<div class={`ui pagination${className ? " " + className : ""}`}>
   <div class="container">
     <Button
       type={"anchor"}
-      href={normalizeUrl(previousHref)}
+      classname={"previous page"}
+      href={type ? normalizeUrl(previousHref) : "#"}
       variant={"link-color"}
       iconLeading="arrow-left"
       disabled={parseInt((currentPage || 0).toString()) <= 1}
@@ -44,11 +49,11 @@ const t = (x: string): string => x;
               <Button
                 classname={
                   parseInt((currentPage || 0).toString()) === page
-                    ? "active"
-                    : ""
+                    ? "active page"
+                    : "page"
                 }
                 type={"anchor"}
-                href={`/${prefix}/${page}/`}
+                href={`/${prefix}/${page}${postfix}`}
                 variant={"link-color"}
               >
                 {page}
@@ -62,7 +67,8 @@ const t = (x: string): string => x;
 
     <Button
       type={"anchor"}
-      href={normalizeUrl(nextHref)}
+      classname={"next page"}
+      href={type ? normalizeUrl(nextHref) : "#"}
       variant={"link-color"}
       iconTrailing="arrow-right"
       disabled={parseInt((currentPage || 0).toString()) ===
