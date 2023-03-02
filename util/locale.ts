@@ -1,4 +1,4 @@
-export const getBrowserLocale = (): string => {
+const getBrowserLocale = (): string => {
   const fallback = 'en'
 
   try {
@@ -19,7 +19,7 @@ export const getBrowserLocale = (): string => {
   return fallback
 }
 
-export const localeNames: Record<string, string> = {
+const localeNames: Record<string, string> = {
   en: 'English',
   zh: 'Chinese - 中文'
   // fr: 'French - français',
@@ -35,8 +35,15 @@ export const localeNames: Record<string, string> = {
   // vi: 'Vietnamese - Tiếng Việt'
 }
 
-export const availableLocales: string[] = [
+const availableLocales: string[] = [
   ...Object.keys(localeNames)
 ]
 
-export const currentLocale = getBrowserLocale()
+const currentLocale = getBrowserLocale()
+
+export {
+  getBrowserLocale,
+  localeNames,
+  availableLocales,
+  currentLocale
+}

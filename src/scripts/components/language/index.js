@@ -3,13 +3,13 @@ import {
   localeNames
 } from '../../../../util/locale.ts'
 
-const languageDropdowns = document.querySelectorAll(
+const languageDropdown = document.querySelector(
   '.language.select.container div.dropdown.container'
 )
-const toggleButtons = document.querySelectorAll(
+const toggleButton = document.querySelector(
   '.language.select.container button.toggle'
 )
-const backButtons = document.querySelectorAll(
+const backButton = document.querySelector(
   '.language.select.container .back.button'
 )
 
@@ -20,58 +20,44 @@ function handleDocumentClick (e) {
 }
 
 function hideDropdown () {
-  languageDropdowns.forEach((languageDropdown) => {
-    languageDropdown.setAttribute('data-open', 'false')
-  })
+  languageDropdown.setAttribute('data-open', 'false')
 
-  toggleButtons.forEach((toggleButton) => {
-    toggleButton.setAttribute('data-open', 'false')
-  })
+  toggleButton.setAttribute('data-open', 'false')
 
-  updateInputFields()
+  updateInputField()
   updateOptions()
 
   document.removeEventListener('click', handleDocumentClick)
 }
 
 function showDropdown () {
-  languageDropdowns.forEach((languageDropdown) => {
-    languageDropdown.setAttribute('data-open', 'true')
-  })
+  languageDropdown.setAttribute('data-open', 'true')
 
-  toggleButtons.forEach((toggleButton) => {
-    toggleButton.setAttribute('data-open', 'true')
-  })
+  toggleButton.setAttribute('data-open', 'true')
 
   document.addEventListener('click', handleDocumentClick)
 }
 
-toggleButtons.forEach((toggleButton) => {
-  toggleButton.addEventListener('click', (e) => {
-    e.stopPropagation()
-    const state = e.currentTarget?.getAttribute('data-open')
-    const newState = state === 'true' ? 'false' : 'true'
-    newState === 'true' ? showDropdown() : hideDropdown()
-  })
+toggleButton.addEventListener('click', (e) => {
+  e.stopPropagation()
+  const state = e.currentTarget?.getAttribute('data-open')
+  const newState = state === 'true' ? 'false' : 'true'
+  newState === 'true' ? showDropdown() : hideDropdown()
 })
 
-backButtons.forEach((backButton) => {
-  backButton.addEventListener('click', (e) => {
-    hideDropdown()
-  })
+backButton.addEventListener('click', (e) => {
+  hideDropdown()
 })
 
 // handle input change & filtering
-const inputs = document.querySelectorAll('.language.select.container input')
+const input = document.querySelector('.language.select.container input')
 const listItems = document.querySelectorAll('.language.select.container ul.options > li')
-const noDataItems = document.querySelectorAll('.language.select.container ul.options > li[data-value="no-match"]')
+const noDataItem = document.querySelector('.language.select.container ul.options > li[data-value="no-match"]')
 
 const languages = Object.keys(localeNames).map(key => ({ [key]: localeNames[key] }))
 
-function updateInputFields (val = '') {
-  inputs.forEach(input => {
-    input.value = val
-  })
+function updateInputField (val = '') {
+  input.value = val
 }
 
 function updateOptions (val = '') {
@@ -89,17 +75,11 @@ function updateOptions (val = '') {
     listItem.setAttribute('data-show', show)
   })
 
-  updateInputFields(val)
-
   const showNoDataItem = filteredArray.length ? 'false' : 'true'
-  noDataItems.forEach(noDataItem => {
-    noDataItem.setAttribute('data-show', showNoDataItem)
-  })
+  noDataItem.setAttribute('data-show', showNoDataItem)
 }
 
-inputs.forEach(input => {
-  input.addEventListener('input', e => {
-    const val = e.target.value.toLowerCase()
-    updateOptions(val)
-  })
+input.addEventListener('input', e => {
+  const val = e.target.value.toLowerCase()
+  updateOptions(val)
 })
