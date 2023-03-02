@@ -16,6 +16,11 @@ const hacks = await api.getEnumerable<Hack>(Api.Hack, 20, 0);
     slot="seo"
     title="DeFi and Cryptocurrency Hacks / Neptune Mutual"
     description="The DeFi hack database provides a summary of major cryptocurrency hacks, exploits, smart contract vulnerabilities, and much more."
+    og={{
+      image: "/assets/images/meta/og/hack-database.png",
+      imageAlt:
+        "Neptune Mutual DeFi and Cryptocurrency Hacks Open Graph Banner",
+    }}
   />
   <style slot="header" is:inline set:html={styles}></style>
 
