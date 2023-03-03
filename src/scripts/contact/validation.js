@@ -13,6 +13,19 @@
 
     if (!valid) {
       target.classList.add('error')
+      return
+    }
+
+    appendHttps(this)
+  }
+
+  // append "https://" to url if not provided
+  function appendHttps (element) {
+    const isUrlInput = element.id === 'WebsiteInputUrl'
+    const hasHttp = element.value.match(/^https?:\/\//)
+
+    if (isUrlInput && !hasHttp) {
+      element.value = `https://${element.value}`
     }
   }
 

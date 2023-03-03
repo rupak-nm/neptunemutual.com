@@ -35,6 +35,7 @@ interface Props {
   className?: string;
   hint?: string;
   hideLabel?: boolean;
+  pattern?: string;
 }
 
 const {
@@ -53,6 +54,7 @@ const {
   hint,
   options,
   hideLabel,
+  pattern,
 } = Astro.props;
 ---
 
@@ -85,6 +87,7 @@ const {
         placeholder={placeholder}
         autocomplete={autocomplete || "off"}
         value={value}
+        pattern={pattern || undefined}
       />
     )
   }

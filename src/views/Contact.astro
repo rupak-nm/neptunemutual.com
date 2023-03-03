@@ -103,11 +103,12 @@ const recaptchaKey = env("RECAPTCHA_SITE_KEY");
     <Input
       id="WebsiteInputUrl"
       data-member="website"
-      type={"url"}
+      type={"text"}
       required
       maxlength={256}
       placeholder="https://example.com"
       label="What is the website for your business or project?"
+      pattern="^(https?:\\/\\/)?[-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]{2,256}\\.[a-z]{2,4}\\b(\\/[-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)?$"
     />
 
     <Input
