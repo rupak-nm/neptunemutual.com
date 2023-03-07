@@ -11,7 +11,7 @@ const setupPagination = (totalPages: number, currentPage: number): void => {
   const pagesHtml = pagination
     .pages?.map((page) => {
       return page != null
-        ? `<a class="ui page link color button${page === currentPage ? ' active' : ''}" href="#/">
+        ? `<a class="ui page link pointer color button${page === currentPage ? ' active' : ''}">
               <span class="content">
                 ${page}
               </span>
