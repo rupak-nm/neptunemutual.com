@@ -42,6 +42,7 @@
   h3 {
     margin-top: 8px;
     color: light.$color;
+    --max-lines: 2;
 
     @include styles.display-xs;
     @include weights.medium;
@@ -56,7 +57,9 @@
 
   p {
     margin-top: 8px;
+    margin-bottom: -9px;
     color: light.$secondary-color;
+    --max-lines: 3;
 
     @include styles.text-md;
     @include weights.medium;
