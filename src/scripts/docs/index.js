@@ -12,15 +12,19 @@ import mediumZoom from '../utils/image-zoom.min'
 import { getDocs } from './request'
 import { search } from './search'
 
+import { copyToClipboard } from '../../../util/copy'
+
 const key = 'docs__cache'
 
 const searchOverlay = document.querySelector('.search.dimmer')
+const searchInputField = document.getElementById('ModalSearchInputSearch')
+const inputClearButton = document.querySelector('#ModalSearchInputSearch + button.clear')
 
 const onActivate = async () => {
   searchOverlay.classList.toggle('hidden')
   window.docs = await getDocs(key)
 
-  document.getElementById('ModalSearchInputSearch').focus()
+  searchInputField.focus()
 
   searchOverlay.addEventListener('click', handleClick)
 
@@ -44,10 +48,31 @@ const onSearch = async (e) => {
   const { srcElement } = e
   const term = srcElement.value.trim()
   search(term)
+  updateCopyButtons()
+}
+
+const onClear = () => {
+  searchInputField.value = ''
+  searchInputField.focus()
+  search()
 }
 
 document.getElementById('SearchInputSearch').addEventListener('focus', onActivate, { passive: true })
-document.getElementById('ModalSearchInputSearch').addEventListener('input', onSearch, { passive: true })
+searchInputField.addEventListener('input', onSearch, { passive: true })
+inputClearButton.addEventListener('click', onClear, { passive: true })
+
+function updateCopyButtons () {
+  const copyButtons = document.querySelectorAll('.search.result .item > .footer button.copy')
+
+  const handleCopy = e => {
+    const href = e.target.nextSibling.getAttribute('href')
+    copyToClipboard(`${window.location.origin}${href}`)
+  }
+
+  copyButtons.forEach(copyButton => {
+    copyButton.addEventListener('click', handleCopy)
+  })
+}
 
 {
   const images = [

@@ -136,12 +136,15 @@ const breadcrumbs = [
 <div class="initially hidden search dimmer">
   <div class="ui search modal">
     <div class="search header input">
-      <Icon size={"xl"} variant={"search-lg"} />
+      <Icon size="lg" variant={"search-lg"} />
       <input
         type="search"
         placeholder="Search the Documentation"
         id="ModalSearchInputSearch"
       />
+      <button class="clear">
+        <Icon size="lg" variant={"x-close"} />
+      </button>
     </div>
 
     <div class="search result"></div>

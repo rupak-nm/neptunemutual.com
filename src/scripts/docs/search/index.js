@@ -18,6 +18,8 @@ const search = (searchTerm) => {
 
   for (const result of results) {
     const text = result.text
+    if (!text) return
+
     const url = ['/docs', result.parent, result.slug].filter(x => x !== undefined).join('/')
 
     const pos = text.toLowerCase().indexOf(searchTerm.toLowerCase())
