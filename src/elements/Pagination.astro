@@ -32,8 +32,8 @@ const t = (x: string): string => x;
   <div class="container">
     <Button
       type={"anchor"}
-      classname={"previous page"}
-      href={type ? normalizeUrl(previousHref) : "#"}
+      classname={"previous pointer page"}
+      href={type ? normalizeUrl(previousHref) : undefined}
       variant={"link-color"}
       iconLeading="arrow-left"
       disabled={parseInt((currentPage || 0).toString()) <= 1}
@@ -49,8 +49,8 @@ const t = (x: string): string => x;
               <Button
                 classname={
                   parseInt((currentPage || 0).toString()) === page
-                    ? "active page"
-                    : "page"
+                    ? "active page pointer"
+                    : "page pointer"
                 }
                 type={"anchor"}
                 href={`/${prefix}/${page}${postfix}`}
@@ -67,8 +67,8 @@ const t = (x: string): string => x;
 
     <Button
       type={"anchor"}
-      classname={"next page"}
-      href={type ? normalizeUrl(nextHref) : "#"}
+      classname={"next page pointer"}
+      href={type ? normalizeUrl(nextHref) : undefined}
       variant={"link-color"}
       iconTrailing="arrow-right"
       disabled={parseInt((currentPage || 0).toString()) ===

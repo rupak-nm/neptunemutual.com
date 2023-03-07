@@ -6,3 +6,4 @@ import '../global/video'
 import '../global/index'
 // Global End
 import './table/index'
+import '../components/subscription/index'
