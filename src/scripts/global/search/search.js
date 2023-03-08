@@ -1,16 +1,15 @@
-import { compose } from '../dom'
+import { compose } from './dom'
 import { find } from './find'
-
 const OFFSET = 100
 
-const search = (searchTerm) => {
+const search = async (searchTerm) => {
   document.querySelector('.search.result').innerHTML = ''
 
   if (!searchTerm || searchTerm.length < 4) {
     return
   }
 
-  const results = find(searchTerm)
+  const results = await find(searchTerm)
 
   if (!results) {
     return

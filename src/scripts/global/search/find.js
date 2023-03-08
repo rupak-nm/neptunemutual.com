@@ -1,11 +1,16 @@
+import { getIDBValidKey } from '../../util/search'
+import { getDocs } from './request'
+
 const coalesce = (x, or) => {
   return x ?? or
 }
 
-const find = (searchTerm) => {
+const find = async (searchTerm) => {
   searchTerm = coalesce(searchTerm, '')
 
-  const results = window.docs.filter((x) => {
+  const key = getIDBValidKey()
+  const data = await getDocs(key)
+  const results = data.filter((x) => {
     return (
       coalesce(x.title, '').toLowerCase().indexOf(searchTerm.toLowerCase()) >
         -1 ||

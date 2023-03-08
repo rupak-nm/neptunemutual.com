@@ -1,4 +1,4 @@
-const copyToClipboard = async (text: string, cb = () => { }): Promise<void> => {
+const copyToClipboard = async (text, cb = () => { }) => {
   try {
     await navigator.clipboard.writeText(text)
     cb()
