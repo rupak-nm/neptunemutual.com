@@ -215,17 +215,7 @@ $sidebar-width: 300px;
       }
 
       .item {
-        color: colors.$yellow-300;
-
-        &:hover,
-        &:focus-within {
-          background-color: colors.$gray-900;
-        }
-
-        &:hover {
-          border-color: colors.$gray-700;
-          color: colors.$white;
-        }
+        color: colors.$white;
 
 
         .header {
@@ -234,6 +224,14 @@ $sidebar-width: 300px;
           padding: 4px;
           @include styles.text-md;
           @include weights.medium;
+
+          .file.icon {
+            background-image: icons.$file-04-dark;
+          }
+
+          .link.icon {
+            background-image: icons.$arrow-up-right-dark;
+          }
         }
 
         .content {
@@ -242,7 +240,20 @@ $sidebar-width: 300px;
           @include styles.text-sm;
           @include weights.regular;
 
-          color: colors.$gray-400;
+          color: colors.$gray-50;
+        }
+
+        &:hover,
+        &:focus-within {
+          .header {
+            .file.icon {
+              background-image: icons.$file-04-hover;
+            }
+  
+            .link.icon {
+              background-image: icons.$arrow-up-right-hover;
+            }
+          }
         }
       }
     }

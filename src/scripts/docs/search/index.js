@@ -26,10 +26,10 @@ const search = (searchTerm) => {
     const start = text.substring(0, pos - OFFSET).split(' ').slice(0, -1).join(' ').length
     const end = text.substring(0, pos + OFFSET).split(' ').slice(0, -1).join(' ').length + 1
 
-    const pattern = new RegExp(searchTerm, 'd')
+    const pattern = new RegExp(`(${searchTerm})`, 'i')
     const html = text
       .substring(start, end)
-      .replace(pattern, `<span class='match'>${searchTerm}</span>`) + ' ...'
+      .replace(pattern, '<span class=\'match\'>$1</span>') + ' ...'
 
     compose(url, result.title, html)
   }
