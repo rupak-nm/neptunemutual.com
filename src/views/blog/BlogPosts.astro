@@ -6,6 +6,8 @@ import TagFilterDropdown from "./TagFilterDropdown.astro";
 import { Api } from "../../../types/enum";
 
 import { slugify } from "../../../util/slug";
+import InputWithIcon from "../../elements/InputWithIcon.astro";
+import Icon from "../../elements/Icon.astro";
 
 interface Props {
   articles: Article[];
@@ -24,6 +26,15 @@ const slug = tag?.slug ?? slugify(heading);
   <div class="inner container">
     <div class="desktop only visible">
       <TagFilters />
+      <InputWithIcon
+        className="blog search script only"
+        iconProps={{
+          variant: "search-lg",
+        }}
+        placeholder="Search"
+        value=""
+        id={"SearchInputSearch"}
+      />
     </div>
 
     <div class="mobile only visible">
@@ -50,5 +61,23 @@ const slug = tag?.slug ?? slugify(heading);
       currentPage={currentPage}
       totalPages={totalPages}
     />
+  </div>
+</div>
+
+<div class="initially hidden search dimmer">
+  <div class="ui search modal">
+    <div class="search header input">
+      <Icon size="lg" variant={"search-lg"} />
+      <input
+        type="search"
+        placeholder="Search the Blogs"
+        id="ModalSearchInputSearch"
+      />
+      <button class="clear">
+        <Icon size="lg" variant={"x-close"} />
+      </button>
+    </div>
+
+    <div class="search result"></div>
   </div>
 </div>

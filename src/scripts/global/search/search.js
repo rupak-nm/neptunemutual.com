@@ -1,3 +1,4 @@
+import { getRootPath } from '../../util/search'
 import { compose } from './dom'
 import { find } from './find'
 const OFFSET = 100
@@ -19,7 +20,8 @@ const search = async (searchTerm) => {
     const text = result.text
     if (!text) return
 
-    const url = ['/docs', result.parent, result.slug].filter(x => x !== undefined).join('/')
+    const rootPath = getRootPath()
+    const url = [rootPath, result.parent, result.slug].filter(x => x !== undefined).join('/')
 
     const pos = text.toLowerCase().indexOf(searchTerm.toLowerCase())
     const start = text.substring(0, pos - OFFSET).split(' ').slice(0, -1).join(' ').length

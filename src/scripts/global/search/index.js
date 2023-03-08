@@ -7,6 +7,13 @@ const searchOverlay = document.querySelector('.search.dimmer')
 const searchInputField = document.getElementById('ModalSearchInputSearch')
 const inputClearButton = document.querySelector('#ModalSearchInputSearch + button.clear')
 
+function handleKeyDown (e) {
+  if ((e.key === 'Escape' || e.which === 27) && !searchInputField.value) {
+    searchOverlay.classList.add('hidden')
+    document.removeEventListener('keydown', handleKeyDown)
+  }
+}
+
 const onActivate = async () => {
   searchOverlay.classList.toggle('hidden')
 
@@ -16,6 +23,8 @@ const onActivate = async () => {
 
   // disable page scrolling
   document.querySelector('html body').classList.add('no', 'vertical', 'scroll')
+
+  document.addEventListener('keydown', handleKeyDown)
 }
 
 function handleClick (e) {
