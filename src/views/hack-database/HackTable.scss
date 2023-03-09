@@ -180,7 +180,7 @@
 }
 
 .dark .hack.table.container {
-  border: 1px solid colors.$gray-600;
+  border: 1px solid colors.$gray-800;
 
   .icon.chevron.down {
     background-image: 
@@ -197,10 +197,10 @@
 
   table {
     thead {
-      background-color: colors.$gray-700;
+      background-color: colors.$gray-900;
 
       th {
-        border-bottom: 1px solid colors.$gray-600;
+        border-bottom: 1px solid colors.$gray-800;
         color: colors.$white;
 
         button {
@@ -216,14 +216,14 @@
     tbody {
       tr {
         &:not(.loading, .no.data):hover {
-          background-color: colors.$gray-700;
+          background-color: colors.$gray-900;
         }
       }
 
 
       tr:not(:last-of-type) {
         td {
-          border-bottom: 1px solid colors.$gray-700;
+          border-bottom: 1px solid colors.$gray-800;
         }
       }
     }

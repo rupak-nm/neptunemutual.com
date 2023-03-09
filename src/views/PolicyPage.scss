@@ -10,7 +10,6 @@
     padding-bottom: 12px;
   }
 
-
   .ui.tab.buttons {
     display: flex;
     gap: 8px;
@@ -45,13 +44,17 @@
 .dark .policy.page.container {
   .ui.tab.buttons {
     .item {
-      color: colors.$gray-300;
+      color: colors.$gray-100;
     }
 
     .item.active {
-      background-color: colors.$gray-600;
+      background-color: colors.$gray-800;
       color: colors.$white;
+    }
 
+    .item:hover {
+      background-color: colors.$gray-700;
+      color: colors.$white;
     }
   }
 }

@@ -84,8 +84,8 @@
 }
 
 .dark .sub.menu.container {
-  background-color: dark.$primary-background-color;
-  border-top: 1px solid colors.$gray-700;
+  background-color: colors.$black;
+  border-top: 1px solid colors.$gray-800;
   box-shadow: shadows.$shadow-2xl;
 
   .right.space,
@@ -95,6 +95,6 @@
 
   .left.space,
   .content .non.video.sections {
-    background-color: dark.$primary-background-color;
+    background-color:colors.$gray-900;
   }
 }

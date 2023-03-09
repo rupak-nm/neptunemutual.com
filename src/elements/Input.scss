@@ -119,8 +119,8 @@
   textarea,
   select {
     color: colors.$gray-300;
-    background-color: colors.$gray-800;
-    border: 1px solid colors.$gray-500;
+    background-color: dark.$primary-background-color;
+    border: 1px solid colors.$gray-800;
 
 
     ::placeholder {

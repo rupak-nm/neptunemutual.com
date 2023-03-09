@@ -130,8 +130,8 @@
 
   .button.container {
     button {
-      border: 1px solid colors.$gray-700;
-      background-color: colors.$gray-700;
+      border: 1px solid colors.$gray-800;
+      background-color: dark.$primary-background-color;
       
       &, & svg {
         color: colors.$white
@@ -139,14 +139,14 @@
     }
 
     .menu {
-      border: 1px solid colors.$gray-600;
-      background-color: colors.$gray-700;
+      border: 1px solid colors.$gray-800;
+      background-color: colors.$gray-900;
 
       ul li {
         color: colors.$white;
 
         &:hover {
-          background-color: colors.$gray-600;
+          background-color: colors.$gray-800;
         }
       }
     }

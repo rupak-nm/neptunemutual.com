@@ -51,8 +51,8 @@
       gap: 24px;
       margin: 0 -24px;
       padding: 0 24px;
-      padding-bottom:32px;
-      padding-top:24px;
+      padding-bottom: 32px;
+      padding-top: 24px;
 
       @media (max-width: 767px) {
         margin: 0 -16px;
@@ -63,9 +63,9 @@
       }
 
       &:hover {
-        background-color:  colors.$gray-100;
+        background-color: colors.$gray-100;
       }
-        
+
       .title.and.intro {
         display: flex;
         flex-direction: column;
@@ -123,7 +123,7 @@
   }
 
   .arrow.container {
-   color: colors.$primary-700;
+    color: colors.$primary-700;
   }
 }
 
@@ -144,20 +144,18 @@
     a.item {
 
       &:not(:first-of-type) {
-        border-top: 1px solid colors.$gray-700;
+        border-top: 1px solid colors.$gray-900;
       }
 
       &:hover {
-        background-color:  colors.$gray-900;
+        background-color: colors.$gray-900;
       }
-        
+
       .title.and.intro {
         .title.with.badge {
-
           h3 {
             color: colors.$white;
           }
-
         }
       }
     }
@@ -172,6 +170,6 @@
   }
 
   .arrow.container {
-   color: colors.$primary-300;
+    color: colors.$primary-300;
   }
 }

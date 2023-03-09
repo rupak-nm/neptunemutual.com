@@ -1,6 +1,7 @@
 @use "../design-system/theme/light" as light-theme;
 @use "../design-system/theme/dark" as dark-theme;
 @use "../design-system/utils";
+@use "../design-system/colors";
 @import "../design-system/base";
 
 .full.width.container {
@@ -26,7 +27,7 @@ html.dark {
   text-rendering: optimizeSpeed;
 
   body {
-    background-color: dark-theme.$primary-background-color;
+    background-color: colors.$black;
     color: dark-theme.$color;
   }
 

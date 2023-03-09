@@ -153,7 +153,7 @@
 }
 
 .dark .about.us.hero.container {
-  background-color: colors.$gray-900;
+  background-color: dark.$primary-background-color;
 
   .inner.container {
     .subheader {
@@ -171,11 +171,11 @@
 
   .floating.container {
     .top {
-      background-color: colors.$gray-900;
+      background-color: dark.$primary-background-color;
     }
     
     .bottom {
-      background-color: dark.$primary-background-color;
+      background-color: colors.$black;
     }
   }
 }

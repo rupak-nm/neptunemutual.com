@@ -5,8 +5,6 @@
 @use "../../design-system/theme/light";
 @use "../../design-system/theme/dark";
 
-
-
 .marketplace.options.container {
   @include utils.full-width-container;
   margin-bottom: 96px;
@@ -88,7 +86,7 @@
   .inner.container {
     .network.item {
       &:hover, &:focus-visible {
-        background-color: colors.$gray-700;
+        background-color: colors.$gray-900;
       }
 
       i[data-mode="light"] {

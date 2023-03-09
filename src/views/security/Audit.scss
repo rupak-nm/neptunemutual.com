@@ -5,8 +5,6 @@
 @use "../../design-system/theme/light";
 @use "../../design-system/theme/dark";
 
-
-
 .security.audit.report {
   padding: 24px;
   display: flex;
@@ -69,7 +67,12 @@
 }
 
 .dark .security.audit.report {
-  background-color: colors.$gray-700;
+  background-color: colors.$black;
+  border: 1px solid colors.$gray-900;
+
+  &:hover {
+    background-color: dark.$primary-background-color;
+  }
 
   a.button {
 

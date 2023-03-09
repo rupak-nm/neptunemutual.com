@@ -363,7 +363,7 @@
 
 .dark .content.viewer.container {
   .sidebar {
-    border-right: 1px solid colors.$gray-700;
+    border-right: 1px solid colors.$gray-900;
   }
 
   .table.of.contents.container {
@@ -590,6 +590,6 @@
 
 .dark {
   .medium-zoom-overlay {
-    background-color: dark.$primary-background-color !important;
+    background-color: colors.$black !important;
   }
 }
