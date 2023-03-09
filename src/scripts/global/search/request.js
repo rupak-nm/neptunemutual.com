@@ -1,7 +1,8 @@
 import {
   cache,
   fromCache
-} from '../util/cache'
+} from '../../util/cache'
+import { getCacheUrl } from '../../util/search'
 
 const SECONDS = 100
 const DAYS = 24 * 60 * 60 * SECONDS
@@ -9,13 +10,14 @@ const duration = 7 * DAYS
 
 const request = async () => {
   try {
-    const content = await fetch('/cache/docs.json')
+    const url = getCacheUrl()
+    const content = await fetch(url)
     const { docs } = await content.json()
 
     return docs.map((x) => {
       return {
         title: x.title,
-        subtitle: x.subtitle,
+        subtitle: x.subtitle ?? x.intro,
         text: x.htmlAsText,
         slug: x.slug,
         parent: x.parent?.slug
