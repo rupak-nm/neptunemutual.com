@@ -29,8 +29,10 @@ const compose = (href, title, content) => {
   const anchor = createEl({ appendTo: parent, type: 'div', className: 'item' })
   const header = createEl({ appendTo: anchor, type: 'div', className: 'header' })
 
-  createEl({ appendTo: header, type: 'div', className: 'file icon' })
-  createEl({ appendTo: header, type: 'div', className: 'title', html: title })
+  const iconAndTitle = createEl({ appendTo: header, type: 'div', className: 'icon with title' })
+
+  createEl({ appendTo: iconAndTitle, type: 'i', className: 'file icon' })
+  createEl({ appendTo: iconAndTitle, type: 'p', className: 'title', html: title })
 
   const externalLink = createEl({
     appendTo: header,
@@ -39,7 +41,7 @@ const compose = (href, title, content) => {
     attributes: [
       ...attributes,
       { key: 'target', value: '_blank' },
-      { key: 'data-tooltip', value: 'Open in Newtab' },
+      { key: 'data-tooltip', value: 'Open in new tab' },
       { key: 'data-flow', value: 'left' }
     ],
     html: '<span>New Tab</span>'

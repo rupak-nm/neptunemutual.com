@@ -5,15 +5,11 @@ const coalesce = (x, or) => {
   return x ?? or
 }
 
-let data
-
 const find = async (searchTerm) => {
   searchTerm = coalesce(searchTerm, '')
 
   const key = getIDBValidKey()
-  if (!data) {
-    data = await getDocs(key)
-  }
+  const data = await getDocs(key)
 
   const results = data.filter((x) => {
     return (
