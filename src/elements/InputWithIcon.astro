@@ -9,12 +9,13 @@ interface Props {
   };
   placeholder: string;
   value: string;
+  id?: string;
 }
 
-const { className, iconProps, placeholder, value } = Astro.props;
+const { className, iconProps, placeholder, value, id } = Astro.props;
 ---
 
 <div class={`input with icon ${className || ""}`.trim()}>
   {Object.keys(iconProps).length > 0 && <Icon {...iconProps} />}
-  <input placeholder={placeholder} autocomplete="off" value={value} />
+  <input placeholder={placeholder} autocomplete="off" value={value} id={id} />
 </div>

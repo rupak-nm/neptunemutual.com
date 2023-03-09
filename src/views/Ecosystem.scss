@@ -16,8 +16,8 @@
     padding: 32px 0;
     overflow: auto;
 
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
+    // scroll-snap-type: x mandatory;
+    // scroll-behavior: smooth;
   }
 
   .newsletter.signup {
@@ -50,8 +50,8 @@
 
   .item {
     transition: all 100ms ease-in;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+    // scroll-snap-align: start;
+    // scroll-snap-stop: always;
 
     &:first-child {
       padding-left: 4px;
