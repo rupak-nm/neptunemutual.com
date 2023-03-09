@@ -62,8 +62,8 @@
 }
 
 .dark .button.secondary.gray {
-  border: 1px solid colors.$gray-700;
-  background-color: dark.$primary-background-color;
+  border: 1px solid colors.$gray-800;
+  background-color: colors.$black;
   color: colors.$gray-50;
 
   &:disabled,
@@ -75,7 +75,7 @@
     &[data-state="hover"],
     &:hover {
       color: colors.$gray-100;
-      background-color: colors.$gray-600;
+      background-color: colors.$gray-900;
     }
 
     &[data-state="focused"],

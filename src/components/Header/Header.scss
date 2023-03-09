@@ -108,17 +108,17 @@ header {
 }
 
 .dark header {
-  border-bottom: 1px solid colors.$gray-700;
-  background-color: dark.$primary-background-color;
+  border-bottom: 1px solid colors.$gray-800;
+  background-color: colors.$black;
 
   .inner.container {
     .nav.with.language.and.theme {
-      background-color: dark.$primary-background-color;
+      background-color: colors.$black;
     }
 
     @media (max-width: 1023px) {
       .nav.with.language.and.theme {
-        border-top: 1px solid colors.$gray-700;
+        border-top: 1px solid colors.$gray-800;
       }
   
       .language.and.theme.only {
@@ -129,11 +129,11 @@ header {
 
 
   &[data-style="colored"] {
-    background-color: colors.$gray-900;
+    background-color: colors.$black;
 
     @media (min-width: 1024px) {
       .inner.container .nav.with.language.and.theme {
-        background-color: colors.$gray-900;
+        background-color: colors.$black;
       }
     }
   }

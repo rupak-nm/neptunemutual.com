@@ -74,11 +74,10 @@
       &[data-active="true"] {
         border-left: 4px solid colors.$primary-600;
       }
-
     }
   }
 
   .image.container {
-    background-color: colors.$gray-700;
+    background-color: dark.$primary-background-color;
   }
 }

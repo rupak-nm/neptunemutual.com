@@ -151,7 +151,7 @@
 
 
 .dark .ui.hero.section {
-  background-color: colors.$gray-800;
+  background-color: dark.$primary-background-color;
 
   >.container {
     .content {
@@ -178,5 +178,5 @@
 }
 
 .dark .ui.basic.hero.section {
-  background-color: colors.$gray-900;
+  background-color: dark.$primary-background-color;
 }
