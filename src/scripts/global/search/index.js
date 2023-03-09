@@ -62,8 +62,16 @@ function updateCopyButtons () {
   const copyButtons = document.querySelectorAll('.search.result .item > .footer button.copy')
 
   const handleCopy = e => {
-    const href = e.target.nextSibling.getAttribute('href')
-    copyToClipboard(`${window.location.origin}${href}`)
+    const href = `${window.location.origin}${e.currentTarget.getAttribute('data-link')}`
+    const btn = e.currentTarget
+    copyToClipboard(href, () => {
+      const initialAttr = btn.getAttribute('data-tooltip')
+      btn.setAttribute('data-tooltip', 'Copied')
+
+      setTimeout(() => {
+        btn.setAttribute('data-tooltip', initialAttr)
+      }, 1500)
+    })
   }
 
   copyButtons.forEach(copyButton => {

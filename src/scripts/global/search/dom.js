@@ -31,18 +31,46 @@ const compose = (href, title, content) => {
 
   createEl({ appendTo: header, type: 'div', className: 'file icon' })
   createEl({ appendTo: header, type: 'div', className: 'title', html: title })
-  createEl({
+
+  const externalLink = createEl({
     appendTo: header,
     type: 'a',
-    className: 'link icon',
-    attributes: [...attributes, { key: 'target', value: '_blank' }]
+    className: 'external link',
+    attributes: [
+      ...attributes,
+      { key: 'target', value: '_blank' },
+      { key: 'data-tooltip', value: 'Open in Newtab' },
+      { key: 'data-flow', value: 'left' }
+    ],
+    html: '<span>New Tab</span>'
+  })
+  createEl({
+    appendTo: externalLink,
+    type: 'i',
+    className: 'link icon'
   })
 
   createEl({ appendTo: anchor, type: 'div', className: 'content', html: content })
 
   const footer = createEl({ appendTo: anchor, type: 'div', className: 'footer' })
-  createEl({ appendTo: footer, type: 'button', className: 'copy button' })
-  createEl({ appendTo: footer, type: 'a', className: 'link icon', attributes })
+
+  const copyButton = createEl({
+    appendTo: footer,
+    type: 'button',
+    className: 'copy button',
+    html: '<span>Copy</span>',
+    attributes: [{ key: 'data-tooltip', value: 'Copy URL' }, { key: 'data-link', value: href }]
+  })
+  createEl({ appendTo: copyButton, type: 'i', className: 'copy icon' })
+
+  const link = createEl({
+    appendTo: footer,
+    type: 'a',
+    className: 'open link',
+    html: '<span>Open</span>',
+    attributes: [...attributes, { key: 'data-tooltip', value: 'Open URL' }]
+  })
+  createEl({ appendTo: link, type: 'i', className: 'link icon' })
 }
 
 export { compose }

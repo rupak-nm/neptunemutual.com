@@ -1,4 +1,4 @@
-import { DOCS_IDBVALIDKEY, BLOG_IDBVALIDKEY } from '../global/search/constant'
+import { DOCS_IDBVALIDKEY, BLOG_IDBVALIDKEY, TEXT_OFFSET } from '../global/search/constant'
 
 function debounce (func, timeout = 300) {
   let timer
@@ -37,4 +37,21 @@ const getRootPath = () => {
   if (isBlogPage) return '/blog'
 }
 
-export { debounce, getIDBValidKey, getCacheUrl, getRootPath }
+const getUpdatedHtml = (texts = [], searchTerm = '') => {
+  const text = texts.find(text => text && text.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)
+
+  if (!text) return ''
+
+  const pos = text.toLowerCase().indexOf(searchTerm.toLowerCase())
+  const start = pos - TEXT_OFFSET
+  const end = pos + TEXT_OFFSET
+
+  const pattern = new RegExp(`(${searchTerm})`, 'i')
+  const html = text
+    .substring(start, end)
+    .replace(pattern, '<span class=\'match\'>$1</span>') + ' ...'
+
+  return html
+}
+
+export { debounce, getIDBValidKey, getCacheUrl, getRootPath, getUpdatedHtml }
