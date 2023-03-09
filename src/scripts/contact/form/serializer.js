@@ -9,7 +9,7 @@ const serialize = () => {
   })
 
   data.mock = window.mock
-  data.blockchains = data.blockchains.split(',').map(x => x.trim())
+  data.blockchains = data.blockchains ? data.blockchains.split(',').map(x => x.trim()) : []
   data.captcha = window.grecaptcha.getResponse()
 
   return data
