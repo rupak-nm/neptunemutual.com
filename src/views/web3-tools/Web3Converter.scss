@@ -1,0 +1,379 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/shadows";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+@mixin input-fields {
+  div {
+    
+    label {
+      @include styles.text-sm;
+      @include weights.medium;
+    }
+
+    input {
+      padding-right: 40px;
+    }
+
+    input:invalid {
+      border: 1px solid colors.$error-600;
+      box-shadow: 0px 1px 2px rgb(16 24 40 / 5%), 0px 0px 0px 4px colors.$error-300 !important;
+
+      .dark & {
+        border: 1px solid colors.$error-700;
+        box-shadow: 0px 1px 2px rgb(16 24 40 / 5%), 0px 0px 0px 4px colors.$error-900 !important;
+      }
+    }
+
+    textarea {
+      height: 180px;
+
+      @media screen and (max-width: 767px) {
+        height: 168px;
+      }
+    }
+
+    input,textarea {
+      margin-top: 6px;
+      
+    }
+  }
+}
+
+.web3.tools {
+  padding: 56px 0;
+  margin-bottom: 64px;
+  display: flex;
+  gap: 64px;
+  align-items: flex-start;
+
+  ol {
+    margin-top: 0;
+  }
+
+  @media screen and (max-width: 767px) {
+    padding-top: 32px;
+    padding-bottom: 64px;
+    flex-direction: column-reverse;
+    gap: 0;
+  }
+
+  .left.container {
+    width: 754px;
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+
+    .button.container {
+      button .content {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+
+      &.mobile.only.visible {
+        margin-top: 32px;
+        
+        @media screen and (max-width: 767px) {
+          display: block;
+        }
+      }
+    }
+
+    .title.container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 32px;
+    }
+
+    .desktop.header {
+      h2 {
+        @include styles.display-sm;
+        @include weights.semibold;
+      }
+
+      @media screen and (max-width: 767px) {
+        display: none;
+      }
+    }
+
+    form {
+      margin-top: 32px;     
+      @include input-fields;
+
+      .input.container {
+        position: relative;
+
+        .help.icon {
+          position: absolute;
+          top: 4px;
+          right: 16px;
+          bottom: 0;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+        }
+
+        .copy.button.container, .copied.button.container {
+          position: absolute;
+          bottom: 16px;
+          right: 14px;
+
+          button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: rgb(102, 112, 133);
+            border: none;
+          }
+        }
+
+        .copied.button.container {
+          display: none;
+        }
+      }
+
+      .inputs {
+        display: block;
+      }
+
+      label {
+        color: colors.$gray-700;
+      }
+
+      & > div {
+        display: none;
+        
+        > :not(:first-child) {
+          margin-top: 32px;
+        } 
+      
+      }
+    }
+  }
+
+  .right.container {
+    border-radius: 8px;
+    width: 398px;
+    padding: 24px;
+    border: 1px solid colors.$gray-300;
+
+    @media screen and (max-width: 767px) {
+      padding: 16px;
+      width: 100%;
+    }
+
+    .option.container {
+
+      legend {
+        @include styles.text-lg;
+        @include weights.semibold;
+      }
+
+      .sub.legend {
+        @include styles.text-sm;
+        margin-top: 16px;
+      }
+
+      .options {
+        display: flex;
+        gap: 16px;
+        padding-top: 16px;
+
+        @media screen and (max-width: 767px) {
+          padding-top: 8px;
+        }
+  
+        .option {
+          display: flex;
+          align-items: center;
+          pointer-events: none;
+          
+          label {
+            margin-left: 8px;
+            color: colors.$gray-700;
+
+            @include weights.medium;
+            @include styles.text-sm;
+          }
+        }
+      }
+
+      button.padding.container {
+        margin-top: 24px;
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 4px;
+
+        background-color: colors.$gray-50;
+        .dark & {
+          background-color: colors.$gray-600;
+        }
+
+        border: 2px solid colors.$gray-400;
+        .dark & {
+          border: 2px solid colors.$gray-500;
+        }
+        border-radius: 12px;
+        text-align: left;
+        cursor: pointer;
+
+        input[type="radio"] {
+          width: 16px;
+          height: 16px;
+        }
+
+        p.padding.label {
+          @include styles.text-sm;
+          @include weights.medium;
+          color: colors.$gray-700;
+
+          .dark & {
+            color: colors.$white;
+          }
+        }
+        p.padding.info {
+          @include styles.text-sm;
+          @include weights.regular;
+          color: colors.$gray-600;
+
+          .dark & {
+            color: colors.$gray-25;
+          }
+        }
+
+        .checkbox.container {
+          display: flex;
+
+          label {
+            margin-left: 12px;
+            @include styles.text-md;
+            @include weights.regular;
+            color: colors.$gray-600;
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0px;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0px, 0px, 0px, 0px);
+            white-space: nowrap;
+            border-width: 0px;
+            
+            .dark & {
+              color: colors.$gray-300;
+            }
+          }
+
+          input.checkbox {
+            appearance: none;
+            padding: 0;
+            print-color-adjust: exact;
+            display: inline-block;
+            vertical-align: middle;
+            background-origin: border-box;
+            user-select: none;
+            flex-shrink: 0;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid colors.$primary-600;
+            background-color: transparent;
+            .dark & {
+              border: 1px solid colors.$gray-300;
+              background-color: colors.$white;
+
+              &:focus,
+            &:active,
+            &:focus-visible {
+                box-shadow: shadows.$xs,
+              0px 0px 0px 4px colors.$primary-800;
+              }
+            }
+            
+            &:focus,
+            &:active,
+            &:focus-visible {
+              outline: none;
+              box-shadow: shadows.$xs,
+                0px 0px 0px 4px colors.$primary-100;
+              
+            }
+
+            &:hover,
+            & + label:hover {
+              border-color: rgb(130, 130, 130);
+              cursor: pointer;
+            }
+
+            background-position: center;
+            background-repeat: no-repeat;
+            &:checked {
+              background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.33332 2.5L3.74999 7.08333L1.66666 5' stroke='white' stroke-width='1.66667' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+              background-color: colors.$primary-600;
+              border: 1px solid inherit;
+              .dark & {
+                border: 1px solid transparent;
+                background-color: colors.$primary-600;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .mobile.header {
+    display: none;
+
+    @media screen and (max-width: 767px) {
+      display: block;
+      h2 {
+        margin: 32px 0;
+        color: colors.$gray-900;
+        @include styles.display-xs;
+        @include weights.semibold;
+      }
+    }
+  }
+
+  
+}
+
+.dark {
+  .web3.tools {
+    .header{
+      h2 {
+        color: white;
+      }
+    }
+
+    .left.container {
+      form {
+        label {
+          color: colors.$gray-300;
+        }
+      }
+    }
+  
+      .right.container {
+        border: 1px solid colors.$gray-500;
+        .option.container {
+          .option {
+            label {
+              color: white;
+            }
+          }
+        }
+      }
+  }
+}
