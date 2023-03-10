@@ -19,6 +19,26 @@
     @media screen and (max-width: 767px) {
       padding-top: 32px;
     }
+
+    & > div:nth-child(1) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .blog.search {
+        width: 320px;
+        color: colors.$gray-500;
+        padding: 10px 14px;
+      }
+      
+      @media screen and (max-width: 767px) {
+        margin-bottom: 16px;
+        
+        .blog.search {
+          width: 100%;
+        }
+      }
+    }
   }
 
   .text.and.cta {
@@ -75,7 +95,17 @@
 
 .dark .blog.post.container {
   .inner.container {
-    border-top: 0.5px solid colors.$gray-700;
+    border-top: 0.5px solid colors.$gray-800;
+
+    & > div:nth-child(1) {
+      .blog.search {
+        background-color: transparent;
+
+        input::placeholder {
+          color: colors.$gray-500;
+        }
+      }
+    }
   }
 
   .text.and.cta {

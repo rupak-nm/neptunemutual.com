@@ -167,28 +167,27 @@
 .dark .contact.form {
   .ui.blockchain.selection.list {
     .item {
-      border: 1px solid colors.$gray-500;
-      background-color: colors.$gray-700;
+      border: 1px solid colors.$gray-800;
+      background-color: dark.$primary-background-color;
 
       &.selected {
         .checkbox {
-          border-color: colors.$primary-600;
-          background-color: colors.$primary-600;
+          border-color: colors.$primary-800;
+          background-color: colors.$primary-900;
           color: colors.$white;
         }
       }
 
 
       &:not(.selected):hover {
-        border: 1px solid colors.$gray-400;
-        background-color: colors.$gray-600;
+        border: 1px solid colors.$gray-800;
+        background-color: colors.$gray-900;
 
         .checkbox {
-          background-color: colors.$gray-500;
-          border-color: colors.$gray-400;
+          background-color: colors.$gray-600;
+          border-color: colors.$gray-800;
         }
       }
-
 
       .checkbox {
         border: 1px solid colors.$gray-500;

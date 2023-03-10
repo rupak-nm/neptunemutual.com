@@ -11,8 +11,8 @@
 /* Applies to all tooltips */
 [data-tooltip]::before,
 [data-tooltip]::after {
-  @include styles.text-xs;
-  @include weights.medium;
+  font-size: 12px;
+  font-weight: 600;
   text-transform: none;
   user-select: none;
   pointer-events: none;
@@ -31,6 +31,10 @@
   border-bottom-width: 0;
   border-top-color: colors.$gray-900;
   left: 50%;
+
+  .dark & {
+    border-top-color: colors.$gray-800;
+  }
 }
 
 [data-tooltip]::after {
@@ -40,17 +44,23 @@
   max-width: 450px;
   white-space: nowrap;
   overflow: auto;
-  padding: 1.5ch 1.9ch;
+  padding: 0.75ch 2ch;
   box-shadow: shadows.$md;
   z-index: 1000;
   background: colors.$gray-900;
   color: colors.$white;
   border-radius: 8px;
   bottom: calc(100% + 5px);
-  right: -100%;
 
-
+  .dark & {
+    background: colors.$gray-800;
+  }
 }
+
+[data-tooltip][data-flow="left"]::after {
+  right: -1rem;
+}
+
 /* Make the tooltips respond to hover */
 [data-tooltip]:hover::before,
 [data-tooltip]:hover::after {
@@ -58,8 +68,8 @@
 }
 
 /* don't show empty tooltips */
-[tooltip=""]::before,
-[tooltip=""]::after {
+[data-tooltip=""]::before,
+[data-tooltip=""]::after {
   display: none !important;
 }
 
@@ -70,4 +80,3 @@
     transform: translate(0, 0);
   }
 }
-

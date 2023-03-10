@@ -5,8 +5,6 @@
 @use "../../design-system/theme/light";
 @use "../../design-system/theme/dark";
 
-
-
 .security.review.section {
   display: flex;
   padding-bottom: 96px;
@@ -73,10 +71,9 @@
     flex-direction: row;
     gap: 16px;
 
-    .item {
-
+    .item {      
       @media (min-width: 1024px) {
-        width: 400px;
+        width: 392px;
       }
 
       @media (max-width: 1023px) {
