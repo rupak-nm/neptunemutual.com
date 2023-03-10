@@ -30,7 +30,11 @@ const t = (x: string): string => x;
             <a
               itemprop="item"
               class="crumb"
-              href={item.link === "#" ? undefined : normalizeUrl(item.link)}
+              href={
+                ["#", ""].includes(item.link)
+                  ? undefined
+                  : normalizeUrl(item.link)
+              }
               data-is-last={items.length === i}
             >
               <span itemprop="name">{t(`${item.name}`)}</span>

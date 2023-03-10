@@ -10,6 +10,7 @@ const inputClearButton = document.querySelector('#ModalSearchInputSearch + butto
 function handleKeyDown (e) {
   if ((e.key === 'Escape' || e.which === 27) && !searchInputField.value) {
     searchOverlay.classList.add('hidden')
+    document.querySelector('html body').classList.remove('no', 'vertical', 'scroll')
     document.removeEventListener('keydown', handleKeyDown)
   }
 }
