@@ -17,9 +17,9 @@ interface Props {
 const { items, page } = Astro.props;
 
 const getSlug = (x: Documentation) =>
-  x.parent ? `/${x.parent.slug}/${x.slug}` : x.slug;
+  x.parent ? `${x.parent.slug}/${x.slug}` : x.slug;
 
-const slug = getSlug(page);
+const slug = `/${getSlug(page)}`;
 
 const [next] = Enumerable.from(items)
   .where((x) => x.order > page.order && !x.unlinked)

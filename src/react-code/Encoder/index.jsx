@@ -316,67 +316,68 @@ const FormContent = styled.form`
 
 const FormAction = styled.div`
   display: flex;
-
+  border: 1px solid ${colors.gray[300]};
+  border-radius: 8px;
+  padding:0;
+  gap: 0;
+  width: max-content;
+  
   @media (max-width: 767px) {
     flex-direction: column;
+    width: 100%;
   }
   
   button {
-    background-color: ${lightTheme.primaryBackgroundColor};
-    border-radius: 0;
-    border: 1px solid ${colors.gray[300]};
+    display: flex;
+    padding: 10px 16px;
+    background-color: ${colors.white};
     color: ${colors.gray[700]};
+    border: 0px solid ${colors.gray[300]};
+    margin: 0;
+    border-radius: 0;
 
-    &:nth-of-type(1) {
-      border-right: none;
-      border-top-left-radius: 8px;
-      border-bottom-left-radius: 8px;
-
-      @media (max-width: 767px) {
-        border: 1px solid ${colors.gray[300]};
-        border-top-right-radius: 8px;
-        border-bottom-left-radius: 0;
-        border-bottom: none;
-      }
+    @media (max-width: 767px) {
+      border-radius: 0;
+      border-width: 0;
     }
-    
-    &:nth-last-of-type(1) {
-      border-left: none;
-      border-top-right-radius: 8px;
-      border-bottom-right-radius: 8px;
 
+    &:first-of-type {
+      border-radius: 8px 0 0 8px;
+      border-width: 0 1px 0 0;
+      
       @media (max-width: 767px) {
-        border: 1px solid ${colors.gray[300]};
-        border-top-right-radius: 0;
-        border-bottom-left-radius: 8px;
-        border-top: none;
+        border-radius: 8px 8px 0 0;
+        border-width: 0 0 1px 0;
       }
     }
 
-    .dark & {
+    &:last-of-type {
+      border-radius: 0 8px 8px 0;
+      border-width: 0 0 0 1px;
+
+      @media (max-width: 767px) {
+        border-radius: 0 0 8px 8px;
+        border-width: 1px 0 0 0;
+      }
+    }
+
+    &:hover:not(:disabled) {
+      background-color: ${colors.gray[100]};
+      color: ${colors.gray[800]};
+    }
+  }
+
+  .dark & {
+    border-color: ${colors.gray[500]};
+
+    button {
+      border-color: ${colors.gray[500]};
       background-color: ${colors.gray[600]};
-      border: 1px solid ${colors.gray[500]};
-      color: ${colors.white};
+      color: ${colors.gray[300]};
 
-      @media (min-width: 768px) { 
-        border-right-color: ${colors.gray[50]};
-        border-left-color: ${colors.gray[50]};
-      }
-
-      &:nth-of-type(1) {
-        border-left-color: ${colors.gray[600]};
-
-        @media (max-width: 767px) {
-          border: 1px solid ${colors.gray[500]};
-        }
-      }
-
-      &:nth-last-of-type(1) {
-        border-right-color: ${colors.gray[500]};
-
-        @media (max-width: 767px) {
-          border: 1px solid ${colors.gray[500]};
-        }
+      &:hover:not(:disabled) {
+        background-color: ${colors.gray[700]};
+        color: ${colors.white};
       }
     }
   }

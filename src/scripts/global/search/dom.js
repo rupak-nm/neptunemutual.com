@@ -76,7 +76,6 @@ const compose = (href, title, content) => {
       ...attributes,
       { key: 'target', value: '_blank' },
       { key: 'data-tooltip', value: 'Open in New Tab' }
-      // { key: 'data-flow', value: 'left' }
     ],
     html: '<span>New Tab</span>'
   })

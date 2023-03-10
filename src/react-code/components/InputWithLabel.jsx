@@ -10,7 +10,7 @@ import {
   primaryColorKey
 } from '../styles/colors'
 import { shadows } from '../styles/shadows'
-import { lightTheme } from '../styles/theme'
+import { darkTheme, lightTheme } from '../styles/theme'
 import { typography } from '../styles/typography'
 import { Icon } from './Icon'
 
@@ -124,6 +124,7 @@ const StyledInput = styled.input`
     &[data-state="focussed"],
     &:focus,
     &:active,
+    &:hover,
     &:focus-visible {
 
       outline: none;
@@ -137,25 +138,27 @@ const StyledInput = styled.input`
   }
 
   .dark & {
-    background-color: ${props => colors.gray[600]};
-    border: 1px solid ${colors.gray['500']};
+    color: ${colors.gray[300]};
+    background-color: ${darkTheme.primaryBackgroundColor};
+    border: 1px solid ${colors.gray[800]};
     
     ::placeholder {
-      color: ${colors.gray['300']};
+      color: ${colors.gray['500']};
     }
 
     :-ms-input-placeholder { 
-      color: ${colors.gray['300']};
+      color: ${colors.gray['500']};
     }
 
     ::-ms-input-placeholder {
-      color: ${colors.gray['300']};
+      color: ${colors.gray['500']};
     }
 
     &:not(&:disabled) {
       &[data-state="focussed"],
       &:focus,
       &:active,
+      &:hover,
       &:focus-visible {
         box-shadow: ${shadows.xs},
           0px 0px 0px 4px ${colors[primaryColorKey]['800']};
