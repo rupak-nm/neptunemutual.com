@@ -5,7 +5,7 @@ import {
   primaryColorKey
 } from '../styles/colors'
 import { shadows } from '../styles/shadows'
-import { lightTheme } from '../styles/theme'
+import { darkTheme, lightTheme } from '../styles/theme'
 import { typography } from '../styles/typography'
 
 const TextArea = ({ children, placeholder, label, error, ...props }) => {
@@ -84,6 +84,7 @@ const StyledTextArea = styled.textarea`
     &[data-state="focussed"],
     &:focus,
     &:active,
+    &:hover,
     &:focus-visible {
 
       outline: none;
@@ -100,27 +101,29 @@ const StyledTextArea = styled.textarea`
   }
 
   .dark & {
-    background-color: ${colors.gray[600]};
-    border: 1px solid ${colors.gray['500']};
+    color: ${colors.gray[300]};
+    background-color: ${darkTheme.primaryBackgroundColor};
+    border: 1px solid ${colors.gray[800]};
     
     ::placeholder {
-      color: ${colors.gray['300']};
+      color: ${colors.gray['500']};
     }
 
     :-ms-input-placeholder {
-      color: ${colors.gray['300']};
+      color: ${colors.gray['500']};
     }
 
     ::-ms-input-placeholder {
-      color: ${colors.gray['300']};
+      color: ${colors.gray['500']};
     }
 
     &:not(&:disabled) {
       &[data-state="focussed"],
       &:focus,
       &:active,
+      &:hover,
       &:focus-visible {
-        box-shadow: ${shadows.xs}, 0px 0px 0px 4px ${colors[primaryColorKey]['800']};
+        box-shadow: ${shadows.xs}, 0px 0px 0px 4px ${colors[primaryColorKey][800]};
       }
     }
   }

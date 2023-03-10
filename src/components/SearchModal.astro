@@ -1,5 +1,11 @@
 ---
 import Icon from "../elements/Icon.astro";
+
+interface Props {
+  inputPlaceholder: string;
+}
+
+const { inputPlaceholder } = Astro.props;
 ---
 
 <div class="initially hidden search dimmer">
@@ -9,7 +15,7 @@ import Icon from "../elements/Icon.astro";
         <Icon size="lg" variant={"search-lg"} />
         <input
           type="search"
-          placeholder="Search the Documentation"
+          placeholder={inputPlaceholder}
           id="ModalSearchInputSearch"
         />
         <button class="clear">

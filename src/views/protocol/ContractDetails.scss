@@ -46,7 +46,6 @@
   .search.input {
     @include styles.text-md;
     @include weights.regular;
-    color: colors.$gray-500;
   }
 
   .ui.contracts.list.view {
@@ -75,13 +74,4 @@
     color: colors.$gray-25;
   }
 
-  .search.input {
-    background: colors.$gray-600;
-    border-color: colors.$gray-500;
-    color: colors.$gray-25;
-
-    input, ::placeholder, svg {
-      color: colors.$gray-25;
-    }
-  }
 }

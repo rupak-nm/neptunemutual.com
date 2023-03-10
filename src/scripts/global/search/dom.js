@@ -34,22 +34,16 @@ const compose = (href, title, content) => {
   createEl({ appendTo: iconAndTitle, type: 'i', className: 'file icon' })
   createEl({ appendTo: iconAndTitle, type: 'p', className: 'title', html: title })
 
-  const externalLink = createEl({
+  createEl({
     appendTo: header,
     type: 'a',
-    className: 'external link',
+    className: 'link icon',
     attributes: [
       ...attributes,
       { key: 'target', value: '_blank' },
-      { key: 'data-tooltip', value: 'Open in new tab' },
+      { key: 'data-tooltip', value: 'Open in New Tab' },
       { key: 'data-flow', value: 'left' }
-    ],
-    html: '<span>New Tab</span>'
-  })
-  createEl({
-    appendTo: externalLink,
-    type: 'i',
-    className: 'link icon'
+    ]
   })
 
   createEl({ appendTo: anchor, type: 'div', className: 'content', html: content })
@@ -73,6 +67,24 @@ const compose = (href, title, content) => {
     attributes: [...attributes, { key: 'data-tooltip', value: 'Open URL' }]
   })
   createEl({ appendTo: link, type: 'i', className: 'link icon' })
+
+  const externalLink = createEl({
+    appendTo: footer,
+    type: 'a',
+    className: 'external link',
+    attributes: [
+      ...attributes,
+      { key: 'target', value: '_blank' },
+      { key: 'data-tooltip', value: 'Open in New Tab' }
+    ],
+    html: '<span>New Tab</span>'
+  })
+
+  createEl({
+    appendTo: externalLink,
+    type: 'i',
+    className: 'ext link icon'
+  })
 }
 
 export { compose }
