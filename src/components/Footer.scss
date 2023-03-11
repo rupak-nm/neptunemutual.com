@@ -210,15 +210,15 @@ footer {
   .risk.warning {
 
     > .inner.container {
-      border-color: colors.$gray-900;
+      border-color: colors.$gray-800;
     }
     
     h3 {
-      color: colors.$gray-700;
+      color: colors.$gray-500;
     }
 
     p {
-      color: colors.$gray-700;
+      color: colors.$gray-500;
     }
   }
 

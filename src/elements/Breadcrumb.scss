@@ -59,18 +59,17 @@ ol.breadcrumb.trail {
   
   li .crumb {
     color: colors.$gray-300;
+
     &:hover {
-      background-color: colors.$gray-600;
+      background-color: colors.$gray-700;
       color: colors.$gray-25;
     }
   }
 
   li:last-of-type {
     .crumb {
-      background-color: colors.$gray-600;
+      background-color: colors.$gray-700;
       color: colors.$gray-25;
-  
     }
   }
-
 }

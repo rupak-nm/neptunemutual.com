@@ -82,11 +82,10 @@
 }
 
 .dark .marketplace.options.container {
-
   .inner.container {
     .network.item {
       &:hover, &:focus-visible {
-        background-color: colors.$gray-900;
+        background-color: dark.$primary-background-color;
       }
 
       i[data-mode="light"] {

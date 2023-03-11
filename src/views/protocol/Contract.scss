@@ -59,8 +59,8 @@
 
 .dark .contract.card.item {
   &:hover {
-    background-color: colors.$gray-700;
-    border-color: colors.$gray-600;
+    background-color: dark.$primary-background-color;
+    border-color: colors.$gray-800;
   }
 
   .contract.name {

@@ -5,7 +5,10 @@ import {
   primaryColorKey
 } from '../styles/colors'
 import { shadows } from '../styles/shadows'
-import { darkTheme, lightTheme } from '../styles/theme'
+import {
+  darkTheme,
+  lightTheme
+} from '../styles/theme'
 import { typography } from '../styles/typography'
 
 const TextArea = ({ children, placeholder, label, error, ...props }) => {

@@ -363,11 +363,10 @@
 
 .dark .content.viewer.container {
   .sidebar {
-    border-right: 1px solid colors.$gray-900;
+    border-right: 1px solid colors.$gray-800;
   }
 
   .table.of.contents.container {
-
     p {
       color: colors.$gray-300;
     }
@@ -381,12 +380,12 @@
 
       &.active {
         color: colors.$gray-25;
-        background-color: colors.$gray-600;
+        background-color: colors.$gray-700;
       }
 
       &:not(.active):hover {
         color: colors.$gray-25;
-        background-color: colors.$gray-700;
+        background-color: colors.$gray-800;
       }
     }
   }

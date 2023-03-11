@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
+
 import styled from 'styled-components'
 
 import { Button } from '../components/Button'
 import { Icon } from '../components/Icon'
-
 import {
   colors,
   primaryColorKey
@@ -259,11 +259,13 @@ const HistoryCTA = styled.div`
 
   .dark & {
     button {
-      color: ${colors.gray[700]};
+      color: ${colors.gray[300]};
+      background: ${colors.gray[900]};
+      border-color: ${colors.gray[700]};
 
       &:not(:disabled) {
         &[data-state="hover"], &:hover {
-          color: ${colors.gray[700]} !important;
+          color: ${colors.gray[100]} !important;
         }
       }
     }

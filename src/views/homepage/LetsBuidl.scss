@@ -94,11 +94,11 @@
   }
 
   .code.block {
-    background: dark.$primary-background-color;
+    background: colors.$black;
     border: 1px solid colors.$gray-800;
 
     &:hover {
-      background-color: colors.$gray-900;
+      background-color: dark.$primary-background-color;
     }
   }
 }

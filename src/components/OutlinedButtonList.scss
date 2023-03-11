@@ -45,15 +45,15 @@
 }
 
 .dark .ui.outlined.button.list {
-  border-color: colors.$gray-500;
+  border-color: colors.$gray-700;
 
   .item {
-    border-color: colors.$gray-500;
-    background-color: colors.$gray-600;
+    border-color: colors.$gray-700;
+    background-color: colors.$gray-900;
     color: colors.$gray-300;
     
-    &.active {
-      background-color: colors.$gray-700;
+    &.active,&:hover {
+      background-color: colors.$gray-800;
       color: colors.$white;
     }
   }

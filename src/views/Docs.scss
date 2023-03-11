@@ -782,7 +782,7 @@ $sidebar-width: 300px;
           border: 1px solid colors.$gray-800;
       
           &:hover code {
-            background-color: colors.$gray-900;
+            background-color: dark.$primary-background-color;
           }
       
           code {
@@ -817,7 +817,7 @@ $sidebar-width: 300px;
         }
             
         blockquote {
-          background-color: colors.$gray-700;
+          background-color: colors.$gray-800;
           border-left: 0.5em solid colors.$gray-600;
           color: colors.$gray-100;
 
@@ -921,7 +921,7 @@ $sidebar-width: 300px;
           border-color: colors.$gray-800;
 
           tr:first-child {
-            background-color: colors.$gray-900;
+            background-color: dark.$primary-background-color;
           }
 
           th:not(:last-child),
@@ -972,7 +972,7 @@ $sidebar-width: 300px;
           border: 1px solid colors.$gray-800;
 
           &:hover {
-            background-color: colors.$gray-900;
+            background-color: dark.$primary-background-color;
             border-color: colors.$gray-700;
           }
 

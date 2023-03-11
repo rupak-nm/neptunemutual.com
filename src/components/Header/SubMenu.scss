@@ -18,6 +18,7 @@
   display: flex;
   border-top: 1px solid colors.$gray-100;
   box-shadow: shadows.$lg;
+  border-bottom: 1px solid colors.$gray-100;
 
   @media (max-width: 1023px) {
     position: relative;
@@ -87,14 +88,15 @@
   background-color: colors.$black;
   border-top: 1px solid colors.$gray-800;
   box-shadow: shadows.$shadow-2xl;
+  border-bottom-color: colors.$gray-800;
 
   .right.space,
   .content .video.sections {
-    background-color: colors.$gray-900;
+    background-color: dark.$primary-background-color;
   }
 
   .left.space,
   .content .non.video.sections {
-    background-color:colors.$gray-900;
+    background-color: dark.$primary-background-color;
   }
 }

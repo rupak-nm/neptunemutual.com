@@ -2,7 +2,7 @@ const primaryColorKey = 'indigo'
 
 const colors = {
   white: '#ffffff',
-  black: '#000000',
+  black: '#121212',
   gray: {
     25: '#fcfcfd',
     50: '#f9fafb',

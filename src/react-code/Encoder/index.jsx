@@ -14,7 +14,6 @@ import { InputWithLabel } from '../components/InputWithLabel'
 import { TextArea } from '../components/TextArea'
 import { getLibrary } from '../lib/connect-wallet/utils/web3'
 import { colors } from '../styles/colors'
-import { lightTheme } from '../styles/theme'
 import { typography } from '../styles/typography/'
 import { utils } from '../styles/utils'
 import {
@@ -368,15 +367,15 @@ const FormAction = styled.div`
   }
 
   .dark & {
-    border-color: ${colors.gray[500]};
+    border-color: ${colors.gray[700]};
 
     button {
-      border-color: ${colors.gray[500]};
-      background-color: ${colors.gray[600]};
+      border-color: ${colors.gray[700]};
+      background-color: ${colors.gray[900]};
       color: ${colors.gray[300]};
 
       &:hover:not(:disabled) {
-        background-color: ${colors.gray[700]};
+        background-color: ${colors.gray[800]};
         color: ${colors.white};
       }
     }

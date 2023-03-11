@@ -14,7 +14,7 @@ const darkTheme = {
   name: 'dark',
   isLightMode: false,
   colorScheme: 'dark',
-  primaryBackgroundColor: 'rgba(15,15,15)',
+  primaryBackgroundColor: '#171717',
   color: colors.white,
   secondaryColor: colors.gray['25'],
   tertiaryColor: colors.gray['300']
