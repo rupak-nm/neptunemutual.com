@@ -12,7 +12,7 @@ const renderers: Record<string, (hack: Hack) => string> = {
   <div class="chain icon group">
     ${hack.chains.length === 0 ? '-' : ''}
     ${hack.chains.map((chain) =>
-    availableChainIcons.includes(chain.shortName)
+    availableChainIcons.includes(chain.shortName.toLowerCase())
       ? (
         `<i class="${chain.shortName.toLowerCase() + ' chain icon'}" title="${chain.title}"></i>`
       )
