@@ -268,7 +268,7 @@ interface Hack {
   name: string
   date: Date
   amountLost: string
-  chains: Chain[]
+  chains?: Chain[]
   techniques: string
   description?: string
   link: string
