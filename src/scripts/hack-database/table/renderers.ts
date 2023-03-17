@@ -1,3 +1,4 @@
+import { abbreviateHackDatabaseAmount } from '../../../../util/abbreviate-hack-database-amount'
 import { formatDate } from '../../../../util/format'
 import { stripTags } from '../../../../util/strip-tags'
 import { chainIconMapping } from '../../../data/chain-icon-mapping'
@@ -7,7 +8,11 @@ const availableChainIcons = Object.keys(chainIconMapping)
 const renderers: Record<string, (hack: Hack) => string> = {
   Name: (hack: Hack) => hack.name,
   Date: (hack: Hack) => formatDate(new Date(hack.date), 'en-GB', { dateStyle: 'short', timeZone: 'GMT' }),
-  'Amount Lost': (hack: Hack) => hack.amountLost,
+  'Amount Lost': (hack: Hack) => {
+    const amount = abbreviateHackDatabaseAmount(hack.amountLost)
+
+    return `<div data-tooltip='${amount.long}'>${amount.short}</div>`
+  },
   Chains: (hack: Hack) => `
   <div class="chain icon group">
     ${(hack.chains ?? []).length === 0 ? '-' : ''}
