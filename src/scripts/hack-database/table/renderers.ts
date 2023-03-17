@@ -11,7 +11,7 @@ const renderers: Record<string, (hack: Hack) => string> = {
   'Amount Lost': (hack: Hack) => {
     const amount = abbreviateHackDatabaseAmount(hack.amountLost)
 
-    return `<div data-tooltip='${amount.long}'>${amount.short}</div>`
+    return `<span data-tooltip='${amount.long}'>${amount.short}</span>`
   },
   Chains: (hack: Hack) => `
   <div class="chain icon group">
