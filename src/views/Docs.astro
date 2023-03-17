@@ -65,8 +65,8 @@ const breadcrumbs = [
       {
         items.map((item) => {
           const itemSlug = item.parent
-            ? `${item.parent.slug}/${item.slug}`
-            : item.slug;
+            ? `/${item.parent.slug}/${item.slug}`
+            : `/${item.slug}`;
 
           return item.unlinked ? (
             <div
@@ -79,7 +79,7 @@ const breadcrumbs = [
           ) : (
             <a
               class={normalize(`${itemSlug === slug ? "current" : ""} item`)}
-              href={`/docs/${itemSlug}/`}
+              href={`/docs${itemSlug}/`}
             >
               {item.navigationLabel}
             </a>
