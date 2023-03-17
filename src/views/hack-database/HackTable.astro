@@ -1,4 +1,5 @@
 ---
+import { abbreviateHackDatabaseAmount } from "../../../util/abbreviate-hack-database-amount";
 import { formatDate } from "../../../util/format";
 import { stripTags } from "../../../util/strip-tags";
 import { chainIconMapping } from "../../data/chain-icon-mapping";
@@ -21,7 +22,11 @@ const renderers: Record<string, (hack: Hack) => string> = {
       dateStyle: "short",
       timeZone: "GMT",
     }),
-  "Amount Lost": (hack: Hack) => hack.amountLost,
+  "Amount Lost": (hack: Hack) => {
+    const amount = abbreviateHackDatabaseAmount(hack.amountLost);
+
+    return `<span data-tooltip='${amount.long}'>${amount.short}</span>`;
+  },
   Chains: (hack: Hack) =>
     (hack.chains ?? [])
       .map((chain) =>
