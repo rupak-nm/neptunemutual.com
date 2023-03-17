@@ -23,7 +23,7 @@ const renderers: Record<string, (hack: Hack) => string> = {
     }),
   "Amount Lost": (hack: Hack) => hack.amountLost,
   Chains: (hack: Hack) =>
-    hack.chains
+    (hack.chains ?? [])
       .map((chain) =>
         availableChainIcons.includes(chain.shortName.toLowerCase())
           ? `<i class="${
