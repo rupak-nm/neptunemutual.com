@@ -194,15 +194,15 @@ $sidebar-width: 300px;
         blockquote {
           @include styles.display-sm;
           @include weights.regular;
-          background-color: colors.$gray-50;
-          border-left: 0.5em solid colors.$gray-100;
+          background-color: colors.$gray-neutral-100;
+          border-left: 0.5em solid colors.$gray-neutral-200;
           color: colors.$gray-600;
           transition: background 600ms linear;
           margin-bottom: 1em;
 
           &:hover {
-            background-color: colors.$gray-100;
-            border-color: colors.$gray-200;
+            background-color: colors.$gray-neutral-200;
+            border-color: colors.$gray-neutral-300;
             color: colors.$gray-700;
           }
 
@@ -377,6 +377,8 @@ $sidebar-width: 300px;
           border-spacing: 0;
           border-collapse: separate !important;
           border: 1px solid transparent;
+          display: block;
+          overflow: auto;
 
           th,
           td {
@@ -424,6 +426,20 @@ $sidebar-width: 300px;
           tbody:not(:last-child),
           tfoot:not(:last-child) {
             border-bottom: 1px solid colors.$gray-200;
+          }
+        }
+
+        @media (min-width: 1024px) {
+          table.striped {
+            tr:nth-child(even) {
+              background-color: colors.$gray-neutral-100;
+            }          
+          }            
+        }
+
+        table:not(:has(thead)) {
+          tr:first-child {
+            @include weights.semibold;
           }
         }
 
@@ -817,18 +833,18 @@ $sidebar-width: 300px;
         }
             
         blockquote {
-          background-color: colors.$gray-800;
-          border-left: 0.5em solid colors.$gray-600;
-          color: colors.$gray-100;
+          background-color: colors.$gray-neutral-800;
+          border-left: 0.5em solid colors.$gray-neutral-600;
+          color: colors.$gray-neutral-100;
 
           &:hover {
-            background-color: colors.$gray-900;
-            border-color: colors.$gray-700;
-            color: colors.$gray-50;
+            background-color: colors.$gray-neutral-900;
+            border-color: colors.$gray-neutral-700;
+            color: colors.$gray-neutral-50;
           }
 
           .header {
-            color: colors.$gray-400;
+            color: colors.$gray-neutral-400;
           }
         }
 
@@ -848,7 +864,7 @@ $sidebar-width: 300px;
           }
         }
 
-        .ui.error, .ui.warning, .ui.info, .ui.message {
+        .ui.error, .ui.warning, .ui.info, .ui.success, .ui.message {
           background-color: dark.$primary-background-color;
           color: colors.$white;
 
@@ -942,6 +958,12 @@ $sidebar-width: 300px;
           tfoot:not(:last-child) {
             border-bottom: 1px solid colors.$gray-800;
           }
+        }
+
+        table.striped {
+          tr:nth-child(even) {
+            background-color: dark.$primary-background-color;
+          }          
         }
 
         @media (max-width: 1023px) {  
