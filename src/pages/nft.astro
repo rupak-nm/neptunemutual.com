@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Seo from "../components/Seo.astro";
 
 import styles from "./nft.scss?inline";
-import Hero from "../views/nft/Hero.astro";
+import NFT from "../views/NFT.astro";
 ---
 
 <BaseLayout>
@@ -18,7 +18,7 @@ import Hero from "../views/nft/Hero.astro";
   />
   <style slot="header" is:inline set:html={styles}></style>
 
-  <Hero />
+  <NFT />
 
   <Fragment slot="footer">
     <script src="../scripts/nft/index.js"></script>
