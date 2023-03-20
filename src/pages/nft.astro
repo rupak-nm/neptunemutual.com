@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Seo from "../components/Seo.astro";
+
+import styles from "./nft.scss?inline";
+import Hero from "../views/nft/Hero.astro";
+---
+
+<BaseLayout>
+  <Seo
+    slot="seo"
+    title="NFT / Neptune Mutual"
+    description="Participate in our cover ecosystem and mint NFTs for free. Select your persona and keep unlocking new levels of NFTs."
+    og={{
+      image: "/assets/images/meta/og/home.png",
+      imageAlt: "Neptune Mutual NFT",
+    }}
+  />
+  <style slot="header" is:inline set:html={styles}></style>
+
+  <Hero />
+
+  <Fragment slot="footer">
+    <script src="../scripts/nft/index.js"></script>
+  </Fragment>
+</BaseLayout>
