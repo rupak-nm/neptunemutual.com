@@ -1,5 +1,6 @@
 @use "../design-system/utils";
 @use "../design-system/colors";
+@use "../design-system/shadows";
 @use "../design-system/typography/styles";
 @use "../design-system/typography/weights";
 @use "../design-system/theme/light";
@@ -147,6 +148,12 @@
       text-align: center;
     }
   }
+
+  .actions {
+    .button.secondary.gray {
+      box-shadow: shadows.$xs;
+    }
+  }
 }
 
 
@@ -167,6 +174,12 @@
           }
         }
       }
+    }
+  }
+
+  .actions {
+    .button.secondary.gray {
+      border: 1px solid colors.$gray-300;
     }
   }
 }
