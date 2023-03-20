@@ -22,7 +22,7 @@ const process = async (html: string): Promise<string> => {
     return ''
   }
 
-  const expression = /<p>&nbsp;<\/p>/d
+  const expression = /<p>&nbsp;<\/p>/g
   const $ = await run(load(html.replace(expression, ''), null, false))
   return $.html()
 }
