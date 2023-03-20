@@ -2,7 +2,7 @@ import { env } from '../../util/env'
 
 const origin: string = env('NFT_API_ORIGIN')
 
-const knowYourCharacters = async (): Promise<ApiResponse<NftCharacterModel[]>> => {
+const knowYourCharacters = async (): Promise<ApiResponse<NftCharacter[]>> => {
   const response = await fetch(origin + '/home/know-the-characters')
 
   const data = await response.json()
@@ -10,8 +10,35 @@ const knowYourCharacters = async (): Promise<ApiResponse<NftCharacterModel[]>> =
   return data
 }
 
+const mostViewedNfts = async (): Promise<ApiResponse<NftCharacterWithViews[]>> => {
+  const response = await fetch(origin + '/home/most-viewed-nfts')
+
+  const data = await response.json()
+
+  return data
+}
+
+const premiumNfts = async (): Promise<ApiResponse<NftCharacter[]>> => {
+  const response = await fetch(origin + '/home/premium-nfts')
+
+  const data = await response.json()
+
+  return data
+}
+
+const regularNfts = async (): Promise<ApiResponse<NftCharacter[]>> => {
+  const response = await fetch(origin + '/home/regular-nfts')
+
+  const data = await response.json()
+
+  return data
+}
+
 const NftApi = {
-  knowYourCharacters
+  knowYourCharacters,
+  mostViewedNfts,
+  premiumNfts,
+  regularNfts
 }
 
 export { NftApi }

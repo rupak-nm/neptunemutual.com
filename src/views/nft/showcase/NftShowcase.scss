@@ -1,0 +1,18 @@
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/colors";
+@use "../../../design-system/blurs";
+
+
+.nft.showcase {
+  h2 {
+    @include styles.display-xs;
+    margin-bottom: 20px;
+  }
+
+  .content {
+    display: grid;
+    grid-template-columns: 1fr 438px;
+    gap: 32px;
+  }
+}
