@@ -5,20 +5,19 @@ const totalPages = parseInt(document.querySelector('.know.the.characters .pagina
 const hideAllPages = () => {
   const pages = document.querySelectorAll('.know.the.characters .character.page')
 
-  pages.forEach(page => {
+  for (const page of pages) {
     page.classList.add('hidden')
-  })
+  }
 }
 
 const showPage = (page) => {
-  console.log('.know.the.characters .character.page.page-' + page)
   const characterPage = document.querySelector('.know.the.characters .character.page.page-' + page)
   characterPage.classList.remove('hidden')
   activePage.textContent = page
 }
 
 const getCurrentPage = () => {
-  return parseInt(activePage.innerHTML.trim())
+  return parseInt(activePage.innerText)
 }
 
 previousButton.addEventListener('click', () => {
