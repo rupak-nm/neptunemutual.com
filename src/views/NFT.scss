@@ -1,0 +1,15 @@
+@use "../design-system/utils";
+
+.nft.home.page {
+  @include utils.full-width-container;
+
+  section {
+    padding: 96px 0;
+  }
+
+  .dashboard {
+    display: grid;
+    grid-template-columns: 368px 1fr;
+    gap: 24px;
+  }
+}

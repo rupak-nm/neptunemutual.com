@@ -1,0 +1,57 @@
+---
+import { NftApi } from "../../../../service/remote-api/nft-api";
+import Button from "../../../elements/buttons/Button.astro";
+
+const response = await NftApi.knowYourCharacters();
+const charactersByPage = [];
+
+for (let i = 0; i < response.data.length; i += 5) {
+  charactersByPage.push(response.data.slice(i, i + 5));
+}
+---
+
+<div class="know the characters">
+  <h2>Know the Characters</h2>
+  {
+    charactersByPage.map((characters, index) => (
+      <div
+        class={`character page${index === 0 ? "" : " hidden"} page-${
+          index + 1
+        }`}
+      >
+        {characters.map((character) => (
+          <div class="character details">
+            <div>
+              <img src={character.image} alt={character.name} />
+            </div>
+            <div>
+              <div class="character name">{character.name}</div>
+              <div class="character description">{character.description}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    ))
+  }
+
+  <div class="pagination">
+    <Button
+      disabled
+      variant={"secondary-gray"}
+      icon="only"
+      iconLeading="arrow-left"
+    >
+      Previous
+    </Button>
+
+    <div>
+      Page <span class="active page">1</span> of <span class="total pages"
+        >{charactersByPage.length}</span
+      >
+    </div>
+
+    <Button variant={"secondary-gray"} icon="only" iconLeading="arrow-right">
+      Next
+    </Button>
+  </div>
+</div>
