@@ -48,6 +48,9 @@
     "transliteration": "^2.3.5",
     "typescript": "^4.9.5"
   },
+  "engines": {
+    "node": ">=16.13.0 <19.0.0.0"
+  },
   "volta": {
     "node": "16.13.1",
     "yarn": "1.22.19"
