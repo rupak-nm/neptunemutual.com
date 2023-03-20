@@ -2,6 +2,8 @@
 import { NftApi } from "../../../../service/remote-api/nft-api";
 import Button from "../../../elements/buttons/Button.astro";
 import MostViewedNFTs from "./MostViewedNfts.astro";
+import PremiumNfts from "./PremiumNfts.astro";
+import RegularNfts from "./RegularNfts.astro";
 
 const response = await NftApi.knowYourCharacters();
 const charactersByPage = [];
@@ -14,7 +16,10 @@ for (let i = 0; i < response.data.length; i += 5) {
 <div class="nft showcase">
   <h2>Premium NFTs</h2>
   <div class="content">
-    <div>PREMIUM</div>
+    <div>
+      <PremiumNfts />
+      <RegularNfts />
+    </div>
     <MostViewedNFTs />
   </div>
 </div>

@@ -5,4 +5,5 @@ import '../global/cookie'
 import '../global/video'
 import '../global/index'
 // Global End
+import '../components/temp/slider'
 import './know-the-characters/pagination'

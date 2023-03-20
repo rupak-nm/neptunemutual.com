@@ -1,3 +1,34 @@
+---
+import { NftApi } from "../../../../service/remote-api/nft-api";
+import { abbreviateNumber } from "../../../../util/abbreviate-number";
+
+const response = await NftApi.mostViewedNfts();
+---
+
 <div class="most viewed nfts">
   <h3>Most Viewed</h3>
+  {
+    response.data.map((character) => {
+      const views = abbreviateNumber(character.views);
+
+      return (
+        <div class="character details">
+          <div>
+            <img src={character.image} alt={character.name} />
+          </div>
+          <div>
+            <div class="character name">{character.name}</div>
+            <div class="character description">{character.description}</div>
+            <div class="character viewed">
+              Viewed{" "}
+              <span data-tooltip={views.long} data-flow="left">
+                {views.short}
+              </span>{" "}
+              times
+            </div>
+          </div>
+        </div>
+      );
+    })
+  }
 </div>

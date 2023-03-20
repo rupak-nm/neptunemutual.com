@@ -7,12 +7,17 @@
 .nft.showcase {
   h2 {
     @include styles.display-xs;
+    @include weights.bold;
     margin-bottom: 20px;
   }
 
   .content {
     display: grid;
-    grid-template-columns: 1fr 438px;
+    grid-template-columns: minmax(0, 1fr) 438px;
     gap: 32px;
+
+    @media (max-width: 767px) {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 }

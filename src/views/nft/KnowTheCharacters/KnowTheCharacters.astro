@@ -3,6 +3,19 @@ import { NftApi } from "../../../../service/remote-api/nft-api";
 import Button from "../../../elements/buttons/Button.astro";
 
 const response = await NftApi.knowYourCharacters();
+
+// Sort the Characters in Descending Order by level (No level means Higher Level)
+response.data.sort((a, b) => {
+  if (!a.level) {
+    return -1;
+  }
+
+  if (!b.level) {
+    return 1;
+  }
+  return b.level - a.level;
+});
+
 const charactersByPage = [];
 
 for (let i = 0; i < response.data.length; i += 5) {

@@ -123,13 +123,27 @@
 
   const options = {
     selectors: {
-      buttonContainer: '.arrows',
       sliderContainer: '.slider.container',
-      scrollContainer: '.slider.scrollable',
-      item: '.with.slider'
+      buttonContainer: '.slider.container .arrows',
+      scrollContainer: '.slider.container .slider.scrollable',
+      item: '.slider.container .with.slider'
     },
     swipeOnly: true
   }
 
   slider.initialize(options)
+
+  if (document.querySelector('.regular.nfts')) {
+    const options = {
+      selectors: {
+        sliderContainer: '.regular.nfts .slider.container',
+        buttonContainer: '.regular.nfts .slider.container .arrows',
+        scrollContainer: '.regular.nfts .slider.container .slider.scrollable',
+        item: '.regular.nfts .slider.container .with.slider'
+      },
+      swipeOnly: true
+    }
+
+    slider.initialize(options)
+  }
 }
