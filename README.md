@@ -12,4 +12,4 @@
 
 - `src/styles` - CSS related files
 
-- `public/*` - Static files
+- `public/*` - Static files 
