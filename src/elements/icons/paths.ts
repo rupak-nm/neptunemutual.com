@@ -37,6 +37,7 @@ const paths: Record<string, any> = {
   'users-01': import('./variants/Users/users-01.svg?raw'),
   'chevron-down': import('./variants/Arrows/chevron-down.svg?raw'),
   check: import('./variants/General/check.svg?raw'),
+  eye: import('./variants/General/eye.svg?raw'),
   Dot: import('./custom/dot.svg?raw'),
   'tag-03': import('./variants/FinanceAndEcommerce/tag-03.svg?raw'),
   'message-chat-circle': import('./variants/Communication/message-chat-circle.svg?raw'),

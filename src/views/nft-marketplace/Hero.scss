@@ -1,0 +1,22 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/shadows";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+.nft.marketplace.hero.container {
+  .heading.and.supporting.text {
+    max-width: 480px;
+
+    .heading.and.subheading {
+      .sub.heading {
+      .button{
+        display: inline-flex;
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }}
+  }
+}

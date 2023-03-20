@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NftMarketplace from "../../views/NftMarketplace.astro";
+import Seo from "../../components/Seo.astro";
+
+import styles from "./marketplace.scss?inline";
+---
+
+<BaseLayout headerStyle={"default"}>
+  <Seo
+    slot="seo"
+    title="@todo"
+    description="@todo"
+    og={{
+      image: "/assets/images/meta/og/home.png",
+      imageAlt: "@todo",
+    }}
+    noindex
+  />
+  <style slot="header" is:inline set:html={styles}></style>
+
+  <NftMarketplace />
+
+  <Fragment slot="footer">
+    <script src="../../scripts/nft/marketplace.js"></script>
+  </Fragment>
+</BaseLayout>

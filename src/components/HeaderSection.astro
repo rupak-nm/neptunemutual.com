@@ -44,6 +44,7 @@ const actions = primary || secondary || null;
         <div class="heading and supporting text">
           <h1 class="heading and subheading" id={slugify(heading)}>
             {subheading && <div class="sub heading">{subheading}</div>}
+            <slot name="subheading" />
             <span class="heading">{heading}</span>
           </h1>
 

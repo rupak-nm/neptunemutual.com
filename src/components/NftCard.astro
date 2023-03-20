@@ -1,0 +1,35 @@
+---
+import Icon from "../elements/Icon.astro";
+
+const coverImage = "/assets/images/hero/home-cover.webp";
+const views = new Intl.NumberFormat("en").format(1024);
+const count = new Intl.NumberFormat("en").format(25);
+---
+
+<a class={`nft card container`} href={`/`}>
+  <div class="image container">
+    <img src={coverImage} alt={"asd"} loading="lazy" />
+  </div>
+
+  <div class="contents">
+    <div class="title container">
+      <h3>Neptune in Sea</h3>
+    </div>
+
+    <div class="info container">
+      <div class="nft id">#1001</div>
+      <div class="insights">
+        <div class="nft insight">
+          <span class="sr-only">Views</span>
+          <Icon variant="eye" size={"sm"} />
+          <span>{views}</span>
+        </div>
+        <div class="nft insight">
+          <span class="sr-only">Count</span>
+          <Icon variant="users-01" size={"sm"} />
+          <span>{count}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
