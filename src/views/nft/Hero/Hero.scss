@@ -1,11 +1,10 @@
-@use "../../design-system/utils";
-@use "../../design-system/colors";
-@use "../../design-system/typography/styles";
-@use "../../design-system/typography/weights";
-@use "../../design-system/shadows";
+@use "../../../design-system/utils";
+@use "../../../design-system/colors";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/shadows";
 
 .nft.hero.container {
-  @include utils.full-width-container;
   padding-top: 56px;
 
   .titles.container {
