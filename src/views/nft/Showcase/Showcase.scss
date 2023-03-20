@@ -1,0 +1,23 @@
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/colors";
+@use "../../../design-system/blurs";
+
+
+.nft.showcase {
+  h2 {
+    @include styles.display-xs;
+    @include weights.bold;
+    margin-bottom: 20px;
+  }
+
+  .content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 438px;
+    gap: 32px;
+
+    @media (max-width: 767px) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+}

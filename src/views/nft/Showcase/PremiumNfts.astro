@@ -1,0 +1,33 @@
+---
+import { NftApi } from "../../../../service/remote-api/nft-api";
+import { abbreviateNumber } from "../../../../util/abbreviate-number";
+import Slider from "../../../components/Slider.astro";
+
+const response = await NftApi.premiumNfts();
+---
+
+<div class="premium nfts">
+  <Slider gap={24}>
+    <Fragment>
+      {
+        response.data.map((character) => {
+          return (
+            <div class="character details with slider">
+              <div>
+                <img src={character.image} alt={character.name} />
+              </div>
+              <div class="overlay">
+                <div>
+                  <div>{character.name}</div>
+                  <div class="supporting text">
+                    {character.siblings} siblings
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })
+      }
+    </Fragment>
+  </Slider>
+</div>

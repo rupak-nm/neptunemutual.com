@@ -1,0 +1,82 @@
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/colors";
+@use "../../../design-system/blurs";
+
+
+.premium.nfts {
+  margin-bottom: 24px;;
+  .character.details {
+    width: 238px !important;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+
+    .overlay {
+      opacity: 1;
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      backdrop-filter: blur(42px);
+      border-radius: 16px;
+      opacity: 0;
+      color: colors.$white;
+      transition: all 0.2s;
+      @include styles.text-md;
+      @include weights.semibold;
+      
+      .supporting.text {
+        color: colors.$gray-25;
+        @include styles.text-sm;
+        @include weights.regular;
+      }
+    }
+
+    &:hover .overlay {
+      opacity: 1;
+      background-color: colors.$black-500;
+    }
+  }
+
+  .slider.container {
+    padding: 0;
+    .arrows  {
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 24px;
+
+      button {
+        width: 36px !important;
+        height: 36px !important;
+        backdrop-filter: blurs.$sm !important;
+    
+        background-color: colors.$black-900 !important;
+        color: colors.$white !important;
+        border: none !important;
+    
+        &:not(:disabled):not([data-disabled]):hover {
+          background-color: colors.$gray-800 !important;
+          color: colors.$white !important;
+        }
+    
+        &:disabled,
+        &[data-disabled] {
+          cursor: not-allowed;
+          opacity: 50%;
+        }
+      }
+    }
+  }
+
+}

@@ -6,6 +6,7 @@
 @import "../../elements/buttons/_base/index.scss";
 @import "../../elements/buttons/PrimaryButton.scss";
 @import "../../elements/FeaturedIcon.scss";
+@import "../../elements/tooltip/Tooltip.scss";
 
 
 @import "../../components/Header/Header.scss";
@@ -22,7 +23,12 @@
 @import "../../components/Header/HamburgerButton.scss";
 
 @import "../../components/CookiePopup.scss";
+@import "../../components/Slider.scss";
 
 @import "../../views/NFT.scss";
 @import "../../views/nft/Hero/Hero.scss";
 @import "../../views/nft/KnowTheCharacters/KnowTheCharacters.scss";
+@import "../../views/nft/Showcase/Showcase.scss";
+@import "../../views/nft/Showcase/MostViewedNfts.scss";
+@import "../../views/nft/Showcase/PremiumNfts.scss";
+@import "../../views/nft/Showcase/RegularNfts.scss";

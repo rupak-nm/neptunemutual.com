@@ -1,4 +1,4 @@
-interface NftCharacterModel {
+interface NftCharacter {
   level?: number
   role: string
   name: string
@@ -9,3 +9,5 @@ interface NftCharacterModel {
   rarity: number
   type?: string
 }
+
+type NftCharacterWithViews = NftCharacter & { views: string }

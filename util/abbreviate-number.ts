@@ -1,16 +1,8 @@
-const abbreviateHackDatabaseAmount = (input: string): {
+const abbreviateNumber = (input: string): {
   long: string
   short: string
 } => {
-  let amount = input
-
-  if (!amount.includes('$')) {
-    return { short: input, long: input }
-  }
-
-  amount = amount.replace(/\$\s/g, '').replace(/,/g, '')
-
-  const number = parseFloat(amount)
+  const number = parseFloat(input)
 
   if (isNaN(number)) {
     return { short: input, long: input }
@@ -46,9 +38,9 @@ const abbreviateHackDatabaseAmount = (input: string): {
   }
 
   return {
-    short: `${sign}$${result}${symbol}`,
-    long: input
+    short: `${sign}${result}${symbol}`,
+    long: number.toLocaleString('en-US', { maximumFractionDigits: 2 })
   }
 }
 
-export { abbreviateHackDatabaseAmount }
+export { abbreviateNumber }
