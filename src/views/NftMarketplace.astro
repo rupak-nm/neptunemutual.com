@@ -3,11 +3,19 @@ import { NftMarketplace } from "../../service/remote-api/nft-marketplace";
 import Hero from "./nft-marketplace/Hero.astro";
 import { MarketPlace } from "./nft-marketplace/Marketplace";
 
-const { data } = await NftMarketplace.searchMarketplace();
+const { searchMarketplace, getOrigins } = NftMarketplace;
+
+const { imageOrigin, apiOrigin } = getOrigins();
+const { data } = await searchMarketplace();
 ---
 
 <>
   <Hero />
 
-  <MarketPlace client:only initialData={data} />
+  <MarketPlace
+    client:only
+    initialData={data}
+    imageOrigin={imageOrigin}
+    apiOrigin={apiOrigin}
+  />
 </>

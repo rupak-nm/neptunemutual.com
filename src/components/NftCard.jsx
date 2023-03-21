@@ -1,12 +1,10 @@
 import { Icon } from '../react-code/components/Icon'
 
-const NftCard = ({ name, views, count, nftId }) => {
-  const coverImage = '/assets/images/hero/home-cover.webp'
-
+const NftCard = ({ name, views, count, nftId, image }) => {
   return (
     <a className={'nft card container'} href={'/'}>
       <div className="image container">
-        <img src={coverImage} alt={'asd'} loading="lazy" />
+        <img src={image} alt={name || 'NFT Image'} loading="lazy" />
       </div>
 
       <div className="contents">

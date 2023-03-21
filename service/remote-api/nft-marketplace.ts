@@ -1,22 +1,28 @@
-// const origin: string = env('NFT_API_ORIGIN')
-const origin: string = 'https://nft-api.neptunemutual.net'
+import { env } from '../../util/env'
+
+const getOrigins = (): {
+  apiOrigin: string
+  imageOrigin: string
+} => {
+  return {
+    apiOrigin: env('NFT_API_ORIGIN'),
+    imageOrigin: env('NFT_IMAGE_ORIGIN')
+  }
+}
 
 const DEFAULT_PAGE_SIZE = 25
 
 const searchMarketplace = async (
   searchQuery = '',
   pageNumber = 1,
-  pageSize = DEFAULT_PAGE_SIZE
+  pageSize = DEFAULT_PAGE_SIZE,
+  apiOrigin?: string
 ): Promise<ApiResponse<MarketplaceNft[]>> => {
+  const origin = apiOrigin ?? getOrigins().apiOrigin
   const url = origin + '/marketplace/search'
   const body = JSON.stringify({
     search: searchQuery,
-    properties: [
-      {
-        key: 'Type',
-        value: 'Evolution'
-      }
-    ],
+    properties: [],
     pageNumber,
     pageSize
   })
@@ -44,7 +50,8 @@ const searchMarketplace = async (
 }
 
 const NftMarketplace = {
-  searchMarketplace
+  searchMarketplace,
+  getOrigins
 }
 
 export { NftMarketplace }

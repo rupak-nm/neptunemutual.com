@@ -1,16 +1,14 @@
 import React from '@astrojs/react'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { NftCard } from '../../components/NftCard'
 import { Pagination } from './Pagination'
 import { NftMarketplace } from '../../../service/remote-api/nft-marketplace'
 import { useDebounce } from './hooks/useDebounce'
 
-/**
- *
- */
-const MarketPlace = ({ initialData = [] }) => {
+const MarketPlace = ({ initialData = [], imageOrigin, apiOrigin }) => {
   const [searchValue, setSearchValue] = useState('')
   const [data, setData] = useState(initialData)
+  const initial = useRef(true)
 
   const debouncedSearchValue = useDebounce(searchValue, 500)
 
@@ -28,9 +26,11 @@ const MarketPlace = ({ initialData = [] }) => {
   }, [data])
 
   const makeApiCall = useCallback((page, query) => {
+    if (initial.current) return
+
     (async function async () {
       try {
-        const { data: _data } = await NftMarketplace.searchMarketplace(query, page)
+        const { data: _data } = await NftMarketplace.searchMarketplace(query, page, undefined, apiOrigin)
         if (_data && Array.isArray(_data)) {
           setData(_data)
         }
@@ -38,7 +38,13 @@ const MarketPlace = ({ initialData = [] }) => {
     })()
   }, [])
 
+  const handleInputChange = (e) => {
+    initial.current = false
+    setSearchValue(e.target.value)
+  }
+
   const handlePageChange = (page) => {
+    initial.current = false
     makeApiCall(page, searchValue)
   }
 
@@ -49,7 +55,7 @@ const MarketPlace = ({ initialData = [] }) => {
           placeholder="Search"
           className='search input'
           value={searchValue}
-          onChange={e => setSearchValue(e.target.value)}
+          onChange={handleInputChange}
         />
 
         <div className='nft grid'>
@@ -61,6 +67,7 @@ const MarketPlace = ({ initialData = [] }) => {
                 nftId={nft.tokenId}
                 views={nft.views}
                 count={nft.siblings}
+                image={nft.image || `${imageOrigin}/images/${nft.tokenId}.png`}
               />
             ))
           }
