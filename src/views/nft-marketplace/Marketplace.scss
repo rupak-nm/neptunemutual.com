@@ -1,0 +1,46 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/shadows";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+.nft.marketplace.search.container {
+  background-color: colors.$base-white;
+  padding: 96px 0;
+
+  .inner {
+    @include utils.full-width-container;
+    
+    input.search {
+      padding: 10px 14px;
+      @include styles.text-md;
+      @include weights.regular;
+      border-radius: 8px;
+      border: 1px solid colors.$gray-300;
+      box-shadow: shadows.$xs;
+      width: 100%;
+      min-width: 100px;
+    }
+  
+    .nft.grid {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      row-gap: 48px;
+      column-gap: 26px;
+      place-items: center;
+    }
+  }
+}
+
+.dark .nft.marketplace.search.container {
+  background-color: colors.$black;
+
+  .inner {
+    input.search {
+      border: 1px solid colors.$gray-700;
+    }
+  }
+}

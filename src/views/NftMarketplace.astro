@@ -1,13 +1,13 @@
 ---
-import NftCard from "../components/NftCard.astro";
+import { NftMarketplace } from "../../service/remote-api/nft-marketplace";
 import Hero from "./nft-marketplace/Hero.astro";
+import { MarketPlace } from "./nft-marketplace/Marketplace";
+
+const { data } = await NftMarketplace.searchMarketplace();
 ---
 
 <>
   <Hero />
-  <br />
-  <div class="full width container">
-    <NftCard />
-  </div>
-  <br />
+
+  <MarketPlace client:only initialData={data} />
 </>
