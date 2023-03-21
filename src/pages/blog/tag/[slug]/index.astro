@@ -7,6 +7,8 @@ import * as api from "../../../../../service/api/blog";
 import styles from "./page.scss?inline";
 import { Api } from "../../../../../types/enum";
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   const POSTS_PER_PAGE = 9;
   const tagsData = await api.getPaginatedByTags(Api.Blog, POSTS_PER_PAGE);

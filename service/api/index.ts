@@ -96,6 +96,76 @@ const getEnumerable = async <T>(api: Api, limit: number, skip: number): Promise<
   return []
 }
 
+const getPaginatedByPageNum = async<T>(api: Api, page: number = 1, pageSize: number = 12): Promise<PaginatedResult<T>> => {
+  try {
+    const { docs } = await getApi<T>(api)
+
+    const records = docs.length
+    const totalPages = Math.ceil(records / pageSize)
+
+    const result: PaginatedResult<T> = {
+      records,
+      totalPages,
+      pageSize,
+      pages: {
+      }
+    }
+
+    const start = (page - 1) * pageSize
+    const end = start + pageSize <= records ? start + pageSize : records
+    console.log({ page, start, end, totalPages })
+
+    result.pages[page.toString() as keyof PaginatedResult<T>] = docs.slice(start, end)
+
+    return result
+  } catch (error) {
+    console.error(error)
+  }
+
+  return { pages: {} }
+}
+
+const getPaginatedByTagsWithPageNum = async (api: Api, page: number = 1, tag: string, pageSize: number = 12): Promise<PaginatedByTagsResult<Article>> => {
+  try {
+    const { docs } = await getApi<Article>(api)
+
+    const allTags = docs.map((doc) => doc.tags).flat()
+    const uniqueTags = [...new Map(allTags.map((tag: any) => [tag.id, tag])).values()]
+    const _tag = uniqueTags.find(t => t.slug === tag)
+
+    const filteredDocs = docs.filter((doc: any) => {
+      const matchedTag = doc.tags.find((x: any) => x.slug === _tag.slug)
+      return matchedTag
+    })
+
+    const records = filteredDocs.length
+    const totalPages = Math.ceil(records / pageSize)
+
+    const _result: PaginatedByTagsResult<Article> = {
+      tag: _tag,
+      records,
+      totalPages,
+      pageSize,
+      pages: {
+      }
+    }
+
+    const start = (page - 1) * pageSize
+    const end = start + pageSize <= records ? start + pageSize : records
+
+    _result.pages[page.toString() as keyof PaginatedByTagsResult<Article>] = filteredDocs.slice(start, end)
+
+    return _result
+  } catch (error) {
+    console.error(error)
+  }
+
+  return {
+    tag: null,
+    pages: {}
+  }
+}
+
 const getPaginated = async<T>(api: Api, pageSize: number = 12): Promise<PaginatedResult<T>> => {
   try {
     const { docs } = await getApi<T>(api)
@@ -171,4 +241,4 @@ const getPaginatedByTags = async (api: Api, pageSize: number = 12): Promise<Arra
   return []
 }
 
-export { getApi, getContracts, getEnumerable, getPaginated, getPaginatedByTags }
+export { getApi, getContracts, getEnumerable, getPaginated, getPaginatedByTags, getPaginatedByPageNum, getPaginatedByTagsWithPageNum }

@@ -7,6 +7,8 @@ import * as api from "../../../service/api";
 import styles from "./index.scss?inline";
 import { Api } from "../../../types/enum";
 
+export const prerender = true;
+
 const POSTS_PER_PAGE = 9;
 const paginated = await api.getPaginated<Article>(Api.Blog, POSTS_PER_PAGE);
 

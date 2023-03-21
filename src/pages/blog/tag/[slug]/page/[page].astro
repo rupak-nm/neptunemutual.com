@@ -14,32 +14,49 @@ interface Props {
   totalPages: number | undefined;
 }
 
-export async function getStaticPaths() {
-  const POSTS_PER_PAGE = 9;
-  const tagsData = await api.getPaginatedByTags(Api.Blog, POSTS_PER_PAGE);
+// export async function getStaticPaths() {
+//   const POSTS_PER_PAGE = 9;
+//   const tagsData = await api.getPaginatedByTags(Api.Blog, POSTS_PER_PAGE);
 
-  return tagsData
-    .map((data) => {
-      const nums = Object.keys(data.pages);
+//   return tagsData
+//     .map((data) => {
+//       const nums = Object.keys(data.pages);
 
-      return nums.map((num) => {
-        return {
-          params: { slug: data.tag.slug, page: num },
-          props: {
-            tag: data.tag,
-            currentPage: num,
-            data: data.pages[num],
-            totalPages: data.totalPages,
-          },
-        };
-      });
-    })
-    .flat();
-}
+//       return nums.map((num) => {
+//         return {
+//           params: { slug: data.tag.slug, page: num },
+//           props: {
+//             tag: data.tag,
+//             currentPage: num,
+//             data: data.pages[num],
+//             totalPages: data.totalPages,
+//           },
+//         };
+//       });
+//     })
+//     .flat();
+// }
 
 // All paginated data is passed on the "page" prop
 
-const { tag, data, currentPage, totalPages } = Astro.props;
+const POSTS_PER_PAGE = 9;
+const { slug, page: p } = Astro.params;
+const page = parseInt(p || "1");
+const res = await api.getPaginatedByTagsWithPageNum(
+  Api.Blog,
+  page,
+  slug || "all",
+  POSTS_PER_PAGE
+);
+
+const props = {
+  tag: res.tag,
+  data: res.pages[p || "1"],
+  currentPage: page,
+  totalPages: res.totalPages,
+};
+
+const { tag, data, currentPage, totalPages } = props;
 ---
 
 <BaseLayout>
