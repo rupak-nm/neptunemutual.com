@@ -75,7 +75,7 @@
   
     div {
       position: relative;
-      background-color:colors.$white;
+      background-color: colors.$white;
       padding: 0 24px;
       @include styles.text-xl;
       @include weights.semibold;
@@ -110,7 +110,7 @@
   .about.this.vacancy {
   
     div {
-      background-color: colors.$gray-800;
+      background-color: colors.$black;
     }
   
     span {
