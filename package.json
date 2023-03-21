@@ -56,6 +56,7 @@
     "yarn": "1.22.19"
   },
   "dependencies": {
+    "@astrojs/vercel": "^3.2.1",
     "highlight.js": "^11.7.0",
     "idb-keyval": "^6.2.0"
   }

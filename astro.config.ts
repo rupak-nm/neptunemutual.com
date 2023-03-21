@@ -14,6 +14,7 @@ const integrations = production ? [builder, ...common] : [...common]
 
 /** @type {import('astro').AstroUserConfig} */
 const config = defineConfig({
+  output: 'server',
   integrations,
   server: {
     port: 3001,
