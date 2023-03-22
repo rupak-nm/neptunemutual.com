@@ -8,18 +8,21 @@
 @use "../../design-system/blurs";
 
 .roadmap.container {
-  padding-top: 56px;
   padding-bottom: 96px;
+  
 
   @media (max-width: 767px) {
     padding-top: 64px;
     padding-bottom: 64px;
   }
 
-  >.inner.container {
+  .inner.container {
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    border-top: 1px solid colors.$gray-200;
+    margin-top: 96px;
+    padding-top: 56px;
 
     @include utils.full-width-container;
   }
@@ -288,6 +291,11 @@
 }
 
 .dark .roadmap.container {
+
+  .inner.container {
+    border-top-color: colors.$gray-800;
+  }
+
   h2 {
     .subheading {
       color: colors.$primary-300;
@@ -372,7 +380,7 @@
     button {
       background-color: colors.$gray-700;
       color: colors.$gray-50;
-      border: 1px solid colors.$gray-600;
+      border: 1px solid colors.$gray-800;
 
       &:not(:disabled):not([data-disabled]):hover {
         background-color: colors.$gray-600 !important;
@@ -381,7 +389,7 @@
 
       &:disabled,
       [data-disabled] {
-        border: 1px solid colors.$gray-600 !important;
+        border: 1px solid colors.$gray-800 !important;
         color: colors.$gray-600 !important;
       }
     }
