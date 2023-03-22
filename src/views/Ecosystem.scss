@@ -213,7 +213,7 @@
 .dark .neptune.mutual.ecosystem {
   .item .box {
     background: dark.$primary-background-color;
-    border: 1px solid colors.$gray-700;
+    border: 1px solid colors.$gray-800;
 
     p {
       margin-top: 16px;
@@ -241,7 +241,7 @@
 
   .ui.dropdown .button.container {
     button {
-      border: 1px solid colors.$gray-700;
+      border: 1px solid colors.$gray-800;
       background-color: colors.$gray-700;
 
       &:focus,
