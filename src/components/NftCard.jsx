@@ -2,7 +2,7 @@ import { Icon } from '../react-code/components/Icon'
 
 const NftCard = ({ name, views, count, nftId, image }) => {
   return (
-    <a className={'nft card container'} href={'/'}>
+    <a className={'nft card container'} href={`/nft/marketplace/${nftId}`}>
       <div className="image container">
         <img src={image} alt={name || 'NFT Image'} loading="lazy" />
       </div>

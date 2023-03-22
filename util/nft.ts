@@ -10,4 +10,40 @@ const truncateAddress = (address: string): string => {
   return `${match[1]}…${match[2]}`
 }
 
-export { truncateAddress }
+const aggregateFiltersData = <T>(data: Array<KeyValuePair<T>>): Array<{ key: string, values: T[] }> => {
+  let finalArray: Array<{ key: string, values: T[] }> = []
+
+  finalArray = data.reduce((acc, curr) => {
+    const foundIndex = acc.findIndex(i => i.key === curr.key)
+    if (foundIndex > -1) {
+      const found = acc[foundIndex]
+      if (Array.isArray(found.values)) found.values.push(curr.value)
+      else found.values = [curr.value]
+      acc[foundIndex] = found
+      return acc
+    }
+
+    acc.push({ key: curr.key, values: [curr.value] })
+    return acc
+  }, finalArray)
+
+  const sorted = finalArray.map(item => {
+    const values = item.values
+    const sortedValues = values.sort((a, b) => {
+      if (!Number.isNaN(Number(a))) return Number(a) - Number(b)
+      if (typeof a === 'string' && typeof b === 'string') return a.localeCompare(b)
+      return 0
+    })
+    return {
+      key: item.key,
+      values: sortedValues
+    }
+  })
+
+  return sorted
+}
+
+export {
+  truncateAddress,
+  aggregateFiltersData
+}

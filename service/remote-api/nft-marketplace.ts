@@ -1,4 +1,5 @@
 import { env } from '../../util/env'
+import { aggregateFiltersData } from '../../util/nft'
 
 const getOrigins = (): {
   apiOrigin: string
@@ -14,6 +15,7 @@ const DEFAULT_PAGE_SIZE = 25
 
 const searchMarketplace = async (
   searchQuery = '',
+  properties: Array<KeyValuePair<string>> = [],
   pageNumber = 1,
   pageSize = DEFAULT_PAGE_SIZE,
   apiOrigin?: string
@@ -22,7 +24,7 @@ const searchMarketplace = async (
   const url = origin + '/marketplace/search'
   const body = JSON.stringify({
     search: searchQuery,
-    properties: [],
+    properties,
     pageNumber,
     pageSize
   })
@@ -40,7 +42,33 @@ const searchMarketplace = async (
 
     return data
   } catch (e) {
-    console.log({ e })
+    console.error(e)
+    return {
+      message: '',
+      code: '0',
+      data: []
+    }
+  }
+}
+
+const getMarketplaceFilters = async (): Promise<ApiResponse<Array<{
+  key: string
+  values: string[]
+}>>> => {
+  const url = getOrigins().apiOrigin + '/marketplace/properties'
+
+  try {
+    const res = await fetch(url)
+    const { message, code, data } = await res.json()
+
+    const aggregatedData = aggregateFiltersData<string>(data)
+    return {
+      message,
+      data: aggregatedData,
+      code
+    }
+  } catch (e) {
+    console.error(e)
     return {
       message: '',
       code: '0',
@@ -51,6 +79,7 @@ const searchMarketplace = async (
 
 const NftMarketplace = {
   searchMarketplace,
+  getMarketplaceFilters,
   getOrigins
 }
 
