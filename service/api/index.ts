@@ -96,9 +96,40 @@ const getEnumerable = async <T>(api: Api, limit: number, skip: number): Promise<
   return []
 }
 
+const getApi2 = async <T>(api: Api): Promise<ApiResult<T>> => {
+  if (!Object.values(Api).includes(api)) {
+    throw new Error(`Invalid type ${api}`)
+  }
+
+  const file = path.join('vercel', 'path0', 'public', 'cache', `${api}.json`)
+
+  try {
+    const contents = await io.readFile(file)
+    const result = JSON.parse(contents)
+    return result
+  } catch (error) {
+    console.error('getApi2 error: ', error)
+  }
+
+  const result: ApiResult<T> = {
+    docs: [] as T[],
+    totalDocs: 0,
+    limit: 0,
+    totalPages: 0,
+    page: 0,
+    pagingCounter: 0,
+    hasPrevPage: false,
+    hasNextPage: false,
+    prevPage: null,
+    nextPage: null
+  }
+
+  return result
+}
+
 const getPaginatedByPageNum = async<T>(api: Api, page: number = 1, pageSize: number = 12): Promise<PaginatedResult<T>> => {
   try {
-    const { docs } = await getApi<T>(api)
+    const { docs } = await getApi2<T>(api)
 
     const records = docs.length
     const totalPages = Math.ceil(records / pageSize)
@@ -113,7 +144,6 @@ const getPaginatedByPageNum = async<T>(api: Api, page: number = 1, pageSize: num
 
     const start = (page - 1) * pageSize
     const end = start + pageSize <= records ? start + pageSize : records
-    console.log({ page, start, end, totalPages })
 
     result.pages[page.toString() as keyof PaginatedResult<T>] = docs.slice(start, end)
 
@@ -127,7 +157,7 @@ const getPaginatedByPageNum = async<T>(api: Api, page: number = 1, pageSize: num
 
 const getPaginatedByTagsWithPageNum = async (api: Api, page: number = 1, tag: string, pageSize: number = 12): Promise<PaginatedByTagsResult<Article>> => {
   try {
-    const { docs } = await getApi<Article>(api)
+    const { docs } = await getApi2<Article>(api)
 
     const allTags = docs.map((doc) => doc.tags).flat()
     const uniqueTags = [...new Map(allTags.map((tag: any) => [tag.id, tag])).values()]
@@ -241,4 +271,4 @@ const getPaginatedByTags = async (api: Api, pageSize: number = 12): Promise<Arra
   return []
 }
 
-export { getApi, getContracts, getEnumerable, getPaginated, getPaginatedByTags, getPaginatedByPageNum, getPaginatedByTagsWithPageNum }
+export { getApi, getContracts, getEnumerable, getPaginated, getPaginatedByTags, getPaginatedByPageNum, getPaginatedByTagsWithPageNum, getApi2 }

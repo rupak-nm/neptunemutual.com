@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config'
+import { AstroUserConfig, defineConfig } from 'astro/config'
 import dotenv from 'dotenv'
 
 import vercel from '@astrojs/vercel/serverless'
@@ -15,8 +15,7 @@ const production = env('BUILD_ENV') === 'production'
 const common = [react()]
 const integrations = production ? [builder, ...common] : [...common]
 
-/** @type {import('astro').AstroUserConfig} */
-const config = defineConfig({
+const config: AstroUserConfig = defineConfig({
   output: 'server',
   adapter: vercel({
     analytics: false
