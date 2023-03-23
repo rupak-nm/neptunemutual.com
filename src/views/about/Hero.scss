@@ -15,11 +15,6 @@
     display: flex;
     justify-content: center;
     padding-top: 56px;
-    padding-bottom: 272px;
-    
-    @media (max-width: 767px) {
-      padding-bottom: 0;
-    }
 
     h1 {
       display: flex;
@@ -172,16 +167,8 @@
   }
 
   .floating.container {
-    .video.container:not(.modal) {
-      transform: translateY(-50%);
-
-      @media (max-width: 767px) {
-        transform: translateY(0);
-      }
-    }
-
     .top {
-      background-color: dark.$primary-background-color;
+      background-color: colors.$black-800;
     }
     
     .bottom {

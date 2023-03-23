@@ -37,14 +37,14 @@
 
 
       &:not(:disabled):not([data-disabled]):hover {
-        background-color: colors.$gray-50 !important;
-        color: colors.$gray-700 !important;
+        background-color: colors.$gray-50;
+        color: colors.$gray-700;
       }
 
       &:disabled,
       &[data-disabled] {
-        border: 1px solid colors.$gray-100 !important;
-        color: colors.$gray-300 !important;
+        border: 1px solid colors.$gray-100;
+        color: colors.$gray-300;
         cursor: not-allowed;
       }
     }
@@ -55,8 +55,13 @@
   border-top: 1px solid colors.$gray-800;
 
   .outlined.button {
-    background-color: colors.$black-900;
+    background-color: colors.$gray-800;
     color: colors.$gray-50;
-    border: 1px solid colors.$gray-800;
+    border: 1px solid colors.$gray-600;
+    
+    &:not(:disabled):not([data-disabled]):hover {
+      color: colors.$gray-50;
+      background-color: colors.$gray-900;
+    }
   }
 }

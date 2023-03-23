@@ -75,11 +75,7 @@
   }
 
   a.button {
-
-    &:hover,
-    &:active {
-      color: colors.$primary-300;
-    }
+    color: colors.$primary-300;
   }
 
   .icon.and.tag {
