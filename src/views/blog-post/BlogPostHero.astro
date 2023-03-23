@@ -32,8 +32,7 @@ const { publishedAt, timeToRead, title, intro, featuredImage, alt } = Astro.prop
     </div>
     <div class="image container">
         <meta itemprop="image" content={`${featuredImage}`} />
-        <!-- <img itemprop="image" src={`${featuredImage}`} alt={alt} loading="eager" /> -->
-        <img itemprop="image" src={`/assets/images/hero/home-cover.webp`} alt={alt} loading="eager" />
+        <img itemprop="image" src={`${featuredImage}`} alt={alt} loading="eager" />
     </div>
     <p class="intro">
         {intro}
