@@ -5,39 +5,37 @@ import { getFormattedDate } from "../../../util/format";
 import { slugify } from "../../../util/slug";
 
 interface Props {
-  publishedAt: Date;
-  timeToRead: number;
-  title: string;
-  intro: string;
-  featuredImage: string;
-  alt: string;
+    publishedAt: Date;
+    timeToRead: number;
+    title: string;
+    intro: string;
+    featuredImage: string;
+    alt: string;
 }
 
-const { publishedAt, timeToRead, title, intro, featuredImage, alt } =
-  Astro.props;
+const { publishedAt, timeToRead, title, intro, featuredImage, alt } = Astro.props;
 ---
 
 <div class="blog post hero full width container">
-  <div class="header">
-    <div class="blog info">
-      <span itemprop="datePublished" content={publishedAt.toISOString()}>
-        <time itemprop="published" datetime={publishedAt.toISOString()}
-          >{getFormattedDate(new Date(publishedAt).toUTCString())}</time
-        >
-      </span>
+    <div class="header">
+        <h1 itemprop="headline" id={slugify(title)}>
+            {title}
+        </h1>
+        <div class="blog info">
+            <span itemprop="datePublished" content={publishedAt.toISOString()}>
+                <time itemprop="published" datetime={publishedAt.toISOString()}>{getFormattedDate(new Date(publishedAt).toUTCString())}</time>
+            </span>
 
-      <Icon size={"sm"} variant="dot" />
-      <span class="time to read">{timeToRead} min read</span>
+            <Icon size={"sm"} variant="dot" />
+            <span class="time to read">{timeToRead} min read</span>
+        </div>
     </div>
-    <h1 itemprop="headline" id={slugify(title)}>
-      {title}
-    </h1>
+    <div class="image container">
+        <meta itemprop="image" content={`${featuredImage}`} />
+        <!-- <img itemprop="image" src={`${featuredImage}`} alt={alt} loading="eager" /> -->
+        <img itemprop="image" src={`/assets/images/hero/home-cover.webp`} alt={alt} loading="eager" />
+    </div>
     <p class="intro">
-      {intro}
+        {intro}
     </p>
-  </div>
-  <div class="image container">
-    <meta itemprop="image" content={`${featuredImage}`} />
-    <img itemprop="image" src={`${featuredImage}`} alt={alt} loading="eager" />
-  </div>
 </div>
