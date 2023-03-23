@@ -9,7 +9,11 @@
 .blog.pressroom.viewer.container {
   .author {
     margin: 48px 0 16px;
-    @include weights.semibold
+    .title.tag{
+      display: block;
+      @include weights.semibold;
+      margin: 16px 0 0;
+    }
   }
 
   .content.wrapper {
