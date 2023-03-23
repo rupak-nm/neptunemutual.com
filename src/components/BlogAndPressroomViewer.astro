@@ -25,11 +25,11 @@ const { type, title, intro, html, tags, pageUrl, showSocial } = Astro.props;
         <div class="article" set:html={html} />
 
         <div class="author">
-            By
-            <span itemprop="author" itemscope itemtype="https://schema.org/Organization">
+            Tags
+            <!-- <span itemprop="author" itemscope itemtype="https://schema.org/Organization">
                 <span itemprop="name">Neptune Mutual</span>
                 <span itemprop="url" content="https://neptunemutual.com"></span>
-            </span>
+            </span> -->
         </div>
         <Tags tags={toTagsWithHref(type, tags)} showAll />
 
