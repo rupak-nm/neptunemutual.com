@@ -212,8 +212,8 @@
 
 .dark .neptune.mutual.ecosystem {
   .item .box {
-    background: dark.$primary-background-color;
-    border: 1px solid colors.$gray-700;
+    background: colors.$black-800;
+    border: 1px solid colors.$gray-800;
 
     p {
       margin-top: 16px;
@@ -223,25 +223,29 @@
   }
 
   .ui.buttons {
-    .button.active, 
-    .button:hover {
-      color: colors.$white !important;
-      background: colors.$gray-600 !important;
-      cursor: pointer;
-    }
-
-    .button:focus {
-      color: colors.$white !important;
-    }
-
-    .button *:hover {
-      color: inherit !important;
+    .button {
+      color: colors.$gray-500;
+      
+      &.active, 
+      &:hover {
+        color: colors.$white !important;
+        background: colors.$gray-600 !important;
+        cursor: pointer;
+      }
+  
+      &:focus {
+        color: colors.$white !important;
+      }
+  
+      & *:hover {
+        color: inherit !important;
+      }
     }
   }
 
   .ui.dropdown .button.container {
     button {
-      border: 1px solid colors.$gray-700;
+      border: 1px solid colors.$gray-800;
       background-color: colors.$gray-700;
 
       &:focus,

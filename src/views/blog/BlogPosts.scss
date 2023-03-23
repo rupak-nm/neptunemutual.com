@@ -99,10 +99,11 @@
 
     & > div:nth-child(1) {
       .blog.search {
-        background-color: transparent;
-
+        background-color: colors.$black-800;
+        color: colors.$gray-25;
+        
         input::placeholder {
-          color: colors.$gray-500;
+          color: colors.$gray-25;
         }
       }
     }

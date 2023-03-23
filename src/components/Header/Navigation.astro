@@ -15,7 +15,12 @@ const { data } = Astro.props;
       data.map(({ title, href }) => {
         return href ? (
           <li>
-            <a href={normalizeUrl(href)}>{title}</a>
+            <a
+              class={Astro.url.pathname.includes(href) ? "active" : undefined}
+              href={normalizeUrl(href)}
+            >
+              {title}
+            </a>
           </li>
         ) : (
           <li>

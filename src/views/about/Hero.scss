@@ -15,9 +15,6 @@
     display: flex;
     justify-content: center;
     padding-top: 56px;
-    
-    @media (max-width: 767px) {
-    }
 
     h1 {
       display: flex;
@@ -153,7 +150,7 @@
 }
 
 .dark .about.us.hero.container {
-  background-color: dark.$primary-background-color;
+  background-color: colors.$black-800;
 
   .inner.container {
     .subheader {
@@ -171,7 +168,7 @@
 
   .floating.container {
     .top {
-      background-color: dark.$primary-background-color;
+      background-color: colors.$black-800;
     }
     
     .bottom {

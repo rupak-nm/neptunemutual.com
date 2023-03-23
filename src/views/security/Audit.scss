@@ -67,7 +67,7 @@
 }
 
 .dark .security.audit.report {
-  background-color: colors.$black;
+  background-color: colors.$black-800;
   border: 1px solid colors.$gray-800;
 
   &:hover {
@@ -75,11 +75,7 @@
   }
 
   a.button {
-
-    &:hover,
-    &:active {
-      color: colors.$primary-300;
-    }
+    color: colors.$primary-300;
   }
 
   .icon.and.tag {

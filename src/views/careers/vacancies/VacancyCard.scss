@@ -106,12 +106,12 @@
 }
 
 .dark .job.vacancy.card:not(.container) {
-  background: colors.$black;
+  background: colors.$black-900;
   border: 1px solid colors.$gray-800;
 
   &:hover {
-    background: dark.$primary-background-color;
-    border: 1px solid colors.$gray-700;
+    background: colors.$black-800;
+    border: 1px solid colors.$gray-800;
   }
 
   .title.and.cta {
