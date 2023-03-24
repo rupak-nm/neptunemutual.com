@@ -109,11 +109,11 @@ header {
 
 .dark header {
   border-bottom: 1px solid colors.$gray-800;
-  background-color: colors.$black;
+  background-color: colors.$black-900;
 
   .inner.container {
     .nav.with.language.and.theme {
-      background-color: colors.$black;
+      background-color: colors.$black-900;
     }
 
     @media (max-width: 1023px) {
@@ -129,11 +129,11 @@ header {
 
 
   &[data-style="colored"] {
-    background-color: colors.$black;
+    background-color: colors.$black-800;
 
     @media (min-width: 1024px) {
       .inner.container .nav.with.language.and.theme {
-        background-color: colors.$black;
+        background-color: colors.$black-800;
       }
     }
   }

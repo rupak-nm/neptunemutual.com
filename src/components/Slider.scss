@@ -79,7 +79,7 @@
     button {
       background-color: colors.$gray-700;
       color: colors.$gray-50;
-      border: 1px solid colors.$gray-600;
+      border: 1px solid colors.$gray-800;
 
       &:not(:disabled):not([data-disabled]):hover {
         background-color: colors.$gray-600 !important;
@@ -88,7 +88,7 @@
 
       &:disabled,
       [data-disabled] {
-        border: 1px solid colors.$gray-600 !important;
+        border: 1px solid colors.$gray-800 !important;
         color: colors.$gray-600 !important;
       }
     }

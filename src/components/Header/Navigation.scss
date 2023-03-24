@@ -85,6 +85,12 @@ header nav {
   ul li > button[data-open="true"] > i[data-state="closed"] {
     display: none;
   }
+
+  ul li > a {
+    &.active {
+      color: light.$color;
+    }
+  }
 }
 
 .dark header nav {
@@ -101,6 +107,10 @@ header nav {
   }
   
   ul li > a {
+    &.active {
+      color: dark.$color;
+    }
+
     svg {
       color: colors.$primary-500;
     }

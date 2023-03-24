@@ -173,7 +173,7 @@ footer {
 }
 
 .dark footer {
-  background-color: dark.$primary-background-color;
+  background-color: colors.$black-800;
 
   nav {
     h2{
@@ -214,11 +214,11 @@ footer {
     }
     
     h3 {
-      color: colors.$gray-500;
+      color: colors.$base-white;
     }
 
     p {
-      color: colors.$gray-500;
+      color: colors.$gray-300;
     }
   }
 

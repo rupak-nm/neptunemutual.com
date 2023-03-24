@@ -85,7 +85,7 @@
   .inner.container {
     .network.item {
       &:hover, &:focus-visible {
-        background-color: dark.$primary-background-color;
+        background-color: colors.$black-800;
       }
 
       i[data-mode="light"] {
