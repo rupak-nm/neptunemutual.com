@@ -3,6 +3,9 @@ import Icon from "../../elements/Icon.astro";
 
 import { getFormattedDate } from "../../../util/format";
 import { slugify } from "../../../util/slug";
+import { BlogOrPressroom } from "../../../types/enum";
+import Tags from "../../elements/Tags.astro";
+import { toTagsWithHref } from "../../../util/tag";
 
 interface Props {
   publishedAt: Date;
@@ -11,9 +14,11 @@ interface Props {
   intro: string;
   featuredImage: string;
   alt: string;
+  tags?: Tag[];
+  type: BlogOrPressroom;
 }
 
-const { publishedAt, timeToRead, title, intro, featuredImage, alt } = Astro.props;
+const { publishedAt, timeToRead, title, intro, featuredImage, alt, tags, type } = Astro.props;
 ---
 
 <div class="blog post hero full width container">
@@ -22,12 +27,15 @@ const { publishedAt, timeToRead, title, intro, featuredImage, alt } = Astro.prop
       {title}
     </h1>
     <div class="blog info">
-      <span itemprop="datePublished" content={publishedAt.toISOString()}>
-        <time itemprop="published" datetime={publishedAt.toISOString()}>{getFormattedDate(new Date(publishedAt).toUTCString())}</time>
-      </span>
+      <div class="time info">
+        <span itemprop="datePublished" content={publishedAt.toISOString()}>
+          <time itemprop="published" datetime={publishedAt.toISOString()}>{getFormattedDate(new Date(publishedAt).toUTCString())}</time>
+        </span>
 
-      <Icon size={"sm"} variant="dot" />
-      <span class="time to read">{timeToRead} min read</span>
+        <Icon size={"sm"} variant="dot" />
+        <span class="time to read">{timeToRead} min read</span>
+      </div>
+      <Tags tags={toTagsWithHref(type, tags)} />
     </div>
   </div>
   <div class="image container">

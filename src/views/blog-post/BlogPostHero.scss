@@ -57,25 +57,33 @@
   .blog.info{
     display: flex;
     align-items:center; 
-    gap: 6px; 
+    gap: 16px; 
     justify-content: center;
-
-    i {
-      color: colors.$gray-500;
-      width: 6px;
-      height: 6px;
+    .time.info{
+      display: flex;
+      align-items:center; 
+      gap: 6px; 
+      justify-content: center;
+      i {
+        color: colors.$gray-500;
+        width: 6px;
+        height: 6px;
+      }
+      span {
+        @include styles.text-md;
+        @include weights.semibold;
+  
+        color: colors.$gray-500;
+      }
+    }
+    .tags.container .tag{
+      padding: 2px 10px;
+      @include styles.text-sm;
+      @include weights.medium;
     }
   
     @media (max-width: 767px) {
       padding: 0 16px;
-    }
-    
-    span {
-      @include styles.text-md;
-      @include weights.semibold;
-
-      color: colors.$gray-500;
-  
     }
   }
 
@@ -137,6 +145,6 @@
     @include styles.text-md;
     @include weights.semibold;
 
-    color: colors.$gray-300;    
+    color: colors.$gray-200;    
   }
 }
