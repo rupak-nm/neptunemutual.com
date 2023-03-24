@@ -10,19 +10,19 @@ import { getRelatedPosts } from "../../../util/getRelated";
 import { Api } from "../../../types/enum";
 
 export async function getStaticPaths() {
-    const posts = await api.getEnumerable<Article>(Api.Pressroom, 1000, 0);
+  const posts = await api.getEnumerable<Article>(Api.Pressroom, 1000, 0);
 
-    return posts.map((post) => {
-        return {
-            params: { slug: post.slug },
-            props: { post, related: getRelatedPosts(post, posts) },
-        };
-    });
+  return posts.map((post) => {
+    return {
+      params: { slug: post.slug },
+      props: { post, related: getRelatedPosts(post, posts) },
+    };
+  });
 }
 
 interface Props {
-    post: Article;
-    related: Article[];
+  post: Article;
+  related: Article[];
 }
 
 const { post, related } = Astro.props;
@@ -33,19 +33,19 @@ const ogImageUrl = imgUrl ? new URL(`cdn/${imgUrl.split("/").pop()}`, dns.getDns
 ---
 
 <BaseLayout headerStyle="default">
-    <Seo
-        slot="seo"
-        title={post.meta.title}
-        description={post.meta.description}
-        og={{
-            image: ogImageUrl,
-            imageAlt: post.meta.image?.alt,
-        }}
-    />
-    <style slot="header" is:inline set:html={styles}></style>
-    <BlogPost structured={"NewsArticle"} type={Api.Pressroom} post={post} related={related} />
+  <Seo
+    slot="seo"
+    title={post.meta.title}
+    description={post.meta.description}
+    og={{
+      image: ogImageUrl,
+      imageAlt: post.meta.image?.alt,
+    }}
+  />
+  <style slot="header" is:inline set:html={styles}></style>
+  <BlogPost structured={"NewsArticle"} type={Api.Pressroom} post={post} related={related} />
 
-    <Fragment slot="footer">
-        <script src="../../scripts/pressroom/slug.js"></script>
-    </Fragment>
+  <Fragment slot="footer">
+    <script src="../../scripts/pressroom/slug.js"></script>
+  </Fragment>
 </BaseLayout>
