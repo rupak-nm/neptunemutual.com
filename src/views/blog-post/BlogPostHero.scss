@@ -126,25 +126,24 @@
 
 .dark .blog.post.hero.container {
   .blog.info{
-    span {
-      color: colors.$gray-200;
+    .time.info{
+      i, span {
+        color: colors.$gray-300;
+      }
+
     }
   }
 
   h1 {
-    color: colors.$gray-100;
+    color: colors.$base-white;
   }
 
   p.intro {
-    color: colors.$gray-300;
+    color: colors.$gray-25;
     border-bottom-color: colors.$gray-800;
   }
 
   time {
-    display: inline-block;
-    @include styles.text-md;
-    @include weights.semibold;
-
-    color: colors.$gray-200;    
+    color: colors.$gray-300;    
   }
 }
