@@ -29,12 +29,10 @@ const { post, related } = Astro.props;
 
 const imgUrl = post.meta.image?.url || post.cover?.url;
 
-const ogImageUrl = imgUrl
-  ? new URL(`cdn/${imgUrl.split("/").pop()}`, dns.getDns()).pathname
-  : "/assets/images/meta/og/home.png";
+const ogImageUrl = imgUrl ? new URL(`cdn/${imgUrl.split("/").pop()}`, dns.getDns()).pathname : "/assets/images/meta/og/home.png";
 ---
 
-<BaseLayout>
+<BaseLayout headerStyle="default">
   <Seo
     slot="seo"
     title={post.meta.title}
@@ -45,12 +43,7 @@ const ogImageUrl = imgUrl
     }}
   />
   <style slot="header" is:inline set:html={styles}></style>
-  <BlogPost
-    structured={"BlogPosting"}
-    type={Api.Blog}
-    post={post}
-    related={related}
-  />
+  <BlogPost structured={"BlogPosting"} type={Api.Blog} post={post} related={related} />
   <Fragment slot="footer">
     <script src="../../scripts/blog/slug.js"></script>
   </Fragment>

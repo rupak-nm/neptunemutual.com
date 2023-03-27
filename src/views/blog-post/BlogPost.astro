@@ -6,6 +6,7 @@ import NewsletterSignupForm from "../../components/NewsletterSignupForm.astro";
 
 import { parseContent } from "../../../util/content-viewer";
 import { BlogOrPressroom } from "../../../types/enum";
+import BlogAndPressroomViewer from "../../components/BlogAndPressroomViewer.astro";
 
 interface Props {
   type: BlogOrPressroom;
@@ -16,44 +17,15 @@ interface Props {
 
 const { type, post, related, structured } = Astro.props;
 
-const {
-  tag,
-  title,
-  intro,
-  toc,
-  parsedHtml,
-  tags,
-  pageUrl,
-  createdAt,
-  publishedAt,
-  timeToRead,
-  featuredImage,
-  alt,
-} = await parseContent(type, ["html"], post);
+const { tag, title, intro, parsedHtml, tags, pageUrl, createdAt, publishedAt, timeToRead, featuredImage, alt } = await parseContent(type, ["html"], post);
 
 const publishDate = new Date(createdAt || (publishedAt as Date));
 ---
 
 <div itemscope itemtype={`https://schema.org/${structured}`}>
-  <BlogPostHero
-    publishedAt={publishDate}
-    timeToRead={timeToRead}
-    title={title}
-    intro={intro}
-    featuredImage={featuredImage}
-    alt={alt}
-  />
+  <BlogPostHero publishedAt={publishDate} timeToRead={timeToRead} type={type} tags={tags} title={title} intro={intro} featuredImage={featuredImage} alt={alt} />
 
-  <ContentViewer
-    type={type}
-    title={title}
-    intro={intro}
-    toc={toc}
-    html={parsedHtml}
-    tags={tags}
-    pageUrl={pageUrl}
-    showSocial={true}
-  />
+  <BlogAndPressroomViewer type={type} title={title} intro={intro} html={parsedHtml} tags={tags} pageUrl={pageUrl} showSocial={true} />
 
   <RelatedPosts type={type} tagSlug={tag?.slug} relatedPosts={related} />
 

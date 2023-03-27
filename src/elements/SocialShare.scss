@@ -9,8 +9,8 @@
 
 
 .social.share.container {
-  margin-top: 16px;
-  padding-top: 24px;
+  margin: 32px 0 24px;
+  padding-top: 16px;
   border-top: 1px solid colors.$gray-200;
   display: flex;
   flex-wrap: wrap;
@@ -19,6 +19,7 @@
   @media (max-width: 767px) {
     justify-content: center;
     border-top: none;
+    margin-bottom: 0;
   }
 
 

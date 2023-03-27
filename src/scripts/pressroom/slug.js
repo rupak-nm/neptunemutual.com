@@ -7,3 +7,4 @@ import '../global/index'
 // Global End
 import '../components/subscription/index'
 import '../components/content-viewer/index'
+import '../components/blog-pressroom-viewer/index'
