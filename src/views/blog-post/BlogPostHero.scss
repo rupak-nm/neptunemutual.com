@@ -14,16 +14,32 @@
   text-align: center;
 
   @media (max-width: 767px) {
-    padding: 40px 0 32px;
+    padding-top: 0;
+    padding-bottom: 32px;
   }
 
-  >.header {
-    flex: 1;
+  .blog.title.wrapper{
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    max-width: 800px;
-    margin: 0 auto;
+    gap: 32px;
+
+    @media (max-width: 767px) {
+      flex-direction: column-reverse;
+    }
+
+    >.header {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 800px;
+      margin: 0 auto;
+  
+      @media (max-width: 767px) {
+        margin: 0;
+        text-align: left;
+      }
+    }
   }
 
   h1 {
@@ -34,7 +50,6 @@
     @media (max-width: 767px) {
       margin: 0;
       padding: 0 16px;
-      @include styles.display-sm;
     }
   }
 
@@ -50,7 +65,7 @@
 
     @media (max-width: 767px) {
       margin: 0 16px;
-      padding: 0 0 24px;
+      @include styles.text-md;
     }
   }
 
@@ -64,15 +79,16 @@
       align-items:center; 
       gap: 6px; 
       justify-content: center;
+
       i {
         color: colors.$gray-500;
         width: 6px;
         height: 6px;
       }
+
       span {
         @include styles.text-md;
         @include weights.semibold;
-  
         color: colors.$gray-500;
       }
     }
@@ -84,6 +100,9 @@
   
     @media (max-width: 767px) {
       padding: 0 16px;
+      justify-content: start;
+      gap: 12px;
+      flex-wrap: wrap;
     }
   }
 
@@ -91,27 +110,28 @@
     max-width: 1216px;
     width: 100%;
     margin: 0 auto 64px;
+    flex: 1 0 684px;
+    overflow: hidden;
 
-      flex: 1 0 684px;
-      overflow: hidden;
-      @media (max-width: 1200px) {
-        padding: 0 16px;
-        flex: 1 0 584px;
-      }
-      @media (max-width: 767px) {
-        flex: 1 0 280px;
-        height: 280px;
-        max-width: none;
-        padding: 0 16px;
-        margin-bottom: 0;
-      }
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      } 
-    
+    @media (max-width: 1023px) {
+      padding: 0 16px;
+      flex: 1 0 584px;
+    }
+
+    @media (max-width: 767px) {
+      flex: 1 0 240px;
+      height: 240px;
+      max-width: none;
+      padding: 0;
+      margin-bottom: 0;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    } 
   }
 
   time {
