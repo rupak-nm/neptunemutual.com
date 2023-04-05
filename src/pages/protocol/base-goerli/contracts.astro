@@ -9,7 +9,7 @@ import { Api } from "../../../../types/enum";
 import HeaderSection from "../../../components/HeaderSection.astro";
 import ProtocolContracts from "../../../views/protocol/ProtocolContracts.astro";
 
-const paginated = await api.getContracts(Api.ContractFuji);
+const paginated = await api.getContracts(Api.ContractBaseGoerli);
 
 const t = (x: string) => x;
 ---
@@ -17,11 +17,11 @@ const t = (x: string) => x;
 <BaseLayout headerStyle={"colored"}>
   <Seo
     slot="seo"
-    title="PODs / Neptune Mutual Protocol Contracts on Fuji"
-    description="View all POD contracts of the Neptune Mutual Protocol on Fuji"
+    title="Neptune Mutual Protocol Contracts on Fuji"
+    description="View all Neptune Mutual Protocol contracts on Fuji"
     og={{
       image: "/assets/images/meta/og/protocol-contracts.png",
-      imageAlt: "PODs / Neptune Mutual Protocol Contracts on Fuji",
+      imageAlt: "Neptune Mutual Protocol Contracts on Fuji",
     }}
   />
   <style slot="header" is:inline set:html={styles}></style>
@@ -32,7 +32,11 @@ const t = (x: string) => x;
     heading={t("Neptune Mutual Protocol Contracts")}
   />
 
-  <ProtocolContracts networkId={43113} type={"pods"} data={paginated.data} />
+  <ProtocolContracts
+    networkId={84531}
+    type={"contracts"}
+    data={paginated.data}
+  />
 
   <Fragment slot="footer">
     <script src="../../../scripts/protocol/index.js"></script>

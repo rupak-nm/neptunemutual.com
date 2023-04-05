@@ -39,8 +39,8 @@ const getApi = async <T>(api: Api): Promise<ApiResult<T>> => {
   return result
 }
 
-const getContracts = async (api: (Api.Contract | Api.ContractArbitrum | Api.ContractFuji)): Promise<ApiResponse<ProtocolContracts>> => {
-  const contracts = [Api.Contract, Api.ContractArbitrum, Api.ContractFuji]
+const getContracts = async (api: (Api.Contract | Api.ContractArbitrum | Api.ContractBaseGoerli)): Promise<ApiResponse<ProtocolContracts>> => {
+  const contracts = [Api.Contract, Api.ContractArbitrum, Api.ContractBaseGoerli]
   if (!contracts.includes(api)) {
     throw new Error(`Invalid type ${api} for contract`)
   }

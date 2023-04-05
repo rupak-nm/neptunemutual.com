@@ -15,10 +15,10 @@ const getVerticalTabItems = (networkId: number): TabItem[] => {
       active: networkId === Network.Arbitrum
     },
     {
-      text: 'Avalanche C-Chain Testnet (Fuji)',
-      icon: 'avalanche',
-      href: '/protocol/fuji/contracts',
-      active: networkId === Network.Fuji
+      text: 'Base Goerlli',
+      icon: 'base-goerli',
+      href: '/protocol/base-goerli/contracts',
+      active: networkId === Network.BaseGoerli
     }
   ]
 }
@@ -27,8 +27,7 @@ const getTabItems = (networkId: number, type: string): TabItem[] => {
   const networkSlugs: Record<number, string> = {
     [Network.Ethereum]: 'ethereum',
     [Network.Arbitrum]: 'arbitrum',
-    [Network.Fuji]: 'fuji'
-
+    [Network.BaseGoerli]: 'base-goerli'
   }
 
   return [
@@ -63,11 +62,11 @@ const config: Record<number, NetworkConfig> = {
     app: 'https://arbitrum.neptunemutual.net',
     explorer: 'https://arbiscan.io/address/'
   },
-  [Network.Fuji]: {
-    id: Network.Fuji,
-    title: 'Neptune Mutual on Fuji (Testnet)',
+  [Network.BaseGoerli]: {
+    id: Network.BaseGoerli,
+    title: 'Neptune Mutual on Base Goerli (Testnet)',
     app: 'https://test.neptunemutual.net',
-    explorer: 'https://testnet.snowtrace.io/address/'
+    explorer: 'https://goerli.basescan.org/'
   }
 }
 

@@ -93,7 +93,8 @@ const paths: Record<string, any> = {
   'trash-01': import('./variants/General/trash-01.svg?raw'),
   'help-cirlce': import('./variants/General/help-circle.svg?raw'),
   table: import('./variants/Layout/table.svg?raw'),
-  minus: import('./variants/General/minus.svg?raw')
+  minus: import('./variants/General/minus.svg?raw'),
+  'base-goerli': import('./custom/Brands/default/SvgBaseGoerli.svg?raw')
 }
 
 export { paths }
