@@ -40,10 +40,10 @@ const items = [
 ];
 ---
 
-<div class="contract details container">
+<div class="container contract details">
   <Breadcrumb items={items} />
 
-  <div class="titles container">
+  <div class="container titles">
     <h1>{network.title}</h1>
     <a href={network.app} target="_blank">
       {network.app}
@@ -68,7 +68,10 @@ const items = [
 
   {
     type === "cxTokens" && (
-      <FilterTabs className={"cxToken contract"} cxTokens={data.cxTokens} />
+      <FilterTabs
+        className={"cxToken contract"}
+        cxTokens={data?.cxTokens ?? []}
+      />
     )
   }
 
@@ -89,7 +92,7 @@ const items = [
       <>
         <div
           data-scope="expired"
-          class="ui initially hidden contracts list view"
+          class="hidden ui initially contracts list view"
         >
           {expired.map((item) => (
             <Contract

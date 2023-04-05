@@ -16,7 +16,7 @@ const getVerticalTabItems = (networkId: number): TabItem[] => {
     },
     {
       text: 'Base Goerlli',
-      icon: 'avalanche',
+      icon: 'base-goerli',
       href: '/protocol/base-goerli/contracts',
       active: networkId === Network.BaseGoerli
     }

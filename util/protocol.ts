@@ -3,7 +3,7 @@ import { parseBytes32String } from '@ethersproject/strings'
 import { getMonthName } from './date'
 
 const getKeyValuePairFrom = (cxTokens: CxToken[], status: 'active' | 'expired'): Array<KeyValuePair<string>> => {
-  const items = cxTokens
+  const items = (cxTokens ?? [])
     .filter(x => status === 'active'
       ? parseInt(x.expiry) * 1000 > new Date().getTime()
       : parseInt(x.expiry) * 1000 <= new Date().getTime()
