@@ -19,6 +19,12 @@ const getVerticalTabItems = (networkId: number): TabItem[] => {
       icon: 'avalanche',
       href: '/protocol/fuji/contracts',
       active: networkId === Network.Fuji
+    },
+    {
+      text: 'Base Goerlli',
+      icon: 'avalanche',
+      href: '/protocol/base-goerli/contracts',
+      active: networkId === Network.BaseGoerli
     }
   ]
 }
@@ -27,8 +33,8 @@ const getTabItems = (networkId: number, type: string): TabItem[] => {
   const networkSlugs: Record<number, string> = {
     [Network.Ethereum]: 'ethereum',
     [Network.Arbitrum]: 'arbitrum',
-    [Network.Fuji]: 'fuji'
-
+    [Network.Fuji]: 'fuji',
+    [Network.BaseGoerli]: 'base-goerli'
   }
 
   return [
@@ -68,6 +74,12 @@ const config: Record<number, NetworkConfig> = {
     title: 'Neptune Mutual on Fuji (Testnet)',
     app: 'https://test.neptunemutual.net',
     explorer: 'https://testnet.snowtrace.io/address/'
+  },
+  [Network.BaseGoerli]: {
+    id: Network.BaseGoerli,
+    title: 'Neptune Mutual on Base Goerli (Testnet)',
+    app: 'https://test.neptunemutual.net',
+    explorer: 'https://goerli.basescan.org/'
   }
 }
 
