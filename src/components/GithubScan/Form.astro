@@ -1,0 +1,130 @@
+---
+import { Button } from "../../react-code/components/Button";
+
+import Input from "../../elements/Input.astro";
+import Icon from "../../elements/Icon.astro";
+import InputWithIcon from "../../elements/InputWithIcon.astro";
+
+const t = (x: string): string => x;
+---
+
+<div class="container github scan">
+  <div>
+    <h2>Scan your Github Repository</h2>
+
+    <form>
+      <div class="inputs">
+        <Input
+          type={"text"}
+          label="Enter Organization Name*"
+          placeholder="Example Inc."
+        />
+        <Input
+          type={"text"}
+          label="Enter Repository Name*"
+          placeholder="Example-repo"
+        />
+
+        <div>
+          <label>Enter Github Access Token</label>
+          <InputWithIcon
+            className=""
+            iconProps={{
+              variant: "eye",
+              size: "md",
+            }}
+            type="password"
+            value=""
+            placeholder="Example-repo"
+            iconEnd={true}
+          />
+        </div>
+      </div>
+
+      <fieldset>
+        <div>
+          <input type="radio" name="group1" id="package-json" />
+          <label for="package-json">Include package.json</label>
+        </div>
+
+        <div>
+          <input type="radio" name="group1" id="package-lock-json" />
+          <label for="package-lock-json">Include package-lock.json</label>
+        </div>
+
+        <div>
+          <input type="radio" name="group1" id="yarn-lock" />
+          <label for="yarn-lock">Include yarn.lock</label>
+        </div>
+      </fieldset>
+
+      <div class="buttons">
+        <button class="filled">Initiate Scan</button>
+        <button class="outlined">Terminate Scan</button>
+      </div>
+    </form>
+
+    <div class="container summary">
+      <div class="header">
+        <h3>Scan Summary</h3>
+
+        <div class="status">
+          <div data-status="complete">
+            <span>Scan Complete</span>
+            <Icon variant="check-circle" />
+          </div>
+          <div data-status="in-progress">
+            <span>Scan in Progress</span>
+            <Icon variant="refresh-cw-05" />
+          </div>
+          <p>789 of 789 packages</p>
+        </div>
+
+        <div class="found files">
+          <span>Found files:</span>
+          <span class="file">package.json</span>
+          <span class="file">package-lock.json</span>
+          <span class="file">yarn.lock</span>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th class="cell-1">
+              <div>
+                <span>Vulnerable Packages</span>
+                <span class="badge success">0</span>
+              </div>
+            </th>
+            <th class="cell-2"></th>
+            <th class="cell-3">
+              <div>
+                <span>Potential Issues</span>
+                <span class="badge danger">1</span>
+              </div>
+            </th>
+          </tr>
+          <tr class="sub header">
+            <th>Package</th>
+            <th>Issues</th>
+            <th>Unstable Package</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th>@abc@1.1.0</th>
+            <th>2</th>
+            <th>express@1.2.3</th>
+          </tr>
+          <tr>
+            <th>express@2.1.5</th>
+            <th>3</th>
+            <th>ghost@1.1.1</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

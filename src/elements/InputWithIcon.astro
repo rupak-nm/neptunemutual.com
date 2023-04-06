@@ -10,12 +10,22 @@ interface Props {
   placeholder: string;
   value: string;
   id?: string;
+  type?: astroHTML.JSX.HTMLInputTypeAttribute;
+  iconEnd?: boolean;
 }
 
-const { className, iconProps, placeholder, value, id } = Astro.props;
+const { className, iconProps, placeholder, value, id, type, iconEnd } =
+  Astro.props;
 ---
 
 <div class={`input with icon ${className || ""}`.trim()}>
-  {Object.keys(iconProps).length > 0 && <Icon {...iconProps} />}
-  <input placeholder={placeholder} autocomplete="off" value={value} id={id} />
+  {!iconEnd && Object.keys(iconProps).length > 0 && <Icon {...iconProps} />}
+  <input
+    placeholder={placeholder}
+    autocomplete="off"
+    value={value}
+    id={id}
+    type={type || "text"}
+  />
+  {iconEnd && Object.keys(iconProps).length > 0 && <Icon {...iconProps} />}
 </div>

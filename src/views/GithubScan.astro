@@ -1,0 +1,22 @@
+---
+import HeaderSection from "../components/HeaderSection.astro";
+import Form from "../components/GithubScan/Form.astro";
+
+const t = (x: string): string => x;
+---
+
+<HeaderSection
+  color={"basic"}
+  alignment={"center"}
+  heading={t("Github Repository Scan")}
+>
+  <Fragment slot="supporting-text">
+    {
+      t(
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam id nunc nec ante tristique egestas. Integer vitae accumsan purus. Aliquam a mi rhoncus, tincidunt metus at, porttitor eros."
+      )
+    }
+  </Fragment>
+</HeaderSection>
+
+<Form />

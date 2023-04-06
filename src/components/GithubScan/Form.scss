@@ -1,0 +1,340 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+@use "../../design-system/shadows";
+
+.github.scan.container {
+  background-color: colors.$base-white;
+
+  & > div {
+    @include utils.full-width-container;
+    padding-top: 56px;
+    padding-bottom: 288px;
+
+    h2 {
+      @include styles.display-sm;
+      @include weights.semibold;
+    }
+    
+    form {
+      margin-top: 32px;
+
+      .inputs {
+        display: flex;
+        gap: 16px;
+
+        label {
+          @include styles.text-sm;
+          @include weights.medium;
+          color: colors.$gray-700;
+        }
+
+        input, .input.with.icon {
+          color: colors.$gray-600;
+          background-color: colors.$gray-50;
+          @include styles.text-md;
+          @include weights.regular;
+        }
+
+        .input.with.icon {
+          color: colors.$gray-600;
+          height: 50px;
+        }
+
+        & > * {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          justify-content: space-between;
+          width: 353px;
+          flex: 0 1 auto;
+        }
+      }
+
+      fieldset {
+        margin-top: 24px;
+
+        label {
+          @include styles.text-md;
+          @include weights.regular;
+          color: colors.$gray-700;
+          cursor: pointer;
+        }
+
+        input {
+          width: 16px;
+          height: 16px;
+          cursor: pointer;
+        }
+
+        & > div {
+          display: flex;
+          gap: 8px;
+          align-items: center;
+        }
+      }
+
+      .buttons {
+        display: flex;
+        gap: 16px;
+
+        button {
+          margin-top: 24px;
+          padding: 10px 18px;
+          @include styles.text-md;
+          @include weights.semibold;
+          color: colors.$base-white;
+          background-color: colors.$primary-600;
+          border-radius: 8px;
+
+          &.outlined {
+            border: 1px solid colors.$primary-600;
+            background-color: transparent;
+            color: colors.$primary-600;
+          }
+        }
+      }
+
+    }
+    
+    .summary.container {
+      margin-top: 64px;
+      border-radius: 12px;
+      border: 1px solid colors.$gray-200;
+      box-shadow: shadows.$sm;
+      overflow: hidden;
+      
+      .header {
+        padding: 18px 24px;
+        @include styles.display-xs;
+        @include weights.bold;
+        
+        .status {
+          margin-top: 16px;
+          @include styles.text-sm;
+          @include weights.regular;
+          color: colors.$gray-600;
+          
+          & > div {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            
+            &[data-status="complete"] i {
+              color: colors.$success-600;
+            }
+            
+            &[data-status="in-progress"] i {
+              color: colors.$primary-600;
+            }
+
+            svg {
+              width: 16px;
+              height: 16px;
+            }
+          }
+
+          p {
+            margin-top: 8px;
+          }
+        }
+
+        .found.files {
+          margin-top: 16px;
+          display: flex;
+          gap: 8px;
+          align-items: center;
+
+          color: colors.$gray-900;
+          @include styles.text-sm;
+          @include weights.regular;
+          
+          .file {
+            border-radius: 16px;
+            background-color: colors.$primary-50;
+            padding: 2px 8px;
+            color: colors.$primary-700;
+            @include styles.text-xs;
+            @include weights.medium;
+            
+          }
+        }
+      }
+      
+      table {
+        border-spacing: 0;
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid colors.$gray-200;
+
+        td, th {
+          text-align: left;
+          border: 1px solid colors.$gray-200;
+        }
+
+        tr:first-child th {
+          border-top: 0;
+        }
+
+        tr:last-child td {
+          border-bottom: 0;
+        }
+
+        tr td:first-child,
+        tr th:first-child {
+          border-left: 0;
+        }
+
+        tr td:last-child,
+        tr th:last-child {
+          border-right: 0;
+        }
+
+        thead {
+          th {
+            padding: 10px 24px;
+            @include styles.text-md;
+            @include weights.semibold;
+            color: colors.$gray-600;
+            
+            &.cell-1, &.cell-3 {
+              width: 500px;
+            }
+            
+            &.cell-2 {
+              width: 92px;
+            }
+            
+            div {
+              display: flex;
+              gap: 4px;
+              align-items: center;
+            }
+            
+            .badge {
+              border-radius: 4px;
+              padding: 0 4px;
+              @include styles.text-xs;
+              @include weights.regular;
+              color: colors.$base-white;
+
+              &.danger {
+                background-color: colors.$error-600;
+              }
+
+              &.success {
+                background-color: colors.$success-600;
+              }
+            }
+          }
+          
+          tr:not(.sub.header) th {
+            background-color: colors.$gray-50;
+          }
+          
+          tr.sub.header th {
+            padding: 12px 24px;
+            @include styles.text-sm;
+          }
+
+        }
+        
+        tbody {
+          th {
+            padding: 26px 24px;
+            @include styles.text-sm;
+            @include weights.regular;
+          }
+        }
+      }
+    }
+  }
+}
+
+.dark .github.scan.container {
+  background-color: colors.$black-900;
+
+  & > div {
+    h2 {
+      color: colors.$base-white;
+    }
+
+    form {
+      .inputs {
+        label {
+          color: colors.$gray-300;
+        }
+
+        input, .input.with.icon {
+          color: colors.$base-white;
+          background-color: colors.$black-800;
+          border-color: colors.$gray-800;
+        }
+      }
+
+      fieldset {
+        label {
+          color: colors.$base-white
+        }
+      }
+
+      .buttons {
+        button.outlined {
+          border: 1px solid colors.$primary-300;
+          color: colors.$primary-100;
+        }
+      }
+    }
+
+    .summary.container {
+      border: 1px solid colors.$gray-800;
+
+      .header {
+        .status {
+          color: colors.$gray-25;
+
+          & > div {
+            &[data-status="complete"] i {
+              color: colors.$success-400;
+            }
+            
+            &[data-status="in-progress"] i {
+              color: colors.$primary-400;
+            }
+          }
+        }
+
+        .found.files {
+          color: colors.$base-white;
+
+          .file {
+            background-color: colors.$gray-100;
+            color: colors.$gray-800;
+          }
+        }
+      }
+
+      table {
+        border-color: colors.$gray-800;
+
+        td, th {
+          border: 1px solid colors.$gray-800; 
+        }
+
+        thead {
+          th {
+            color: colors.$base-white;
+          }
+
+          tr:not(.sub.header) th {
+            background-color: colors.$gray-900;
+          }
+        }
+
+      }
+    }
+  }
+}
