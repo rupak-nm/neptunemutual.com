@@ -60,18 +60,19 @@ const getFooterData = async (): Promise<FooterData> => {
           badge: 'New!',
           badgeColor: 'success'
         },
-        { href: '/blog/', text: 'Blog', isExternal: false },
-        { href: '/pressroom/', text: 'Press Room', isExternal: false },
         { href: '/ecosystem/', text: 'Ecosystem', isExternal: false },
         { href: '/docs/', text: 'Documentation', isExternal: false },
         { href: '/web3-tools/', text: 'Web3 Tools', isExternal: false },
-        { href: '/hack-database/', text: 'Blockchain Hack Database', isExternal: false }
+        { href: 'https://nft.neptunemutual.com/', includeTheme: true, text: 'NFT Portal', isExternal: false },
+        { href: 'https://explorer.neptunemutual.net/', includeTheme: true, text: 'Explorer', isExternal: false }
       ]
     },
     {
       title: 'Company',
       links: [
         { href: '/about/', text: 'About us', isExternal: false },
+        { href: '/blog/', text: 'Blog', isExternal: false },
+        { href: '/pressroom/', text: 'Press Room', isExternal: false },
         {
           href: '/grants-and-bounties/',
           text: 'Grants and Bounties',
