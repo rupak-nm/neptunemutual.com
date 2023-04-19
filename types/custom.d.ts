@@ -94,6 +94,7 @@ interface DetailedListViewItem {
   href: string
   icon: string
   category: string
+  isExternal?: boolean
 }
 
 interface NamedIcon {
@@ -228,6 +229,7 @@ interface Web3ToolItem {
     icon: string
     text: string
   }>
+  isExternal?: boolean
 }
 
 interface TableRenderConfig<T> {
