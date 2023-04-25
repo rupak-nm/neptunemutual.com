@@ -6,6 +6,15 @@
 @use "../../design-system/theme/dark";
 @use "../../design-system/shadows";
 
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .github.scan.container {
   background-color: colors.$base-white;
 
@@ -25,6 +34,7 @@
       .inputs {
         display: flex;
         gap: 16px;
+        align-items: flex-start;
 
         label {
           @include styles.text-sm;
@@ -51,6 +61,17 @@
           justify-content: space-between;
           width: 353px;
           flex: 0 1 auto;
+        }
+
+        .input.error {
+          color: colors.$error-500;
+          @include styles.text-sm;
+          @include weights.regular;
+          display: inline;
+
+          &.hide {
+            display: none;
+          }
         }
       }
 
@@ -95,6 +116,11 @@
             background-color: transparent;
             color: colors.$primary-600;
           }
+
+          &:disabled {
+            opacity: 0.75;
+            cursor: not-allowed;
+          }
         }
       }
 
@@ -129,6 +155,7 @@
             
             &[data-status="in-progress"] i {
               color: colors.$primary-600;
+              animation: spin 750ms linear infinite;
             }
 
             svg {

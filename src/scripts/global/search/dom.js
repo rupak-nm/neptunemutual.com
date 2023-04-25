@@ -87,4 +87,4 @@ const compose = (href, title, content) => {
   })
 }
 
-export { compose }
+export { createEl, compose }

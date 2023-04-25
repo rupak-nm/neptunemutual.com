@@ -1,7 +1,4 @@
 ---
-import { Button } from "../../react-code/components/Button";
-
-import Input from "../../elements/Input.astro";
 import Icon from "../../elements/Icon.astro";
 import InputWithIcon from "../../elements/InputWithIcon.astro";
 
@@ -12,18 +9,45 @@ const t = (x: string): string => x;
   <div>
     <h2>Scan your Github Repository</h2>
 
-    <form>
+    <form onsubmit="return false;">
       <div class="inputs">
-        <Input
-          type={"text"}
-          label="Enter Organization Name*"
-          placeholder="Example Inc."
-        />
-        <Input
-          type={"text"}
-          label="Enter Repository Name*"
-          placeholder="Example-repo"
-        />
+        <div>
+          <label>Enter Organization Name*</label>
+          <InputWithIcon
+            className=""
+            iconProps={{
+              variant: "eye",
+              size: "md",
+            }}
+            type="text"
+            value=""
+            placeholder="Organization Name"
+            iconEnd={true}
+            id="OrganizationName"
+          />
+          <span data-name="org" class="input error hide"
+            >Invalid Organization Name</span
+          >
+        </div>
+
+        <div>
+          <label>Enter Repository Name*</label>
+          <InputWithIcon
+            className=""
+            iconProps={{
+              variant: "eye",
+              size: "md",
+            }}
+            type="text"
+            value=""
+            placeholder="Repository Name"
+            iconEnd={true}
+            id="RepoName"
+          />
+          <span data-name="repo" class="input error hide"
+            >Invalid Repository Name</span
+          >
+        </div>
 
         <div>
           <label>Enter Github Access Token</label>
@@ -37,58 +61,80 @@ const t = (x: string): string => x;
             value=""
             placeholder="Example-repo"
             iconEnd={true}
+            id="AccessToken"
           />
+          <span class="input error hide">Error</span>
         </div>
       </div>
 
-      <fieldset>
+      <fieldset id="FileType">
         <div>
-          <input type="radio" name="group1" id="package-json" />
+          <input
+            type="radio"
+            name="file-type-selection"
+            id="package-json"
+            value="package.json"
+          />
           <label for="package-json">Include package.json</label>
         </div>
 
         <div>
-          <input type="radio" name="group1" id="package-lock-json" />
+          <input
+            type="radio"
+            name="file-type-selection"
+            id="package-lock-json"
+            value="package-lock.json"
+          />
           <label for="package-lock-json">Include package-lock.json</label>
         </div>
 
         <div>
-          <input type="radio" name="group1" id="yarn-lock" />
+          <input
+            type="radio"
+            name="file-type-selection"
+            id="yarn-lock"
+            value="yarn.lock"
+          />
           <label for="yarn-lock">Include yarn.lock</label>
         </div>
       </fieldset>
 
       <div class="buttons">
-        <button class="filled">Initiate Scan</button>
-        <button class="outlined">Terminate Scan</button>
+        <button class="filled initiate" disabled>Initiate Scan</button>
+        <button class="outlined terminate initially hidden"
+          >Terminate Scan</button
+        >
       </div>
     </form>
 
-    <div class="container summary">
+    <div class="container summary initially hidden">
       <div class="header">
         <h3>Scan Summary</h3>
 
         <div class="status">
-          <div data-status="complete">
+          <div class="initially hidden" data-status="complete">
             <span>Scan Complete</span>
             <Icon variant="check-circle" />
           </div>
-          <div data-status="in-progress">
+          <div class="initially hidden" data-status="in-progress">
             <span>Scan in Progress</span>
             <Icon variant="refresh-cw-05" />
           </div>
-          <p>789 of 789 packages</p>
+          <p class="packages count initially hidden">789 of 789 packages</p>
         </div>
 
         <div class="found files">
           <span>Found files:</span>
-          <span class="file">package.json</span>
-          <span class="file">package-lock.json</span>
-          <span class="file">yarn.lock</span>
+          <span class="file" data-name="package.json">package.json</span>
+          <span class="file" data-name="package-lock.json"
+            >package-lock.json</span
+          >
+          <span class="file" data-name="yarn.lock">yarn.lock</span>
+          <span data-name="no-files">No files found</span>
         </div>
       </div>
 
-      <table>
+      <table class="initially hidden">
         <thead>
           <tr>
             <th class="cell-1">
@@ -108,22 +154,11 @@ const t = (x: string): string => x;
           <tr class="sub header">
             <th>Package</th>
             <th>Issues</th>
-            <th>Unstable Package</th>
+            <th>Unstable Version</th>
           </tr>
         </thead>
 
-        <tbody>
-          <tr>
-            <th>@abc@1.1.0</th>
-            <th>2</th>
-            <th>express@1.2.3</th>
-          </tr>
-          <tr>
-            <th>express@2.1.5</th>
-            <th>3</th>
-            <th>ghost@1.1.1</th>
-          </tr>
-        </tbody>
+        <tbody></tbody>
       </table>
     </div>
   </div>
