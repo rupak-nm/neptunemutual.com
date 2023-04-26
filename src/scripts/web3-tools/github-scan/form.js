@@ -1,7 +1,9 @@
 import { appendTableRows, toggleElementVisibility, updateInnerHtml } from './dom'
 import { getGithubFile } from './utils/check-github-file'
 import { fetchGithubAdvisory } from './utils/fetch-github-advisory'
+import { getWeeklyDownloads } from './utils/get-version-downloads'
 import { getYarnPackagesWithFinalVersion } from './utils/get-yarn-packages'
+import { parsePackageJson } from './utils/parse-package-json'
 import { checkRepository } from './utils/validate-github'
 
 {
@@ -50,7 +52,43 @@ import { checkRepository } from './utils/validate-github'
     handleInitiateScan()
   })
 
+  function resetUI () {
+    // show summary container
+    toggleElementVisibility({
+      element: summaryContainerEl,
+      show: false
+    })
+
+    updateInnerHtml({
+      parent: summaryContainerEl,
+      selector: 'p.packages.count',
+      newHtml: ''
+    })
+
+    updateInnerHtml({
+      parent: summaryContainerEl,
+      selector: 'table > tbody',
+      newHtml: ''
+    })
+
+    // show vulnerable packages badge if needed
+    toggleElementVisibility({
+      parent: summaryContainerEl,
+      selector: 'table > thead span.badge',
+      show: true
+    })
+
+    // update package count number
+    updateInnerHtml({
+      parent: summaryContainerEl,
+      selector: 'table > thead span.badge',
+      newHtml: ''
+    })
+  }
+
   async function handleInitiateScan () {
+    resetUI()
+
     const { orgName, repoName, accessToken } = values
 
     const { org, repo } = await checkRepository(orgName, repoName, accessToken)
@@ -120,44 +158,60 @@ import { checkRepository } from './utils/validate-github'
       show: availableFiles.length
     })
 
-    if (fileType === 'yarn.lock' && availableFiles.find(_file => _file.name === 'yarn.lock')) {
-      await handleYarnLockAnalysis(availableFiles)
+    // @note: @todo
+    if (fileType === 'package-lock.json') return
+
+    const file = availableFiles.find(f => f.name === fileType)
+    if (file) {
+      handleFileAnalysis(fileType, file)
     }
   }
 
-  async function handleYarnLockAnalysis (availableFiles = []) {
-    const file = availableFiles.find(_file => _file.name === 'yarn.lock')
-    const packagesArray = await getYarnPackagesWithFinalVersion(file.download_url)
+  async function handleFileAnalysis (fileType, file) {
+    const packagesFn = fileType === 'yarn.lock' ? getYarnPackagesWithFinalVersion : parsePackageJson
+    const packages = await packagesFn(file.download_url)
 
     // show package count when packages are available
     toggleElementVisibility({
       parent: summaryContainerEl,
       selector: 'p.packages.count',
-      show: packagesArray.length
+      show: packages.length
     })
 
     // update package count number
     updateInnerHtml({
       parent: summaryContainerEl,
       selector: 'p.packages.count',
-      newHtml: `0 of ${packagesArray.length} packages`
+      newHtml: `0 of ${packages.length} packages`
     })
 
-    const vulnerablePackages = await fetchGithubAdvisory(packagesArray, values.accessToken)
-    const flattenedData = vulnerablePackages.map(p => {
-      const name = Object.keys(p)[0]
-      return {
+    const vulnerablePackages = await fetchGithubAdvisory(packages, values.accessToken)
+
+    let potentialIssuePackages = []
+    if (fileType === 'package.json') {
+      potentialIssuePackages = await getWeeklyDownloads(packages)
+    }
+
+    const flattenedData = []
+    for (let i = 0; (i < vulnerablePackages.length) || (i < potentialIssuePackages.length); i++) {
+      const item1 = vulnerablePackages[i]
+      const item2 = potentialIssuePackages[i] ?? ''
+
+      const name = item1 ? Object.keys(item1)[0] : ''
+      const issueCount = item1 ? item1[name].length : ''
+
+      flattenedData.push({
         name,
-        issueCount: p[name].length,
-        unstable: '1.0'
-      }
-    })
+        issueCount,
+        unstable: item2
+      })
+    }
 
     // update package count number
     updateInnerHtml({
       parent: summaryContainerEl,
       selector: 'p.packages.count',
-      newHtml: `${packagesArray.length} of ${packagesArray.length} packages`
+      newHtml: `${packages.length} of ${packages.length} packages`
     })
 
     // hide status in-progress once the scanning is complete
@@ -166,6 +220,7 @@ import { checkRepository } from './utils/validate-github'
       selector: "div.status > div[data-status='in-progress']",
       show: false
     })
+
     // show status complete once the scanning is complete
     toggleElementVisibility({
       parent: summaryContainerEl,
@@ -178,6 +233,38 @@ import { checkRepository } from './utils/validate-github'
       selector: 'table',
       show: true
     })
+
+    if (vulnerablePackages.length) {
+      // show vulnerable packages badge if needed
+      toggleElementVisibility({
+        parent: summaryContainerEl,
+        selector: 'table > thead span.badge.success',
+        show: true
+      })
+
+      // update package count number
+      updateInnerHtml({
+        parent: summaryContainerEl,
+        selector: 'table > thead span.badge.success',
+        newHtml: vulnerablePackages.length
+      })
+    }
+
+    if (potentialIssuePackages.length) {
+      // show vulnerable packages badge if needed
+      toggleElementVisibility({
+        parent: summaryContainerEl,
+        selector: 'table > thead span.badge.danger',
+        show: true
+      })
+
+      // update package count number
+      updateInnerHtml({
+        parent: summaryContainerEl,
+        selector: 'table > thead span.badge.danger',
+        newHtml: potentialIssuePackages.length
+      })
+    }
 
     appendTableRows({
       parent: summaryContainerEl,

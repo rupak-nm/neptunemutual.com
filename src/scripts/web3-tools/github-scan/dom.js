@@ -1,11 +1,19 @@
 import { createEl } from '../../global/search/dom'
 
 function toggleElementVisibility ({ element, parent = document, selector, show, hideClass = ['initially', 'hidden'] }) {
-  const el = element ?? parent.querySelector(selector)
+  const elements = element ?? parent.querySelectorAll(selector)
 
-  if (el?.classList) {
-    el.classList.add(...hideClass)
-    if (show) el.classList.remove(...hideClass)
+  if (!element) {
+    elements.forEach(el => {
+      el.classList.add(...hideClass)
+      if (show) el.classList.remove(...hideClass)
+    })
+    return
+  }
+
+  if (element?.classList) {
+    element.classList.add(...hideClass)
+    if (show) element.classList.remove(...hideClass)
     return
   }
 
@@ -13,10 +21,17 @@ function toggleElementVisibility ({ element, parent = document, selector, show, 
 }
 
 function updateInnerHtml ({ element, parent = document, selector, newHtml }) {
-  const el = element ?? parent.querySelector(selector)
+  const elements = element ?? parent.querySelectorAll(selector)
 
-  if (el) {
-    el.innerHTML = newHtml
+  if (!element) {
+    elements.forEach(el => {
+      el.innerHTML = newHtml
+    })
+    return
+  }
+
+  if (element) {
+    element.innerHTML = newHtml
     return
   }
 

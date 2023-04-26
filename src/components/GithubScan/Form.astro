@@ -120,17 +120,23 @@ const t = (x: string): string => x;
             <span>Scan in Progress</span>
             <Icon variant="refresh-cw-05" />
           </div>
-          <p class="packages count initially hidden">789 of 789 packages</p>
+          <p class="packages count initially hidden"></p>
         </div>
 
         <div class="found files">
           <span>Found files:</span>
-          <span class="file" data-name="package.json">package.json</span>
-          <span class="file" data-name="package-lock.json"
+          <span class="file initially hidden" data-name="package.json"
+            >package.json</span
+          >
+          <span class="file initially hidden" data-name="package-lock.json"
             >package-lock.json</span
           >
-          <span class="file" data-name="yarn.lock">yarn.lock</span>
-          <span data-name="no-files">No files found</span>
+          <span class="file initially hidden" data-name="yarn.lock"
+            >yarn.lock</span
+          >
+          <span class="initially hidden" data-name="no-files"
+            >No files found</span
+          >
         </div>
       </div>
 
@@ -140,21 +146,21 @@ const t = (x: string): string => x;
             <th class="cell-1">
               <div>
                 <span>Vulnerable Packages</span>
-                <span class="badge success">0</span>
+                <span class="initially hidden badge success"></span>
               </div>
             </th>
             <th class="cell-2"></th>
             <th class="cell-3">
               <div>
                 <span>Potential Issues</span>
-                <span class="badge danger">1</span>
+                <span class="initially hidden badge danger"></span>
               </div>
             </th>
           </tr>
           <tr class="sub header">
             <th>Package</th>
             <th>Issues</th>
-            <th>Unstable Version</th>
+            <th>Unstable Packages</th>
           </tr>
         </thead>
 

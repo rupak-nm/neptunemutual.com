@@ -12,18 +12,12 @@ const getQuery = (packages) => {
       advisory {
         description
         severity
-      #  references {
-      #    url
-      #  }
       }
       package {
         name
         ecosystem
       }
       vulnerableVersionRange
-      #firstPatchedVersion {
-      #  identifier
-      #}
     }
   }
 `).join('\n')
