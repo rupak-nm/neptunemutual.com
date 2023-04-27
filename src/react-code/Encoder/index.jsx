@@ -6,6 +6,7 @@ import {
   useState
 } from 'react'
 
+import { isAddress } from '@ethersproject/address'
 import { Web3ReactProvider } from '@web3-react/core'
 
 import { Breadcrumbs } from '../components/BreadCrumbs'
@@ -22,6 +23,44 @@ import { History } from './History'
 import { Result } from './Result'
 
 const STORAGE_KEY = 'abis'
+
+const POSSIBLE_ABIS = [
+  'IAaveV2LendingPoolLike',
+  'IBondPool',
+  'IClaimsProcessor',
+  'ICompoundERC20DelegatorLike',
+  'ICover',
+  'ICoverReassurance',
+  'ICoverStake',
+  'ICxToken',
+  'ICxTokenFactory',
+  'IERC20',
+  'IERC20Detailed',
+  'IFinalization',
+  'IGovernance',
+  'ILendingStrategy',
+  'ILiquidityEngine',
+  'IMember',
+  'IPausable',
+  'IPolicy',
+  'IPolicyAdmin',
+  'IPriceOracle',
+  'IProtocol',
+  'IRecoverable',
+  'IReporter',
+  'IResolution',
+  'IResolvable',
+  'IStakingPools',
+  'IStore',
+  'IUniswapV2FactoryLike',
+  'IUniswapV2PairLike',
+  'IUniswapV2RouterLike',
+  'IUnstakable',
+  'IVault',
+  'IVaultDelegate',
+  'IVaultFactory',
+  'IWitness'
+]
 
 const Encoder = () => {
   const formRef = useRef()
@@ -170,6 +209,60 @@ const Encoder = () => {
     }
     setIsSaveable(isValidAbiString)
     setAbiInvalidFormat(!isValidAbiString)
+  }
+
+  // Consume and auto-fill values when available in URL
+  useEffect(() => {
+    consumeAndFill()
+  }, [])
+
+  const consumeAndFill = async () => {
+    const search = window.location.search
+
+    if (search) {
+      const params = new URLSearchParams(search.slice(1))
+
+      if (params.has('name') && params.has('address') && params.has('abi')) {
+        const name = params.get('name')
+        const address = params.get('address')
+        const abi = params.get('abi')
+
+        if (!isAddress(address)) {
+          return console.error('Address is invalid')
+        }
+
+        if (!name) {
+          return console.error('Name was not provided.')
+        }
+
+        if (!POSSIBLE_ABIS.includes(abi)) {
+          return console.error('Provided ABI was invalid')
+        }
+
+        try {
+          document.querySelector('#address').value = address
+          document.querySelector('#contract_name').value = name
+
+          const response = await fetch(`/abis/${abi}.json`).then(res => res.text())
+
+          if (isJSON(response) && isArray(response) && isValidAbi(response)) {
+            const abiTextField = document.querySelector('#abi')
+
+            abiTextField.value = response
+
+            validateABI({ target: abiTextField })
+            setContractName(name)
+            setAddress(address)
+          } else {
+            console.error('Unable to load ABI from file')
+          }
+        } catch (err) {
+          console.error(err)
+        }
+      } else {
+        console.error('Query params not provided in valid format')
+      }
+    }
   }
 
   return (
