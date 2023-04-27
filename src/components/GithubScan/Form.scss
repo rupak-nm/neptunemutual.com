@@ -189,6 +189,14 @@
             
           }
         }
+        
+        span[data-name]:not(.file) {
+          margin-top: 12px;
+          font-style: italic;
+          display: block;
+          @include styles.text-sm;
+          @include weights.medium;
+        }
       }
       
       table {

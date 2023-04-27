@@ -4,6 +4,7 @@ import { fetchGithubAdvisory } from './utils/fetch-github-advisory'
 import { getWeeklyDownloads } from './utils/get-version-downloads'
 import { getYarnPackagesWithFinalVersion } from './utils/get-yarn-packages'
 import { parsePackageJson } from './utils/parse-package-json'
+import { parsePackageLock } from './utils/parse-package-lock'
 import { checkRepository } from './utils/validate-github'
 
 {
@@ -127,6 +128,13 @@ import { checkRepository } from './utils/validate-github'
 
     const filesEl = summaryContainerEl.querySelectorAll('.found.files > .file')
 
+    // show files container if availables files are available
+    toggleElementVisibility({
+      parent: summaryContainerEl,
+      selector: '.header > .found.files',
+      show: availableFiles.length
+    })
+
     filesEl.forEach(fileEl => {
       const fileName = fileEl.getAttribute('data-name')
 
@@ -137,39 +145,49 @@ import { checkRepository } from './utils/validate-github'
       })
     })
 
+    const selectedFile = availableFiles.find(f => f.name === fileType)
+
     // show 'No files found' element if no available files
     toggleElementVisibility({
       parent: summaryContainerEl,
-      selector: ".found.files > *[data-name='no-files']",
-      show: availableFiles.length === 0
+      selector: ".header > *[data-name='no-files']",
+      show: !availableFiles.length
+    })
+
+    // show 'Couldn't find selected file' element if selected file not found
+    toggleElementVisibility({
+      parent: summaryContainerEl,
+      selector: ".header > *[data-name='no-selected-file']",
+      show: !selectedFile
     })
 
     // show status complete element if no available files
     toggleElementVisibility({
       parent: summaryContainerEl,
       selector: "div.status > div[data-status='complete']",
-      show: availableFiles.length === 0
+      show: !availableFiles.length || !selectedFile
     })
 
     // show status in-progress element if files are available
     toggleElementVisibility({
       parent: summaryContainerEl,
       selector: "div.status > div[data-status='in-progress']",
-      show: availableFiles.length
+      show: availableFiles.length && selectedFile
     })
 
-    // @note: @todo
-    if (fileType === 'package-lock.json') return
-
-    const file = availableFiles.find(f => f.name === fileType)
-    if (file) {
-      handleFileAnalysis(fileType, file)
+    if (selectedFile) {
+      handleFileAnalysis(fileType, selectedFile)
     }
   }
 
+  const packageFn = {
+    'yarn.lock': getYarnPackagesWithFinalVersion,
+    'package.json': parsePackageJson,
+    'package-lock.json': parsePackageLock
+  }
+
   async function handleFileAnalysis (fileType, file) {
-    const packagesFn = fileType === 'yarn.lock' ? getYarnPackagesWithFinalVersion : parsePackageJson
-    const packages = await packagesFn(file.download_url)
+    const packages = await packageFn[fileType](file.download_url)
 
     // show package count when packages are available
     toggleElementVisibility({
