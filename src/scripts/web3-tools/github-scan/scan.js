@@ -1,7 +1,8 @@
 import { appendTableRows, toggleElementVisibility, updateInnerHtml } from './dom'
 import { getGithubFile } from './utils/check-github-file'
 import { fetchGithubAdvisory } from './utils/fetch-github-advisory'
-import { getWeeklyDownloads } from './utils/get-version-downloads'
+import { getVulnerableByPublishedDate } from './utils/get-published-data'
+import { getVulnerableByWeeklyDownloads } from './utils/get-weekly-downloads'
 import { getYarnPackagesWithFinalVersion } from './utils/get-yarn-packages'
 import { parsePackageJson } from './utils/parse-package-json'
 import { parsePackageLock } from './utils/parse-package-lock'
@@ -175,8 +176,16 @@ import { checkRepository } from './utils/validate-github'
       show: availableFiles.length && selectedFile
     })
 
+    let getFullPackages = null
+    if (fileType === 'package.json') {
+      const yarnFile = availableFiles.find(f => (f.name === 'yarn.lock'))
+      const packageLockFile = availableFiles.find(f => (f.name === 'package-lock.json'))
+      if (yarnFile) getFullPackages = () => getYarnPackagesWithFinalVersion(yarnFile.download_url)
+      else if (packageLockFile) getFullPackages = () => parsePackageLock(packageLockFile.download_url)
+    }
+
     if (selectedFile) {
-      handleFileAnalysis(fileType, selectedFile)
+      handleFileAnalysis(fileType, selectedFile, getFullPackages)
     }
   }
 
@@ -186,8 +195,8 @@ import { checkRepository } from './utils/validate-github'
     'package-lock.json': parsePackageLock
   }
 
-  async function handleFileAnalysis (fileType, file) {
-    const packages = await packageFn[fileType](file.download_url)
+  async function handleFileAnalysis (fileType, file, getFullPackages) {
+    const packages = await packageFn[fileType](file.download_url, getFullPackages)
 
     // show package count when packages are available
     toggleElementVisibility({
@@ -207,7 +216,9 @@ import { checkRepository } from './utils/validate-github'
 
     let potentialIssuePackages = []
     if (fileType === 'package.json') {
-      potentialIssuePackages = await getWeeklyDownloads(packages)
+      const potentialByDownloads = await getVulnerableByWeeklyDownloads(packages)
+      const potentialByDate = await getVulnerableByPublishedDate(packages)
+      potentialIssuePackages = [...new Set(potentialByDownloads), ...new Set(potentialByDate)]
     }
 
     const flattenedData = []

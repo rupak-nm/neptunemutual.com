@@ -14,27 +14,26 @@ const getSimplifiedVersion = versionString => {
   return versionString.replaceAll(/[^\d.]/g, '')
 }
 
-const parsePackageJson = async (downloadUrl) => {
+const parsePackageJson = async (downloadUrl, getFullPackages) => {
   const data = await fetchPackageJson(downloadUrl)
 
+  const fullPackages = getFullPackages ? await getFullPackages() : undefined
   const packages = []
   if (Object.keys(data).length) {
-    const dependencies = data.dependencies
-    const devDependencies = data.devDependencies
+    const allDependencies = { ...data.dependencies, ...data.devDependencies }
 
-    if (dependencies) {
-      Object.keys(dependencies).map(key => {
-        packages.push({ name: key, versions: [getSimplifiedVersion(data.dependencies[key])] })
-        return null
-      })
-    }
-
-    if (devDependencies) {
-      Object.keys(devDependencies).map(key => {
-        packages.push({ name: key, versions: [getSimplifiedVersion(data.devDependencies[key])] })
-        return null
-      })
-    }
+    Object.keys(allDependencies).map(key => {
+      let version = getSimplifiedVersion(allDependencies[key])
+      if (fullPackages) {
+        const _package = fullPackages.find(p => p.name === key)
+        if (_package) {
+          const [_version] = _package.versions
+          version = _version
+        }
+      }
+      packages.push({ name: key, versions: [version] })
+      return null
+    })
   }
 
   return packages

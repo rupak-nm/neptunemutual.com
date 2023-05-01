@@ -1,6 +1,6 @@
 const BASE_URL = 'https://api.npmjs.org/versions/:packageName/last-week'
 
-async function potentialFlag (downloadCount) {
+function potentialFlag (downloadCount) {
   if (downloadCount < 50_000) return true
   return false
 }
@@ -11,15 +11,19 @@ function getVulenrableByDownloads (statsArray, packages) {
     const name = p.name
     const versions = p.versions
     const npmStats = statsArray.find(res => res.package === name)
-    const flags = versions.filter(v => potentialFlag(npmStats.downloads[v]))
-    if (flags.length) vulnerablePackages.push(name)
+    versions.map(v => {
+      const downloadcount = npmStats.downloads[v]
+      const flag = potentialFlag(downloadcount)
+      if (flag) vulnerablePackages.push(name)
+      return null
+    })
     return null
   })
 
   return vulnerablePackages
 }
 
-async function getWeeklyDownloads (packages) {
+async function getVulnerableByWeeklyDownloads (packages) {
   try {
     const requests = []
     packages.map(p => {
@@ -41,4 +45,4 @@ async function getWeeklyDownloads (packages) {
   return []
 }
 
-export { getWeeklyDownloads }
+export { getVulnerableByWeeklyDownloads }
