@@ -15,10 +15,6 @@ const t = (x: string): string => x;
           <label>Enter Organization Name*</label>
           <InputWithIcon
             className=""
-            iconProps={{
-              variant: "eye",
-              size: "md",
-            }}
             type="text"
             value=""
             placeholder="Organization Name"
@@ -34,10 +30,6 @@ const t = (x: string): string => x;
           <label>Enter Repository Name*</label>
           <InputWithIcon
             className=""
-            iconProps={{
-              variant: "eye",
-              size: "md",
-            }}
             type="text"
             value=""
             placeholder="Repository Name"
@@ -62,6 +54,7 @@ const t = (x: string): string => x;
             placeholder="Example-repo"
             iconEnd={true}
             id="AccessToken"
+            isPasswordField={true}
           />
           <span class="input error hide">Error</span>
         </div>

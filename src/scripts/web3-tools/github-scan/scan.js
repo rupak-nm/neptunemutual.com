@@ -1,8 +1,7 @@
 import { appendTableRows, toggleElementVisibility, updateInnerHtml } from './dom'
 import { getGithubFile } from './utils/check-github-file'
 import { fetchGithubAdvisory } from './utils/fetch-github-advisory'
-import { getVulnerableByPublishedDate } from './utils/get-published-data'
-import { getVulnerableByWeeklyDownloads } from './utils/get-weekly-downloads'
+import { getUnstablePackages } from './utils/get-unstable-packages'
 import { getYarnPackagesWithFinalVersion } from './utils/get-yarn-packages'
 import { parsePackageJson } from './utils/parse-package-json'
 import { parsePackageLock } from './utils/parse-package-lock'
@@ -216,9 +215,7 @@ import { checkRepository } from './utils/validate-github'
 
     let potentialIssuePackages = []
     if (fileType === 'package.json') {
-      const potentialByDownloads = await getVulnerableByWeeklyDownloads(packages)
-      const potentialByDate = await getVulnerableByPublishedDate(packages)
-      potentialIssuePackages = [...new Set(potentialByDownloads), ...new Set(potentialByDate)]
+      potentialIssuePackages = await getUnstablePackages(packages)
     }
 
     const flattenedData = []

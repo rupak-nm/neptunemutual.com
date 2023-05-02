@@ -3,7 +3,7 @@ import Icon from "./Icon.astro";
 
 interface Props {
   className: string;
-  iconProps: {
+  iconProps?: {
     variant: string;
     size?: "2xl" | "xl" | "lg" | "md" | "sm" | "xs";
   };
@@ -12,14 +12,34 @@ interface Props {
   id?: string;
   type?: astroHTML.JSX.HTMLInputTypeAttribute;
   iconEnd?: boolean;
+  isPasswordField?: boolean;
 }
 
-const { className, iconProps, placeholder, value, id, type, iconEnd } =
-  Astro.props;
+const {
+  className,
+  iconProps,
+  placeholder,
+  value,
+  id,
+  type,
+  iconEnd,
+  isPasswordField,
+} = Astro.props;
 ---
 
 <div class={`input with icon ${className || ""}`.trim()}>
-  {!iconEnd && Object.keys(iconProps).length > 0 && <Icon {...iconProps} />}
+  {
+    !iconEnd &&
+      iconProps &&
+      Object.keys(iconProps).length > 0 &&
+      (isPasswordField ? (
+        <button class="input icon button">
+          <Icon {...iconProps} />
+        </button>
+      ) : (
+        <Icon {...iconProps} />
+      ))
+  }
   <input
     placeholder={placeholder}
     autocomplete="off"
@@ -27,5 +47,16 @@ const { className, iconProps, placeholder, value, id, type, iconEnd } =
     id={id}
     type={type || "text"}
   />
-  {iconEnd && Object.keys(iconProps).length > 0 && <Icon {...iconProps} />}
+  {
+    iconEnd &&
+      iconProps &&
+      Object.keys(iconProps).length > 0 &&
+      (isPasswordField ? (
+        <button class="input icon button">
+          <Icon {...iconProps} />
+        </button>
+      ) : (
+        <Icon {...iconProps} />
+      ))
+  }
 </div>
