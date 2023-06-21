@@ -7,11 +7,16 @@ BigNumber.config({
 
 const GAS_MARGIN_MULTIPLIER = 1.5
 
-const getErrorMessage = (_error) => {
+const getErrorMessage = (_error, iface = null) => {
   try {
     const error = _error.error || _error
     if (!error || !error.message) {
       return 'Unexpected Error Occurred'
+    }
+
+    if (iface && error.data.data) {
+      const parsedError = iface.parseError(error.data.data)
+      return `Error: ${parsedError.name}`
     }
 
     if (error?.reason) return error.reason

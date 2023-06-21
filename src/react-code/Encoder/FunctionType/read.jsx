@@ -11,13 +11,12 @@ import { Icon } from '../../components/Icon'
 import { InputWithLabel } from '../../components/InputWithLabel'
 import {
   checkInputErrors,
-  getPlaceholder,
-  isInputError
+  getWriteArguments
 } from '../helpers/web3-tools/abi-encoder'
 import { InputFields } from '../components/InputFields'
 
 const ReadContract = (props) => {
-  const { func, call, joiSchema, isReady } = props
+  const { func, call, joiSchema, isReady, encodeInterface: iface } = props
   const { name, inputs, outputs } = func
 
   const [inputData, setInputData] = useState({})
@@ -38,18 +37,18 @@ const ReadContract = (props) => {
     setMakingCall(true)
 
     const methodName = name
-    const args = Object.values(inputData)
-    const outputs = await call(methodName, args)
+    const args = getWriteArguments(func, inputData)
+    const outputResponse = await call(methodName, args, undefined, iface)
 
-    if (outputs && !outputs.error) {
-      const _outputData = outputs.map((o, i) => ({
+    if (outputResponse && !outputResponse.error) {
+      const _outputData = outputResponse.map((o, i) => ({
         ...o,
-        value: outputs[i]?.toString()
+        value: outputResponse[i]?.toString()
       }))
       setOutputData(_outputData)
     }
 
-    if (outputs?.error) setError(outputs.error)
+    if (outputResponse?.error) setError(outputResponse.error)
     else setError('')
 
     setMakingCall(false)
@@ -80,10 +79,16 @@ const ReadContract = (props) => {
         <span className='error'>{error}</span>
       </div>
 
-      <div className='output'>
-        <div>L</div>
-        {getOutputsSignature()}
-      </div>
+      {
+        outputs.length
+          ? (
+          <div className='output'>
+            <div>L</div>
+            {getOutputsSignature()}
+          </div>
+            )
+          : <></>
+      }
       {outputData.map((output, i) => {
         return (
           <Fragment key={`output-${i}`}>

@@ -18,7 +18,7 @@ const WriteContract = (props) => {
   const [error, setError] = useState('')
   const [makingCall, setMakingCall] = useState(false)
 
-  const { func, call, joiSchema, isReady } = props
+  const { func, call, joiSchema, isReady, encodeInterface: iface } = props
   const { name } = func
 
   async function handleWrite () {
@@ -31,7 +31,7 @@ const WriteContract = (props) => {
     const hasPayableStateMutability = func?.stateMutability === 'payable'
     const value = inputData[name]
 
-    const res = await call(methodName, methodArgs, hasPayableStateMutability && { value })
+    const res = await call(methodName, methodArgs, hasPayableStateMutability && { value }, iface)
 
     if (res.error) setError(res.error)
     else setError('')
