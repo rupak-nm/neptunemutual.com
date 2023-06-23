@@ -28,6 +28,17 @@ const networks: NetworkOption[] = [
     ).then((x: any) => x.default),
     text: 'arbitrum.neptunemutual.net',
     link: 'https://arbitrum.neptunemutual.net'
+  },
+  {
+    name: 'BNB Smart Chain',
+    src: import(
+      '../../elements/icons/custom/Brands/default/SvgBNBChain.svg?raw'
+    ).then((x: any) => x.default),
+    srcDark: import(
+      '../../elements/icons/custom/Brands/dark/SvgBNBChainDark.svg?raw'
+    ).then((x: any) => x.default),
+    text: 'bsc.neptunemutual.net',
+    link: 'https://bsc.neptunemutual.net'
   }
 ]
 

@@ -19,6 +19,12 @@ const getVerticalTabItems = (networkId: number): TabItem[] => {
       icon: 'base-goerli',
       href: '/protocol/base-goerli/contracts',
       active: networkId === Network.BaseGoerli
+    },
+    {
+      text: 'BNB Smart Chain',
+      icon: 'bnbchain',
+      href: '/protocol/bsc/contracts',
+      active: networkId === Network.BSC
     }
   ]
 }
@@ -27,7 +33,8 @@ const getTabItems = (networkId: number, type: string): TabItem[] => {
   const networkSlugs: Record<number, string> = {
     [Network.Ethereum]: 'ethereum',
     [Network.Arbitrum]: 'arbitrum',
-    [Network.BaseGoerli]: 'base-goerli'
+    [Network.BaseGoerli]: 'base-goerli',
+    [Network.BSC]: 'bsc'
   }
 
   return [
@@ -67,6 +74,12 @@ const config: Record<number, NetworkConfig> = {
     title: 'Neptune Mutual on Base Goerli (Testnet)',
     app: 'https://test.neptunemutual.net',
     explorer: 'https://goerli.basescan.org/address/'
+  },
+  [Network.BSC]: {
+    id: Network.BSC,
+    title: 'Neptune Mutual on BNB Smart Chain',
+    app: 'https://bsc.neptunemutual.net',
+    explorer: 'https://bscscan.com/address/'
   }
 }
 
