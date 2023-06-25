@@ -265,7 +265,7 @@ export const chains = {
     shortName: 'ZYX'
   },
   56: {
-    name: 'Binance Smart Chain Mainnet',
+    name: 'BNB Smart Chain Mainnet',
     chain: 'BSC',
     shortName: 'bnb'
   },
@@ -460,7 +460,7 @@ export const chains = {
     shortName: 'nsc'
   },
   97: {
-    name: 'Binance Smart Chain Testnet',
+    name: 'BNB Smart Chain Testnet',
     chain: 'BSC',
     shortName: 'bnbt'
   },
