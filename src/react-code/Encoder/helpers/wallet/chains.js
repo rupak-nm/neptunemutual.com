@@ -1,3302 +1,949 @@
 export const chains = {
-  1: {
-    name: 'Main Ethereum Network',
-    chain: 'ETH',
-    shortName: 'eth'
-  },
-  2: {
-    name: 'Expanse Network',
-    chain: 'EXP',
-    shortName: 'exp'
-  },
-  3: {
-    name: 'Ropsten',
-    chain: 'ETH',
-    shortName: 'rop'
-  },
-  4: {
-    name: 'Rinkeby',
-    chain: 'ETH',
-    shortName: 'rin'
-  },
-  5: {
-    name: 'Goerli',
-    chain: 'ETH',
-    shortName: 'gor'
-  },
-  6: {
-    name: 'Ethereum Classic Testnet Kotti',
-    chain: 'ETC',
-    shortName: 'kot'
-  },
-  7: {
-    name: 'ThaiChain',
-    chain: 'TCH',
-    shortName: 'tch'
-  },
-  8: {
-    name: 'Ubiq',
-    chain: 'UBQ',
-    shortName: 'ubq'
-  },
-  9: {
-    name: 'Ubiq Network Testnet',
-    chain: 'UBQ',
-    shortName: 'tubq'
-  },
-  10: {
-    name: 'Optimism',
-    chain: 'ETH',
-    shortName: 'oeth'
-  },
-  11: {
-    name: 'Metadium Mainnet',
-    chain: 'META',
-    shortName: 'meta'
-  },
-  12: {
-    name: 'Metadium Testnet',
-    chain: 'META',
-    shortName: 'kal'
-  },
-  13: {
-    name: 'Diode Testnet Staging',
-    chain: 'DIODE',
-    shortName: 'dstg'
-  },
-  14: {
-    name: 'Flare Mainnet',
-    chain: 'FLR',
-    shortName: 'flr'
-  },
-  15: {
-    name: 'Diode Prenet',
-    chain: 'DIODE',
-    shortName: 'diode'
-  },
-  16: {
-    name: 'Flare Testnet Coston',
-    chain: 'FLR',
-    shortName: 'cflr'
-  },
-  17: {
-    name: 'ThaiChain 2.0 ThaiFi',
-    chain: 'TCH',
-    shortName: 'tfi'
-  },
-  18: {
-    name: 'ThunderCore Testnet',
-    chain: 'TST',
-    shortName: 'TST'
-  },
-  19: {
-    name: 'Songbird Canary-Network',
-    chain: 'SGB',
-    shortName: 'sgb'
-  },
-  20: {
-    name: 'Elastos Smart Chain',
-    chain: 'ETH',
-    shortName: 'esc'
-  },
-  21: {
-    name: 'Elastos Smart Chain Testnet',
-    chain: 'ETH',
-    shortName: 'esct'
-  },
-  22: {
-    name: 'ELA-DID-Sidechain Mainnet',
-    chain: 'ETH',
-    shortName: 'eladid'
-  },
-  23: {
-    name: 'ELA-DID-Sidechain Testnet',
-    chain: 'ETH',
-    shortName: 'eladidt'
-  },
-  24: {
-    name: 'KardiaChain Mainnet',
-    chain: 'KAI',
-    shortName: 'kardiachain'
-  },
-  25: {
-    name: 'Cronos Mainnet Beta',
-    chain: 'CRO',
-    shortName: 'cro'
-  },
-  26: {
-    name: 'Genesis L1 testnet',
-    chain: 'genesis',
-    shortName: 'L1test'
-  },
-  27: {
-    name: 'ShibaChain',
-    chain: 'SHIB',
-    shortName: 'shib'
-  },
-  28: {
-    name: 'Boba Network Rinkeby Testnet',
-    chain: 'ETH',
-    shortName: 'BobaRinkeby'
-  },
-  29: {
-    name: 'Genesis L1',
-    chain: 'genesis',
-    shortName: 'L1'
-  },
-  30: {
-    name: 'RSK Mainnet',
-    chain: 'RSK',
-    shortName: 'rsk'
-  },
-  31: {
-    name: 'RSK Testnet',
-    chain: 'RSK',
-    shortName: 'trsk'
-  },
-  32: {
-    name: 'GoodData Testnet',
-    chain: 'GooD',
-    shortName: 'GooDT'
-  },
-  33: {
-    name: 'GoodData Mainnet',
-    chain: 'GooD',
-    shortName: 'GooD'
-  },
-  34: {
-    name: 'Dithereum Testnet',
-    chain: 'DTH',
-    shortName: 'dth'
-  },
-  35: {
-    name: 'TBWG Chain',
-    chain: 'TBWG',
-    shortName: 'tbwg'
-  },
-  36: {
-    name: 'Dxchain Mainnet',
-    chain: 'Dxchain',
-    shortName: 'dx'
-  },
-  37: {
-    name: 'SeedCoin-Network',
-    chain: 'SeedCoin-Network',
-    shortName: 'SEED'
-  },
-  38: {
-    name: 'Valorbit',
-    chain: 'VAL',
-    shortName: 'val'
-  },
-  40: {
-    name: 'Telos EVM Mainnet',
-    chain: 'TLOS',
-    shortName: 'TelosEVM'
-  },
-  41: {
-    name: 'Telos EVM Testnet',
-    chain: 'TLOS',
-    shortName: 'TelosEVMTestnet'
-  },
-  42: {
-    name: 'Kovan',
-    chain: 'ETH',
-    shortName: 'kov'
-  },
-  43: {
-    name: 'Darwinia Pangolin Testnet',
-    chain: 'pangolin',
-    shortName: 'pangolin'
-  },
-  44: {
-    name: 'Darwinia Crab Network',
-    chain: 'crab',
-    shortName: 'crab'
-  },
-  45: {
-    name: 'Darwinia Pangoro Testnet',
-    chain: 'pangoro',
-    shortName: 'pangoro'
-  },
-  46: {
-    name: 'Darwinia Network',
-    chain: 'darwinia',
-    shortName: 'darwinia'
-  },
-  48: {
-    name: 'Ennothem Mainnet Proterozoic',
-    chain: 'ETMP',
-    shortName: 'etmp'
-  },
-  49: {
-    name: 'Ennothem Testnet Pioneer',
-    chain: 'ETMP',
-    shortName: 'etmpTest'
-  },
-  50: {
-    name: 'XinFin XDC Network',
-    chain: 'XDC',
-    shortName: 'xdc'
-  },
-  51: {
-    name: 'XDC Apothem Network',
-    chain: 'XDC',
-    shortName: 'txdc'
-  },
-  52: {
-    name: 'CoinEx Smart Chain Mainnet',
-    chain: 'CSC',
-    shortName: 'cet'
-  },
-  53: {
-    name: 'CoinEx Smart Chain Testnet',
-    chain: 'CSC',
-    shortName: 'tcet'
-  },
-  54: {
-    name: 'Openpiece Mainnet',
-    chain: 'OPENPIECE',
-    shortName: 'OP'
-  },
-  55: {
-    name: 'Zyx Mainnet',
-    chain: 'ZYX',
-    shortName: 'ZYX'
-  },
-  56: {
-    name: 'BNB Smart Chain Mainnet',
-    chain: 'BSC',
-    shortName: 'bnb'
-  },
-  57: {
-    name: 'Syscoin Mainnet',
-    chain: 'SYS',
-    shortName: 'sys'
-  },
-  58: {
-    name: 'Ontology Mainnet',
-    chain: 'Ontology',
-    shortName: 'OntologyMainnet'
-  },
-  59: {
-    name: 'EOS Mainnet',
-    chain: 'EOS',
-    shortName: 'EOSMainnet'
-  },
-  60: {
-    name: 'GoChain',
-    chain: 'GO',
-    shortName: 'go'
-  },
-  61: {
-    name: 'Ethereum Classic Mainnet',
-    chain: 'ETC',
-    shortName: 'etc'
-  },
-  62: {
-    name: 'Ethereum Classic Testnet Morden',
-    chain: 'ETC',
-    shortName: 'tetc'
-  },
-  63: {
-    name: 'Ethereum Classic Testnet Mordor',
-    chain: 'ETC',
-    shortName: 'metc'
-  },
-  64: {
-    name: 'Ellaism',
-    chain: 'ELLA',
-    shortName: 'ellaism'
-  },
-  65: {
-    name: 'OKExChain Testnet',
-    chain: 'okexchain',
-    shortName: 'tokt'
-  },
-  66: {
-    name: 'OKXChain Mainnet',
-    chain: 'okxchain',
-    shortName: 'okt'
-  },
-  67: {
-    name: 'DBChain Testnet',
-    chain: 'DBM',
-    shortName: 'dbm'
-  },
-  68: {
-    name: 'SoterOne Mainnet',
-    chain: 'SOTER',
-    shortName: 'SO1'
-  },
-  69: {
-    name: 'Optimism Kovan',
-    chain: 'ETH',
-    shortName: 'okov'
-  },
-  70: {
-    name: 'Hoo Smart Chain',
-    chain: 'HSC',
-    shortName: 'hsc'
-  },
-  71: {
-    name: 'Conflux eSpace (Testnet)',
-    chain: 'Conflux',
-    shortName: 'cfxtest'
-  },
-  72: {
-    name: 'DxChain Testnet',
-    chain: 'DxChain',
-    shortName: 'dxc'
-  },
-  73: {
-    name: 'FNCY',
-    chain: 'FNCY',
-    shortName: 'FNCY'
-  },
-  74: {
-    name: 'IDChain Mainnet',
-    chain: 'IDChain',
-    shortName: 'idchain'
-  },
-  75: {
-    name: 'Decimal Smart Chain Mainnet',
-    chain: 'DSC',
-    shortName: 'DSC'
-  },
-  76: {
-    name: 'Mix',
-    chain: 'MIX',
-    shortName: 'mix'
-  },
-  77: {
-    name: 'POA Network Sokol',
-    chain: 'POA',
-    shortName: 'spoa'
-  },
-  78: {
-    name: 'PrimusChain mainnet',
-    chain: 'PC',
-    shortName: 'primuschain'
-  },
-  79: {
-    name: 'Zenith Mainnet',
-    chain: 'Zenith',
-    shortName: 'zenith'
-  },
-  80: {
-    name: 'GeneChain',
-    chain: 'GeneChain',
-    shortName: 'GeneChain'
-  },
-  81: {
-    name: 'Zenith Testnet (Vilnius)',
-    chain: 'Zenith',
-    shortName: 'VIL'
-  },
-  82: {
-    name: 'Meter Mainnet',
-    chain: 'METER',
-    shortName: 'Meter'
-  },
-  83: {
-    name: 'Meter Testnet',
-    chain: 'METER Testnet',
-    shortName: 'MeterTest'
-  },
-  85: {
-    name: 'GateChain Testnet',
-    chain: 'GTTEST',
-    shortName: 'gttest'
-  },
-  86: {
-    name: 'GateChain Mainnet',
-    chain: 'GT',
-    shortName: 'gt'
-  },
-  87: {
-    name: 'Nova Network',
-    chain: 'NNW',
-    shortName: 'nnw'
-  },
-  88: {
-    name: 'TomoChain',
-    chain: 'TOMO',
-    shortName: 'tomo'
-  },
-  89: {
-    name: 'TomoChain Testnet',
-    chain: 'TOMO',
-    shortName: 'tomot'
-  },
-  90: {
-    name: 'Garizon Stage0',
-    chain: 'GAR',
-    shortName: 'gar-s0'
-  },
-  91: {
-    name: 'Garizon Stage1',
-    chain: 'GAR',
-    shortName: 'gar-s1'
-  },
-  92: {
-    name: 'Garizon Stage2',
-    chain: 'GAR',
-    shortName: 'gar-s2'
-  },
-  93: {
-    name: 'Garizon Stage3',
-    chain: 'GAR',
-    shortName: 'gar-s3'
-  },
-  95: {
-    name: 'CryptoKylin Testnet',
-    chain: 'EOS',
-    shortName: 'KylinTestnet'
-  },
-  96: {
-    name: 'NEXT Smart Chain',
-    chain: 'NSC',
-    shortName: 'nsc'
-  },
-  97: {
-    name: 'BNB Smart Chain Testnet',
-    chain: 'BSC',
-    shortName: 'bnbt'
-  },
-  99: {
-    name: 'POA Network Core',
-    chain: 'POA',
-    shortName: 'poa'
-  },
-  100: {
-    name: 'Gnosis',
-    chain: 'GNO',
-    shortName: 'gno'
-  },
-  101: {
-    name: 'EtherInc',
-    chain: 'ETI',
-    shortName: 'eti'
-  },
-  102: {
-    name: 'Web3Games Testnet',
-    chain: 'Web3Games',
-    shortName: 'tw3g'
-  },
-  104: {
-    name: 'Kaiba Lightning Chain Testnet',
-    chain: 'tKLC',
-    shortName: 'tklc'
-  },
-  105: {
-    name: 'Web3Games Devnet',
-    chain: 'Web3Games',
-    shortName: 'dw3g'
-  },
-  106: {
-    name: 'Velas EVM Mainnet',
-    chain: 'Velas',
-    shortName: 'vlx'
-  },
-  107: {
-    name: 'Nebula Testnet',
-    chain: 'NTN',
-    shortName: 'ntn'
-  },
-  108: {
-    name: 'ThunderCore Mainnet',
-    chain: 'TT',
-    shortName: 'TT'
-  },
-  110: {
-    name: 'Proton Testnet',
-    chain: 'XPR',
-    shortName: 'xpr'
-  },
-  111: {
-    name: 'EtherLite Chain',
-    chain: 'ETL',
-    shortName: 'ETL'
-  },
-  113: {
-    name: 'Dehvo',
-    chain: 'Dehvo',
-    shortName: 'deh'
-  },
-  114: {
-    name: 'Flare Testnet Coston2',
-    chain: 'FLR',
-    shortName: 'c2flr'
-  },
-  115: {
-    name: 'DeBank Testnet',
-    chain: 'DeBank',
-    shortName: 'debank-testnet'
-  },
-  116: {
-    name: 'DeBank Mainnet',
-    chain: 'DeBank',
-    shortName: 'debank-mainnet'
-  },
-  122: {
-    name: 'Fuse Mainnet',
-    chain: 'FUSE',
-    shortName: 'fuse'
-  },
-  123: {
-    name: 'Fuse Sparknet',
-    chain: 'fuse',
-    shortName: 'spark'
-  },
-  124: {
-    name: 'Decentralized Web Mainnet',
-    chain: 'DWU',
-    shortName: 'dwu'
-  },
-  125: {
-    name: 'OYchain Testnet',
-    chain: 'OYchain',
-    shortName: 'OYchainTestnet'
-  },
-  126: {
-    name: 'OYchain Mainnet',
-    chain: 'OYchain',
-    shortName: 'OYchainMainnet'
-  },
-  127: {
-    name: 'Factory 127 Mainnet',
-    chain: 'FETH',
-    shortName: 'feth'
-  },
-  128: {
-    name: 'Huobi ECO Chain Mainnet',
-    chain: 'Heco',
-    shortName: 'heco'
-  },
-  135: {
-    name: 'Alyx Chain Testnet',
-    chain: 'Alyx Chain Testnet',
-    shortName: 'AlyxTestnet'
-  },
-  137: {
-    name: 'Polygon Mainnet',
-    chain: 'Polygon',
-    shortName: 'matic'
-  },
-  141: {
-    name: 'Openpiece Testnet',
-    chain: 'OPENPIECE',
-    shortName: 'OPtest'
-  },
-  142: {
-    name: 'DAX CHAIN',
-    chain: 'DAX',
-    shortName: 'dax'
-  },
-  144: {
-    name: 'PHI Network v2',
-    chain: 'PHI',
-    shortName: 'PHI'
-  },
-  162: {
-    name: 'Lightstreams Testnet',
-    chain: 'PHT',
-    shortName: 'tpht'
-  },
-  163: {
-    name: 'Lightstreams Mainnet',
-    chain: 'PHT',
-    shortName: 'pht'
-  },
-  168: {
-    name: 'AIOZ Network',
-    chain: 'AIOZ',
-    shortName: 'aioz'
-  },
-  170: {
-    name: 'HOO Smart Chain Testnet',
-    chain: 'ETH',
-    shortName: 'hoosmartchain'
-  },
-  172: {
-    name: 'Latam-Blockchain Resil Testnet',
-    chain: 'Resil',
-    shortName: 'resil'
-  },
-  180: {
-    name: 'AME Chain Mainnet',
-    chain: 'AME',
-    shortName: 'ame'
-  },
-  186: {
-    name: 'Seele Mainnet',
-    chain: 'Seele',
-    shortName: 'Seele'
-  },
-  188: {
-    name: 'BMC Mainnet',
-    chain: 'BMC',
-    shortName: 'BMC'
-  },
-  189: {
-    name: 'BMC Testnet',
-    chain: 'BMC',
-    shortName: 'BMCT'
-  },
-  193: {
-    name: 'Crypto Emergency',
-    chain: 'CEM',
-    shortName: 'cem'
-  },
-  199: {
-    name: 'BitTorrent Chain Mainnet',
-    chain: 'BTTC',
-    shortName: 'BTT'
-  },
-  200: {
-    name: 'Arbitrum on xDai',
-    chain: 'AOX',
-    shortName: 'aox'
-  },
-  201: {
-    name: 'MOAC testnet',
-    chain: 'MOAC',
-    shortName: 'moactest'
-  },
-  211: {
-    name: 'Freight Trust Network',
-    chain: 'EDI',
-    shortName: 'EDI'
-  },
-  212: {
-    name: 'MAP Makalu',
-    chain: 'MAP',
-    shortName: 'makalu'
-  },
-  217: {
-    name: 'SiriusNet V2',
-    chain: 'SIN2',
-    shortName: 'SIN2'
-  },
-  218: {
-    name: 'SoterOne Mainnet old',
-    chain: 'SOTER',
-    shortName: 'SO1-old'
-  },
-  222: {
-    name: 'Permission',
-    chain: 'ASK',
-    shortName: 'ASK'
-  },
-  225: {
-    name: 'LACHAIN Mainnet',
-    chain: 'LA',
-    shortName: 'LA'
-  },
-  226: {
-    name: 'LACHAIN Testnet',
-    chain: 'TLA',
-    shortName: 'TLA'
-  },
-  246: {
-    name: 'Energy Web Chain',
-    chain: 'Energy Web Chain',
-    shortName: 'ewt'
-  },
-  248: {
-    name: 'Oasys Mainnet',
-    chain: 'Oasys',
-    shortName: 'OAS'
-  },
-  250: {
-    name: 'Fantom Opera',
-    chain: 'FTM',
-    shortName: 'ftm'
-  },
-  256: {
-    name: 'Huobi ECO Chain Testnet',
-    chain: 'Heco',
-    shortName: 'hecot'
-  },
-  258: {
-    name: 'Setheum',
-    chain: 'Setheum',
-    shortName: 'setm'
-  },
-  262: {
-    name: 'SUR Blockchain Network',
-    chain: 'SUR',
-    shortName: 'SUR'
-  },
-  269: {
-    name: 'High Performance Blockchain',
-    chain: 'HPB',
-    shortName: 'hpb'
-  },
-  280: {
-    name: 'zkSync alpha testnet',
-    chain: 'ETH',
-    shortName: 'zksync-goerli'
-  },
-  288: {
-    name: 'Boba Network',
-    chain: 'ETH',
-    shortName: 'Boba'
-  },
-  300: {
-    name: 'Optimism on Gnosis',
-    chain: 'OGC',
-    shortName: 'ogc'
-  },
-  301: {
-    name: 'Bobaopera',
-    chain: 'Bobaopera',
-    shortName: 'Bobaopera'
-  },
-  314: {
-    name: 'Filecoin - Mainnet',
-    chain: 'FIL',
-    shortName: 'filecoin'
-  },
-  321: {
-    name: 'KCC Mainnet',
-    chain: 'KCC',
-    shortName: 'kcs'
-  },
-  322: {
-    name: 'KCC Testnet',
-    chain: 'KCC',
-    shortName: 'kcst'
-  },
-  324: {
-    name: 'zkSync v2',
-    chain: 'ETH',
-    shortName: 'zksync'
-  },
-  333: {
-    name: 'Web3Q Mainnet',
-    chain: 'Web3Q',
-    shortName: 'w3q'
-  },
-  335: {
-    name: 'DFK Chain Test',
-    chain: 'DFK',
-    shortName: 'DFKTEST'
-  },
-  336: {
-    name: 'Shiden',
-    chain: 'SDN',
-    shortName: 'sdn'
-  },
-  338: {
-    name: 'Cronos Testnet',
-    chain: 'CRO',
-    shortName: 'tcro'
-  },
-  361: {
-    name: 'Theta Mainnet',
-    chain: 'Theta',
-    shortName: 'theta-mainnet'
-  },
-  363: {
-    name: 'Theta Sapphire Testnet',
-    chain: 'Theta',
-    shortName: 'theta-sapphire'
-  },
-  364: {
-    name: 'Theta Amber Testnet',
-    chain: 'Theta',
-    shortName: 'theta-amber'
-  },
-  365: {
-    name: 'Theta Testnet',
-    chain: 'Theta',
-    shortName: 'theta-testnet'
-  },
-  369: {
-    name: 'PulseChain Mainnet',
-    chain: 'PLS',
-    shortName: 'pls'
-  },
-  385: {
-    name: 'Lisinski',
-    chain: 'CRO',
-    shortName: 'lisinski'
-  },
-  400: {
-    name: 'HyperonChain TestNet',
-    chain: 'HPN',
-    shortName: 'hpn'
-  },
-  416: {
-    name: 'SX Network Mainnet',
-    chain: 'SX',
-    shortName: 'SX'
-  },
-  420: {
-    name: 'Optimism Goerli Testnet',
-    chain: 'ETH',
-    shortName: 'ogor'
-  },
-  427: {
-    name: 'Zeeth Chain',
-    chain: 'ZeethChain',
-    shortName: 'zeeth'
-  },
-  499: {
-    name: 'Rupaya',
-    chain: 'RUPX',
-    shortName: 'rupx'
-  },
-  500: {
-    name: 'Camino C-Chain',
-    chain: 'CAM',
-    shortName: 'Camino'
-  },
-  501: {
-    name: 'Columbus Test Network',
-    chain: 'CAM',
-    shortName: 'Columbus'
-  },
-  512: {
-    name: 'Double-A Chain Mainnet',
-    chain: 'AAC',
-    shortName: 'aac'
-  },
-  513: {
-    name: 'Double-A Chain Testnet',
-    chain: 'AAC',
-    shortName: 'aact'
-  },
-  516: {
-    name: 'Gear Zero Network Mainnet',
-    chain: 'GearZero',
-    shortName: 'gz-mainnet'
-  },
-  520: {
-    name: 'XT Smart Chain Mainnet',
-    chain: 'XSC',
-    shortName: 'xt'
-  },
-  529: {
-    name: 'Firechain Mainnet',
-    chain: 'FIRE',
-    shortName: 'fire'
-  },
-  530: {
-    name: 'F(x)Core Mainnet Network',
-    chain: 'Fxcore',
-    shortName: 'FxCore'
-  },
-  534: {
-    name: 'Candle',
-    chain: 'Candle',
-    shortName: 'CNDL'
-  },
-  555: {
-    name: 'Vela1 Chain Mainnet',
-    chain: 'VELA1',
-    shortName: 'CLASS'
-  },
-  558: {
-    name: 'Tao Network',
-    chain: 'TAO',
-    shortName: 'tao'
-  },
-  568: {
-    name: 'Dogechain Testnet',
-    chain: 'DC',
-    shortName: 'dct'
-  },
-  588: {
-    name: 'Metis Stardust Testnet',
-    chain: 'ETH',
-    shortName: 'metis-stardust'
-  },
-  592: {
-    name: 'Astar',
-    chain: 'ASTR',
-    shortName: 'astr'
-  },
-  595: {
-    name: 'Acala Mandala Testnet',
-    chain: 'mACA',
-    shortName: 'maca'
-  },
-  596: {
-    name: 'Karura Network Testnet',
-    chain: 'KAR',
-    shortName: 'tkar'
-  },
-  597: {
-    name: 'Acala Network Testnet',
-    chain: 'ACA',
-    shortName: 'taca'
-  },
-  599: {
-    name: 'Metis Goerli Testnet',
-    chain: 'ETH',
-    shortName: 'metis-goerli'
-  },
-  600: {
-    name: 'Meshnyan testnet',
-    chain: 'MeshTestChain',
-    shortName: 'mesh-chain-testnet'
-  },
-  647: {
-    name: 'SX Network Testnet',
-    chain: 'SX',
-    shortName: 'SX-Testnet'
-  },
-  666: {
-    name: 'Pixie Chain Testnet',
-    chain: 'PixieChain',
-    shortName: 'pixie-chain-testnet'
-  },
-  686: {
-    name: 'Karura Network',
-    chain: 'KAR',
-    shortName: 'kar'
-  },
-  700: {
-    name: 'Star Social Testnet',
-    chain: 'SNS',
-    shortName: 'SNS'
-  },
-  707: {
-    name: 'BlockChain Station Mainnet',
-    chain: 'BCS',
-    shortName: 'bcs'
-  },
-  708: {
-    name: 'BlockChain Station Testnet',
-    chain: 'BCS',
-    shortName: 'tbcs'
-  },
-  721: {
-    name: 'Lycan Chain',
-    chain: 'LYC',
-    shortName: 'LYC'
-  },
-  766: {
-    name: 'QL1',
-    chain: 'QOM',
-    shortName: 'qom'
-  },
-  776: {
-    name: 'OpenChain Testnet',
-    chain: 'OpenChain Testnet',
-    shortName: 'opc'
-  },
-  777: {
-    name: 'cheapETH',
-    chain: 'cheapETH',
-    shortName: 'cth'
-  },
-  787: {
-    name: 'Acala Network',
-    chain: 'ACA',
-    shortName: 'aca'
-  },
-  788: {
-    name: 'Aerochain Testnet',
-    chain: 'Aerochain',
-    shortName: 'taero'
-  },
-  803: {
-    name: 'Haic',
-    chain: 'Haic',
-    shortName: 'haic'
-  },
-  808: {
-    name: 'Portal Fantasy Chain Test',
-    chain: 'PF',
-    shortName: 'PFTEST'
-  },
-  813: {
-    name: 'Qitmeer',
-    chain: 'MEER',
-    shortName: 'meer'
-  },
-  820: {
-    name: 'Callisto Mainnet',
-    chain: 'CLO',
-    shortName: 'clo'
-  },
-  821: {
-    name: 'Callisto Testnet Deprecated',
-    chain: 'CLO',
-    shortName: 'tclo'
-  },
-  841: {
-    name: 'Taraxa Mainnet',
-    chain: 'Tara',
-    shortName: 'tara'
-  },
-  842: {
-    name: 'Taraxa Testnet',
-    chain: 'Tara',
-    shortName: 'taratest'
-  },
-  859: {
-    name: 'Zeeth Chain Dev',
-    chain: 'ZeethChainDev',
-    shortName: 'zeethdev'
-  },
-  877: {
-    name: 'Dexit Network',
-    chain: 'DXT',
-    shortName: 'DXT'
-  },
-  880: {
-    name: 'Ambros Chain Mainnet',
-    chain: 'ambroschain',
-    shortName: 'ambros'
-  },
-  888: {
-    name: 'Wanchain',
-    chain: 'WAN',
-    shortName: 'wan'
-  },
-  900: {
-    name: 'Garizon Testnet Stage0',
-    chain: 'GAR',
-    shortName: 'gar-test-s0'
-  },
-  901: {
-    name: 'Garizon Testnet Stage1',
-    chain: 'GAR',
-    shortName: 'gar-test-s1'
-  },
-  902: {
-    name: 'Garizon Testnet Stage2',
-    chain: 'GAR',
-    shortName: 'gar-test-s2'
-  },
-  903: {
-    name: 'Garizon Testnet Stage3',
-    chain: 'GAR',
-    shortName: 'gar-test-s3'
-  },
-  909: {
-    name: 'Portal Fantasy Chain',
-    chain: 'PF',
-    shortName: 'PF'
-  },
-  917: {
-    name: 'Rinia Testnet',
-    chain: 'FIRE',
-    shortName: 'tfire'
-  },
-  940: {
-    name: 'PulseChain Testnet',
-    chain: 'tPLS',
-    shortName: 'tpls'
-  },
-  941: {
-    name: 'PulseChain Testnet v2b',
-    chain: 't2bPLS',
-    shortName: 't2bpls'
-  },
-  942: {
-    name: 'PulseChain Testnet v3',
-    chain: 't3PLS',
-    shortName: 't3pls'
-  },
-  956: {
-    name: 'muNode Testnet',
-    chain: 'munode',
-    shortName: 'munode'
-  },
-  970: {
-    name: 'Oort Mainnet',
-    chain: 'Oort Mainnet',
-    shortName: 'ccn'
-  },
-  971: {
-    name: 'Oort Huygens',
-    chain: 'Huygens',
-    shortName: 'Huygens'
-  },
-  972: {
-    name: 'Oort Ascraeus',
-    chain: 'Ascraeus',
-    shortName: 'Ascraeus'
-  },
-  977: {
-    name: 'Nepal Blockchain Network',
-    chain: 'YETI',
-    shortName: 'yeti'
-  },
-  980: {
-    name: 'TOP Mainnet EVM',
-    chain: 'TOP',
-    shortName: 'top_evm'
-  },
-  985: {
-    name: 'Memo Smart Chain Mainnet',
-    chain: 'MEMO',
-    shortName: 'memochain'
-  },
-  989: {
-    name: 'TOP Mainnet',
-    chain: 'TOP',
-    shortName: 'top'
-  },
-  998: {
-    name: 'Lucky Network',
-    chain: 'LN',
-    shortName: 'ln'
-  },
-  999: {
-    name: 'Wanchain Testnet',
-    chain: 'WAN',
-    shortName: 'twan'
-  },
-  1000: {
-    name: 'GTON Mainnet',
-    chain: 'GTON',
-    shortName: 'gton'
-  },
-  1001: {
-    name: 'Klaytn Testnet Baobab',
-    chain: 'KLAY',
-    shortName: 'Baobab'
-  },
-  1004: {
-    name: 'T-EKTA',
-    chain: 'T-EKTA',
-    shortName: 't-ekta'
-  },
-  1007: {
-    name: 'Newton Testnet',
-    chain: 'NEW',
-    shortName: 'tnew'
-  },
-  1008: {
-    name: 'Eurus Mainnet',
-    chain: 'EUN',
-    shortName: 'eun'
-  },
-  1010: {
-    name: 'Evrice Network',
-    chain: 'EVC',
-    shortName: 'EVC'
-  },
-  1012: {
-    name: 'Newton',
-    chain: 'NEW',
-    shortName: 'new'
-  },
-  1022: {
-    name: 'Sakura',
-    chain: 'Sakura',
-    shortName: 'sku'
-  },
-  1023: {
-    name: 'Clover Testnet',
-    chain: 'Clover',
-    shortName: 'tclv'
-  },
-  1024: {
-    name: 'CLV Parachain',
-    chain: 'CLV',
-    shortName: 'clv'
-  },
-  1028: {
-    name: 'BitTorrent Chain Testnet',
-    chain: 'BTTC',
-    shortName: 'tbtt'
-  },
-  1030: {
-    name: 'Conflux eSpace',
-    chain: 'Conflux',
-    shortName: 'cfx'
-  },
-  1038: {
-    name: 'Bronos Testnet',
-    chain: 'Bronos',
-    shortName: 'bronos-testnet'
-  },
-  1039: {
-    name: 'Bronos Mainnet',
-    chain: 'Bronos',
-    shortName: 'bronos-mainnet'
-  },
-  1088: {
-    name: 'Metis Andromeda Mainnet',
-    chain: 'ETH',
-    shortName: 'metis-andromeda'
-  },
-  1099: {
-    name: 'MOAC mainnet',
-    chain: 'MOAC',
-    shortName: 'moac'
-  },
-  1111: {
-    name: 'WEMIX3.0 Mainnet',
-    chain: 'WEMIX',
-    shortName: 'wemix'
-  },
-  1112: {
-    name: 'WEMIX3.0 Testnet',
-    chain: 'TWEMIX',
-    shortName: 'twemix'
-  },
-  1130: {
-    name: 'DeFiChain EVM Network Mainnet',
-    chain: 'defichain-evm',
-    shortName: 'DFI'
-  },
-  1131: {
-    name: 'DeFiChain EVM Network Testnet',
-    chain: 'defichain-evm-testnet',
-    shortName: 'DFI-T'
-  },
-  1139: {
-    name: 'MathChain',
-    chain: 'MATH',
-    shortName: 'MATH'
-  },
-  1140: {
-    name: 'MathChain Testnet',
-    chain: 'MATH',
-    shortName: 'tMATH'
-  },
-  1177: {
-    name: 'Smart Host Teknoloji TESTNET',
-    chain: 'SHT',
-    shortName: 'sht'
-  },
-  1197: {
-    name: 'Iora Chain',
-    chain: 'IORA',
-    shortName: 'iora'
-  },
-  1201: {
-    name: 'Evanesco Testnet',
-    chain: 'Evanesco Testnet',
-    shortName: 'avis'
-  },
-  1202: {
-    name: 'World Trade Technical Chain Mainnet',
-    chain: 'WTT',
-    shortName: 'wtt'
-  },
-  1213: {
-    name: 'Popcateum Mainnet',
-    chain: 'POPCATEUM',
-    shortName: 'popcat'
-  },
-  1214: {
-    name: 'EnterChain Mainnet',
-    chain: 'ENTER',
-    shortName: 'enter'
-  },
-  1229: {
-    name: 'Exzo Network Mainnet',
-    chain: 'EXZO',
-    shortName: 'xzo'
-  },
-  1230: {
-    name: 'Ultron Testnet',
-    chain: 'Ultron',
-    shortName: 'UltronTestnet'
-  },
-  1231: {
-    name: 'Ultron Mainnet',
-    chain: 'Ultron',
-    shortName: 'UtronMainnet'
-  },
-  1234: {
-    name: 'Step Network',
-    chain: 'STEP',
-    shortName: 'step'
-  },
-  1246: {
-    name: 'OM Platform Mainnet',
-    chain: 'omplatform',
-    shortName: 'om'
-  },
-  1252: {
-    name: 'CIC Chain Testnet',
-    chain: 'CICT',
-    shortName: 'CICT'
-  },
-  1280: {
-    name: 'HALO Mainnet',
-    chain: 'HALO',
-    shortName: 'HO'
-  },
-  1284: {
-    name: 'Moonbeam',
-    chain: 'MOON',
-    shortName: 'mbeam'
-  },
-  1285: {
-    name: 'Moonriver',
-    chain: 'MOON',
-    shortName: 'mriver'
-  },
-  1286: {
-    name: 'Moonrock old',
-    chain: 'MOON',
-    shortName: 'mrock-old'
-  },
-  1287: {
-    name: 'Moonbase Alpha',
-    chain: 'MOON',
-    shortName: 'mbase'
-  },
-  1288: {
-    name: 'Moonrock',
-    chain: 'MOON',
-    shortName: 'mrock'
-  },
-  1294: {
-    name: 'Bobabeam',
-    chain: 'Bobabeam',
-    shortName: 'Bobabeam'
-  },
-  1297: {
-    name: 'Bobabase Testnet',
-    chain: 'Bobabase Testnet',
-    shortName: 'Bobabase'
-  },
-  1311: {
-    name: 'Dos Fuji Subnet',
-    chain: 'DOS',
-    shortName: 'DOS'
-  },
-  1314: {
-    name: 'Alyx Mainnet',
-    chain: 'ALYX',
-    shortName: 'alyx'
-  },
-  1319: {
-    name: 'Aitd Mainnet',
-    chain: 'AITD',
-    shortName: 'aitd'
-  },
-  1320: {
-    name: 'Aitd Testnet',
-    chain: 'AITD',
-    shortName: 'aitdtestnet'
-  },
-  1337: {
-    name: 'Geth Testnet',
-    chain: 'ETH',
-    shortName: 'geth'
-  },
-  1353: {
-    name: 'CIC Chain Mainnet',
-    chain: 'CIC',
-    shortName: 'CIC'
-  },
-  1402: {
-    name: 'Polygon zkEVM Testnet',
-    chain: 'Polygon',
-    shortName: 'zkevmtest'
-  },
-  1506: {
-    name: 'Sherpax Mainnet',
-    chain: 'Sherpax Mainnet',
-    shortName: 'Sherpax'
-  },
-  1507: {
-    name: 'Sherpax Testnet',
-    chain: 'Sherpax Testnet',
-    shortName: 'SherpaxTestnet'
-  },
-  1515: {
-    name: 'Beagle Messaging Chain',
-    chain: 'BMC',
-    shortName: 'beagle'
-  },
-  1618: {
-    name: 'Catecoin Chain Mainnet',
-    chain: 'Catechain',
-    shortName: 'cate'
-  },
-  1620: {
-    name: 'Atheios',
-    chain: 'ATH',
-    shortName: 'ath'
-  },
-  1657: {
-    name: 'Btachain',
-    chain: 'btachain',
-    shortName: 'bta'
-  },
-  1688: {
-    name: 'LUDAN Mainnet',
-    chain: 'LUDAN',
-    shortName: 'LUDAN'
-  },
-  1701: {
-    name: 'Anytype EVM Chain',
-    chain: 'ETH',
-    shortName: 'AnytypeChain'
-  },
-  1707: {
-    name: 'TBSI Mainnet',
-    chain: 'TBSI',
-    shortName: 'TBSI'
-  },
-  1708: {
-    name: 'TBSI Testnet',
-    chain: 'TBSI',
-    shortName: 'tTBSI'
-  },
-  1804: {
-    name: 'Kerleano',
-    chain: 'CRC',
-    shortName: 'kerleano'
-  },
-  1807: {
-    name: 'Rabbit Analog Testnet Chain',
-    chain: 'rAna',
-    shortName: 'rAna'
-  },
-  1818: {
-    name: 'Cube Chain Mainnet',
-    chain: 'Cube',
-    shortName: 'cube'
-  },
-  1819: {
-    name: 'Cube Chain Testnet',
-    chain: 'Cube',
-    shortName: 'cubet'
-  },
-  1856: {
-    name: 'Teslafunds',
-    chain: 'TSF',
-    shortName: 'tsf'
-  },
-  1898: {
-    name: 'BON Network',
-    chain: 'BON',
-    shortName: 'boya'
-  },
-  1945: {
-    name: 'ONUS Chain Testnet',
-    chain: 'onus',
-    shortName: 'onus-testnet'
-  },
-  1975: {
-    name: 'ONUS Chain Mainnet',
-    chain: 'onus',
-    shortName: 'onus-mainnet'
-  },
-  1984: {
-    name: 'Eurus Testnet',
-    chain: 'EUN',
-    shortName: 'euntest'
-  },
-  1987: {
-    name: 'EtherGem',
-    chain: 'EGEM',
-    shortName: 'egem'
-  },
-  1994: {
-    name: 'Ekta',
-    chain: 'EKTA',
-    shortName: 'ekta'
-  },
-  1995: {
-    name: 'edeXa Testnet',
-    chain: 'edeXa TestNetwork',
-    shortName: 'edx'
-  },
-  2000: {
-    name: 'Dogechain Mainnet',
-    chain: 'DC',
-    shortName: 'dc'
-  },
-  2001: {
-    name: 'Milkomeda C1 Mainnet',
-    chain: 'milkAda',
-    shortName: 'milkAda'
-  },
-  2002: {
-    name: 'Milkomeda A1 Mainnet',
-    chain: 'milkALGO',
-    shortName: 'milkALGO'
-  },
-  2008: {
-    name: 'CloudWalk Testnet',
-    chain: 'CloudWalk Testnet',
-    shortName: 'cloudwalk_testnet'
-  },
-  2009: {
-    name: 'CloudWalk Mainnet',
-    chain: 'CloudWalk Mainnet',
-    shortName: 'cloudwalk_mainnet'
-  },
-  2018: {
-    name: 'PublicMint Devnet',
-    chain: 'PublicMint',
-    shortName: 'pmint_dev'
-  },
-  2019: {
-    name: 'PublicMint Testnet',
-    chain: 'PublicMint',
-    shortName: 'pmint_test'
-  },
-  2020: {
-    name: 'PublicMint Mainnet',
-    chain: 'PublicMint',
-    shortName: 'pmint'
-  },
-  2021: {
-    name: 'Edgeware Mainnet',
-    chain: 'EDG',
-    shortName: 'edg'
-  },
-  2022: {
-    name: 'Beresheet Testnet',
-    chain: 'EDG',
-    shortName: 'edgt'
-  },
-  2023: {
-    name: 'Taycan Testnet',
-    chain: 'Taycan',
-    shortName: 'taycan-testnet'
-  },
-  2025: {
-    name: 'Rangers Protocol Mainnet',
-    chain: 'Rangers',
-    shortName: 'rpg'
-  },
-  2043: {
-    name: 'OriginTrail Parachain',
-    chain: 'OTP',
-    shortName: 'otp'
-  },
-  2077: {
-    name: 'Quokkacoin Mainnet',
-    chain: 'Qkacoin',
-    shortName: 'QKA'
-  },
-  2100: {
-    name: 'Ecoball Mainnet',
-    chain: 'ECO',
-    shortName: 'eco'
-  },
-  2101: {
-    name: 'Ecoball Testnet Espuma',
-    chain: 'ECO',
-    shortName: 'esp'
-  },
-  2109: {
-    name: 'Exosama Network',
-    chain: 'EXN',
-    shortName: 'exn'
-  },
-  2151: {
-    name: 'BOSagora Mainnet',
-    chain: 'ETH',
-    shortName: 'boa'
-  },
-  2152: {
-    name: 'Findora Mainnet',
-    chain: 'Findora',
-    shortName: 'fra'
-  },
-  2153: {
-    name: 'Findora Testnet',
-    chain: 'Testnet-anvil',
-    shortName: 'findora-testnet'
-  },
-  2154: {
-    name: 'Findora Forge',
-    chain: 'Testnet-forge',
-    shortName: 'findora-forge'
-  },
-  2203: {
-    name: 'Bitcoin EVM',
-    chain: 'Bitcoin EVM',
-    shortName: 'eBTC'
-  },
-  2213: {
-    name: 'Evanesco Mainnet',
-    chain: 'EVA',
-    shortName: 'evanesco'
-  },
-  2221: {
-    name: 'Kava EVM Testnet',
-    chain: 'KAVA',
-    shortName: 'tkava'
-  },
-  2222: {
-    name: 'Kava EVM',
-    chain: 'KAVA',
-    shortName: 'kava'
-  },
-  2223: {
-    name: 'VChain Mainnet',
-    chain: 'VChain',
-    shortName: 'VChain'
-  },
-  2300: {
-    name: 'BOMB Chain',
-    chain: 'BOMB',
-    shortName: 'bomb'
-  },
-  2330: {
-    name: 'Altcoinchain',
-    chain: 'mainnet',
-    shortName: 'alt'
-  },
-  2399: {
-    name: 'BOMB Chain Testnet',
-    chain: 'BOMB',
-    shortName: 'bombt'
-  },
-  2559: {
-    name: 'Kortho Mainnet',
-    chain: 'Kortho Chain',
-    shortName: 'ktoc'
-  },
-  2569: {
-    name: 'TechPay Mainnet',
-    chain: 'TPC',
-    shortName: 'tpc'
-  },
-  2606: {
-    name: 'PoCRNet',
-    chain: 'CRC',
-    shortName: 'pocrnet'
-  },
-  2611: {
-    name: 'Redlight Chain Mainnet',
-    chain: 'REDLC',
-    shortName: 'REDLC'
-  },
-  2612: {
-    name: 'EZChain C-Chain Mainnet',
-    chain: 'EZC',
-    shortName: 'EZChain'
-  },
-  2613: {
-    name: 'EZChain C-Chain Testnet',
-    chain: 'EZC',
-    shortName: 'Fuji-EZChain'
-  },
-  2888: {
-    name: 'Boba Network Goerli Testnet',
-    chain: 'ETH',
-    shortName: 'Bobagoerli'
-  },
-  2999: {
-    name: 'BitYuan Mainnet',
-    chain: 'BTY',
-    shortName: 'bty'
-  },
-  3000: {
-    name: 'CENNZnet Rata',
-    chain: 'CENNZnet',
-    shortName: 'cennz-r'
-  },
-  3001: {
-    name: 'CENNZnet Nikau',
-    chain: 'CENNZnet',
-    shortName: 'cennz-n'
-  },
-  3031: {
-    name: 'Orlando Chain',
-    chain: 'ORL',
-    shortName: 'ORL'
-  },
-  3141: {
-    name: 'Filecoin - Buildernet',
-    chain: 'FIL',
-    shortName: 'filecoin-buildernet'
-  },
-  3306: {
-    name: 'Debounce Subnet Testnet',
-    chain: 'Debounce Network',
-    shortName: 'debounce-devnet'
-  },
-  3331: {
-    name: 'ZCore Testnet',
-    chain: 'Beach',
-    shortName: 'zcrbeach'
-  },
-  3333: {
-    name: 'Web3Q Testnet',
-    chain: 'Web3Q',
-    shortName: 'w3q-t'
-  },
-  3334: {
-    name: 'Web3Q Galileo',
-    chain: 'Web3Q',
-    shortName: 'w3q-g'
-  },
-  3400: {
-    name: 'Paribu Net Mainnet',
-    chain: 'PRB',
-    shortName: 'prb'
-  },
-  3500: {
-    name: 'Paribu Net Testnet',
-    chain: 'PRB',
-    shortName: 'prbtestnet'
-  },
-  3501: {
-    name: 'JFIN Chain',
-    chain: 'JFIN',
-    shortName: 'jfin'
-  },
-  3601: {
-    name: 'PandoProject Mainnet',
-    chain: 'PandoProject',
-    shortName: 'pando-mainnet'
-  },
-  3602: {
-    name: 'PandoProject Testnet',
-    chain: 'PandoProject',
-    shortName: 'pando-testnet'
-  },
-  3666: {
-    name: 'Metacodechain',
-    chain: 'metacode',
-    shortName: 'metacode'
-  },
-  3690: {
-    name: 'Bittex Mainnet',
-    chain: 'BTX',
-    shortName: 'btx'
-  },
-  3737: {
-    name: 'Crossbell',
-    chain: 'Crossbell',
-    shortName: 'csb'
-  },
-  3912: {
-    name: 'DRAC Network',
-    chain: 'DRAC',
-    shortName: 'drac'
-  },
-  3966: {
-    name: 'DYNO Mainnet',
-    chain: 'DYNO',
-    shortName: 'dyno'
-  },
-  3967: {
-    name: 'DYNO Testnet',
-    chain: 'DYNO',
-    shortName: 'tdyno'
-  },
-  3999: {
-    name: 'YuanChain Mainnet',
-    chain: 'YCC',
-    shortName: 'ycc'
-  },
-  4002: {
-    name: 'Fantom Testnet',
-    chain: 'FTM',
-    shortName: 'tftm'
-  },
-  4051: {
-    name: 'Bobaopera Testnet',
-    chain: 'Bobaopera Testnet',
-    shortName: 'BobaoperaTestnet'
-  },
-  4102: {
-    name: 'AIOZ Network Testnet',
-    chain: 'AIOZ',
-    shortName: 'aioz-testnet'
-  },
-  4181: {
-    name: 'PHI Network V1',
-    chain: 'PHI V1',
-    shortName: 'PHIv1'
-  },
-  4328: {
-    name: 'Bobafuji Testnet',
-    chain: 'Bobafuji Testnet',
-    shortName: 'BobaFujiTestnet'
-  },
-  4444: {
-    name: 'Htmlcoin Mainnet',
-    chain: 'mainnet',
-    shortName: 'html'
-  },
-  4689: {
-    name: 'IoTeX Network Mainnet',
-    chain: 'iotex.io',
-    shortName: 'iotex-mainnet'
-  },
-  4690: {
-    name: 'IoTeX Network Testnet',
-    chain: 'iotex.io',
-    shortName: 'iotex-testnet'
-  },
-  4918: {
-    name: 'Venidium Testnet',
-    chain: 'XVM',
-    shortName: 'txvm'
-  },
-  4919: {
-    name: 'Venidium Mainnet',
-    chain: 'XVM',
-    shortName: 'xvm'
-  },
-  5000: {
-    name: 'Mantle',
-    chain: 'ETH',
-    shortName: 'mantle'
-  },
-  5001: {
-    name: 'Mantle Testnet',
-    chain: 'ETH',
-    shortName: 'mantle-testnet'
-  },
-  5177: {
-    name: 'TLChain Network Mainnet',
-    chain: 'TLC',
-    shortName: 'tlc'
-  },
-  5197: {
-    name: 'EraSwap Mainnet',
-    chain: 'ESN',
-    shortName: 'es'
-  },
-  5234: {
-    name: 'Humanode Mainnet',
-    chain: 'HMND',
-    shortName: 'hmnd'
-  },
-  5290: {
-    name: 'Firechain Mainnet Old',
-    chain: 'FIRE',
-    shortName: '_old_fire'
-  },
-  5315: {
-    name: 'Uzmi Network Mainnet',
-    chain: 'UZMI',
-    shortName: 'UZMI'
-  },
-  5551: {
-    name: 'Nahmii Mainnet',
-    chain: 'Nahmii',
-    shortName: 'Nahmii'
-  },
-  5553: {
-    name: 'Nahmii Testnet',
-    chain: 'Nahmii',
-    shortName: 'NahmiiTestnet'
-  },
-  5700: {
-    name: 'Syscoin Tanenbaum Testnet',
-    chain: 'SYS',
-    shortName: 'tsys'
-  },
-  5777: {
-    name: 'Ganache',
-    chain: 'ETH',
-    shortName: 'ggui'
-  },
-  5851: {
-    name: 'Ontology Testnet',
-    chain: 'Ontology',
-    shortName: 'OntologyTestnet'
-  },
-  5869: {
-    name: 'Wegochain Rubidium Mainnet',
-    chain: 'RBD',
-    shortName: 'rbd'
-  },
-  6065: {
-    name: 'Tres Leches Testnet',
-    chain: 'TresLeches',
-    shortName: 'TRESTEST'
-  },
-  6066: {
-    name: 'Tres Leches Mainnet',
-    chain: 'TresLeches',
-    shortName: 'TRESMAIN'
-  },
-  6626: {
-    name: 'Pixie Chain Mainnet',
-    chain: 'PixieChain',
-    shortName: 'pixie-chain'
-  },
-  6969: {
-    name: 'Tomb Chain Mainnet',
-    chain: 'Tomb Chain',
-    shortName: 'tombchain'
-  },
-  6999: {
-    name: 'PolySmartChain',
-    chain: 'PSC',
-    shortName: 'psc'
-  },
-  7000: {
-    name: 'ZetaChain Mainnet',
-    chain: 'ZetaChain',
-    shortName: 'zetachain-mainnet'
-  },
-  7001: {
-    name: 'ZetaChain Athens Testnet',
-    chain: 'ZetaChain',
-    shortName: 'zetachain-athens'
-  },
-  7027: {
-    name: 'Ella the heart',
-    chain: 'ella',
-    shortName: 'ELLA'
-  },
-  7070: {
-    name: 'Planq Mainnet',
-    chain: 'Planq',
-    shortName: 'planq'
-  },
-  7341: {
-    name: 'Shyft Mainnet',
-    chain: 'SHYFT',
-    shortName: 'shyft'
-  },
-  7700: {
-    name: 'Canto',
-    chain: 'Canto',
-    shortName: 'canto'
-  },
-  7777: {
-    name: 'Rise of the Warbots Testnet',
-    chain: 'nmactest',
-    shortName: 'RiseOfTheWarbotsTestnet'
-  },
-  7878: {
-    name: 'Hazlor Testnet',
-    chain: 'SCAS',
-    shortName: 'tscas'
-  },
-  8000: {
-    name: 'Teleport',
-    chain: 'Teleport',
-    shortName: 'teleport'
-  },
-  8001: {
-    name: 'Teleport Testnet',
-    chain: 'Teleport',
-    shortName: 'teleport-testnet'
-  },
-  8029: {
-    name: 'MDGL Testnet',
-    chain: 'MDGL',
-    shortName: 'mdgl'
-  },
-  8080: {
-    name: 'Shardeum Liberty 1.X',
-    chain: 'Shardeum',
-    shortName: 'Liberty10'
-  },
-  8081: {
-    name: 'Shardeum Liberty 2.X',
-    chain: 'Shardeum',
-    shortName: 'Liberty20'
-  },
-  8131: {
-    name: 'Qitmeer Network Testnet',
-    chain: 'MEER',
-    shortName: 'meertest'
-  },
-  8217: {
-    name: 'Klaytn Mainnet Cypress',
-    chain: 'KLAY',
-    shortName: 'Cypress'
-  },
-  8285: {
-    name: 'KorthoTest',
-    chain: 'Kortho',
-    shortName: 'Kortho'
-  },
-  8654: {
-    name: 'Toki Network',
-    chain: 'TOKI',
-    shortName: 'toki'
-  },
-  8655: {
-    name: 'Toki Testnet',
-    chain: 'TOKI',
-    shortName: 'toki-testnet'
-  },
-  8723: {
-    name: 'TOOL Global Mainnet',
-    chain: 'OLO',
-    shortName: 'olo'
-  },
-  8724: {
-    name: 'TOOL Global Testnet',
-    chain: 'OLO',
-    shortName: 'tolo'
-  },
-  8738: {
-    name: 'Alph Network',
-    chain: 'ALPH',
-    shortName: 'alph'
-  },
-  8888: {
-    name: 'Ambros Chain Testnet',
-    chain: 'ambroschain',
-    shortName: 'ambrostestnet'
-  },
-  8889: {
-    name: 'Vyvo Smart Chain',
-    chain: 'VSC',
-    shortName: 'vsc'
-  },
-  8898: {
-    name: 'Mammoth Mainnet',
-    chain: 'MMT',
-    shortName: 'mmt'
-  },
-  8995: {
-    name: 'bloxberg',
-    chain: 'bloxberg',
-    shortName: 'berg'
-  },
-  9000: {
-    name: 'Evmos Testnet',
-    chain: 'Evmos',
-    shortName: 'evmos-testnet'
-  },
-  9001: {
-    name: 'Evmos',
-    chain: 'Evmos',
-    shortName: 'evmos'
-  },
-  9012: {
-    name: 'BerylBit Mainnet',
-    chain: 'BRB',
-    shortName: 'brb'
-  },
-  9100: {
-    name: 'Genesis Coin',
-    chain: 'Genesis',
-    shortName: 'GENEC'
-  },
-  9170: {
-    name: 'Rinia Testnet Old',
-    chain: 'FIRE',
-    shortName: '_old_tfire'
-  },
-  9527: {
-    name: 'Rangers Protocol Testnet Robin',
-    chain: 'Rangers',
-    shortName: 'trpg'
-  },
-  9528: {
-    name: 'QEasyWeb3 Testnet',
-    chain: 'QET',
-    shortName: 'QETTest'
-  },
-  9700: {
-    name: 'Oort MainnetDev',
-    chain: 'MainnetDev',
-    shortName: 'MainnetDev'
-  },
-  9728: {
-    name: 'Boba BNB Testnet',
-    chain: 'Boba BNB Testnet',
-    shortName: 'BobaBnbTestnet'
-  },
-  9999: {
-    name: 'myOwn Testnet',
-    chain: 'myOwn',
-    shortName: 'myn'
-  },
-  10000: {
-    name: 'Smart Bitcoin Cash',
-    chain: 'smartBCH',
-    shortName: 'smartbch'
-  },
-  10001: {
-    name: 'Smart Bitcoin Cash Testnet',
-    chain: 'smartBCHTest',
-    shortName: 'smartbchtest'
-  },
-  10024: {
-    name: 'Gon Chain',
-    chain: 'GonChain',
-    shortName: 'gon'
-  },
-  10086: {
-    name: 'SJATSH',
-    chain: 'ETH',
-    shortName: 'SJ'
-  },
-  10101: {
-    name: 'Blockchain Genesis Mainnet',
-    chain: 'GEN',
-    shortName: 'GEN'
-  },
-  10200: {
-    name: 'Chiado Testnet',
-    chain: 'CHI',
-    shortName: 'chi'
-  },
-  10248: {
-    name: '0XTade',
-    chain: '0XTade Chain',
-    shortName: '0xt'
-  },
-  10507: {
-    name: 'Numbers Mainnet',
-    chain: 'NUM',
-    shortName: 'Jade'
-  },
-  10508: {
-    name: 'Numbers Testnet',
-    chain: 'NUM',
-    shortName: 'Snow'
-  },
-  10823: {
-    name: 'CryptoCoinPay',
-    chain: 'CCP',
-    shortName: 'CCP'
-  },
-  10946: {
-    name: 'Quadrans Blockchain',
-    chain: 'QDC',
-    shortName: 'quadrans'
-  },
-  10947: {
-    name: 'Quadrans Blockchain Testnet',
-    chain: 'tQDC',
-    shortName: 'quadranstestnet'
-  },
-  11110: {
-    name: 'Astra',
-    chain: 'Astra',
-    shortName: 'astra'
-  },
-  11111: {
-    name: 'WAGMI',
-    chain: 'WAGMI',
-    shortName: 'WAGMI'
-  },
-  11115: {
-    name: 'Astra Testnet',
-    chain: 'Astra',
-    shortName: 'astra-testnet'
-  },
-  11235: {
-    name: 'Haqq Network',
-    chain: 'Haqq',
-    shortName: 'ISLM'
-  },
-  11437: {
-    name: 'Shyft Testnet',
-    chain: 'SHYFTT',
-    shortName: 'shyftt'
-  },
-  11888: {
-    name: 'SanR Chain',
-    chain: 'SanRChain',
-    shortName: 'SAN'
-  },
-  12051: {
-    name: 'Singularity ZERO Testnet',
-    chain: 'ZERO',
-    shortName: 'tZERO'
-  },
-  12052: {
-    name: 'Singularity ZERO Mainnet',
-    chain: 'ZERO',
-    shortName: 'ZERO'
-  },
-  12345: {
-    name: 'Step Testnet',
-    chain: 'STEP',
-    shortName: 'steptest'
-  },
-  13000: {
-    name: 'SPS',
-    chain: 'SPS',
-    shortName: 'SPS'
-  },
-  13381: {
-    name: 'Phoenix Mainnet',
-    chain: 'Phoenix',
-    shortName: 'Phoenix'
-  },
-  14000: {
-    name: 'SPS Testnet',
-    chain: 'SPS-Testnet',
-    shortName: 'SPS-Test'
-  },
-  15555: {
-    name: 'Trust EVM Testnet',
-    chain: 'Trust EVM Testnet',
-    shortName: 'TrustTestnet'
-  },
-  16000: {
-    name: 'MetaDot Mainnet',
-    chain: 'MTT',
-    shortName: 'mtt'
-  },
-  16001: {
-    name: 'MetaDot Testnet',
-    chain: 'MTTTest',
-    shortName: 'mtttest'
-  },
-  16888: {
-    name: 'IVAR Chain Testnet',
-    chain: 'IVAR',
-    shortName: 'tivar'
-  },
-  18000: {
-    name: 'Frontier of Dreams Testnet',
-    chain: 'Game Network',
-    shortName: 'ZKST'
-  },
-  18159: {
-    name: 'Proof Of Memes',
-    chain: 'POM',
-    shortName: 'pom'
-  },
-  19845: {
-    name: 'BTCIX Network',
-    chain: 'BTCIX',
-    shortName: 'btcix'
-  },
-  20729: {
-    name: 'Callisto Testnet',
-    chain: 'CLO',
-    shortName: 'CLOTestnet'
-  },
-  20736: {
-    name: 'P12 Chain',
-    chain: 'P12',
-    shortName: 'p12'
-  },
-  21337: {
-    name: 'CENNZnet Azalea',
-    chain: 'CENNZnet',
-    shortName: 'cennz-a'
-  },
-  21816: {
-    name: 'omChain Mainnet',
-    chain: 'OML',
-    shortName: 'omc'
-  },
-  22023: {
-    name: 'Taycan',
-    chain: 'Taycan',
-    shortName: 'SFL'
-  },
-  22776: {
-    name: 'MAP Mainnet',
-    chain: 'MAP',
-    shortName: 'map'
-  },
-  23118: {
-    name: 'Opside Testnet',
-    chain: 'Opside',
-    shortName: 'opside'
-  },
-  23294: {
-    name: 'Oasis Sapphire',
-    chain: 'Sapphire',
-    shortName: 'sapphire'
-  },
-  23295: {
-    name: 'Oasis Sapphire Testnet',
-    chain: 'Sapphire',
-    shortName: 'sapphire-testnet'
-  },
-  24484: {
-    name: 'Webchain',
-    chain: 'WEB',
-    shortName: 'web'
-  },
-  24734: {
-    name: 'MintMe.com Coin',
-    chain: 'MINTME',
-    shortName: 'mintme'
-  },
-  25888: {
-    name: 'Hammer Chain Mainnet',
-    chain: 'HammerChain',
-    shortName: 'GOLDT'
-  },
-  26863: {
-    name: 'OasisChain Mainnet',
-    chain: 'OasisChain',
-    shortName: 'OAC'
-  },
-  28528: {
-    name: 'Optimism Bedrock (Goerli Alpha Testnet)',
-    chain: 'ETH',
-    shortName: 'obgor'
-  },
-  30067: {
-    name: 'Piece testnet',
-    chain: 'PieceNetwork',
-    shortName: 'Piece'
-  },
-  31102: {
-    name: 'Ethersocial Network',
-    chain: 'ESN',
-    shortName: 'esn'
-  },
-  31223: {
-    name: 'CloudTx Mainnet',
-    chain: 'CLD',
-    shortName: 'CLDTX'
-  },
-  31224: {
-    name: 'CloudTx Testnet',
-    chain: 'CloudTx',
-    shortName: 'CLD'
-  },
-  31337: {
-    name: 'GoChain Testnet',
-    chain: 'GO',
-    shortName: 'got'
-  },
-  31415: {
-    name: 'Filecoin - Wallaby testnet',
-    chain: 'FIL',
-    shortName: 'filecoin-wallaby'
-  },
-  32520: {
-    name: 'Bitgert Mainnet',
-    chain: 'Brise',
-    shortName: 'Brise'
-  },
-  32659: {
-    name: 'Fusion Mainnet',
-    chain: 'FSN',
-    shortName: 'fsn'
-  },
-  33333: {
-    name: 'Aves Mainnet',
-    chain: 'AVS',
-    shortName: 'avs'
-  },
-  35011: {
-    name: 'J2O Taro',
-    chain: 'TARO',
-    shortName: 'j2o'
-  },
-  35441: {
-    name: 'Q Mainnet',
-    chain: 'Q',
-    shortName: 'q'
-  },
-  35443: {
-    name: 'Q Testnet',
-    chain: 'Q',
-    shortName: 'q-testnet'
-  },
-  39797: {
-    name: 'Energi Mainnet',
-    chain: 'NRG',
-    shortName: 'nrg'
-  },
-  39815: {
-    name: 'OHO Mainnet',
-    chain: 'OHO',
-    shortName: 'oho'
-  },
-  41500: {
-    name: 'Opulent-X BETA',
-    chain: 'Opulent-X',
-    shortName: 'ox-beta'
-  },
-  42069: {
-    name: 'pegglecoin',
-    chain: '42069',
-    shortName: 'PC'
-  },
-  42161: {
-    name: 'Arbitrum One',
-    chain: 'ETH',
-    shortName: 'arb1'
-  },
-  42170: {
-    name: 'Arbitrum Nova',
-    chain: 'ETH',
-    shortName: 'arb-nova'
-  },
-  42220: {
-    name: 'Celo Mainnet',
-    chain: 'CELO',
-    shortName: 'celo'
-  },
-  42261: {
-    name: 'Oasis Emerald ParaTime Testnet',
-    chain: 'Emerald',
-    shortName: 'emerald-testnet'
-  },
-  42262: {
-    name: 'Oasis Emerald ParaTime Mainnet',
-    chain: 'Emerald',
-    shortName: 'emerald'
-  },
-  43110: {
-    name: 'Athereum',
-    chain: 'ATH',
-    shortName: 'avaeth'
-  },
-  43113: {
-    name: 'Avalanche Fuji Testnet',
-    chain: 'AVAX',
-    shortName: 'Fuji'
-  },
-  43114: {
-    name: 'Avalanche C-Chain',
-    chain: 'AVAX',
-    shortName: 'avax'
-  },
-  43288: {
-    name: 'Boba Avax',
-    chain: 'Boba Avax',
-    shortName: 'bobaavax'
-  },
-  44787: {
-    name: 'Celo Alfajores Testnet',
-    chain: 'CELO',
-    shortName: 'ALFA'
-  },
-  45000: {
-    name: 'Autobahn Network',
-    chain: 'TXL',
-    shortName: 'AutobahnNetwork'
-  },
-  47805: {
-    name: 'REI Network',
-    chain: 'REI',
-    shortName: 'REI'
-  },
-  49088: {
-    name: 'Bifrost Testnet1',
-    chain: 'BFC',
-    shortName: 'BIT'
-  },
-  49797: {
-    name: 'Energi Testnet',
-    chain: 'NRG',
-    shortName: 'tnrg'
-  },
-  50021: {
-    name: 'GTON Testnet',
-    chain: 'GTON Testnet',
-    shortName: 'tgton'
-  },
-  53935: {
-    name: 'DFK Chain',
-    chain: 'DFK',
-    shortName: 'DFK'
-  },
-  54211: {
-    name: 'Haqq Chain Testnet',
-    chain: 'TestEdge2',
-    shortName: 'ISLMT'
-  },
-  55555: {
-    name: 'REI Chain Mainnet',
-    chain: 'REI',
-    shortName: 'reichain'
-  },
-  55556: {
-    name: 'REI Chain Testnet',
-    chain: 'REI',
-    shortName: 'trei'
-  },
-  60000: {
-    name: 'Thinkium Testnet Chain 0',
-    chain: 'Thinkium',
-    shortName: 'TKM-test0'
-  },
-  60001: {
-    name: 'Thinkium Testnet Chain 1',
-    chain: 'Thinkium',
-    shortName: 'TKM-test1'
-  },
-  60002: {
-    name: 'Thinkium Testnet Chain 2',
-    chain: 'Thinkium',
-    shortName: 'TKM-test2'
-  },
-  60103: {
-    name: 'Thinkium Testnet Chain 103',
-    chain: 'Thinkium',
-    shortName: 'TKM-test103'
-  },
-  61916: {
-    name: 'DoKEN Super Chain Mainnet',
-    chain: 'DoKEN Super Chain',
-    shortName: 'DoKEN'
-  },
-  62320: {
-    name: 'Celo Baklava Testnet',
-    chain: 'CELO',
-    shortName: 'BKLV'
-  },
-  62621: {
-    name: 'MultiVAC Mainnet',
-    chain: 'MultiVAC',
-    shortName: 'mtv'
-  },
-  63000: {
-    name: 'eCredits Mainnet',
-    chain: 'ECS',
-    shortName: 'ecs'
-  },
-  63001: {
-    name: 'eCredits Testnet',
-    chain: 'ECS',
-    shortName: 'ecs-testnet'
-  },
-  67390: {
-    name: 'SiriusNet',
-    chain: 'SIN',
-    shortName: 'mcl'
-  },
-  69420: {
-    name: 'Condrieu',
-    chain: 'ETH',
-    shortName: 'cndr'
-  },
-  70000: {
-    name: 'Thinkium Mainnet Chain 0',
-    chain: 'Thinkium',
-    shortName: 'TKM0'
-  },
-  70001: {
-    name: 'Thinkium Mainnet Chain 1',
-    chain: 'Thinkium',
-    shortName: 'TKM1'
-  },
-  70002: {
-    name: 'Thinkium Mainnet Chain 2',
-    chain: 'Thinkium',
-    shortName: 'TKM2'
-  },
-  70103: {
-    name: 'Thinkium Mainnet Chain 103',
-    chain: 'Thinkium',
-    shortName: 'TKM103'
-  },
-  71393: {
-    name: 'Polyjuice Testnet',
-    chain: 'CKB',
-    shortName: 'ckb'
-  },
-  71401: {
-    name: 'Godwoken Testnet v1',
-    chain: 'GWT',
-    shortName: 'gw-testnet-v1'
-  },
-  71402: {
-    name: 'Godwoken Mainnet',
-    chain: 'GWT',
-    shortName: 'gw-mainnet-v1'
-  },
-  73799: {
-    name: 'Energy Web Volta Testnet',
-    chain: 'Volta',
-    shortName: 'vt'
-  },
-  73927: {
-    name: 'Mixin Virtual Machine',
-    chain: 'MVM',
-    shortName: 'mvm'
-  },
-  75000: {
-    name: 'ResinCoin Mainnet',
-    chain: 'RESIN',
-    shortName: 'resin'
-  },
-  78110: {
-    name: 'Firenze test network',
-    chain: 'ETH',
-    shortName: 'firenze'
-  },
-  80001: {
-    name: 'Mumbai',
-    chain: 'Polygon',
-    shortName: 'maticmum'
-  },
-  88888: {
-    name: 'IVAR Chain Mainnet',
-    chain: 'IVAR',
-    shortName: 'ivar'
-  },
-  90210: {
-    name: 'Beverly Hills',
-    chain: 'ETH',
-    shortName: 'bvhl'
-  },
-  92001: {
-    name: 'Lambda Testnet',
-    chain: 'Lambda',
-    shortName: 'lambda-testnet'
-  },
-  97288: {
-    name: 'Boba BNB Mainnet',
-    chain: 'Boba BNB Mainnet',
-    shortName: 'BobaBnb'
-  },
-  99998: {
-    name: 'UB Smart Chain(testnet)',
-    chain: 'USC',
-    shortName: 'usctest'
-  },
-  99999: {
-    name: 'UB Smart Chain',
-    chain: 'USC',
-    shortName: 'usc'
-  },
-  100000: {
-    name: 'QuarkChain Mainnet Root',
-    chain: 'QuarkChain',
-    shortName: 'qkc-r'
-  },
-  100001: {
-    name: 'QuarkChain Mainnet Shard 0',
-    chain: 'QuarkChain',
-    shortName: 'qkc-s0'
-  },
-  100002: {
-    name: 'QuarkChain Mainnet Shard 1',
-    chain: 'QuarkChain',
-    shortName: 'qkc-s1'
-  },
-  100003: {
-    name: 'QuarkChain Mainnet Shard 2',
-    chain: 'QuarkChain',
-    shortName: 'qkc-s2'
-  },
-  100004: {
-    name: 'QuarkChain Mainnet Shard 3',
-    chain: 'QuarkChain',
-    shortName: 'qkc-s3'
-  },
-  100005: {
-    name: 'QuarkChain Mainnet Shard 4',
-    chain: 'QuarkChain',
-    shortName: 'qkc-s4'
-  },
-  100006: {
-    name: 'QuarkChain Mainnet Shard 5',
-    chain: 'QuarkChain',
-    shortName: 'qkc-s5'
-  },
-  100007: {
-    name: 'QuarkChain Mainnet Shard 6',
-    chain: 'QuarkChain',
-    shortName: 'qkc-s6'
-  },
-  100008: {
-    name: 'QuarkChain Mainnet Shard 7',
-    chain: 'QuarkChain',
-    shortName: 'qkc-s7'
-  },
-  100100: {
-    name: 'Deprecated Chiado Testnet',
-    chain: 'CHI1',
-    shortName: 'chi1'
-  },
-  103090: {
-    name: 'Crystaleum',
-    chain: 'crystal',
-    shortName: 'CRFI'
-  },
-  108801: {
-    name: 'BROChain Mainnet',
-    chain: 'BRO',
-    shortName: 'bro'
-  },
-  110000: {
-    name: 'QuarkChain Devnet Root',
-    chain: 'QuarkChain',
-    shortName: 'qkc-d-r'
-  },
-  110001: {
-    name: 'QuarkChain Devnet Shard 0',
-    chain: 'QuarkChain',
-    shortName: 'qkc-d-s0'
-  },
-  110002: {
-    name: 'QuarkChain Devnet Shard 1',
-    chain: 'QuarkChain',
-    shortName: 'qkc-d-s1'
-  },
-  110003: {
-    name: 'QuarkChain Devnet Shard 2',
-    chain: 'QuarkChain',
-    shortName: 'qkc-d-s2'
-  },
-  110004: {
-    name: 'QuarkChain Devnet Shard 3',
-    chain: 'QuarkChain',
-    shortName: 'qkc-d-s3'
-  },
-  110005: {
-    name: 'QuarkChain Devnet Shard 4',
-    chain: 'QuarkChain',
-    shortName: 'qkc-d-s4'
-  },
-  110006: {
-    name: 'QuarkChain Devnet Shard 5',
-    chain: 'QuarkChain',
-    shortName: 'qkc-d-s5'
-  },
-  110007: {
-    name: 'QuarkChain Devnet Shard 6',
-    chain: 'QuarkChain',
-    shortName: 'qkc-d-s6'
-  },
-  110008: {
-    name: 'QuarkChain Devnet Shard 7',
-    chain: 'QuarkChain',
-    shortName: 'qkc-d-s7'
-  },
-  131419: {
-    name: 'ETND Chain Mainnets',
-    chain: 'ETND',
-    shortName: 'ETND'
-  },
-  188881: {
-    name: 'Condor Test Network',
-    chain: 'CONDOR',
-    shortName: 'condor'
-  },
-  200101: {
-    name: 'Milkomeda C1 Testnet',
-    chain: 'milkTAda',
-    shortName: 'milkTAda'
-  },
-  200202: {
-    name: 'Milkomeda A1 Testnet',
-    chain: 'milkTAlgo',
-    shortName: 'milkTAlgo'
-  },
-  200625: {
-    name: 'Akroma',
-    chain: 'AKA',
-    shortName: 'aka'
-  },
-  201018: {
-    name: 'Alaya Mainnet',
-    chain: 'Alaya',
-    shortName: 'alaya'
-  },
-  201030: {
-    name: 'Alaya Dev Testnet',
-    chain: 'Alaya',
-    shortName: 'alayadev'
-  },
-  201804: {
-    name: 'Mythical Chain',
-    chain: 'MYTH',
-    shortName: 'myth'
-  },
-  202020: {
-    name: 'Decimal Smart Chain Testnet',
-    chain: 'tDSC',
-    shortName: 'tDSC'
-  },
-  202624: {
-    name: 'Jellie',
-    chain: 'ETH',
-    shortName: 'twl-jellie'
-  },
-  210425: {
-    name: 'PlatON Mainnet',
-    chain: 'PlatON',
-    shortName: 'platon'
-  },
-  234666: {
-    name: 'Haymo Testnet',
-    chain: 'tHYM',
-    shortName: 'hym'
-  },
-  246529: {
-    name: 'ARTIS sigma1',
-    chain: 'ARTIS',
-    shortName: 'ats'
-  },
-  246785: {
-    name: 'ARTIS Testnet tau1',
-    chain: 'ARTIS',
-    shortName: 'atstau'
-  },
-  256256: {
-    name: 'CMP-Mainnet',
-    chain: 'CMP',
-    shortName: 'cmp-mainnet'
-  },
-  266256: {
-    name: 'Gear Zero Network Testnet',
-    chain: 'GearZero',
-    shortName: 'gz-testnet'
-  },
-  281121: {
-    name: 'Social Smart Chain Mainnet',
-    chain: 'SoChain',
-    shortName: 'SoChain'
-  },
-  314159: {
-    name: 'Filecoin - Calibration testnet',
-    chain: 'FIL',
-    shortName: 'filecoin-calibration'
-  },
-  333888: {
-    name: 'Polis Testnet',
-    chain: 'Sparta',
-    shortName: 'sparta'
-  },
-  333999: {
-    name: 'Polis Mainnet',
-    chain: 'Olympus',
-    shortName: 'olympus'
-  },
-  381931: {
-    name: 'Metal C-Chain',
-    chain: 'Metal',
-    shortName: 'metal'
-  },
-  381932: {
-    name: 'Metal Tahoe C-Chain',
-    chain: 'Metal',
-    shortName: 'Tahoe'
-  },
-  420420: {
-    name: 'Kekchain',
-    chain: 'kek',
-    shortName: 'KEK'
-  },
-  420666: {
-    name: 'Kekchain (kektest)',
-    chain: 'kek',
-    shortName: 'tKEK'
-  },
-  421611: {
-    name: 'Arbitrum Rinkeby',
-    chain: 'ETH',
-    shortName: 'arb-rinkeby'
-  },
-  421613: {
-    name: 'Arbitrum Goerli',
-    chain: 'ETH',
-    shortName: 'arb-goerli'
-  },
-  432201: {
-    name: 'Dexalot Subnet Testnet',
-    chain: 'DEXALOT',
-    shortName: 'dexalot-testnet'
-  },
-  432204: {
-    name: 'Dexalot Subnet',
-    chain: 'DEXALOT',
-    shortName: 'dexalot'
-  },
-  444900: {
-    name: 'Weelink Testnet',
-    chain: 'WLK',
-    shortName: 'wlkt'
-  },
-  474142: {
-    name: 'OpenChain Mainnet',
-    chain: 'OpenChain',
-    shortName: 'oc'
-  },
-  512512: {
-    name: 'CMP-Testnet',
-    chain: 'CMP',
-    shortName: 'cmp'
-  },
-  513100: {
-    name: 'ethereum Fair',
-    chain: 'ETF',
-    shortName: 'etf'
-  },
-  534352: {
-    name: 'Scroll',
-    chain: 'ETH',
-    shortName: 'scr'
-  },
-  534353: {
-    name: 'Scroll Goerli Testnet',
-    chain: 'ETH',
-    shortName: 'scr-goerli'
-  },
-  534354: {
-    name: 'Scroll Pre-Alpha Testnet',
-    chain: 'ETH',
-    shortName: 'scr-prealpha'
-  },
-  666666: {
-    name: 'Vision - Vpioneer Test Chain',
-    chain: 'Vision-Vpioneer',
-    shortName: 'vpioneer'
-  },
-  800001: {
-    name: 'OctaSpace',
-    chain: 'OCTA',
-    shortName: 'octa'
-  },
-  846000: {
-    name: '4GoodNetwork',
-    chain: '4GN',
-    shortName: 'bloqs4good'
-  },
-  888888: {
-    name: 'Vision - Mainnet',
-    chain: 'Vision',
-    shortName: 'vision'
-  },
-  900000: {
-    name: 'Posichain Mainnet Shard 0',
-    chain: 'PSC',
-    shortName: 'psc-s0'
-  },
-  910000: {
-    name: 'Posichain Testnet Shard 0',
-    chain: 'PSC',
-    shortName: 'psc-t-s0'
-  },
-  920000: {
-    name: 'Posichain Devnet Shard 0',
-    chain: 'PSC',
-    shortName: 'psc-d-s0'
-  },
-  920001: {
-    name: 'Posichain Devnet Shard 1',
-    chain: 'PSC',
-    shortName: 'psc-d-s1'
-  },
-  923018: {
-    name: 'FNCY Testnet',
-    chain: 'FNCY',
-    shortName: 'tFNCY'
-  },
-  955305: {
-    name: 'Eluvio Content Fabric',
-    chain: 'Eluvio',
-    shortName: 'elv'
-  },
-  1313114: {
-    name: 'Etho Protocol',
-    chain: 'ETHO',
-    shortName: 'etho'
-  },
-  1313500: {
-    name: 'Xerom',
-    chain: 'XERO',
-    shortName: 'xero'
-  },
-  1337702: {
-    name: 'Kintsugi',
-    chain: 'ETH',
-    shortName: 'kintsugi'
-  },
-  1337802: {
-    name: 'Kiln',
-    chain: 'ETH',
-    shortName: 'kiln'
-  },
-  2099156: {
-    name: 'Plian Mainnet Main',
-    chain: 'Plian',
-    shortName: 'plian-mainnet'
-  },
-  2203181: {
-    name: 'PlatON Dev Testnet Deprecated',
-    chain: 'PlatON',
-    shortName: 'platondev'
-  },
-  2206132: {
-    name: 'PlatON Dev Testnet2',
-    chain: 'PlatON',
-    shortName: 'platondev2'
-  },
-  3141592: {
-    name: 'Filecoin - Butterfly testnet',
-    chain: 'FIL',
-    shortName: 'filecoin-butterfly'
-  },
-  5555555: {
-    name: 'Imversed Mainnet',
-    chain: 'Imversed',
-    shortName: 'imversed'
-  },
-  5555558: {
-    name: 'Imversed Testnet',
-    chain: 'Imversed',
-    shortName: 'imversed-testnet'
-  },
-  7668378: {
-    name: 'QL1 Testnet',
-    chain: 'QOM',
-    shortName: 'tqom'
-  },
-  7762959: {
-    name: 'Musicoin',
-    chain: 'MUSIC',
-    shortName: 'music'
-  },
-  8007736: {
-    name: 'Plian Mainnet Subchain 1',
-    chain: 'Plian',
-    shortName: 'plian-mainnet-l2'
-  },
-  10067275: {
-    name: 'Plian Testnet Subchain 1',
-    chain: 'Plian',
-    shortName: 'plian-testnet-l2'
-  },
-  11155111: {
-    name: 'Sepolia',
-    chain: 'ETH',
-    shortName: 'sep'
-  },
-  13371337: {
-    name: 'PepChain Churchill',
-    chain: 'PEP',
-    shortName: 'tpep'
-  },
-  16658437: {
-    name: 'Plian Testnet Main',
-    chain: 'Plian',
-    shortName: 'plian-testnet'
-  },
-  18289463: {
-    name: 'IOLite',
-    chain: 'ILT',
-    shortName: 'ilt'
-  },
-  20180430: {
-    name: 'SmartMesh Mainnet',
-    chain: 'Spectrum',
-    shortName: 'spectrum'
-  },
-  20181205: {
-    name: 'quarkblockchain',
-    chain: 'QKI',
-    shortName: 'qki'
-  },
-  22052002: {
-    name: 'Excelon Mainnet',
-    chain: 'XLON',
-    shortName: 'xlon'
-  },
-  27082017: {
-    name: 'Excoincial Chain Volta-Testnet',
-    chain: 'TEXL',
-    shortName: 'exlvolta'
-  },
-  27082022: {
-    name: 'Excoincial Chain Mainnet',
-    chain: 'EXL',
-    shortName: 'exl'
-  },
-  28945486: {
-    name: 'Auxilium Network Mainnet',
-    chain: 'AUX',
-    shortName: 'auxi'
-  },
-  31415926: {
-    name: 'Filecoin - Local testnet',
-    chain: 'FIL',
-    shortName: 'filecoin-local'
-  },
-  35855456: {
-    name: 'Joys Digital Mainnet',
-    chain: 'JOYS',
-    shortName: 'JOYS'
-  },
-  43214913: {
-    name: 'maistestsubnet',
-    chain: 'MAI',
-    shortName: 'mais'
-  },
-  61717561: {
-    name: 'Aquachain',
-    chain: 'AQUA',
-    shortName: 'aqua'
-  },
-  99415706: {
-    name: 'Joys Digital TestNet',
-    chain: 'TOYS',
-    shortName: 'TOYS'
-  },
-  192837465: {
-    name: 'Gather Mainnet Network',
-    chain: 'GTH',
-    shortName: 'GTH'
-  },
-  245022926: {
-    name: 'Neon EVM DevNet',
-    chain: 'Solana',
-    shortName: 'neonevm-devnet'
-  },
-  245022934: {
-    name: 'Neon EVM MainNet',
-    chain: 'Solana',
-    shortName: 'neonevm-mainnet'
-  },
-  245022940: {
-    name: 'Neon EVM TestNet',
-    chain: 'Solana',
-    shortName: 'neonevm-testnet'
-  },
-  311752642: {
-    name: 'OneLedger Mainnet',
-    chain: 'OLT',
-    shortName: 'oneledger'
-  },
-  344106930: {
-    name: 'Calypso NFT Hub (SKALE Testnet)',
-    chain: 'staging-utter-unripe-menkar',
-    shortName: 'calypso-testnet'
-  },
-  356256156: {
-    name: 'Gather Testnet Network',
-    chain: 'GTH',
-    shortName: 'tGTH'
-  },
-  486217935: {
-    name: 'Gather Devnet Network',
-    chain: 'GTH',
-    shortName: 'dGTH'
-  },
-  503129905: {
-    name: 'Nebula Staging',
-    chain: 'staging-faint-slimy-achird',
-    shortName: 'nebula-staging'
-  },
-  1122334455: {
-    name: 'IPOS Network',
-    chain: 'IPOS',
-    shortName: 'ipos'
-  },
-  1313161554: {
-    name: 'Aurora Mainnet',
-    chain: 'NEAR',
-    shortName: 'aurora'
-  },
-  1313161555: {
-    name: 'Aurora Testnet',
-    chain: 'NEAR',
-    shortName: 'aurora-testnet'
-  },
-  1313161556: {
-    name: 'Aurora Betanet',
-    chain: 'NEAR',
-    shortName: 'aurora-betanet'
-  },
-  1482601649: {
-    name: 'Nebula Mainnet',
-    chain: 'green-giddy-denebola',
-    shortName: 'nebula-mainnet'
-  },
-  1564830818: {
-    name: 'Calypso NFT Hub (SKALE)',
-    chain: 'honorable-steel-rasalhague',
-    shortName: 'calypso-mainnet'
-  },
-  1666600000: {
-    name: 'Harmony Mainnet Shard 0',
-    chain: 'Harmony',
-    shortName: 'hmy-s0'
-  },
-  1666600001: {
-    name: 'Harmony Mainnet Shard 1',
-    chain: 'Harmony',
-    shortName: 'hmy-s1'
-  },
-  1666600002: {
-    name: 'Harmony Mainnet Shard 2',
-    chain: 'Harmony',
-    shortName: 'hmy-s2'
-  },
-  1666600003: {
-    name: 'Harmony Mainnet Shard 3',
-    chain: 'Harmony',
-    shortName: 'hmy-s3'
-  },
-  1666700000: {
-    name: 'Harmony Testnet Shard 0',
-    chain: 'Harmony',
-    shortName: 'hmy-b-s0'
-  },
-  1666700001: {
-    name: 'Harmony Testnet Shard 1',
-    chain: 'Harmony',
-    shortName: 'hmy-b-s1'
-  },
-  1666700002: {
-    name: 'Harmony Testnet Shard 2',
-    chain: 'Harmony',
-    shortName: 'hmy-b-s2'
-  },
-  1666700003: {
-    name: 'Harmony Testnet Shard 3',
-    chain: 'Harmony',
-    shortName: 'hmy-b-s3'
-  },
-  1666900000: {
-    name: 'Harmony Devnet Shard 0',
-    chain: 'Harmony',
-    shortName: 'hmy-ps-s0'
-  },
-  2021121117: {
-    name: 'DataHopper',
-    chain: 'HOP',
-    shortName: 'hop'
-  },
-  3125659152: {
-    name: 'Pirl',
-    chain: 'PIRL',
-    shortName: 'pirl'
-  },
-  4216137055: {
-    name: 'OneLedger Testnet Frankenstein',
-    chain: 'OLT',
-    shortName: 'frankenstein'
-  },
-  11297108099: {
-    name: 'Palm Testnet',
-    chain: 'Palm',
-    shortName: 'tpalm'
-  },
-  11297108109: {
-    name: 'Palm',
-    chain: 'Palm',
-    shortName: 'palm'
-  },
-  197710212030: {
-    name: 'Ntity Mainnet',
-    chain: 'Ntity',
-    shortName: 'ntt'
-  },
-  197710212031: {
-    name: 'Haradev Testnet',
-    chain: 'Ntity',
-    shortName: 'ntt-haradev'
-  },
-  666301171999: {
-    name: 'PDC Mainnet',
-    chain: 'IPDC',
-    shortName: 'ipdc'
-  },
-  6022140761023: {
-    name: 'Molereum Network',
-    chain: 'ETH',
-    shortName: 'mole'
-  },
-  868455272153094: {
-    name: 'Godwoken Testnet (V1)',
-    chain: 'GWT',
-    shortName: 'gw-testnet-v1-deprecated'
-  }
+  1: 'Ethereum Mainnet',
+  2: 'Expanse Network',
+  3: 'Ropsten',
+  4: 'Rinkeby',
+  5: 'Goerli',
+  6: 'Ethereum Classic Testnet Kotti',
+  7: 'ThaiChain',
+  8: 'Ubiq',
+  9: 'Ubiq Network Testnet',
+  10: 'OP Mainnet',
+  11: 'Metadium Mainnet',
+  12: 'Metadium Testnet',
+  13: 'Diode Testnet Staging',
+  14: 'Flare Mainnet',
+  15: 'Diode Prenet',
+  16: 'Flare Testnet Coston',
+  17: 'ThaiChain 2.0 ThaiFi',
+  18: 'ThunderCore Testnet',
+  19: 'Songbird Canary-Network',
+  20: 'Elastos Smart Chain',
+  21: 'Elastos Smart Chain Testnet',
+  22: 'ELA-DID-Sidechain Mainnet',
+  23: 'ELA-DID-Sidechain Testnet',
+  24: 'KardiaChain Mainnet',
+  25: 'Cronos Mainnet Beta',
+  26: 'Genesis L1 testnet',
+  27: 'ShibaChain',
+  28: 'Boba Network Rinkeby Testnet',
+  29: 'Genesis L1',
+  30: 'RSK Mainnet',
+  31: 'RSK Testnet',
+  32: 'GoodData Testnet',
+  33: 'GoodData Mainnet',
+  34: 'Dithereum Testnet',
+  35: 'TBWG Chain',
+  36: 'Dxchain Mainnet',
+  37: 'SeedCoin-Network',
+  38: 'Valorbit',
+  39: 'Unicorn Ultra Testnet',
+  40: 'Telos EVM Mainnet',
+  41: 'Telos EVM Testnet',
+  42: 'LUKSO Mainnet',
+  43: 'Darwinia Pangolin Testnet',
+  44: 'Darwinia Crab Network',
+  45: 'Darwinia Pangoro Testnet',
+  46: 'Darwinia Network',
+  47: 'Acria IntelliChain',
+  48: 'Ennothem Mainnet Proterozoic',
+  49: 'Ennothem Testnet Pioneer',
+  50: 'XinFin XDC Network',
+  51: 'XDC Apothem Network',
+  52: 'CoinEx Smart Chain Mainnet',
+  53: 'CoinEx Smart Chain Testnet',
+  54: 'Openpiece Mainnet',
+  55: 'Zyx Mainnet',
+  56: 'Binance Smart Chain Mainnet',
+  57: 'Syscoin Mainnet',
+  58: 'Ontology Mainnet',
+  59: 'EOS EVM Legacy',
+  60: 'GoChain',
+  61: 'Ethereum Classic Mainnet',
+  62: 'Ethereum Classic Testnet Morden',
+  63: 'Ethereum Classic Testnet Mordor',
+  64: 'Ellaism',
+  65: 'OKExChain Testnet',
+  66: 'OKXChain Mainnet',
+  67: 'DBChain Testnet',
+  68: 'SoterOne Mainnet',
+  69: 'Optimism Kovan',
+  70: 'Hoo Smart Chain',
+  71: 'Conflux eSpace (Testnet)',
+  72: 'DxChain Testnet',
+  73: 'FNCY',
+  74: 'IDChain Mainnet',
+  75: 'Decimal Smart Chain Mainnet',
+  76: 'Mix',
+  77: 'POA Network Sokol',
+  78: 'PrimusChain mainnet',
+  79: 'Zenith Mainnet',
+  80: 'GeneChain',
+  81: 'Zenith Testnet (Vilnius)',
+  82: 'Meter Mainnet',
+  83: 'Meter Testnet',
+  84: 'Linqto Devnet',
+  85: 'GateChain Testnet',
+  86: 'GateChain Mainnet',
+  87: 'Nova Network',
+  88: 'TomoChain',
+  89: 'TomoChain Testnet',
+  90: 'Garizon Stage0',
+  91: 'Garizon Stage1',
+  92: 'Garizon Stage2',
+  93: 'Garizon Stage3',
+  94: 'SwissDLT',
+  95: 'CamDL Mainnet',
+  96: 'Bitkub Chain',
+  97: 'Binance Smart Chain Testnet',
+  98: 'Six Protocol',
+  99: 'POA Network Core',
+  100: 'Gnosis',
+  101: 'EtherInc',
+  102: 'Web3Games Testnet',
+  104: 'Kaiba Lightning Chain Testnet',
+  105: 'Web3Games Devnet',
+  106: 'Velas EVM Mainnet',
+  107: 'Nebula Testnet',
+  108: 'ThunderCore Mainnet',
+  110: 'Proton Testnet',
+  111: 'EtherLite Chain',
+  112: 'Coinbit Mainnet',
+  113: 'Dehvo',
+  114: 'Flare Testnet Coston2',
+  115: 'DeBank Testnet',
+  116: 'DeBank Mainnet',
+  117: 'Uptick Mainnet',
+  118: 'Arcology Testnet',
+  119: 'ENULS Mainnet',
+  120: 'ENULS Testnet',
+  121: 'Realchain Mainnet',
+  122: 'Fuse Mainnet',
+  123: 'Fuse Sparknet',
+  124: 'Decentralized Web Mainnet',
+  125: 'OYchain Testnet',
+  126: 'OYchain Mainnet',
+  127: 'Factory 127 Mainnet',
+  128: 'Huobi ECO Chain Mainnet',
+  134: 'iExec Sidechain',
+  135: 'Alyx Chain Testnet',
+  136: 'Deamchain Mainnet',
+  137: 'Polygon Mainnet',
+  138: 'Defi Oracle Meta Mainnet',
+  139: 'WoopChain Mainnet',
+  141: 'Openpiece Testnet',
+  142: 'DAX CHAIN',
+  144: 'PHI Network v2',
+  150: 'Six Protocol Testnet',
+  155: 'Tenet Testnet',
+  156: 'OEBlock Testnet',
+  160: 'Armonia Eva Chain Mainnet',
+  161: 'Armonia Eva Chain Testnet',
+  162: 'Lightstreams Testnet',
+  163: 'Lightstreams Mainnet',
+  165: 'Omni Testnet 1',
+  167: 'Atoshi Testnet',
+  168: 'AIOZ Network',
+  170: 'HOO Smart Chain Testnet',
+  172: 'Latam-Blockchain Resil Testnet',
+  180: 'AME Chain Mainnet',
+  186: 'Seele Mainnet',
+  188: 'BMC Mainnet',
+  189: 'BMC Testnet',
+  193: 'Crypto Emergency',
+  195: 'OKBChain Testnet',
+  196: 'OKBChain Mainnet',
+  197: 'Neutrinos TestNet',
+  199: 'BitTorrent Chain Mainnet',
+  200: 'Arbitrum on xDai',
+  201: 'MOAC testnet',
+  208: 'Structx Mainnet',
+  211: 'Freight Trust Network',
+  212: 'MAP Makalu',
+  217: 'SiriusNet V2',
+  218: 'SoterOne Mainnet old',
+  222: 'Permission',
+  225: 'LACHAIN Mainnet',
+  226: 'LACHAIN Testnet',
+  230: 'SwapDEX',
+  236: 'Deamchain Testnet',
+  246: 'Energy Web Chain',
+  248: 'Oasys Mainnet',
+  250: 'Fantom Opera',
+  256: 'Huobi ECO Chain Testnet',
+  258: 'Setheum',
+  259: 'Neonlink Mainnet',
+  262: 'SUR Blockchain Network',
+  269: 'High Performance Blockchain',
+  274: 'LaChain',
+  280: 'zkSync Era Testnet',
+  288: 'Boba Network',
+  295: 'Hedera Mainnet',
+  296: 'Hedera Testnet',
+  297: 'Hedera Previewnet',
+  298: 'Hedera Localnet',
+  300: '(deprecated) Optimism on GC',
+  301: 'Bobaopera',
+  303: 'Neurochain Testnet',
+  311: 'Omax Mainnet',
+  313: 'Neurochain Mainnet',
+  314: 'Filecoin - Mainnet',
+  321: 'KCC Mainnet',
+  322: 'KCC Testnet',
+  324: 'zkSync Era Mainnet',
+  333: 'Web3Q Mainnet',
+  335: 'DFK Chain Test',
+  336: 'Shiden',
+  338: 'Cronos Testnet',
+  361: 'Theta Mainnet',
+  363: 'Theta Sapphire Testnet',
+  364: 'Theta Amber Testnet',
+  365: 'Theta Testnet',
+  369: 'PulseChain',
+  371: 'Consta Testnet',
+  385: 'Lisinski',
+  400: 'HyperonChain TestNet',
+  401: 'Ozone Chain Testnet',
+  416: 'SX Network Mainnet',
+  418: 'LaTestnet',
+  420: 'Optimism Goerli Testnet',
+  427: 'Zeeth Chain',
+  444: 'Frenchain Testnet',
+  456: 'ARZIO Chain',
+  499: 'Rupaya',
+  500: 'Camino C-Chain',
+  501: 'Columbus Test Network',
+  512: 'Double-A Chain Mainnet',
+  513: 'Double-A Chain Testnet',
+  516: 'Gear Zero Network Mainnet',
+  520: 'XT Smart Chain Mainnet',
+  529: 'Firechain Mainnet',
+  530: 'F(x)Core Mainnet Network',
+  534: 'Candle',
+  555: 'Vela1 Chain Mainnet',
+  558: 'Tao Network',
+  568: 'Dogechain Testnet',
+  570: 'Rollux Mainnet',
+  588: 'Metis Stardust Testnet',
+  592: 'Astar',
+  595: 'Acala Mandala Testnet',
+  596: 'Karura Network Testnet',
+  597: 'Acala Network Testnet',
+  599: 'Metis Goerli Testnet',
+  600: 'Meshnyan testnet',
+  614: 'Graphlinq Blockchain Mainnet',
+  647: 'SX Network Testnet',
+  648: 'Endurance Smart Chain Mainnet',
+  666: 'Pixie Chain Testnet',
+  686: 'Karura Network',
+  700: 'Star Social Testnet',
+  707: 'BlockChain Station Mainnet',
+  708: 'BlockChain Station Testnet',
+  719: 'Shibarium Beta',
+  721: 'Lycan Chain',
+  740: 'Canto Testnet',
+  741: 'Vention Smart Chain Testnet',
+  766: 'QL1',
+  776: 'OpenChain Testnet',
+  777: 'cheapETH',
+  786: 'MAAL Sharia Chain',
+  787: 'Acala Network',
+  788: 'Aerochain Testnet',
+  789: 'Patex',
+  800: 'Lucid Blockchain',
+  803: 'Haic',
+  808: 'Portal Fantasy Chain Test',
+  813: 'Qitmeer',
+  818: 'BeOne Chain Mainnet',
+  820: 'Callisto Mainnet',
+  821: 'Callisto Testnet Deprecated',
+  841: 'Taraxa Mainnet',
+  842: 'Taraxa Testnet',
+  859: 'Zeeth Chain Dev',
+  868: 'Fantasia Chain Mainnet',
+  876: 'Bandai Namco Research Verse Mainnet',
+  877: 'Dexit Network',
+  880: 'Ambros Chain Mainnet',
+  888: 'Wanchain',
+  900: 'Garizon Testnet Stage0',
+  901: 'Garizon Testnet Stage1',
+  902: 'Garizon Testnet Stage2',
+  903: 'Garizon Testnet Stage3',
+  909: 'Portal Fantasy Chain',
+  910: 'DecentraBone Layer1 Testnet',
+  917: 'Rinia Testnet',
+  940: 'PulseChain Testnet',
+  941: 'PulseChain Testnet v2b',
+  942: 'PulseChain Testnet v3',
+  943: 'PulseChain Testnet v4',
+  956: 'muNode Testnet',
+  970: 'Oort Mainnet',
+  971: 'Oort Huygens',
+  972: 'Oort Ascraeus',
+  977: 'Nepal Blockchain Network',
+  980: 'TOP Mainnet EVM',
+  985: 'Memo Smart Chain Mainnet',
+  989: 'TOP Mainnet',
+  997: '5ireChain Thunder',
+  998: 'Lucky Network',
+  999: 'Wanchain Testnet',
+  1000: 'GTON Mainnet',
+  1001: 'Klaytn Testnet Baobab',
+  1004: 'T-EKTA',
+  1007: 'Newton Testnet',
+  1008: 'Eurus Mainnet',
+  1010: 'Evrice Network',
+  1012: 'Newton',
+  1022: 'Sakura',
+  1023: 'Clover Testnet',
+  1024: 'CLV Parachain',
+  1028: 'BitTorrent Chain Testnet',
+  1030: 'Conflux eSpace',
+  1031: 'Proxy Network Testnet',
+  1038: 'Bronos Testnet',
+  1039: 'Bronos Mainnet',
+  1071: 'ShimmerEVM Testnet',
+  1088: 'Metis Andromeda Mainnet',
+  1099: 'MOAC mainnet',
+  1101: 'Polygon zkEVM',
+  1111: 'WEMIX3.0 Mainnet',
+  1112: 'WEMIX3.0 Testnet',
+  1115: 'Core Blockchain Testnet',
+  1116: 'Core Blockchain Mainnet',
+  1117: 'Dogcoin Mainnet',
+  1130: 'DeFiChain EVM Network Mainnet',
+  1131: 'DeFiChain EVM Network Testnet',
+  1138: 'AmStar Testnet',
+  1139: 'MathChain',
+  1140: 'MathChain Testnet',
+  1149: 'Symplexia Smart Chain',
+  1170: 'Origin Testnet',
+  1177: 'Smart Host Teknoloji TESTNET',
+  1197: 'Iora Chain',
+  1201: 'Evanesco Testnet',
+  1202: 'World Trade Technical Chain Mainnet',
+  1213: 'Popcateum Mainnet',
+  1214: 'EnterChain Mainnet',
+  1229: 'Exzo Network Mainnet',
+  1230: 'Ultron Testnet',
+  1231: 'Ultron Mainnet',
+  1234: 'Step Network',
+  1243: 'ARC Mainnet',
+  1244: 'ARC Testnet',
+  1246: 'OM Platform Mainnet',
+  1252: 'CIC Chain Testnet',
+  1280: 'HALO Mainnet',
+  1284: 'Moonbeam',
+  1285: 'Moonriver',
+  1286: 'Moonrock old',
+  1287: 'Moonbase Alpha',
+  1288: 'Moonrock',
+  1294: 'Bobabeam',
+  1297: 'Bobabase Testnet',
+  1311: 'Dos Fuji Subnet',
+  1314: 'Alyx Mainnet',
+  1319: 'Aitd Mainnet',
+  1320: 'Aitd Testnet',
+  1337: 'Geth Testnet',
+  1338: 'Elysium Testnet',
+  1339: 'Elysium Mainnet',
+  1353: 'CIC Chain Mainnet',
+  1369: 'Zafirium Mainnet',
+  1388: 'AmStar Mainnet',
+  1392: 'Joseon Mainnet',
+  1402: 'Polygon zkEVM Testnet old',
+  1422: 'Polygon zkEVM Testnet Pre Audit-Upgraded',
+  1433: 'Rikeza Network Mainnet',
+  1440: 'Living Assets Mainnet',
+  1442: 'Polygon zkEVM Testnet',
+  1452: 'GIL Testnet',
+  1455: 'Ctex Scan Blockchain',
+  1501: 'ChainX-EVM',
+  1506: 'Sherpax Mainnet',
+  1507: 'Sherpax Testnet',
+  1515: 'Beagle Messaging Chain',
+  1559: 'Tenet',
+  1618: 'Catecoin Chain Mainnet',
+  1620: 'Atheios',
+  1657: 'Btachain',
+  1662: 'Horizen Yuma Testnet Deprecated',
+  1663: 'Horizen Gobi Testnet',
+  1688: 'LUDAN Mainnet',
+  1701: 'Anytype EVM Chain',
+  1707: 'TBSI Mainnet',
+  1708: 'TBSI Testnet',
+  1718: 'Palette Chain Mainnet',
+  1773: 'PartyChain',
+  1777: 'Gauss Mainnet',
+  1804: 'Kerleano',
+  1807: 'Rabbit Analog Testnet Chain',
+  1818: 'Cube Chain Mainnet',
+  1819: 'Cube Chain Testnet',
+  1856: 'Teslafunds',
+  1881: 'Gitshock Cartenz Testnet',
+  1890: 'Lightlink Phoenix Mainnet',
+  1891: 'Lightlink Pegasus Testnet',
+  1898: 'BON Network',
+  1907: 'Bitcichain Mainnet',
+  1908: 'Bitcichain Testnet',
+  1945: 'ONUS Chain Testnet',
+  1951: 'D-Chain Mainnet',
+  1954: 'Dexilla Testnet',
+  1967: 'Eleanor',
+  1969: 'Super Smart Chain Testnet',
+  1970: 'Super Smart Chain Mainnet',
+  1971: 'Atelier',
+  1975: 'ONUS Chain Mainnet',
+  1984: 'Eurus Testnet',
+  1987: 'EtherGem',
+  1994: 'Ekta',
+  1995: 'edeXa Testnet',
+  2000: 'Dogechain Mainnet',
+  2001: 'Milkomeda C1 Mainnet',
+  2002: 'Milkomeda A1 Mainnet',
+  2008: 'CloudWalk Testnet',
+  2009: 'CloudWalk Mainnet',
+  2016: 'MainnetZ Mainnet',
+  2018: 'PublicMint Devnet',
+  2019: 'PublicMint Testnet',
+  2020: 'PublicMint Mainnet',
+  2021: 'Edgeware EdgeEVM Mainnet',
+  2022: 'Beresheet BereEVM Testnet',
+  2023: 'Taycan Testnet',
+  2025: 'Rangers Protocol Mainnet',
+  2043: 'OriginTrail Parachain',
+  2044: 'Shrapnel Subnet',
+  2047: 'Stratos Testnet',
+  2048: 'Stratos Mainnet',
+  2077: 'Quokkacoin Mainnet',
+  2100: 'Ecoball Mainnet',
+  2101: 'Ecoball Testnet Espuma',
+  2109: 'Exosama Network',
+  2122: 'Metaplayerone Mainnet',
+  2124: 'Metaplayerone Dubai Testnet',
+  2138: 'Defi Oracle Meta Testnet',
+  2151: 'BOSagora Mainnet',
+  2152: 'Findora Mainnet',
+  2153: 'Findora Testnet',
+  2154: 'Findora Forge',
+  2203: 'Bitcoin EVM',
+  2213: 'Evanesco Mainnet',
+  2221: 'Kava EVM Testnet',
+  2222: 'Kava EVM',
+  2223: 'VChain Mainnet',
+  2300: 'BOMB Chain',
+  2309: 'Arevia',
+  2323: 'SOMA Network Testnet',
+  2330: 'Altcoinchain',
+  2332: 'SOMA Network Mainnet',
+  2357: 'Kroma Sepolia',
+  2399: 'BOMB Chain Testnet',
+  2400: 'TCG Verse Mainnet',
+  2415: 'XODEX',
+  2559: 'Kortho Mainnet',
+  2569: 'TechPay Mainnet',
+  2606: 'PoCRNet',
+  2611: 'Redlight Chain Mainnet',
+  2612: 'EZChain C-Chain Mainnet',
+  2613: 'EZChain C-Chain Testnet',
+  2625: 'WhiteBIT Network Testnet',
+  2888: 'Boba Network Goerli Testnet',
+  2999: 'BitYuan Mainnet',
+  3000: 'CENNZnet Rata',
+  3001: 'CENNZnet Nikau',
+  3003: 'Canxium Mainnet',
+  3011: 'PLAYA3ULL GAMES',
+  3031: 'Orlando Chain',
+  3068: 'Bifrost Mainnet',
+  3141: 'Filecoin - Hyperspace testnet',
+  3306: 'Debounce Subnet Testnet',
+  3331: 'ZCore Testnet',
+  3333: 'Web3Q Testnet',
+  3334: 'Web3Q Galileo',
+  3400: 'Paribu Net Mainnet',
+  3434: 'SecureChain Testnet',
+  3500: 'Paribu Net Testnet',
+  3501: 'JFIN Chain',
+  3601: 'PandoProject Mainnet',
+  3602: 'PandoProject Testnet',
+  3666: 'Jouleverse Mainnet',
+  3690: 'Bittex Mainnet',
+  3693: 'Empire Network',
+  3737: 'Crossbell',
+  3797: 'AlveyChain Mainnet',
+  3912: 'DRAC Network',
+  3939: 'DOS Tesnet',
+  3966: 'DYNO Mainnet',
+  3967: 'DYNO Testnet',
+  3999: 'YuanChain Mainnet',
+  4000: 'Ozone Chain Mainnet',
+  4001: 'Peperium Chain Testnet',
+  4002: 'Fantom Testnet',
+  4051: 'Bobaopera Testnet',
+  4061: 'Nahmii 3 Mainnet',
+  4062: 'Nahmii 3 Testnet',
+  4090: 'Fastex Chain (Bahamut) Oasis Testnet',
+  4096: 'Bitindi Testnet',
+  4099: 'Bitindi Mainnet',
+  4102: 'AIOZ Network Testnet',
+  4141: 'Tipboxcoin Testnet',
+  4181: 'PHI Network V1',
+  4201: 'LUKSO Testnet',
+  4242: 'Nexi Mainnet',
+  4328: 'Bobafuji Testnet',
+  4444: 'Htmlcoin Mainnet',
+  4689: 'IoTeX Network Mainnet',
+  4690: 'IoTeX Network Testnet',
+  4777: 'BlackFort Exchange Network Testnet',
+  4918: 'Venidium Testnet',
+  4919: 'Venidium Mainnet',
+  4999: 'BlackFort Exchange Network',
+  5000: 'Mantle',
+  5001: 'Mantle Testnet',
+  5165: 'Fastex Chain (Bahamut)',
+  5177: 'TLChain Network Mainnet',
+  5197: 'EraSwap Mainnet',
+  5234: 'Humanode Mainnet',
+  5290: 'Firechain Mainnet Old',
+  5315: 'Uzmi Network Mainnet',
+  5551: 'Nahmii Mainnet',
+  5553: 'Nahmii Testnet',
+  5555: 'Chain Verse Mainnet',
+  5700: 'Syscoin Tanenbaum Testnet',
+  5729: 'Hika Network Testnet',
+  5758: 'SatoshiChain Testnet',
+  5777: 'Ganache',
+  5851: 'Ontology Testnet',
+  5869: 'Wegochain Rubidium Mainnet',
+  6065: 'Tres Testnet',
+  6066: 'Tres Mainnet',
+  6102: 'Cascadia Testnet',
+  6118: 'UPTN Testnet',
+  6119: 'UPTN',
+  6502: 'Peerpay',
+  6552: 'Scolcoin WeiChain Testnet',
+  6565: 'Fox Testnet Network',
+  6626: 'Pixie Chain Mainnet',
+  6688: 'IRIShub',
+  6789: 'Gold Smart Chain Mainnet',
+  6969: 'Tomb Chain Mainnet',
+  6999: 'PolySmartChain',
+  7000: 'ZetaChain Mainnet',
+  7001: 'ZetaChain Athens Testnet',
+  7027: 'Ella the heart',
+  7070: 'Planq Mainnet',
+  7331: 'KLYNTAR',
+  7341: 'Shyft Mainnet',
+  7484: 'Raba Network Mainnet',
+  7575: 'ADIL Testnet',
+  7576: 'Adil Chain V2 Mainnet',
+  7668: 'The Root Network - Mainnet',
+  7672: 'The Root Network - Porcini Testnet',
+  7700: 'Canto',
+  7701: 'Canto Tesnet',
+  7777: 'Rise of the Warbots Testnet',
+  7878: 'Hazlor Testnet',
+  7979: 'DOS Chain',
+  8000: 'Teleport',
+  8001: 'Teleport Testnet',
+  8029: 'MDGL Testnet',
+  8080: 'Shardeum Liberty 1.X',
+  8081: 'Shardeum Liberty 2.X',
+  8082: 'Shardeum Sphinx 1.X',
+  8086: 'BitEth',
+  8098: 'StreamuX Blockchain',
+  8131: 'Qitmeer Network Testnet',
+  8132: 'Qitmeer Network Mixnet',
+  8133: 'Qitmeer Network Privnet',
+  8134: 'Amana',
+  8135: 'Flana',
+  8136: 'Mizana',
+  8181: 'BeOne Chain Testnet',
+  8217: 'Klaytn Mainnet Cypress',
+  8272: 'Blockton Blockchain',
+  8285: 'KorthoTest',
+  8387: 'Dracones Financial Services',
+  8453: 'Base',
+  8654: 'Toki Network',
+  8655: 'Toki Testnet',
+  8723: 'TOOL Global Mainnet',
+  8724: 'TOOL Global Testnet',
+  8738: 'Alph Network',
+  8768: 'TMY Chain',
+  8848: 'MARO Blockchain Mainnet',
+  8880: 'Unique',
+  8881: 'Quartz by Unique',
+  8882: 'Opal testnet by Unique',
+  8883: 'Sapphire by Unique',
+  8888: 'XANAChain',
+  8889: 'Vyvo Smart Chain',
+  8898: 'Mammoth Mainnet',
+  8899: 'JIBCHAIN L1',
+  8989: 'Giant Mammoth Mainnet',
+  8995: 'bloxberg',
+  9000: 'Evmos Testnet',
+  9001: 'Evmos',
+  9012: 'BerylBit Mainnet',
+  9100: 'Genesis Coin',
+  9170: 'Rinia Testnet Old',
+  9339: 'Dogcoin Testnet',
+  9527: 'Rangers Protocol Testnet Robin',
+  9528: 'QEasyWeb3 Testnet',
+  9559: 'Neonlink Testnet',
+  9700: 'Oort MainnetDev',
+  9728: 'Boba BNB Testnet',
+  9768: 'MainnetZ Testnet',
+  9779: 'PepeNetwork Mainnet',
+  9790: 'Carbon EVM',
+  9792: 'Carbon EVM Testnet',
+  9997: 'AltLayer Testnet',
+  9999: 'myOwn Testnet',
+  10000: 'Smart Bitcoin Cash',
+  10001: 'Smart Bitcoin Cash Testnet',
+  10024: 'Gon Chain',
+  10086: 'SJATSH',
+  10101: 'Blockchain Genesis Mainnet',
+  10200: 'Gnosis Chiado Testnet',
+  10248: '0XTade',
+  10507: 'Numbers Mainnet',
+  10508: 'Numbers Testnet',
+  10823: 'CryptoCoinPay',
+  10946: 'Quadrans Blockchain',
+  10947: 'Quadrans Blockchain Testnet',
+  11110: 'Astra',
+  11111: 'WAGMI',
+  11115: 'Astra Testnet',
+  11119: 'HashBit Mainnet',
+  11235: 'Haqq Network',
+  11437: 'Shyft Testnet',
+  11612: 'Sardis Testnet',
+  11888: 'SanR Chain',
+  12009: 'SatoshiChain Mainnet',
+  12051: 'Singularity ZERO Testnet',
+  12052: 'Singularity ZERO Mainnet',
+  12123: 'BRC Chain Mainnet',
+  12306: 'Fibonacci Mainnet',
+  12321: 'BLG Testnet',
+  12345: 'Step Testnet',
+  12715: 'Rikeza Network Testnet',
+  13000: 'SPS',
+  13308: 'Credit Smartchain Mainnet',
+  13381: 'Phoenix Mainnet',
+  13812: 'Susono',
+  14000: 'SPS Testnet',
+  15551: 'LoopNetwork Mainnet',
+  15555: 'Trust EVM Testnet',
+  15557: 'EOS EVM Network Testnet',
+  16000: 'MetaDot Mainnet',
+  16001: 'MetaDot Testnet',
+  16507: 'Genesys Mainnet',
+  16688: 'IRIShub Testnet',
+  16718: 'AirDAO Mainnet',
+  16888: 'IVAR Chain Testnet',
+  17180: 'Palette Chain Testnet',
+  17777: 'EOS EVM Network',
+  18000: 'Frontier of Dreams Testnet',
+  18159: 'Proof Of Memes',
+  19011: 'HOME Verse Mainnet',
+  19845: 'BTCIX Network',
+  20001: 'Camelark Mainnet',
+  20729: 'Callisto Testnet',
+  20736: 'P12 Chain',
+  21337: 'CENNZnet Azalea',
+  21816: 'omChain Mainnet',
+  22023: 'Taycan',
+  22040: 'AirDAO Testnet',
+  22776: 'MAP Mainnet',
+  23118: 'Opside Testnet',
+  23294: 'Oasis Sapphire',
+  23295: 'Oasis Sapphire Testnet',
+  24484: 'Webchain',
+  24734: 'MintMe.com Coin',
+  25888: 'Hammer Chain Mainnet',
+  25925: 'Bitkub Chain Testnet',
+  26026: 'Ferrum Testnet',
+  26600: 'Hertz Network Mainnet',
+  26863: 'OasisChain Mainnet',
+  28528: 'Optimism Bedrock (Goerli Alpha Testnet)',
+  30067: 'Piece testnet',
+  31102: 'Ethersocial Network',
+  31223: 'CloudTx Mainnet',
+  31224: 'CloudTx Testnet',
+  31337: 'GoChain Testnet',
+  31415: 'Filecoin - Wallaby testnet',
+  32520: 'Bitgert Mainnet',
+  32659: 'Fusion Mainnet',
+  32769: 'Zilliqa EVM',
+  33101: 'Zilliqa EVM Testnet',
+  33333: 'Aves Mainnet',
+  35011: 'J2O Taro',
+  35441: 'Q Mainnet',
+  35443: 'Q Testnet',
+  39797: 'Energi Mainnet',
+  39815: 'OHO Mainnet',
+  41500: 'Opulent-X BETA',
+  42069: 'pegglecoin',
+  42161: 'Arbitrum One',
+  42170: 'Arbitrum Nova',
+  42220: 'Celo Mainnet',
+  42261: 'Oasis Emerald Testnet',
+  42262: 'Oasis Emerald',
+  43110: 'Athereum',
+  43113: 'Avalanche Fuji Testnet',
+  43114: 'Avalanche C-Chain',
+  43288: 'Boba Avax',
+  44444: 'Frenchain',
+  44787: 'Celo Alfajores Testnet',
+  45000: 'Autobahn Network',
+  46688: 'Fusion Testnet',
+  47805: 'REI Network',
+  49049: 'Wireshape Floripa Testnet',
+  49088: 'Bifrost Testnet',
+  49797: 'Energi Testnet',
+  50001: 'Liveplex OracleEVM',
+  50021: 'GTON Testnet',
+  51178: 'Opside Testnet Pre-Alpha',
+  51712: 'Sardis Mainnet',
+  53935: 'DFK Chain',
+  54211: 'Haqq Chain Testnet',
+  55004: 'Titan',
+  55555: 'REI Chain Mainnet',
+  55556: 'REI Chain Testnet',
+  56288: 'Boba BNB Mainnet',
+  57000: 'Rollux Testnet',
+  59140: 'Linea Testnet',
+  60000: 'Thinkium Testnet Chain 0',
+  60001: 'Thinkium Testnet Chain 1',
+  60002: 'Thinkium Testnet Chain 2',
+  60103: 'Thinkium Testnet Chain 103',
+  61800: 'AxelChain Dev-Net',
+  61803: 'Etica Mainnet',
+  61916: 'DoKEN Super Chain Mainnet',
+  62320: 'Celo Baklava Testnet',
+  62621: 'MultiVAC Mainnet',
+  63000: 'eCredits Mainnet',
+  63001: 'eCredits Testnet',
+  65450: 'Scolcoin Mainnet',
+  67390: 'SiriusNet',
+  67588: 'Cosmic Chain',
+  69420: 'Condrieu',
+  70000: 'Thinkium Mainnet Chain 0',
+  70001: 'Thinkium Mainnet Chain 1',
+  70002: 'Thinkium Mainnet Chain 2',
+  70103: 'Thinkium Mainnet Chain 103',
+  71111: 'GuapcoinX',
+  71393: 'Polyjuice Testnet',
+  71401: 'Godwoken Testnet v1',
+  71402: 'Godwoken Mainnet',
+  73799: 'Energy Web Volta Testnet',
+  73927: 'Mixin Virtual Machine',
+  75000: 'ResinCoin Mainnet',
+  77612: 'Vention Smart Chain Mainnet',
+  78110: 'Firenze test network',
+  78281: 'Dragonfly Mainnet (Hexapod)',
+  79879: 'Gold Smart Chain Testnet',
+  80001: 'Mumbai',
+  81341: 'Amana Testnet',
+  81342: 'Amana Mixnet',
+  81343: 'Amana Privnet',
+  81351: 'Flana Testnet',
+  81352: 'Flana Mixnet',
+  81353: 'Flana Privnet',
+  81361: 'Mizana Testnet',
+  81362: 'Mizana Mixnet',
+  81363: 'Mizana Privnet',
+  84531: 'Base Goerli Testnet',
+  85449: 'CYBERTRUST',
+  88880: 'Chiliz Scoville Testnet',
+  88888: 'IVAR Chain Mainnet',
+  90210: 'Beverly Hills',
+  91002: 'Nautilus Chain',
+  92001: 'Lambda Testnet',
+  96970: 'Mantis Testnet (Hexapod)',
+  97288: 'Boba BNB Mainnet Old',
+  99998: 'UB Smart Chain(testnet)',
+  99999: 'UB Smart Chain',
+  100000: 'QuarkChain Mainnet Root',
+  100001: 'QuarkChain Mainnet Shard 0',
+  100002: 'QuarkChain Mainnet Shard 1',
+  100003: 'QuarkChain Mainnet Shard 2',
+  100004: 'QuarkChain Mainnet Shard 3',
+  100005: 'QuarkChain Mainnet Shard 4',
+  100006: 'QuarkChain Mainnet Shard 5',
+  100007: 'QuarkChain Mainnet Shard 6',
+  100008: 'QuarkChain Mainnet Shard 7',
+  100009: 'VeChain',
+  100010: 'VeChain Testnet',
+  100100: 'Deprecated CHI',
+  101010: 'Soverun Testnet',
+  103090: 'Crystaleum',
+  108801: 'BROChain Mainnet',
+  110000: 'QuarkChain Devnet Root',
+  110001: 'QuarkChain Devnet Shard 0',
+  110002: 'QuarkChain Devnet Shard 1',
+  110003: 'QuarkChain Devnet Shard 2',
+  110004: 'QuarkChain Devnet Shard 3',
+  110005: 'QuarkChain Devnet Shard 4',
+  110006: 'QuarkChain Devnet Shard 5',
+  110007: 'QuarkChain Devnet Shard 6',
+  110008: 'QuarkChain Devnet Shard 7',
+  111000: 'Siberium Test Network',
+  111111: 'Siberium Network',
+  112358: 'Metachain One Mainnet',
+  123456: 'ADIL Devnet',
+  131419: 'ETND Chain Mainnets',
+  142857: 'ICPlaza Mainnet',
+  167004: 'Taiko (Alpha-2 Testnet)',
+  167005: 'Taiko (Alpha-3 Testnet)',
+  188881: 'Condor Test Network',
+  200101: 'Milkomeda C1 Testnet',
+  200202: 'Milkomeda A1 Testnet',
+  200625: 'Akroma',
+  201018: 'Alaya Mainnet',
+  201030: 'Alaya Dev Testnet',
+  201804: 'Mythical Chain',
+  202020: 'Decimal Smart Chain Testnet',
+  202624: 'Jellie',
+  210425: 'PlatON Mainnet',
+  220315: 'Mas Mainnet',
+  224168: 'Taf ECO Chain Mainnet',
+  230315: 'HashKey Chain Testnet',
+  234666: 'Haymo Testnet',
+  246529: 'ARTIS sigma1',
+  246785: 'ARTIS Testnet tau1',
+  247253: 'Saakuru Testnet',
+  256256: 'CMP-Mainnet',
+  266256: 'Gear Zero Network Testnet',
+  281121: 'Social Smart Chain Mainnet',
+  314159: 'Filecoin - Calibration testnet',
+  330844: 'TTcoin Smart Chain Mainnet',
+  333331: 'Aves Testnet',
+  333777: 'Oone Chain Testnet',
+  333888: 'Polis Testnet',
+  333999: 'Polis Mainnet',
+  355113: 'Bitfinity Network Testnet',
+  373737: 'HAPchain Testnet',
+  381931: 'Metal C-Chain',
+  381932: 'Metal Tahoe C-Chain',
+  404040: 'Tipboxcoin Mainnet',
+  420420: 'Kekchain',
+  420666: 'Kekchain (kektest)',
+  421611: 'Arbitrum Rinkeby',
+  421613: 'Arbitrum Goerli',
+  424242: 'Fastex Chain testnet',
+  431140: 'Markr Go',
+  432201: 'Dexalot Subnet Testnet',
+  432204: 'Dexalot Subnet',
+  444900: 'Weelink Testnet',
+  471100: 'Patex Sepolia Testnet',
+  474142: 'OpenChain Mainnet',
+  512512: 'CMP-Testnet',
+  513100: 'ethereum Fair',
+  534351: 'Scroll Sepolia Testnet',
+  534352: 'Scroll',
+  534353: 'Scroll Alpha Testnet',
+  534354: 'Scroll Pre-Alpha Testnet',
+  535037: 'BeanEco SmartChain',
+  641230: 'Bear Network Chain Mainnet',
+  666666: 'Vision - Vpioneer Test Chain',
+  751230: 'Bear Network Chain Testnet',
+  800001: 'OctaSpace',
+  827431: 'CURVE Mainnet',
+  846000: '4GoodNetwork',
+  888888: 'Vision - Mainnet',
+  900000: 'Posichain Mainnet Shard 0',
+  910000: 'Posichain Testnet Shard 0',
+  920000: 'Posichain Devnet Shard 0',
+  920001: 'Posichain Devnet Shard 1',
+  923018: 'FNCY Testnet',
+  955305: 'Eluvio Content Fabric',
+  1313114: 'Etho Protocol',
+  1313500: 'Xerom',
+  1337702: 'Kintsugi',
+  1337802: 'Kiln',
+  1337803: 'Zhejiang',
+  2099156: 'Plian Mainnet Main',
+  2203181: 'PlatON Dev Testnet Deprecated',
+  2206132: 'PlatON Dev Testnet2',
+  3141592: 'Filecoin - Butterfly testnet',
+  4281033: 'Worlds Caldera',
+  5167003: 'MXC Wannsee zkEVM Testnet',
+  5555555: 'Imversed Mainnet',
+  5555558: 'Imversed Testnet',
+  7225878: 'Saakuru Mainnet',
+  7355310: 'OpenVessel',
+  7668378: 'QL1 Testnet',
+  7762959: 'Musicoin',
+  7777777: 'Zora',
+  8007736: 'Plian Mainnet Subchain 1',
+  8794598: 'HAPchain',
+  8888881: 'Quarix Testnet',
+  8888888: 'Quarix',
+  10067275: 'Plian Testnet Subchain 1',
+  10101010: 'Soverun Mainnet',
+  11155111: 'Sepolia',
+  13371337: 'PepChain Churchill',
+  14288640: 'Anduschain Mainnet',
+  16658437: 'Plian Testnet Main',
+  18289463: 'IOLite',
+  20180430: 'SmartMesh Mainnet',
+  20181205: 'quarkblockchain',
+  20201022: 'Pego Network',
+  22052002: 'Excelon Mainnet',
+  27082017: 'Excoincial Chain Volta-Testnet',
+  27082022: 'Excoincial Chain Mainnet',
+  28945486: 'Auxilium Network Mainnet',
+  29032022: 'Flachain Mainnet',
+  31415926: 'Filecoin - Local testnet',
+  35855456: 'Joys Digital Mainnet',
+  43214913: 'maistestsubnet',
+  61717561: 'Aquachain',
+  65010000: 'Autonity Bakerloo (Thames) Testnet',
+  65100000: 'Autonity Piccadilly (Thames) Testnet',
+  88888888: 'T.E.A.M Blockchain',
+  99415706: 'Joys Digital TestNet',
+  192837465: 'Gather Mainnet Network',
+  222000222: 'Kanazawa',
+  245022926: 'Neon EVM DevNet',
+  245022934: 'Neon EVM MainNet',
+  245022940: 'Neon EVM TestNet',
+  278611351: 'Razor Skale Chain',
+  311752642: 'OneLedger Mainnet',
+  333000333: 'Meld',
+  344106930: 'Calypso NFT Hub (SKALE Testnet)',
+  356256156: 'Gather Testnet Network',
+  486217935: 'Gather Devnet Network',
+  503129905: 'Nebula Staging',
+  1122334455: 'IPOS Network',
+  1146703430: 'CyberdeckNet',
+  1273227453: 'HUMAN Protocol',
+  1313161554: 'Aurora Mainnet',
+  1313161555: 'Aurora Testnet',
+  1313161556: 'Aurora Betanet',
+  1351057110: 'Chaos (SKALE Testnet)',
+  1380996178: 'RaptorChain',
+  1482601649: 'Nebula Mainnet',
+  1564830818: 'Calypso NFT Hub (SKALE)',
+  1666600000: 'Harmony Mainnet Shard 0',
+  1666600001: 'Harmony Mainnet Shard 1',
+  1666600002: 'Harmony Mainnet Shard 2',
+  1666600003: 'Harmony Mainnet Shard 3',
+  1666700000: 'Harmony Testnet Shard 0',
+  1666700001: 'Harmony Testnet Shard 1',
+  1666700002: 'Harmony Testnet Shard 2',
+  1666700003: 'Harmony Testnet Shard 3',
+  1666900000: 'Harmony Devnet Shard 0',
+  2021121117: 'DataHopper',
+  2046399126: 'Europa SKALE Chain',
+  3125659152: 'Pirl',
+  4216137055: 'OneLedger Testnet Frankenstein',
+  11297108099: 'Palm Testnet',
+  11297108109: 'Palm',
+  111222333444: 'Alphabet Mainnet',
+  197710212030: 'Ntity Mainnet',
+  197710212031: 'Haradev Testnet',
+  383414847825: 'Zeniq',
+  666301171999: 'PDC Mainnet',
+  6022140761023: 'Molereum Network',
+  868455272153094: 'Godwoken Testnet (V1)'
 }

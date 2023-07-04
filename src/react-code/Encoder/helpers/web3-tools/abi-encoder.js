@@ -249,6 +249,24 @@ function getWriteArguments (_function, inputData) {
   return inputs.filter(Boolean)
 }
 
+function getOutputResponse (func, outputResponse) {
+  let outputArray = func.outputs
+
+  const tupleOutput = func.outputs.find(o => o.type === 'tuple')
+  if (tupleOutput) outputArray = tupleOutput.components
+
+  const outputs = outputArray.map((output, idx) => {
+    const value = outputResponse[idx]?.toString()
+    return {
+      name: output.name,
+      type: output.type,
+      value
+    }
+  })
+
+  return outputs.filter(Boolean)
+}
+
 export {
   checkInputErrors,
   createJoiSchema,
@@ -256,5 +274,6 @@ export {
   isInputError,
   getFunctionSignature,
   getDefaultEncodeData,
-  getWriteArguments
+  getWriteArguments,
+  getOutputResponse
 }

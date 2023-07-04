@@ -8,9 +8,9 @@ import {
 
 import { Button } from '../../components/Button/Button'
 import { Icon } from '../../components/Icon'
-import { InputWithLabel } from '../../components/InputWithLabel'
 import {
   checkInputErrors,
+  getOutputResponse,
   getWriteArguments
 } from '../helpers/web3-tools/abi-encoder'
 import { InputFields } from '../components/InputFields'
@@ -20,7 +20,8 @@ const ReadContract = (props) => {
   const { name, inputs, outputs } = func
 
   const [inputData, setInputData] = useState({})
-  const [outputData, setOutputData] = useState(outputs)
+  const [outputData, setOutputData] = useState([])
+  const [successfulResponse, setSuccessfulResponse] = useState('')
   const [error, setError] = useState('')
   const [makingCall, setMakingCall] = useState(false)
 
@@ -34,17 +35,19 @@ const ReadContract = (props) => {
 
   async function handleQuery () {
     if (error) setError('')
+    setSuccessfulResponse('')
     setMakingCall(true)
 
     const methodName = name
     const args = getWriteArguments(func, inputData)
     const outputResponse = await call(methodName, args, undefined, iface)
 
+    if (outputResponse && !outputResponse.error && !outputResponse.length) {
+      setSuccessfulResponse('✅ Call Successfull')
+    }
+
     if (outputResponse && !outputResponse.error) {
-      const _outputData = outputResponse.map((o, i) => ({
-        ...o,
-        value: outputResponse[i]?.toString()
-      }))
+      const _outputData = getOutputResponse(func, outputResponse)
       setOutputData(_outputData)
     }
 
@@ -57,6 +60,7 @@ const ReadContract = (props) => {
   const handleInputChange = (name, value = '') => {
     setInputData(_prev => ({ ..._prev, [name]: value }))
     if (error) setError('')
+    setSuccessfulResponse('')
   }
 
   return (
@@ -89,18 +93,37 @@ const ReadContract = (props) => {
             )
           : <></>
       }
+
+      {
+        successfulResponse && <p className='output success text'>{successfulResponse}</p>
+      }
+
+      {
+        (outputData.length > 0) && (
+          <div className='output title'>
+            [<span className='bold'>{getFunctionSignature()}</span> method Response]
+          </div>
+        )
+      }
+
       {outputData.map((output, i) => {
         return (
           <Fragment key={`output-${i}`}>
             {
               output.value && (
                 <div className='output container'>
-                  <div className='result title'>
-                    [<span className='bold'>{getFunctionSignature()}</span> method Response]
-                  </div>
                   <div className='result'>
                     <Icon variant='chevron-right-double' size={18} />
-                    <span>{(output.type)}: {output.value}</span>
+                    <p>
+                      <b>
+                        {
+                          output.name
+                            ? output.name
+                            : <>[{output.type}]</>
+                        }
+                      </b>
+                      : <span>{output.value}</span>
+                    </p>
                   </div>
                 </div>
               )
