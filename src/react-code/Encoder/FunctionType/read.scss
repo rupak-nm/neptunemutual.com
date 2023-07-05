@@ -55,6 +55,14 @@
     @include weights.semibold;
   }
 
+  .output.success.text {
+    color: colors.$success-500;
+  }
+
+  .output.title {
+    @include styles.text-sm;
+  }
+
   .output.container {
     display: flex;
     flex-direction: column;
@@ -71,8 +79,10 @@
         font-style: normal;
       }
 
-      span {
+      p {
         color: colors.$black;
+        display: flex;
+        gap: 4px;
       }
     
       svg {
@@ -80,7 +90,7 @@
       }
     
       .dark & {
-        span {
+        p {
           color: colors.$base-white
         }
     

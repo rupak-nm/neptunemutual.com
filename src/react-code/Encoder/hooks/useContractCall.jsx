@@ -30,7 +30,7 @@ export const useContractCall = ({ abi, address }) => {
     }
   }, [abi, address, library, account])
 
-  async function callMethod (methodName, args = [], overrides = {}) {
+  async function callMethod (methodName, args = [], overrides = {}, iface = null) {
     if (!contract || !methodName) return
 
     let methodArgs = [...args]
@@ -45,11 +45,11 @@ export const useContractCall = ({ abi, address }) => {
         return Array.isArray(res) ? Array.from(res) : [res]
       } catch (error) {
         console.log(`Error in calling ${methodName} function: ${error}`)
-        return { error: getErrorMessage(error) }
+        return { error: getErrorMessage(error, iface) }
       }
     } catch (e) {
       console.log(`Could not estimate gas for ${methodName}(${methodArgs})`)
-      return { error: getErrorMessage(e) }
+      return { error: getErrorMessage(e, iface) }
     }
   }
 
