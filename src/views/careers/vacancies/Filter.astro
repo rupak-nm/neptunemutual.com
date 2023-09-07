@@ -3,7 +3,7 @@ import Icon from "../../../elements/Icon.astro";
 
 interface Props {
   options: string[];
-  label: string;
+  label?: string;
   iconVariant: string;
 }
 
@@ -11,7 +11,7 @@ const { options, label, iconVariant } = Astro.props;
 ---
 
 <div class="ui dropdown filter script only container">
-  <p class="label">{label}</p>
+  {label && <p class="label">{label}</p>}
 
   <div class="button container">
     <button type="button" id="CareersFilterButton">

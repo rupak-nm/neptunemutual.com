@@ -15,7 +15,7 @@ const badges: Tag[] = JSON.parse(vacancy.badges);
 
 <div
   class="job vacancy card"
-  data-department={vacancy.department}
+  data-department={vacancy.department.trim()}
   data-show="true"
 >
   <div class="title and cta">

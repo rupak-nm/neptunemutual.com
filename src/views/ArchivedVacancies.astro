@@ -1,0 +1,18 @@
+---
+import HeaderSection from "../components/HeaderSection.astro";
+import ArchivedVacanciesTable from "./careers/archived/ArchivedVacanciesTable.astro";
+
+interface Props {
+  vacancies: Vacancy[];
+}
+
+const { vacancies } = Astro.props;
+---
+
+<HeaderSection
+  color={"basic"}
+  heading={"Archived Vacancies"}
+  alignment={"center"}
+/>
+
+<ArchivedVacanciesTable vacancies={vacancies} />

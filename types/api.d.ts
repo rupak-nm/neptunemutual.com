@@ -224,6 +224,7 @@ interface Vacancy extends Content {
   createdAt?: Date
   updatedAt?: Date
   publishedAt?: Date
+  expired?: boolean
 }
 
 interface ApiResponse<T> {
