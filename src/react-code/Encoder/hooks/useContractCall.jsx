@@ -35,9 +35,9 @@ export const useContractCall = ({ abi, address }) => {
 
     let methodArgs = [...args]
     let estimatedGas = null
+    console.log({ args })
     try {
       estimatedGas = await contract.estimateGas[methodName](...args, { ...overrides })
-
       try {
         methodArgs = [...args, { gasLimit: calculateGasMargin(estimatedGas), ...overrides }]
 
@@ -49,6 +49,7 @@ export const useContractCall = ({ abi, address }) => {
       }
     } catch (e) {
       console.log(`Could not estimate gas for ${methodName}(${methodArgs})`)
+      console.log({ e })
       return { error: getErrorMessage(e, iface) }
     }
   }
