@@ -42,4 +42,35 @@ const networks: NetworkOption[] = [
   }
 ]
 
-export { networks }
+const tokens = {
+  eth: {
+    npm: '0x57f12FE6A4e5fe819eec699FAdf9Db2D06606bB4',
+    usdc: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+  },
+  arb: {
+    npm: '0x57f12FE6A4e5fe819eec699FAdf9Db2D06606bB4',
+    usdc: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8'
+  }
+}
+
+const swaps: Array<{
+  src: any
+  srcDark: any
+  title: string
+  href: string
+}> = [
+  {
+    src: import('../../elements/icons/custom/sushi-arb.svg?raw').then((x: any) => x.default),
+    srcDark: import('../../elements/icons/custom/sushi-arb-dark.svg?raw').then((x: any) => x.default),
+    title: 'Sushiswap (Arbitrum)',
+    href: `https://www.sushi.com/swap?token0=${tokens.arb.usdc}&token1=${tokens.arb.npm}&chainId=42161`
+  },
+  {
+    src: import('../../elements/icons/custom/uniswap-eth.svg?raw').then((x: any) => x.default),
+    srcDark: import('../../elements/icons/custom/uniswap-eth-dark.svg?raw').then((x: any) => x.default),
+    title: 'Uniswap (Ethereum)',
+    href: `https://app.uniswap.org/#/swap?inputCurrency=USDC&outputCurrency=${tokens.eth.npm}&chain=mainnet`
+  }
+]
+
+export { networks, swaps }
