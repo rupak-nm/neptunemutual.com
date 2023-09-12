@@ -43,14 +43,16 @@ const total = Math.ceil(vacancies.length / ROWS_PER_PAGE);
             {
               vacancies.map(
                 (
-                  { title, location, createdAt, type, department, badges },
+                  { title, location, createdAt, type, department, badges, slug },
                   i
                 ) => (
                   <tr
                     data-department={department.trim()}
                     data-show={i < ROWS_PER_PAGE ? "true" : "false"}
                   >
-                    <td>{title}</td>
+                    <td>
+                      <a href={`/careers/${slug}/`}>{title}</a>
+                    </td>
                     <td>{location}</td>
                     <td>
                       <time datetime={new Date(createdAt || 0).toISOString()}>

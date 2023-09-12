@@ -96,5 +96,10 @@
     .supporting.text {
       color: dark.$secondary-color;
     }
+
+    a.view.archived {
+      background-color: colors.$gray-800;
+      color: colors.$gray-50;
+    }
   }
 }

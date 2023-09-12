@@ -47,16 +47,19 @@
           
           td {
             padding: 24px;
-            color: colors.$gray-700;
-            @include styles.text-sm;
-            @include weights.medium;
+
+            &, a {
+              color: colors.$gray-700;
+              @include styles.text-sm;
+              @include weights.medium;
+            }
 
             div.tags.container i[data-size] svg {
               width: 8px;
             }
           }
 
-          tbody tr[data-show=\"true\"] {
+          tbody tr {
             &:nth-child(odd) {
               td {
                 background-color: colors.$gray-50;
@@ -111,7 +114,9 @@
       border-color: colors.$gray-800;
 
       td, th {
-        color: colors.$base-white;
+        &, a {
+          color: colors.$base-white;
+        }
       }
 
       tbody tr {

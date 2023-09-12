@@ -6,6 +6,7 @@ import HeaderSection from "../components/HeaderSection.astro";
 
 import { parseContent } from "../../util/content-viewer";
 import { normalizeUrl } from "../../util/url";
+import Icon from "../elements/Icon.astro";
 
 interface Props {
   vacancy: Vacancy;
@@ -35,6 +36,7 @@ const items = [
     name: t(vacancy.title),
   },
 ];
+const { expired } = vacancy;
 ---
 
 <div class="vacancy detail container">
@@ -48,10 +50,25 @@ const items = [
       toc={toc}
       html={parsedHtml}
       pageUrl={pageUrl}
-      showSocial={true}
+      showSocial={!expired}
     >
       <Fragment slot="pre">
         <Breadcrumb items={items} />
+
+        {
+          expired && (
+            <div class="expired banner">
+              <Icon variant="alert-triangle" size="md" />
+
+              <div>
+                <p class="title">Expired</p>
+                <p class="desc">
+                  We are no longer accepting candidates for this vacancy.
+                </p>
+              </div>
+            </div>
+          )
+        }
 
         <div class="job details">
           <div class="item">
@@ -82,21 +99,25 @@ const items = [
         </div>
       </Fragment>
 
-      <Fragment slot="post">
-        <div class="button container">
-          <Button
-            variant={"primary"}
-            type={"anchor"}
-            target="_blank"
-            href={normalizeUrl(vacancy.form)}
-            rel="noreferrer noopener nofllow"
-            size="lg"
-            iconTrailing="arrow-square-up-right"
-          >
-            {t("Submit My Job Application")}
-          </Button>
-        </div>
-      </Fragment>
+      {
+        !expired && (
+          <Fragment slot="post">
+            <div class="button container">
+              <Button
+                variant={"primary"}
+                type={"anchor"}
+                target="_blank"
+                href={normalizeUrl(vacancy.form)}
+                rel="noreferrer noopener nofllow"
+                size="lg"
+                iconTrailing="arrow-square-up-right"
+              >
+                {t("Submit My Job Application")}
+              </Button>
+            </div>
+          </Fragment>
+        )
+      }
     </ContentViewer>
   </div>
 </div>
