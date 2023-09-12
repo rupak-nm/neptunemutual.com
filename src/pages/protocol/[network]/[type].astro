@@ -23,11 +23,11 @@ export async function getStaticPaths() {
       },
     },
     {
-      params: { network: "base-goerli", type: "contracts" },
+      params: { network: "mumbai", type: "contracts" },
       props: {
-        networkId: 84531,
+        networkId: 80001,
         type: "contracts",
-        paginated: await api.getContracts(Api.ContractBaseGoerli),
+        paginated: await api.getContracts(Api.ContractMumbai),
         networkName: "Base Goerli Network",
       },
     },
@@ -59,11 +59,11 @@ export async function getStaticPaths() {
       },
     },
     {
-      params: { network: "base-goerli", type: "cx-tokens" },
+      params: { network: "mumbai", type: "cx-tokens" },
       props: {
-        networkId: 84531,
+        networkId: 80001,
         type: "cxTokens",
-        paginated: await api.getContracts(Api.ContractBaseGoerli),
+        paginated: await api.getContracts(Api.ContractMumbai),
         networkName: "Base Goerli Network",
       },
     },
@@ -95,11 +95,11 @@ export async function getStaticPaths() {
       },
     },
     {
-      params: { network: "base-goerli", type: "pods" },
+      params: { network: "mumbai", type: "pods" },
       props: {
-        networkId: 84531,
+        networkId: 80001,
         type: "pods",
-        paginated: await api.getContracts(Api.ContractBaseGoerli),
+        paginated: await api.getContracts(Api.ContractMumbai),
         networkName: "Base Goerli Network",
       },
     },
