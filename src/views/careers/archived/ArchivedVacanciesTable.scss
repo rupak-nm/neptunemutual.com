@@ -1,0 +1,143 @@
+@use "../../../design-system/utils";
+@use "../../../design-system/colors";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/theme/light";
+@use "../../../design-system/theme/dark";
+
+.ui.job.archived.vacancies.section {
+  .inner.container {
+    @include utils.full-width-container;
+    padding-top: 96px;
+    padding-bottom: 96px;
+
+    .main.component {
+      border-radius: 12px;
+      border: 1px solid colors.$gray-200;
+
+      .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 24px;
+
+        p {
+          color: colors.$gray-900;
+          @include styles.text-lg;
+          @include weights.semibold;
+        }
+      }
+
+      div.table.wrapper {
+        width: 100%;
+        overflow-x: auto;
+        border: 1px solid colors.$gray-200;
+        border-width: 1px 0;
+
+        table {
+          border-collapse: collapse;
+          min-width: max(100%, 960px);
+
+          th {
+            padding: 12px 24px;
+            color: colors.$gray-900;
+            @include styles.text-xs;
+            @include weights.bold;
+          }
+          
+          td {
+            padding: 24px;
+
+            &, a {
+              color: colors.$gray-700;
+              @include styles.text-sm;
+              @include weights.medium;
+            }
+
+            div.tags.container i[data-size] svg {
+              width: 8px;
+            }
+          }
+
+          tbody tr {
+            &:nth-child(odd) {
+              td {
+                background-color: colors.$gray-50;
+              }
+            }
+            
+            &:hover {
+              td {
+                background-color: colors.$gray-100;
+              }
+            }
+
+            &:only-child, &:not(:last-child) {
+              td {
+                border-top: 1px solid colors.$gray-200;
+              }
+            }
+
+            &[data-show="false"] {
+              display: none;
+            }
+          }
+        }
+      }
+
+      .table.footer {
+        .ui.pagination .container {
+          padding: 12px 24px 16px;
+
+          & > .ui.page.link {
+            @include styles.text-sm;
+            @include weights.semibold;
+            padding: 8px 14px;
+            border: 1px solid colors.$gray-300;
+            border-radius: 8px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.dark .ui.job.archived.vacancies.section .inner.container {
+  .main.component {
+    border-color: colors.$gray-800;
+
+    .title p {
+      color: colors.$base-white;
+    }
+
+    div.table.wrapper {
+      border-color: colors.$gray-800;
+
+      td, th {
+        &, a {
+          color: colors.$base-white;
+        }
+      }
+
+      tbody tr {
+        &:nth-child(odd) {
+          td {
+            background-color: colors.$black-800;
+          }
+        }
+        
+        &:hover {
+          td {
+            background-color: colors.$gray-900;
+          }
+        }
+
+        &:only-child, &:not(:last-child) {
+          td {
+            border-top: 1px solid colors.$gray-800;
+          }
+        }
+      }
+    }
+  }
+}

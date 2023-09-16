@@ -1,14 +1,16 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Careers from "../../views/Careers.astro";
 import Seo from "../../components/Seo.astro";
 
 import * as api from "../../../service/api";
-import styles from "./index.scss?inline";
+import styles from "./archived.scss?inline";
 import { Api } from "../../../types/enum";
+import ArchivedVacancies from "../../views/ArchivedVacancies.astro";
 
 const vacancies = await api.getEnumerable<Vacancy>(Api.Vacancy, 1000, 0);
-const activeVacancies = vacancies.filter((vacancy) => !vacancy.expired);
+const archivedVacancies = vacancies.filter(
+  (vacancy) => vacancy.expired === true
+);
 ---
 
 <BaseLayout>
@@ -23,9 +25,9 @@ const activeVacancies = vacancies.filter((vacancy) => !vacancy.expired);
   />
   <style slot="header" is:inline set:html={styles}></style>
 
-  <Careers vacancies={activeVacancies} />
+  <ArchivedVacancies vacancies={archivedVacancies} />
 
   <Fragment slot="footer">
-    <script src="../../scripts/careers/index.js"></script>
+    <script src="../../scripts/careers/archived.js"></script>
   </Fragment>
 </BaseLayout>

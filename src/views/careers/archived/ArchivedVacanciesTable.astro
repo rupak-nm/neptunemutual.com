@@ -1,0 +1,85 @@
+---
+import { getFormattedDate } from "../../../../util/format";
+import Pagination from "../../../elements/Pagination.astro";
+import Tags from "../../../elements/Tags.astro";
+import Filter from "../vacancies/Filter.astro";
+interface Props {
+  vacancies: Vacancy[];
+}
+
+const { vacancies } = Astro.props;
+
+const departments = [
+  "Any Department",
+  ...new Set(vacancies.map((v) => v.department.trim())),
+];
+
+const t = (x: string): string => x;
+
+const ROWS_PER_PAGE = 10;
+const total = Math.ceil(vacancies.length / ROWS_PER_PAGE);
+---
+
+<div class="ui job archived vacancies section">
+  <div class="inner container">
+    <div class="main component">
+      <div class="vacancies table title">
+        <p>Vacancy List</p>
+        <Filter options={departments} iconVariant="users-01" />
+      </div>
+
+      <div class="table wrapper">
+        <table data-page="1" data-total={total}>
+          <thead>
+            <tr>
+              <th align="left">{t("Role")}</th>
+              <th align="left">{t("Location")}</th>
+              <th align="left">{t("Added On")}</th>
+              <th align="left">{t("Job Type")}</th>
+              <th align="left">{t("Department")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              vacancies.map(
+                (
+                  { title, location, createdAt, type, department, badges, slug },
+                  i
+                ) => (
+                  <tr
+                    data-department={department.trim()}
+                    data-show={i < ROWS_PER_PAGE ? "true" : "false"}
+                  >
+                    <td>
+                      <a href={`/careers/${slug}/`}>{title}</a>
+                    </td>
+                    <td>{location}</td>
+                    <td>
+                      <time datetime={new Date(createdAt || 0).toISOString()}>
+                        {createdAt
+                          ? getFormattedDate(new Date(createdAt).toUTCString())
+                          : "N/A"}
+                      </time>
+                    </td>
+                    <td>{type}</td>
+                    <td>
+                      <Tags tags={JSON.parse(badges)} size={"md"} />
+                    </td>
+                  </tr>
+                )
+              )
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table footer">
+        <Pagination
+          className="no padding script only"
+          currentPage={1}
+          totalPages={total}
+        />
+      </div>
+    </div>
+  </div>
+</div>
