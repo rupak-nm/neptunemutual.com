@@ -90,11 +90,9 @@
           padding: 12px 24px 16px;
 
           & > .ui.page.link {
+            padding: 0;
             @include styles.text-sm;
             @include weights.semibold;
-            padding: 8px 14px;
-            border: 1px solid colors.$gray-300;
-            border-radius: 8px;
           }
         }
       }
