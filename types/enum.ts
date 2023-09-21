@@ -18,7 +18,7 @@ enum Api {
   Hack = 'hacks'
 }
 
-type BlogOrPressroom = Api.Blog | Api.Pressroom
+type BlogOrPressroom = Api.Blog | Api.Pressroom | Api.Vacancy
 
 enum Network {
   Ethereum = 1,

@@ -89,34 +89,6 @@
       top: 50%;
     }    
   }
-
-  .expired.banner {
-    margin-bottom: 24px;
-    border-radius: 12px;
-    border: 1px solid colors.$warning-300;
-    background-color: colors.$warning-25;
-    padding: 16px;
-    color: colors.$warning-700;
-
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-
-    svg {
-      color: colors.$warning-600;
-    }
-
-    p.title {
-      @include styles.text-md;
-      @include weights.semibold;
-    }
-
-    p.desc {
-      margin-top: 4px;
-      @include styles.text-sm;
-      @include weights.regular;
-    }
-  }
 }
 
 
@@ -145,15 +117,4 @@
       border-top: 1px solid colors.$gray-800;
     }    
   }
-
-  .expired.banner {
-    border-color: colors.$warning-300;
-    background-color: colors.$black-800;
-    color: colors.$base-white;
-    
-    svg {
-      color: colors.$warning-300;
-    }
-  }
-
 }
