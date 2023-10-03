@@ -1,6 +1,14 @@
 {
   const subMenu = document.querySelector('.sub.menu.container')
 
+  function enablePageScroll () {
+    document.querySelector('html').style.overflow = 'auto'
+  }
+
+  function disablePageScroll () {
+    document.querySelector('html').style.overflow = 'hidden'
+  }
+
   function click (event) {
     event.stopPropagation()
 
@@ -9,6 +17,9 @@
 
     subMenu.setAttribute('data-open', newState)
     event.currentTarget.setAttribute('data-open', newState)
+
+    if (newState === 'true') disablePageScroll()
+    else enablePageScroll()
   }
 
   document.querySelector('.display.resources.mega.menu').addEventListener('click', click)
@@ -23,6 +34,7 @@
       if (!e.target.closest('#MobileMenu')) {
         subMenu.setAttribute('data-open', 'false')
         button.setAttribute('data-open', 'false')
+        enablePageScroll()
       }
       return
     }
@@ -30,6 +42,7 @@
     if (!e.target.closest('.sub.menu.container')) {
       subMenu.setAttribute('data-open', 'false')
       button.setAttribute('data-open', 'false')
+      enablePageScroll()
     }
   })
 }
