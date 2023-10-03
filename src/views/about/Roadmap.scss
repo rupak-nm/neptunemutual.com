@@ -88,11 +88,16 @@
 
 
   .ui.checked.timeline.list {
-    padding: 48px 0 108px;
-    display: flex;
-    flex-direction: row;
     scroll-behavior: smooth;
     overflow: auto;
+    
+    .inner.scroller {
+      padding: 48px 0 108px;
+      display: flex;
+      flex-direction: row;
+      
+      transition: transform 0.2s ease-in-out;
+    }
 
     .item {
       position: relative;
@@ -212,11 +217,17 @@
   }
 
   .ui.timeline.story.list {
-    display: flex;
     scroll-behavior: smooth;
     overflow: auto;
-    padding: 24px 0 0 0;
+    
+    
+    .inner.scroller {
+      display: flex;
+      flex-direction: row;
+      padding: 24px 0 0 0;
 
+      transition: transform 0.2s ease-in-out;
+    }
 
 
     .story.item {
