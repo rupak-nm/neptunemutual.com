@@ -44,41 +44,45 @@ for (let idx = 0; idx < roadmap.length; idx++) {
     </div>
 
     <div class="ui checked timeline list">
-      {
-        updated.map((item, idx) => {
-          return (
-            <button
-              class:list={[
-                "item",
-                {
-                  future: item.future,
-                  completed: item.completed,
-                  current: item.current,
-                },
-              ]}
-              data-slide-index={idx}
-              data-scope={item.slug}
-            >
-              <div class="check element">
-                <div class="status" />
-              </div>
-              <p class="name">{item.title}</p>
-            </button>
-          );
-        })
-      }
+      <div class="inner scroller">
+        {
+          updated.map((item, idx) => {
+            return (
+              <button
+                class:list={[
+                  "item",
+                  {
+                    future: item.future,
+                    completed: item.completed,
+                    current: item.current,
+                  },
+                ]}
+                data-slide-index={idx}
+                data-scope={item.slug}
+              >
+                <div class="check element">
+                  <div class="status" />
+                </div>
+                <p class="name">{item.title}</p>
+              </button>
+            );
+          })
+        }
+      </div>
     </div>
     <div class="ui timeline story list">
-      {
-        updated.map((item, idx) => {
-          return (
-            <div class="story item" data-slide-index={idx}>
-              <h3 class="title">{item.title}</h3>
-              <div class="text" set:html={item.html} />
-            </div>
-          );
-        })
-      }
+      <div class="inner scroller">
+        {
+          updated.map((item, idx) => {
+            return (
+              <div class="story item" data-slide-index={idx}>
+                <h3 class="title">{item.title}</h3>
+                <div class="text" set:html={item.html} />
+              </div>
+            );
+          })
+        }
+      </div>
     </div>
   </div>
 

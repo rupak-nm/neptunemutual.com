@@ -9,12 +9,18 @@ const prevBtn = container.querySelector('button#PreviousRoadmapButton')
 // next button
 const nextBtn = container.querySelector('button#NextRoadmapButton')
 
-const scrollToCenter = (el) => {
-  el.parentNode.scrollLeft =
-    el.offsetLeft -
-    el.parentNode.offsetLeft -
-    el.parentNode.offsetWidth / 2 +
-    el.offsetWidth / 2
+const scrollToCenter = (el, timeline = false) => {
+  const itemIndex = Number(el.dataset.slideIndex || 0)
+
+  let translateX = itemIndex ? (itemIndex * el.offsetWidth) : 0
+
+  if (timeline) {
+    const totalStories = storiesContainer.querySelectorAll('.inner.scroller > .item').length
+    const index = itemIndex >= totalStories - 4 ? totalStories - 4 : itemIndex
+    translateX = index ? (index * el.offsetWidth) - 20 : 0
+  }
+
+  el.parentNode.style.transform = `translateX(-${translateX}px)`
 }
 
 const selectStorySlide = (idx) => {
@@ -56,7 +62,7 @@ const selectTimelineSlide = (idx) => {
   matchedTimelineItem.setAttribute('data-selected', 'true')
 
   // Scroll to selected item
-  scrollToCenter(matchedTimelineItem)
+  scrollToCenter(matchedTimelineItem, true)
 }
 
 const updateArrowsState = (selectedIdx) => {
