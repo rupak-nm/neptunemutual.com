@@ -949,7 +949,7 @@
 
 // Medium image zoom
 .medium-zoom--opened .medium-zoom-overlay,
-.medium-zoom-image {
+img.medium-zoom-image--opened {
   z-index: 9999;
 }
 
