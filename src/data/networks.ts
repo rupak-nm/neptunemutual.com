@@ -50,6 +50,10 @@ const tokens = {
   arb: {
     npm: '0x57f12FE6A4e5fe819eec699FAdf9Db2D06606bB4',
     usdc: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8'
+  },
+  bsc: {
+    npm: '0x57f12FE6A4e5fe819eec699FAdf9Db2D06606bB4',
+    usdc: '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d'
   }
 }
 
@@ -64,6 +68,12 @@ const swaps: Array<{
     srcDark: import('../elements/icons/custom/sushi-arb-dark.svg?raw').then((x: any) => x.default),
     title: 'Sushiswap (Arbitrum)',
     href: `https://www.sushi.com/swap?token0=${tokens.arb.usdc}&token1=${tokens.arb.npm}&chainId=42161`
+  },
+  {
+    src: import('../elements/icons/custom/sushi-bsc.svg?raw').then((x: any) => x.default),
+    srcDark: import('../elements/icons/custom/sushi-bsc-dark.svg?raw').then((x: any) => x.default),
+    title: 'Sushiswap (BNB Chain)',
+    href: `https://www.sushi.com/swap?token0=${tokens.bsc.usdc}&token1=${tokens.bsc.npm}&chainId=56`
   },
   {
     src: import('../elements/icons/custom/uniswap-eth.svg?raw').then((x: any) => x.default),

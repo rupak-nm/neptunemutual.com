@@ -736,10 +736,6 @@
     color: colors.$gray-25;
   }
 
-  img {
-    filter: invert(100%);
-  }
-
   figure:has(figcaption) {
     border: 1px dashed colors.$gray-600;
 
@@ -953,7 +949,7 @@
 
 // Medium image zoom
 .medium-zoom--opened .medium-zoom-overlay,
-.medium-zoom-image {
+img.medium-zoom-image--opened {
   z-index: 9999;
 }
 
