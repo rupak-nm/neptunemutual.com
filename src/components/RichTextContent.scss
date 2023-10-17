@@ -736,10 +736,6 @@
     color: colors.$gray-25;
   }
 
-  img {
-    filter: invert(100%);
-  }
-
   figure:has(figcaption) {
     border: 1px dashed colors.$gray-600;
 
