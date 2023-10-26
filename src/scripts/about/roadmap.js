@@ -10,13 +10,14 @@ const prevBtn = container.querySelector('button#PreviousRoadmapButton')
 const nextBtn = container.querySelector('button#NextRoadmapButton')
 
 const scrollToCenter = (el, timeline = false) => {
+  const width = window.innerWidth
   const itemIndex = Number(el.dataset.slideIndex || 0)
 
   let translateX = itemIndex ? (itemIndex * el.offsetWidth) : 0
 
   if (timeline) {
     const totalStories = storiesContainer.querySelectorAll('.inner.scroller > .item').length
-    const index = itemIndex >= totalStories - 4 ? totalStories - 4 : itemIndex
+    const index = (width > 600 && itemIndex >= totalStories - 4) ? totalStories - 4 : itemIndex
     translateX = index ? (index * el.offsetWidth) - 20 : 0
   }
 
