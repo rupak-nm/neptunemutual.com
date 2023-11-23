@@ -199,35 +199,41 @@ const defaultData = type => {
 }
 
 function getFunctionSignature (_function) {
-  const inputs = _function.inputs.map(input => {
-    if (input.components) {
+  function getArgsSignature (inps) {
+    const args = inps.map(input => {
       const { isArray } = getTypeInfo(input.type)
-      const componentsArray = input.components.map(component => {
-        return `${component.type}`
-      })
-      return `(${componentsArray.join(', ')})${isArray ? '[]' : ''}`
-    }
-    return `${input.type}`
-  })
 
-  return `${_function.name}(${inputs.join(', ')})`
+      if (['tuple', 'tuple[]'].includes(input.type) && Array.isArray(input.components)) {
+        const _args = getArgsSignature(input.components)
+        return `${_args}${isArray ? '[]' : ''}`
+      }
+
+      return `${input.type}`
+    })
+
+    return `(${args.join(', ')})`
+  }
+
+  return `${_function.name}${getArgsSignature(_function.inputs)}`
 }
 
 function getDefaultEncodeData (_function) {
-  const inputs = _function.inputs.map(input => {
-    const { isArray } = getTypeInfo(input.type)
+  function getEncodedDataArray (inps) {
+    const data = inps.map(input => {
+      const { isArray } = getTypeInfo(input.type)
 
-    if (input.components) {
-      const componentsArray = input.components.map(component => {
-        return defaultData(component.type)
-      })
-      return isArray ? [componentsArray] : componentsArray
-    }
+      if (['tuple', 'tuple[]'].includes(input.type) && Array.isArray(input.components)) {
+        const _data = getEncodedDataArray(input.components)
+        return isArray ? [_data] : _data
+      }
 
-    return defaultData(input.type)
-  })
+      return defaultData(input.type)
+    })
 
-  return inputs
+    return data
+  }
+
+  return getEncodedDataArray(_function.inputs)
 }
 
 function getWriteArguments (_function, inputData) {
