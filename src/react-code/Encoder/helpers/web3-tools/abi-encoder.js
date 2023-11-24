@@ -155,10 +155,22 @@ const createJoiSchema = func => {
 
   if (stateMutability === 'payable') joiSchema[name] = getJoiType('uint')
 
-  inputs.map((i, idx1) => {
-    joiSchema[i.name || idx1] = getJoiType(i.type)
-    return true
-  })
+  function getSchemaObject (_inputs, prevIdx = null) {
+    const schemObject = {}
+
+    _inputs.map((_input, i) => {
+      if (_input.type === 'tuple' && Array.isArray(_input.components)) {
+        Object.assign(schemObject, getSchemaObject(_input.components, getIndex(i, prevIdx)))
+        return null
+      }
+      schemObject[getIndex(i, prevIdx)] = getJoiType(_input.type)
+      return null
+    })
+
+    return schemObject
+  }
+
+  Object.assign(joiSchema, getSchemaObject(inputs))
 
   return Joi.object(joiSchema)
 }
@@ -170,6 +182,26 @@ const checkInputErrors = (schema, inputData) => {
   }
 
   return false
+}
+
+const checkEmptyInputs = (inputs, inputData, name, stateMutability) => {
+  if (stateMutability === 'payable' && !inputData[name]) return true
+
+  if (Array.from(Object.values(inputData)).find(i => !i)) return true
+
+  function getF (_inputs, prevIdx) {
+    const empty = _inputs.find((input, i) => {
+      if (input.type === 'tuple' && Array.isArray(input.components)) return getF(input.components, getIndex(i, prevIdx))
+
+      if (!inputData[getIndex(i, prevIdx)]) return true
+
+      return false
+    })
+
+    return Boolean(empty)
+  }
+
+  return getF(inputs)
 }
 
 const isInputError = (schema, inputData, _field) => {
@@ -237,22 +269,28 @@ function getDefaultEncodeData (_function) {
 }
 
 function getWriteArguments (_function, inputData) {
-  const inputs = _function.inputs.map((input, idx1) => {
-    const { actualType, isArray } = getTypeInfo(input.type)
+  function getInputs (inputs, prevIdx) {
+    const data = inputs.map((input, i) => {
+      const { isArray } = getTypeInfo(input.type)
+      const val = inputData[getIndex(i, prevIdx)]
 
-    const val = inputData[input.name || idx1]
+      if (input.type === 'tuple' && Array.isArray(input.components)) return getInputs(input.components, getIndex(i, prevIdx))
 
-    if (isArray || actualType === 'tuple') {
-      try {
-        const parsed = JSON.parse(val)
-        if (parsed && Array.isArray(parsed)) return parsed
-      } catch {}
-    }
+      if (input.type === 'tuple[]' || isArray) {
+        try {
+          const parsed = JSON.parse(val)
+          if (parsed && Array.isArray(parsed)) return parsed
+        } catch {}
+        return null
+      }
 
-    return val
-  })
+      return val
+    })
 
-  return inputs.filter(Boolean)
+    return data.filter(Boolean)
+  }
+
+  return getInputs(_function.inputs)
 }
 
 function getOutputResponse (func, outputResponse) {
@@ -273,6 +311,10 @@ function getOutputResponse (func, outputResponse) {
   return outputs.filter(Boolean)
 }
 
+function getIndex (idx, prevIndex) {
+  return ['number', 'string'].includes(typeof prevIndex) ? `${prevIndex}-${idx}` : idx
+}
+
 export {
   checkInputErrors,
   createJoiSchema,
@@ -281,5 +323,7 @@ export {
   getFunctionSignature,
   getDefaultEncodeData,
   getWriteArguments,
-  getOutputResponse
+  getOutputResponse,
+  getIndex,
+  checkEmptyInputs
 }
