@@ -60,6 +60,7 @@ const paths: Record<string, any> = {
   'sun-filled': import('./custom/sun-filled.svg?raw'),
   'moon-star-filled': import('./custom/moon-star-filled.svg?raw'),
   'chevron-up': import('./variants/Arrows/chevron-up.svg?raw'),
+  'chevron-selector-vertical': import('./variants/Arrows/chevron-selector-vertical.svg?raw'),
   bank: import('./variants/FinanceAndEcommerce/bank.svg?raw'),
   'edit-03': import('./variants/General/edit-03.svg?raw'),
   'annotation-dots': import('./variants/Communication/annotation-dots.svg?raw'),
