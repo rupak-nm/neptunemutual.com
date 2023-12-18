@@ -36,4 +36,18 @@
       color: colors.$error-700;
     }
   }
+
+  .tuple.container {
+    & > label {
+      display: block;
+      @include styles.text-sm;
+      @include weights.medium;
+      flex: 1;
+      margin-bottom: 8px;
+    }
+
+    & > div {
+      margin-left: 16px;
+    }
+  }
 }

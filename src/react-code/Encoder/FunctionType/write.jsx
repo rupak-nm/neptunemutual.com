@@ -8,6 +8,7 @@ import {
 import { Button } from '../../components/Button/Button'
 import { InputWithLabel } from '../../components/InputWithLabel'
 import {
+  checkEmptyInputs,
   checkInputErrors,
   getWriteArguments
 } from '../helpers/web3-tools/abi-encoder'
@@ -19,7 +20,7 @@ const WriteContract = (props) => {
   const [makingCall, setMakingCall] = useState(false)
 
   const { func, call, joiSchema, isReady, encodeInterface: iface } = props
-  const { name } = func
+  const { inputs, name, stateMutability } = func
 
   async function handleWrite () {
     if (error) setError('')
@@ -58,7 +59,11 @@ const WriteContract = (props) => {
           variant='primary'
           size='sm'
           onClick={handleWrite}
-          disabled={!isReady || checkInputErrors(joiSchema, inputData) || makingCall}
+          disabled={!isReady ||
+            checkEmptyInputs(inputs, inputData, name, stateMutability) ||
+            checkInputErrors(joiSchema, inputData) ||
+            makingCall
+          }
         >
           Write
         </Button>
