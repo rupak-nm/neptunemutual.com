@@ -6,7 +6,7 @@ const switchTheme = async () => {
 
   window.localStorage.setItem('theme', switchTo)
 
-  updateThemeLinks()
+  updateThemeLinks(theme, switchTo)
 
   darkModeInputCheckboxes.forEach(async (darkModeInputCheckbox) => {
     await window.loadTheme(darkModeInputCheckbox)
@@ -80,15 +80,21 @@ const switchTweetTheme = (currentTheme, targetTheme) => {
     return
   }
 
-  const tweets = document.querySelectorAll('[data-tweet-id]')
+  const renderedTweets = document.querySelectorAll('[data-tweet-id]')
 
-  tweets.forEach((tweet) => {
+  renderedTweets.forEach((tweet) => {
     const src = tweet.getAttribute('src')
     tweet.setAttribute('src', src.replace('theme=' + currentTheme, 'theme=' + targetTheme))
   })
+
+  const unRenderedTweets = document.querySelectorAll('blockquote.twitter-tweet')
+
+  unRenderedTweets.forEach((tweet) => {
+    tweet.setAttribute('data-theme', targetTheme)
+  })
 }
 
-const updateThemeLinks = () => {
+const updateThemeLinks = (currentTheme, newTheme) => {
   const links = document.querySelectorAll('a')
 
   links.forEach(link => {
@@ -97,12 +103,12 @@ const updateThemeLinks = () => {
     }
   })
 
-  switchTweetTheme('light', window.getTheme())
+  switchTweetTheme(currentTheme || 'light', newTheme || window.getTheme())
 }
 
 updateThemeLinks()
 
-// Wait for the loading of the theme
-setTimeout(() => {
+window.addEventListener('load', async () => {
+  // Wait for the loading of the theme
   switchTweetTheme('light', window.getTheme())
-}, 1000)
+})
