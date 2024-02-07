@@ -1,5 +1,5 @@
 <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <g clipPath="url(#a)">
+  <g clipPath="url(#sun-filled)">
     <path
       d="M6 8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"
       fill="currentColor"
@@ -12,7 +12,7 @@
     ></path>
   </g>
   <defs>
-    <clipPath id="a">
+    <clipPath id="sun-filled">
       <path fill="currentColor" d="M0 0h12v12H0z"></path>
     </clipPath>
   </defs>
