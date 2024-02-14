@@ -2,6 +2,7 @@ import './read.scss'
 
 import {
   Fragment,
+  useCallback,
   useId,
   useState
 } from 'react'
@@ -11,9 +12,11 @@ import { Icon } from '../../components/Icon'
 import {
   checkInputErrors,
   getOutputResponse,
-  getWriteArguments
+  getWriteArguments,
+  updateObjectByArrayOfKeys
 } from '../helpers/web3-tools/abi-encoder'
 import { InputFields } from '../components/InputFields'
+import { JSONPopup } from '../../components/JSONPopup/JSONPopup'
 
 const ReadContract = (props) => {
   const { func, call, joiSchema, isReady, encodeInterface: iface } = props
@@ -25,6 +28,8 @@ const ReadContract = (props) => {
   const [error, setError] = useState('')
   const [makingCall, setMakingCall] = useState(false)
 
+  const [parsedJSON, setParsedJSON] = useState(null)
+
   function getFunctionSignature () {
     return `${name}(${inputs.map(_inp => _inp.type).join(', ')})`
   }
@@ -33,13 +38,13 @@ const ReadContract = (props) => {
     return `${outputs.map(_inp => _inp.type).join(', ')}`
   }
 
-  async function handleQuery () {
-    if (error) setError('')
+  const handleQuery = useCallback(async (_inputData) => {
+    setError('')
     setSuccessfulResponse('')
     setMakingCall(true)
 
     const methodName = name
-    const args = getWriteArguments(func, inputData)
+    const args = getWriteArguments(_inputData, inputs)
     const { data, error: _error } = await call(methodName, args, undefined, iface)
 
     if (!_error && !data.length) {
@@ -55,16 +60,33 @@ const ReadContract = (props) => {
     else setError('')
 
     setMakingCall(false)
+  }, [name, call, iface, func, inputs])
+
+  const handleInputChange = (value = '', keyArray) => {
+    const updatedObject = updateObjectByArrayOfKeys(inputData, keyArray, value)
+    setInputData({ ...updatedObject })
+    setError('')
+    setSuccessfulResponse('')
   }
 
-  const handleInputChange = (name, value = '') => {
-    setInputData(_prev => ({ ..._prev, [name]: value }))
-    if (error) setError('')
-    setSuccessfulResponse('')
+  const handleJSON = (json) => {
+    handleQuery(json)
   }
 
   return (
     <div className='read container'>
+      {
+        inputs.length > 0 && (
+          <JSONPopup
+            handleJSON={handleJSON}
+            parsedJSON={parsedJSON}
+            setParsedJSON={setParsedJSON}
+            label={`Enter JSON for querying ${name} function`}
+            btnProps={{ label: 'Query', disabled: !isReady || makingCall }}
+          />
+        )
+      }
+
       <InputFields
         func={func}
         inputData={inputData}
@@ -75,8 +97,9 @@ const ReadContract = (props) => {
       <div className='btn wrapper'>
         <Button
           variant='secondary-gray'
-          onClick={handleQuery}
-          disabled={!isReady || checkInputErrors(joiSchema, inputData) || makingCall}
+          onClick={() => handleQuery(inputData)}
+          // disabled={!isReady || checkInputErrors(joiSchema, inputData) || makingCall}
+          disabled={!isReady || makingCall}
         >
           Query
         </Button>

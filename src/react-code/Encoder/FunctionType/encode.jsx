@@ -1,12 +1,13 @@
 import './encode.scss'
 
 import {
+  useCallback,
   useEffect,
   useId,
   useState
 } from 'react'
 
-import { InputWithLabel } from '../../components/InputWithLabel'
+import { InputWithLabel } from '../../components/InputWithLabel/InputWithLabel'
 import { TextArea } from '../../components/TextArea'
 import {
   encodeData
@@ -14,15 +15,19 @@ import {
 } from '../helpers/solidity/methods'
 import {
   getFunctionSignature,
-  getWriteArguments
+  getWriteArguments,
+  updateObjectByArrayOfKeys
 } from '../helpers/web3-tools/abi-encoder'
 import { InputFields } from '../components/InputFields'
+import { JSONPopup } from '../../components/JSONPopup/JSONPopup'
 
 const EncodeData = (props) => {
   const id = useId()
   const [inputData, setInputData] = useState({})
   const [outputData, setOutputData] = useState('')
   const [outputError, setOutputError] = useState('')
+
+  const [parsedJSON, setParsedJSON] = useState(null)
 
   const { encodeInterface, func, joiSchema } = props
   const { inputs, name } = func
@@ -34,35 +39,46 @@ const EncodeData = (props) => {
     }
   }, [name, encodeInterface, inputs])
 
-  const checkNonEmptyInputs = (_inputData) => {
-    const nonEmptyInput = Object.values(_inputData).find(Boolean)
-
-    return Boolean(nonEmptyInput)
-  }
-
-  const handleChange = (name, value) => {
-    const _inputData = ({ ...inputData, [name]: value })
-
-    setInputData(_prev => ({ ..._prev, [name]: value }))
-
+  const handleEncode = useCallback((_inputData) => {
     const encodeSignature = getFunctionSignature(func)
-    const encodeArgs = getWriteArguments(func, _inputData)
+    const encodeArgs = getWriteArguments(_inputData, inputs)
 
     const encoded = encodeData(encodeInterface, encodeSignature, encodeArgs, (error) => {
+      if (error) setOutputError(error)
       setOutputData('')
-
-      if (checkNonEmptyInputs({ ..._inputData })) setOutputError(error)
-      else setOutputError('')
     })
 
     if (encoded) {
       setOutputData(encoded)
       setOutputError('')
     }
+  }, [encodeInterface, func, inputs])
+
+  const handleChange = (value, keyArray) => {
+    const updatedObject = updateObjectByArrayOfKeys(inputData, keyArray, value)
+    setInputData({ ...updatedObject })
+
+    handleEncode(updatedObject)
+  }
+
+  const handleJSON = (json) => {
+    handleEncode(json)
   }
 
   return (
     <div className='encode container'>
+      {
+        inputs.length > 0 && (
+          <JSONPopup
+            handleJSON={handleJSON}
+            parsedJSON={parsedJSON}
+            setParsedJSON={setParsedJSON}
+            label={`Enter JSON for encoding ${name} function`}
+            btnProps={{ label: 'Encode' }}
+          />
+        )
+      }
+
       <InputFields
         func={func}
         inputData={inputData}

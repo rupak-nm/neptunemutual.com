@@ -1,12 +1,9 @@
 @use "../../design-system/colors";
+@use "../../design-system/typography/styles";
 @use "../../design-system/typography/weights";
 
 .func.container {
   border: 1px solid colors.$gray-300;
-
-  .dark & {
-    border: 1px solid colors.$gray-700;
-  }
 
   .list.header {
     padding: 16px;
@@ -15,16 +12,145 @@
     align-items: center;
     z-index: -1;
     cursor: pointer;
+    
+    .name {
+      @include weights.semibold;
+    }
+  
+    .cta {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      color: colors.$black;
+    }
   }
 
-  .name {
-    @include weights.semibold;
-  }
-
-  .cta {
+  div[type="button"] {
     display: flex;
     align-items: center;
-    gap: 30px;
-    color: colors.$black;
+    gap: 8px;
+    width: max-content;
+
+    button.json.trigger {
+      width: max-content;
+      padding: 6px 14px;
+      background-color: colors.$primary-200;
+      color: colors.$primary-800;
+      border-radius: 4px;
+    }
+
+    button.clear {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      padding: 6px;
+      background-color: colors.$gray-300;
+      border-radius: 6px;
+      
+      &, svg {
+        color: colors.$gray-700;
+      }
+
+      svg {
+        height: 14px;
+        width: 14px;
+      }
+    }
+  }
+
+  .inputfield.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .input.container {
+    .input.hint {
+      display: none;
+    }
+  }
+
+  div.input.group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .array.label {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+
+      p.label {
+        @include styles.text-sm;
+        @include weights.medium;
+        color: colors.$gray-700;
+      }
+    }
+
+    .tuple.container > div {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .array.item {
+      position: relative;
+      padding-left: 16px;
+
+      button.close, button.plus {
+        position: absolute;
+        right: 0;
+
+        padding: 4px;
+        border-radius: 4px;
+
+        &:disabled {
+          cursor: not-allowed;
+          border-color: colors.$gray-300;
+        }
+
+        & + .input.container div.label {
+          min-height: 26px;
+        }
+
+        &:hover {
+          background-color: colors.$gray-200;
+        }
+      }
+
+      button.plus {
+        right: 40px;
+      }
+
+    }
+  }
+
+  .dark & {
+    border: 1px solid colors.$gray-700;
+
+    div[type="button"] {
+      button.json.trigger {
+        background-color: colors.$primary-800;
+        color: colors.$primary-50;
+      }
+    }
+
+    div.input.group {
+      div.array.label {
+        p.label {
+          color: colors.$gray-300;
+        }
+      }
+
+      .array.item {
+        button.close, button.plus {
+          &:hover {
+            background-color: colors.$gray-700;
+          }
+        }
+      }
+
+    }
   }
 }

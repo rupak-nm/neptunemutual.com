@@ -1,13 +1,15 @@
 import { useCallback, useEffect } from 'react'
-import { useWeb3React } from '@web3-react/core'
-import { getConnectorByName } from '../utils/connectors'
+import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
+import { getConnectorByName, switchNetwork } from '../utils/connectors'
 
 const activateConnector = async (
   connectorName,
   activate,
-  notify
+  networkId = undefined,
+  notify,
+  cb = () => {}
 ) => {
-  const connector = await getConnectorByName(connectorName)
+  const connector = await getConnectorByName(connectorName, Number(networkId))
 
   if (!connector) {
     console.info('Invalid Connector Name', connectorName)
@@ -16,6 +18,18 @@ const activateConnector = async (
 
   activate(connector, async (error) => {
     notify(error)
+
+    if (error instanceof UnsupportedChainIdError) {
+      try {
+        const switched = await switchNetwork(Number(networkId))
+
+        if (switched.success) await activate(connector)
+
+        cb(switched)
+      } catch (error) {
+        notify(error)
+      }
+    }
   })
 }
 
@@ -34,8 +48,8 @@ const useAuth = (notify = console.log) => {
   }, [connector])
 
   const login = useCallback(
-    (connectorName) =>
-      activateConnector(connectorName, activate, notify),
+    (connectorName, networkId, cb) =>
+      activateConnector(connectorName, activate, networkId, notify, cb),
     [activate, notify]
   )
 

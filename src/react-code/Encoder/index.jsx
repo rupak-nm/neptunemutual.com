@@ -11,7 +11,7 @@ import { Web3ReactProvider } from '@web3-react/core'
 
 import { Breadcrumbs } from '../components/BreadCrumbs'
 import { Button } from '../components/Button/Button'
-import { InputWithLabel } from '../components/InputWithLabel'
+import { InputWithLabel } from '../components/InputWithLabel/InputWithLabel'
 import { TextArea } from '../components/TextArea'
 import { getLibrary } from '../lib/connect-wallet/utils/web3'
 import {
@@ -21,6 +21,8 @@ import {
 } from './helpers'
 import { History } from './History'
 import { Result } from './Result'
+
+import { createContractKey } from '../../../util/string'
 
 const STORAGE_KEY = 'abis'
 
@@ -70,11 +72,13 @@ const Encoder = () => {
   const [isSaveable, setIsSaveable] = useState(false)
   const [restorationFailed, setRestorationFailed] = useState(false)
   const [contractNameExist, setContractNameExist] = useState(false)
-  const [forUpdate, setForUpdate] = useState(false)
 
   const [contractName, setContractName] = useState('')
   const [address, setAddress] = useState('')
   const [abi, setAbi] = useState('[]')
+  const [networkId, setNetworkId] = useState('')
+
+  const [updateIndex, setUpdateIndex] = useState(null)
 
   useEffect(() => {
     const storageData = window.localStorage.getItem(STORAGE_KEY)
@@ -94,17 +98,20 @@ const Encoder = () => {
   }, [contractNameExist])
 
   const restoreSpecificCallback = (data) => {
-    const { abi, contractName, address } = data
+    const { abi, contractName, address, network, index } = data
     const form = formRef.current
-    form.abi.value = abi
-    form.contract_name.value = contractName
-    form.address.value = address
+    form.abi.value = abi || ''
+    form.contract_name.value = contractName || ''
+    form.address.value = address || ''
+    form.network.value = network || ''
+
     setContractName(contractName)
     setAddress(address)
+    setNetworkId(network)
     setAbi(abi)
     setIsSaveable(true)
-    setForUpdate(true)
     validateABI({ target: { value: abi } })
+    setUpdateIndex(index)
   }
 
   const saveToStorage = (e) => {
@@ -124,23 +131,22 @@ const Encoder = () => {
       abis = JSON.parse(storageData) || []
     }
 
-    const existingContractKey = abis.findIndex(abi => {
-      return abi.contract_name.toLowerCase() === form.contract_name.value.toLowerCase()
-    })
-
-    if (!forUpdate && existingContractKey >= 0) {
-      setContractNameExist(true)
-      return true
-    }
+    const newContractKey = createContractKey(
+      form.contract_name.value,
+      form.address.value,
+      form.network.value
+    )
 
     const data = {
+      key: newContractKey,
       abi: form.abi.value,
       contract_name: form.contract_name.value,
-      address: form.address.value
+      address: form.address.value,
+      network: form.network.value
     }
 
-    if (existingContractKey >= 0) {
-      abis[existingContractKey] = { ...abis[existingContractKey], ...data }
+    if (updateIndex) {
+      abis[updateIndex] = { ...abis[updateIndex], ...data }
     } else {
       abis.push(data)
     }
@@ -182,9 +188,10 @@ const Encoder = () => {
     const reader = new window.FileReader()
     reader.onload = (evt) => {
       try {
-        const contracts = JSON.parse(evt.target.result)
-        setContracts(contracts)
-        window.localStorage.setItem(STORAGE_KEY, evt.target.result)
+        const newContracts = JSON.parse(evt.target.result)
+        const updatedContracts = [...contracts, ...newContracts]
+        setContracts(updatedContracts)
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedContracts))
       } catch (error) {
         // Show an error
         setRestorationFailed(true)
@@ -265,6 +272,20 @@ const Encoder = () => {
     }
   }
 
+  const handleNew = () => {
+    setContractName('')
+    setAddress('')
+    setAbi('[]')
+    setNetworkId('')
+    setUpdateIndex(null)
+
+    const form = formRef.current
+    form.abi.value = ''
+    form.contract_name.value = ''
+    form.address.value = ''
+    form.network.value = ''
+  }
+
   return (
     <div className='encoder container'>
       <div className='form container'>
@@ -290,23 +311,33 @@ const Encoder = () => {
 
             <InputWithLabel
               required
-              label='How would you want to remember your contract name in the future?'
+              label='Enter the name of the contract:'
               placeholder='Contract or interface name'
               id='contract_name'
               onChange={(e) => { return setContractName(e.target.value) }}
               error={contractNameExist ? 'Contract name already exist!' : ''}
             >
-                Enter the contract name or an easy way to remember name for this contract
+                Give a name to the contract. This will be used to identify the contract in the history.
             </InputWithLabel>
 
             <InputWithLabel
               required
-              label='Have you deployed this contract on a blockchain network?'
+              label='Enter the deployment address of the contract:'
               placeholder='0x'
               id='address'
               onChange={(e) => { return setAddress(e.target.value) }}
             >
-                If you’d like to perform read and write operations on this contract, paste its address.
+                If you’d like to perform read and write operations on this contract, paste it's address.
+            </InputWithLabel>
+
+            <InputWithLabel
+              required
+              label='Enter the network of the deployed contract'
+              placeholder='1'
+              id='network'
+              onChange={(e) => { return setNetworkId(e.target.value) }}
+            >
+                Give the chain id of the network where the contract is deployed.
             </InputWithLabel>
 
             <div className='form action'>
@@ -352,6 +383,7 @@ const Encoder = () => {
           restore={restore}
           restorationFailed={restorationFailed}
           restoreSpecificCallback={restoreSpecificCallback}
+          handleNew={handleNew}
         />
       </div>
 
@@ -360,6 +392,7 @@ const Encoder = () => {
           title={contractName}
           address={address}
           abi={JSON.parse(abi)}
+          networkId={networkId}
         />
       </Web3ReactProvider>
 

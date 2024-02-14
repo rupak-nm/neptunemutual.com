@@ -8,6 +8,7 @@ import { Button } from '../components/Button/Button'
 import { ConnectWallet } from '../components/ConnectWallet/ConnectWallet'
 import { Func } from './Func'
 import { useContractCall } from './hooks/useContractCall'
+import { DecodeData } from './FunctionType/decode'
 
 const filter = {
   encode_data: {
@@ -18,13 +19,16 @@ const filter = {
   },
   write_contract: {
     stateMutability: '^(?!(view|pure))'
+  },
+  decode_data: {
+    stateMutability: '[a-z]'
   }
 }
 
 const Result = (props) => {
   const [type, setType] = useState('encode_data')
 
-  const { abi, address, title } = props
+  const { abi, address, title, networkId } = props
 
   const { callMethod, isReady } = useContractCall({
     abi,
@@ -65,6 +69,15 @@ const Result = (props) => {
             </Button>
             <Button
               variant='secondary-gray'
+              data-active={type === 'decode_data'}
+              size='sm'
+              data-value='decode_data'
+              onClick={handleType}
+            >
+              Decode Data
+            </Button>
+            <Button
+              variant='secondary-gray'
               data-active={type === 'read_contract'}
               size='sm'
               data-value='read_contract'
@@ -84,8 +97,8 @@ const Result = (props) => {
           </div>
           <div className='right group'>
             {
-              type !== 'encode_data' && (
-                <ConnectWallet />
+              !['encode_data', 'decode_data'].includes(type) && (
+                <ConnectWallet networkId={networkId} />
               )
             }
           </div>
@@ -94,21 +107,25 @@ const Result = (props) => {
 
       <div className='result list container'>
         {
-          Array.isArray(abi) &&
-          abi.filter(func => (
-            func.type === 'function' && validateStateMutability(func.stateMutability)
-          )).map((func, i) => (
-            <Func
-              type={type}
-              key={`func-${i}`}
-              func={func}
-              count={i + 1}
-              call={callMethod}
-              isReady={isReady}
-              interface={ethersInterface}
-              abi={abi}
-            />
-          ))
+          type === 'decode_data'
+            ? <DecodeData encodeInterface={ethersInterface} />
+            : (
+                Array.isArray(abi) &&
+            abi.filter(func => (
+              func.type === 'function' && validateStateMutability(func.stateMutability)
+            )).map((func, i) => (
+              <Func
+                type={type}
+                key={`func-${i}`}
+                func={func}
+                count={i + 1}
+                call={callMethod}
+                isReady={isReady}
+                interface={ethersInterface}
+                abi={abi}
+              />
+            ))
+              )
         }
       </div>
     </div>

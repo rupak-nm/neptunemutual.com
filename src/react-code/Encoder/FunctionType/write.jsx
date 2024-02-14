@@ -1,22 +1,23 @@
 import './write.scss'
 
 import {
-  useId,
+  useCallback,
   useMemo,
   useState
 } from 'react'
 
 import { Button } from '../../components/Button/Button'
-import { InputWithLabel } from '../../components/InputWithLabel'
 import {
   checkEmptyInputs,
   checkInputErrors,
-  getWriteArguments
+  getWriteArguments,
+  updateObjectByArrayOfKeys
 } from '../helpers/web3-tools/abi-encoder'
 import { InputFields } from '../components/InputFields'
 import { useWeb3React } from '@web3-react/core'
 
-import { config } from '../../../data/protocol'
+import { JSONPopup } from '../../components/JSONPopup/JSONPopup'
+import { chains } from '../helpers/wallet/chains'
 
 const WriteContract = (props) => {
   const [inputData, setInputData] = useState({})
@@ -24,22 +25,27 @@ const WriteContract = (props) => {
   const [makingCall, setMakingCall] = useState(false)
   const [hash, setHash] = useState('')
 
+  const [parsedJSON, setParsedJSON] = useState(null)
+
   const { chainId } = useWeb3React()
-  const explorerUrl = useMemo(() => config[chainId || 1].explorer.replace('address/', '') + 'tx/', [chainId])
+  const explorerUrl = useMemo(() => {
+    const explorer = chains[chainId]?.explorer
+    return explorer ? explorer + '/tx/' : ''
+  }, [chainId])
 
   const { func, call, joiSchema, isReady, encodeInterface: iface } = props
-  const { inputs, name, stateMutability } = func
+  const { inputs, name } = func
 
-  async function handleWrite () {
+  const handleWrite = useCallback(async (_inputData) => {
     setError('')
     setHash('')
     setMakingCall(true)
 
     const methodName = name
-    const methodArgs = getWriteArguments(func, inputData)
+    const methodArgs = getWriteArguments(_inputData, inputs)
 
     const hasPayableStateMutability = func?.stateMutability === 'payable'
-    const value = inputData[name]
+    const value = _inputData[name]
 
     const { error: _error, hash: _hash } = await call(methodName, methodArgs, hasPayableStateMutability && { value }, iface)
 
@@ -48,15 +54,32 @@ const WriteContract = (props) => {
     if (_error) setError(_error)
 
     setMakingCall(false)
+  }, [call, name, func, iface, inputs])
+
+  const handleInputChange = (value = '', keyArray) => {
+    const updatedObject = updateObjectByArrayOfKeys(inputData, keyArray, value)
+    setInputData({ ...updatedObject })
+    if (error) setError('')
   }
 
-  const handleInputChange = (name, value = '') => {
-    setInputData(_prev => ({ ..._prev, [name]: value }))
-    if (error) setError('')
+  const handleJSON = (json) => {
+    handleWrite(json)
   }
 
   return (
     <div className='write container'>
+      {
+        inputs.length > 0 && (
+          <JSONPopup
+            handleJSON={handleJSON}
+            parsedJSON={parsedJSON}
+            setParsedJSON={setParsedJSON}
+            label={`Enter JSON for writing with ${name} function`}
+            btnProps={{ label: 'Write', disabled: !isReady || makingCall }}
+          />
+        )
+      }
+
       <InputFields
         func={func}
         inputData={inputData}
@@ -68,18 +91,17 @@ const WriteContract = (props) => {
         <Button
           variant='primary'
           size='sm'
-          onClick={handleWrite}
-          disabled={!isReady ||
-            checkEmptyInputs(inputs, inputData, name, stateMutability) ||
-            checkInputErrors(joiSchema, inputData) ||
-            makingCall
+          onClick={() => handleWrite(inputData)}
+          disabled={!isReady || makingCall
+            // checkEmptyInputs(inputs, inputData, name, stateMutability) ||
+            // checkInputErrors(joiSchema, inputData) ||
           }
         >
           {makingCall ? 'Transaction in progress...' : 'Write'}
         </Button>
 
         {
-          hash && (
+          (hash && explorerUrl) && (
             <Button
               type='anchor'
               size='sm'

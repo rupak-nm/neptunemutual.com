@@ -14,14 +14,20 @@ import { Icon } from '../Icon'
 import { Modal } from '../Modal/Modal'
 import { ConnectedDropdown } from './ConnectedDropdown'
 
-const ConnectWallet = () => {
+const ConnectWallet = ({ networkId }) => {
   const [popupOpen, setPopupOpen] = useState(false)
 
   const { login, logout } = useAuth()
 
   const [isConnecting, setIsConnecting] = useState(false)
 
+  const [error, setError] = useState('')
+
   const { active } = useWeb3React()
+
+  useEffect(() => {
+    logout()
+  }, [networkId])
 
   const handleWalletButtonClick = () => {
     logout()
@@ -34,14 +40,34 @@ const ConnectWallet = () => {
       setIsConnecting(false)
       setPopupOpen(false)
     }
-  }, [popupOpen, active, setPopupOpen])
 
-  const onConnect = (id) => {
+    setError('')
+  }, [popupOpen, active])
+
+  const onConnect = async (id) => {
     setIsConnecting(true)
+    setError('')
+
     const wallet = wallets.find((x) => x.id === id)
     const connectorName = wallet.connectorName
-    login(connectorName)
+    await login(connectorName, networkId, (switched) => {
+      if (!switched.success) setError(switched.message)
+      setIsConnecting(false)
+    })
   }
+
+  const ErrorComponent = ({ title, description }) => (
+    <div className='error'>
+      <div className='icon'>
+        <Icon variant='alert-circle' size='lg' />
+      </div>
+
+        <div className='content'>
+          <div className='title'>{title}</div>
+          <div className='description'>{description}</div>
+        </div>
+    </div>
+  )
 
   return active
     ? <ConnectedDropdown />
@@ -86,6 +112,13 @@ const ConnectWallet = () => {
               </Button>
             </a>
             ))}
+
+        {error && (
+          <ErrorComponent
+            title={'Error'}
+            description={error}
+          />
+        )}
       </Modal>
 
       )
