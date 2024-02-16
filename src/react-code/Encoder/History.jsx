@@ -76,7 +76,7 @@ const History = ({ contracts, setContracts, download, restore, restorationFailed
     setSelected(keysForDeletions)
   }
 
-  const toggleItemAddress = (key) => {
+  const toggleItemDetails = (key) => {
     const _contracts = [...contracts]
 
     _contracts[key].showDetails = !(_contracts[key]?.showDetails || false)
@@ -173,7 +173,7 @@ const History = ({ contracts, setContracts, download, restore, restorationFailed
                     {contract.contract_name || 'Untitled'}
                   </button>
 
-                  <button onClick={() => toggleItemAddress(i)}>
+                  <button className='toggle' onClick={() => toggleItemDetails(i)}>
                     <Icon variant={contract.showDetails ? 'chevron-up' : 'chevron-down'} size='sm' />
                   </button>
                 </div>
@@ -185,8 +185,7 @@ const History = ({ contracts, setContracts, download, restore, restorationFailed
                       {contract.network
                         ? (
                           <p>
-                            <span>Network: </span>{contract.network}
-                            ({chains[contract.network]?.name || 'Unknown Network'})
+                            <span>Network: </span>{chains[contract.network]?.name || 'Unknown Network'}{' '}({contract.network})
                           </p>
                           )
                         : <i>No network provided</i>}

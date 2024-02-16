@@ -151,7 +151,13 @@ const Encoder = () => {
       abis.push(data)
     }
 
-    setContracts(abis)
+    const _contracts = [...contracts]
+    if (updateIndex) _contracts[updateIndex] = { ..._contracts[updateIndex], ...data }
+    else {
+      _contracts.push(data)
+      setUpdateIndex(_contracts.length - 1)
+    }
+    setContracts(_contracts)
 
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(abis))
   }
@@ -278,6 +284,7 @@ const Encoder = () => {
     setAbi('[]')
     setNetworkId('')
     setUpdateIndex(null)
+    setIsSaveable(false)
 
     const form = formRef.current
     form.abi.value = ''
@@ -350,7 +357,9 @@ const Encoder = () => {
                 iconVariant='folder'
                 onClick={saveToStorage}
               >
-                Save to Local Storage
+                {
+                  updateIndex ? 'Update Contract' : 'Save to Local Storage'
+                }
               </Button>
               <Button
                 variant="secondary-gray"

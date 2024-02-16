@@ -134,6 +134,15 @@
           @include weights.regular;
           text-align: left;
         }
+
+        button.toggle {
+          padding: 2px 4px;
+          border-radius: 4px;
+
+          &:hover {
+            background-color: colors.$gray-300;
+          }
+        }
       }
   
       .item.details {
@@ -232,6 +241,12 @@
     
         .item {
           color: colors.$base-white;
+        }
+
+        button.toggle {
+          &:hover {
+            background-color: colors.$gray-700;
+          }
         }
       }
       
