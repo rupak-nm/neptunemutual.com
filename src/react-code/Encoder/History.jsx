@@ -27,7 +27,7 @@ const History = ({
   }, [contracts?.length])
 
   const restoreSpecificContract = (e) => {
-    const { key } = e.target.dataset
+    const { key } = e.currentTarget.dataset
     const { abi, contract_name: contractName, address, network } = contracts[key]
     restoreSpecificCallback({ abi, contractName, address, network, index: Number(key) })
     setCurrentSelected(Number(key))
@@ -181,7 +181,8 @@ const History = ({
                     data-key={i}
                     onClick={restoreSpecificContract}
                   >
-                    {contract.contract_name || 'Untitled'}
+                    <span>{contract.contract_name || 'Untitled'}</span>
+                    {contract.network && <span>[{contract.network}]</span>}
                   </button>
 
                   <button className='toggle' onClick={() => toggleItemDetails(i)}>

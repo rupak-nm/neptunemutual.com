@@ -120,8 +120,10 @@
         color: colors.$gray-900;
         cursor: pointer;
         list-style-type: none;
-        display: flex;
+        // display: flex;
+        display: grid;
         align-items: center;
+        grid-template-columns: auto 1fr auto;
         gap: 8px;
         @include styles.text-sm;
         @include weights.medium;
@@ -133,6 +135,18 @@
           color: colors.$gray-900;
           @include weights.regular;
           text-align: left;
+
+          display: flex;
+          justify-content: space-between;
+          gap: 8px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          
+          span:first-child {
+            /* word-break: break-all; */
+            white-space: nowrap;
+          }
         }
 
         button.toggle {

@@ -2,6 +2,7 @@ import './index.scss'
 
 import {
   useEffect,
+  useMemo,
   useRef,
   useState
 } from 'react'
@@ -80,10 +81,13 @@ const Encoder = () => {
 
   const [updateIndex, setUpdateIndex] = useState(null)
 
+  const consumedFromUrlRef = useRef(false)
+
   useEffect(() => {
     const storageData = window.localStorage.getItem(STORAGE_KEY)
     if (isJSON(storageData)) {
-      setContracts(JSON.parse(storageData) || [])
+      const parsed = JSON.parse(storageData) || []
+      setContracts(parsed)
     } else {
       window.localStorage.removeItem(STORAGE_KEY)
     }
@@ -229,6 +233,43 @@ const Encoder = () => {
     consumeAndFill()
   }, [])
 
+  useEffect(() => {
+    if (consumedFromUrlRef.current) return
+
+    if (!contracts.length) return
+
+    const form = formRef.current
+
+    const { contract_name: contractName, address, network, abi } = form
+
+    if (!abi.value) return
+
+    const alreadyExistsIndex = contracts.findIndex(c => {
+      return c.contract_name === contractName.value && c.address === address.value && c.network.toString() === network.value.toString() && c.abi === abi.value
+    })
+
+    if (alreadyExistsIndex !== -1) {
+      setUpdateIndex(alreadyExistsIndex)
+    }
+    consumedFromUrlRef.current = true
+  }, [contracts, address])
+
+  const isUpdateDisabled = useMemo(() => {
+    if (updateIndex === null || !contracts[updateIndex]) return false
+
+    const _contract = contracts[updateIndex]
+    if (!_contract) return false
+
+    if (
+      _contract.abi === abi &&
+      _contract.contract_name === contractName &&
+      _contract.address === address &&
+      _contract.network === networkId
+    ) {
+      return true
+    }
+  }, [updateIndex, contracts, abi, contractName, address, networkId])
+
   const consumeAndFill = async () => {
     const search = window.location.search
 
@@ -277,6 +318,9 @@ const Encoder = () => {
       } else {
         console.error('Query params not provided in valid format')
       }
+
+      // remove url params
+      window.history.pushState({}, document.title, window.location.pathname)
     }
   }
 
@@ -353,7 +397,7 @@ const Encoder = () => {
               <Button
                 variant="secondary-gray"
                 hierarchy='secondary'
-                disabled={!isSaveable}
+                disabled={!isSaveable || isUpdateDisabled}
                 size='sm'
                 iconLeading
                 iconVariant='folder'
