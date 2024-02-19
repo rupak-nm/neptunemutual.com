@@ -145,14 +145,14 @@ const Encoder = () => {
       network: form.network.value
     }
 
-    if (updateIndex) {
+    if (updateIndex !== null) {
       abis[updateIndex] = { ...abis[updateIndex], ...data }
     } else {
       abis.push(data)
     }
 
     const _contracts = [...contracts]
-    if (updateIndex) _contracts[updateIndex] = { ..._contracts[updateIndex], ...data }
+    if (updateIndex !== null) _contracts[updateIndex] = { ..._contracts[updateIndex], ...data }
     else {
       _contracts.push(data)
       setUpdateIndex(_contracts.length - 1)
@@ -239,6 +239,7 @@ const Encoder = () => {
         const name = params.get('name')
         const address = params.get('address')
         const abi = params.get('abi')
+        const network = params.get('network')
 
         if (!isAddress(address)) {
           return console.error('Address is invalid')
@@ -253,17 +254,18 @@ const Encoder = () => {
         }
 
         try {
-          document.querySelector('#address').value = address
-          document.querySelector('#contract_name').value = name
+          const form = formRef.current
+          form.address.value = address
+          form.contract_name.value = name
+
+          if (!isNaN(network)) form.network.value = network
 
           const response = await fetch(`/abis/${abi}.json`).then(res => res.text())
 
           if (isJSON(response) && isArray(response) && isValidAbi(response)) {
-            const abiTextField = document.querySelector('#abi')
+            form.abi.value = response
 
-            abiTextField.value = response
-
-            validateABI({ target: abiTextField })
+            validateABI({ target: { value: response } })
             setContractName(name)
             setAddress(address)
           } else {
@@ -358,7 +360,7 @@ const Encoder = () => {
                 onClick={saveToStorage}
               >
                 {
-                  updateIndex ? 'Update Contract' : 'Save to Local Storage'
+                  (updateIndex !== null) ? 'Update Contract' : 'Save to Local Storage'
                 }
               </Button>
               <Button
@@ -393,6 +395,8 @@ const Encoder = () => {
           restorationFailed={restorationFailed}
           restoreSpecificCallback={restoreSpecificCallback}
           handleNew={handleNew}
+          currentSelected={updateIndex}
+          setCurrentSelected={setUpdateIndex}
         />
       </div>
 

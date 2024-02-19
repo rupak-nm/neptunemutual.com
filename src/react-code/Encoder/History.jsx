@@ -9,10 +9,18 @@ import { createContractKey } from '../../../util/string'
 
 const STORAGE_KEY = 'abis'
 
-const History = ({ contracts, setContracts, download, restore, restorationFailed, restoreSpecificCallback, handleNew }) => {
+const History = ({
+  contracts,
+  setContracts,
+  download,
+  restore,
+  restorationFailed,
+  restoreSpecificCallback,
+  handleNew,
+  currentSelected,
+  setCurrentSelected
+}) => {
   const [selected, setSelected] = useState([])
-
-  const [currentSelected, setCurrentSelected] = useState(null)
 
   useEffect(() => {
     setSelected([])
@@ -21,7 +29,7 @@ const History = ({ contracts, setContracts, download, restore, restorationFailed
   const restoreSpecificContract = (e) => {
     const { key } = e.target.dataset
     const { abi, contract_name: contractName, address, network } = contracts[key]
-    restoreSpecificCallback({ abi, contractName, address, network, index: key })
+    restoreSpecificCallback({ abi, contractName, address, network, index: Number(key) })
     setCurrentSelected(Number(key))
   }
 
@@ -29,16 +37,19 @@ const History = ({ contracts, setContracts, download, restore, restorationFailed
     const { key } = e.target.dataset
     const cKeys = [...selected]
 
-    const index = cKeys.indexOf(key)
-    index === -1 ? cKeys.push(key) : cKeys.splice(index, 1)
+    const index = cKeys.indexOf(Number(key))
+    index === -1 ? cKeys.push(Number(key)) : cKeys.splice(index, 1)
 
     setSelected(cKeys)
   }
 
   const deleteContracts = () => {
-    const leftOverContracts = contracts.filter((_, i) => !selected.includes(`${i}`))
+    const leftOverContracts = contracts.filter((_, i) => !selected.includes(i))
     setContracts(leftOverContracts)
     setSelected([])
+
+    if (selected.includes(currentSelected)) setCurrentSelected(null)
+
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(leftOverContracts))
   }
 
@@ -67,7 +78,7 @@ const History = ({ contracts, setContracts, download, restore, restorationFailed
 
     contracts.map((contract, i) => {
       if (e.target.checked) {
-        keysForDeletions.push(`${i}`)
+        keysForDeletions.push(i)
       }
 
       return { ...contract, isSelected: e.target.checked }
@@ -160,7 +171,7 @@ const History = ({ contracts, setContracts, download, restore, restorationFailed
               <div className={`item wrapper ${currentSelected === i ? 'selected' : ''}`}>
                 <div className='item title'>
                   <CustomCheckbox
-                    checked={selected.includes(`${i}`)}
+                    checked={selected.includes(i)}
                     onChange={handleSelect}
                     data-key={i}
                   />
