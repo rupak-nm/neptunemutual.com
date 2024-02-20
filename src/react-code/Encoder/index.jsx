@@ -80,8 +80,9 @@ const Encoder = () => {
   const [networkId, setNetworkId] = useState('')
 
   const [updateIndex, setUpdateIndex] = useState(null)
+  const [selected, setSelected] = useState([])
 
-  const consumedFromUrlRef = useRef(false)
+  const consumeFromUrlRef = useRef(false)
 
   useEffect(() => {
     const storageData = window.localStorage.getItem(STORAGE_KEY)
@@ -101,8 +102,10 @@ const Encoder = () => {
     }
   }, [contractNameExist])
 
-  const restoreSpecificCallback = (data) => {
-    const { abi, contractName, address, network, index } = data
+  const restoreSpecificCallback = (idx) => {
+    const data = contracts[idx]
+    const { abi, contract_name: contractName, address, network, index } = data
+
     const form = formRef.current
     form.abi.value = abi || ''
     form.contract_name.value = contractName || ''
@@ -152,14 +155,14 @@ const Encoder = () => {
     if (updateIndex !== null) {
       abis[updateIndex] = { ...abis[updateIndex], ...data }
     } else {
-      abis.push(data)
+      abis.unshift(data)
     }
 
     const _contracts = [...contracts]
     if (updateIndex !== null) _contracts[updateIndex] = { ..._contracts[updateIndex], ...data }
     else {
-      _contracts.push(data)
-      setUpdateIndex(_contracts.length - 1)
+      _contracts.unshift(data)
+      setUpdateIndex(0)
     }
     setContracts(_contracts)
 
@@ -234,7 +237,7 @@ const Encoder = () => {
   }, [])
 
   useEffect(() => {
-    if (consumedFromUrlRef.current) return
+    if (!consumeFromUrlRef.current) return
 
     if (!contracts.length) return
 
@@ -245,13 +248,14 @@ const Encoder = () => {
     if (!abi.value) return
 
     const alreadyExistsIndex = contracts.findIndex(c => {
-      return c.contract_name === contractName.value && c.address === address.value && c.network.toString() === network.value.toString() && c.abi === abi.value
+      return c.contract_name === contractName.value && c.address === address.value && c.network?.toString() === network.value?.toString() && c?.abi === abi.value
     })
 
     if (alreadyExistsIndex !== -1) {
       setUpdateIndex(alreadyExistsIndex)
     }
-    consumedFromUrlRef.current = true
+
+    consumeFromUrlRef.current = false
   }, [contracts, address])
 
   const isUpdateDisabled = useMemo(() => {
@@ -277,6 +281,8 @@ const Encoder = () => {
       const params = new URLSearchParams(search.slice(1))
 
       if (params.has('name') && params.has('address') && params.has('abi')) {
+        consumeFromUrlRef.current = true
+
         const name = params.get('name')
         const address = params.get('address')
         const abi = params.get('abi')
@@ -299,7 +305,10 @@ const Encoder = () => {
           form.address.value = address
           form.contract_name.value = name
 
-          if (!isNaN(network)) form.network.value = network
+          if (!isNaN(network)) {
+            form.network.value = network
+            setNetworkId(network)
+          }
 
           const response = await fetch(`/abis/${abi}.json`).then(res => res.text())
 
@@ -309,6 +318,8 @@ const Encoder = () => {
             validateABI({ target: { value: response } })
             setContractName(name)
             setAddress(address)
+
+            console.log(contracts)
           } else {
             console.error('Unable to load ABI from file')
           }
@@ -331,6 +342,7 @@ const Encoder = () => {
     setNetworkId('')
     setUpdateIndex(null)
     setIsSaveable(false)
+    setRestorationFailed(false)
 
     const form = formRef.current
     form.abi.value = ''
@@ -441,6 +453,8 @@ const Encoder = () => {
           handleNew={handleNew}
           currentSelected={updateIndex}
           setCurrentSelected={setUpdateIndex}
+          selected={selected}
+          setSelected={setSelected}
         />
       </div>
 

@@ -6,6 +6,7 @@ import { Icon } from '../components/Icon'
 import { chains } from './helpers/wallet/chains'
 import { CustomCheckbox } from '../components/Checkbox/Checkbox'
 import { createContractKey } from '../../../util/string'
+import { set } from 'idb-keyval'
 
 const STORAGE_KEY = 'abis'
 
@@ -18,9 +19,11 @@ const History = ({
   restoreSpecificCallback,
   handleNew,
   currentSelected,
-  setCurrentSelected
+  setCurrentSelected,
+  selected,
+  setSelected
 }) => {
-  const [selected, setSelected] = useState([])
+  const [showDropdown, setShowDropdown] = useState(false)
 
   useEffect(() => {
     setSelected([])
@@ -28,12 +31,19 @@ const History = ({
 
   const restoreSpecificContract = (e) => {
     const { key } = e.currentTarget.dataset
-    const { abi, contract_name: contractName, address, network } = contracts[key]
-    restoreSpecificCallback({ abi, contractName, address, network, index: Number(key) })
+    restoreSpecificCallback(key)
+
+    if (currentSelected === Number(key)) {
+      setCurrentSelected(null)
+      handleNew()
+      return
+    }
+
     setCurrentSelected(Number(key))
   }
 
   const handleSelect = (e) => {
+    e.stopPropagation()
     const { key } = e.target.dataset
     const cKeys = [...selected]
 
@@ -44,33 +54,36 @@ const History = ({
   }
 
   const deleteContracts = () => {
-    const leftOverContracts = contracts.filter((_, i) => !selected.includes(i))
+    const _selected = [...selected]
+    const leftOverContracts = contracts.filter((_, i) => !_selected.includes(i))
     setContracts(leftOverContracts)
-    setSelected([])
 
-    if (selected.includes(currentSelected)) setCurrentSelected(null)
+    setCurrentSelected(null)
+    handleNew()
 
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(leftOverContracts))
   }
 
   const duplicateContracts = () => {
-    const newContracts = [...contracts]
+    const duplicates = []
 
     selected.forEach((key) => {
-      const contract = newContracts[key]
-      const duplicateContract = { ...contract, contract_name: `${contract.contract_name} - Copy` }
+      const contract = { ...contracts[key] }
+      const duplicateContract = { ...contract, contract_name: `${contract.contract_name} - Copy`, showDetails: false }
       const duplicateKey = createContractKey(
         duplicateContract.contract_name,
         duplicateContract.address,
         duplicateContract.network
       )
 
-      newContracts.push({ ...duplicateContract, key: duplicateKey })
+      duplicates.unshift({ ...duplicateContract, key: duplicateKey })
     })
 
-    setContracts(newContracts)
-    setSelected([])
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(newContracts))
+    setContracts([...duplicates, ...contracts])
+    setCurrentSelected(null)
+    handleNew()
+
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify([...duplicates, ...contracts]))
   }
 
   const handleSelectAll = (e) => {
@@ -94,29 +107,63 @@ const History = ({
     setContracts(_contracts)
   }
 
+  useEffect(() => {
+    // close dropdown when clicked outside of div.cta
+    const closeDropdown = (e) => {
+      if (!e.target.closest('.cta')) {
+        setShowDropdown(false)
+      }
+    }
+
+    document.addEventListener('click', closeDropdown)
+
+    return () => {
+      document.removeEventListener('click', closeDropdown)
+    }
+  }, [])
+
+  const CtaDropdown = () => {
+    return (
+      <div className='cta'>
+        <button className='dots trigger' onClick={() => setShowDropdown(!showDropdown)}>
+          <Icon variant='dots-vertical' />
+        </button>
+
+        {
+          showDropdown && (
+            <div className='dropdown'>
+              <button onClick={download}>
+                <span>Download Backup</span>
+                <Icon variant='download-02' />
+              </button>
+
+              <button onClick={restore}>
+                <span>Restore</span>
+                <Icon variant='clock-rewind' />
+              </button>
+            </div>
+          )
+        }
+      </div>
+    )
+  }
+
   return (
     <div className='history container'>
       <div className='title'>
         <div className='history title'>Previous Contracts</div>
-        <div className='cta'>
           <button
-            variant='secondary-gray'
-            disabled={contracts.length === 0}
-            size='sm'
-            onClick={download}
-            data-tooltip='Download all contracts'
+            className='new'
+            onClick={() => {
+              setCurrentSelected(null)
+              setSelected([])
+              handleNew()
+            }}
+            data-tooltip='Add new contract'
+            data-flow="left"
           >
-            <Icon variant='folder-download' size='md' />
+            <Icon variant='plus' size='md' />
           </button>
-          <button
-            variant='secondary-gray'
-            size='sm'
-            onClick={restore}
-            data-tooltip='Restore contracts from file'
-          >
-            <Icon variant='refresh-ccw-01' size='md' />
-          </button>
-        </div>
       </div>
 
       <div className='action section'>
@@ -129,39 +176,32 @@ const History = ({
                 data-variant='minus'
               />
 
-              {selected.length > 0 && (
-                <>
-                  <button
-                    className="duplicate btn"
-                    onClick={duplicateContracts}
-                    data-tooltip='Duplicate selected contracts'
-                  >
-                    <Icon variant='file-plus' size='md' />
-                  </button>
+              <div className='buttons'>
+                {selected.length > 0 && (
+                  <>
+                    <button
+                      className="duplicate btn"
+                      onClick={duplicateContracts}
+                      data-tooltip='Duplicate selected contracts'
+                    >
+                      <Icon variant='file-plus' />
+                    </button>
 
-                  <button
-                    className="delete btn"
-                    onClick={deleteContracts}
-                    data-tooltip='Delete selected contracts'
-                  >
-                    <Icon variant='trash-01' size='md' />
-                  </button>
-                </>
-              )}
+                    <button
+                      className="delete btn"
+                      onClick={deleteContracts}
+                      data-tooltip='Delete selected contracts'
+                    >
+                      <Icon variant='trash-01' />
+                    </button>
+                  </>
+                )}
+
+                <CtaDropdown />
+              </div>
             </>
           )
         }
-
-        <button
-          className='new'
-          onClick={() => {
-            setCurrentSelected(null)
-            handleNew()
-          }}
-          data-tooltip='Add new contract'
-        >
-          <Icon variant='plus' size='md' />
-        </button>
       </div>
 
       <div className='history list'>
@@ -182,7 +222,7 @@ const History = ({
                     onClick={restoreSpecificContract}
                   >
                     <span>{contract.contract_name || 'Untitled'}</span>
-                    {contract.network && <span>[{contract.network}]</span>}
+                    {/* {contract.network && <span>[{contract.network}]</span>} */}
                   </button>
 
                   <button className='toggle' onClick={() => toggleItemDetails(i)}>
