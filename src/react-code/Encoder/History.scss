@@ -78,38 +78,49 @@
     div.buttons {
       display: flex;
       gap: 4px;
+    }
 
-      div.cta {
-        position: relative;
+    div.cta,
+    div.select.all {
+      position: relative;
 
-        .dropdown {
-          position: absolute;
-          top: calc(100% + 4px);
-          left: 0;
-          background-color: colors.$base-white;
-          border: 1px solid colors.$gray-200;
-          border-radius: 8px;
-          padding: 4px;
+      .dropdown {
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        background-color: colors.$base-white;
+        border: 1px solid colors.$gray-200;
+        border-radius: 8px;
+        padding: 4px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        width: max-content;
+        box-shadow: shadows.$lg;
+        z-index: 9;
+
+        button {
+          width: 217px;
+          padding: 4px 10px 4px 8px;
+          border-radius: 6px;
           display: flex;
-          flex-direction: column;
-          gap: 4px;
-          width: max-content;
-          box-shadow: shadows.$lg;
-          z-index: 9;
-
-          button {
-            width: 217px;
-            padding: 4px 10px 4px 8px;
-            border-radius: 6px;
-            display: flex;
-            justify-content: space-between;
-          }
-
-          @media (min-width: 1024px) {
-            left: auto;
-            right: 0;
-          }
+          justify-content: space-between;
         }
+
+        @media (min-width: 1024px) {
+          left: auto;
+          right: 0;
+        }
+      }
+    }
+
+    div.select.all {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+
+      .dropdown button {
+        width: 100%;
       }
     }
   }
@@ -133,6 +144,7 @@
     flex-direction: column;
 
     .item.wrapper {
+      cursor: auto;
       &:hover {
         background-color: colors.$gray-50;
       }
@@ -147,10 +159,10 @@
         color: colors.$gray-900;
         cursor: pointer;
         list-style-type: none;
-        // display: flex;
-        display: grid;
+        display: flex;
+        // display: grid;
         align-items: center;
-        grid-template-columns: auto 1fr auto;
+        // grid-template-columns: auto 1fr auto;
         gap: 8px;
         @include styles.text-sm;
         @include weights.medium;
@@ -266,12 +278,11 @@
       }
     }
 
-    div.buttons {
-      div.cta {
-        .dropdown {
-          background-color: colors.$gray-800;
-          border: 1px solid colors.$gray-800;
-        }
+    div.cta,
+    div.select.all {
+      .dropdown {
+        background-color: colors.$gray-800;
+        border: 1px solid colors.$gray-800;
       }
     }
   }
