@@ -122,4 +122,12 @@ const getPaginatedByTags = async (api: Api, pageSize: number = 12): Promise<Arra
   return result
 }
 
-export { getApi, getContracts, getEnumerable, getPaginated, getPaginatedByTags }
+const getCommunityBlogs = async (api: Api.CommunityBlogs): Promise<CommunityBlogItem[]> => {
+  const file = path.join(config.root, `${api}.json`)
+  const contents = await io.readFile(file)
+
+  const result = JSON.parse(contents)
+  return result
+}
+
+export { getApi, getContracts, getEnumerable, getPaginated, getPaginatedByTags, getCommunityBlogs }

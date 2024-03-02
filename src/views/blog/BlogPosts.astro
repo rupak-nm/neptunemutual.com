@@ -7,17 +7,20 @@ import { Api } from "../../../types/enum";
 
 import { slugify } from "../../../util/slug";
 import InputWithIcon from "../../elements/InputWithIcon.astro";
-import Icon from "../../elements/Icon.astro";
+
 import SearchModal from "../../components/SearchModal.astro";
+import WeeklyReports from "./WeeklyReports.astro";
 
 interface Props {
   articles: Article[];
   totalPages?: number;
   currentPage?: number;
   tag?: Tag;
+  weeklyReports: CommunityBlogItem[];
 }
 
-const { articles, totalPages, currentPage, tag } = Astro.props;
+const { articles, totalPages, currentPage, tag, weeklyReports }: Props =
+  Astro.props;
 
 const heading = tag?.name || "All Stories";
 const slug = tag?.slug ?? slugify(heading);
@@ -62,6 +65,8 @@ const slug = tag?.slug ?? slugify(heading);
       currentPage={currentPage}
       totalPages={totalPages}
     />
+
+    <WeeklyReports data={weeklyReports} />
   </div>
 </div>
 

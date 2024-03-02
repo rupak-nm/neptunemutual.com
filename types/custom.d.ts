@@ -236,3 +236,10 @@ interface TableRenderConfig<T> {
   isDescription?: boolean
   isLink?: boolean
 }
+
+interface CommunityBlogItem {
+  title: string
+  slug: string
+  image_url: string
+  created_at: string
+}

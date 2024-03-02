@@ -9,6 +9,7 @@ import { Api } from "../../../types/enum";
 
 const POSTS_PER_PAGE = 9;
 const paginated = await api.getPaginated<Article>(Api.Blog, POSTS_PER_PAGE);
+const communityBlogs = await api.getCommunityBlogs(Api.CommunityBlogs);
 
 const { totalPages, pages } = paginated;
 ---
@@ -24,7 +25,12 @@ const { totalPages, pages } = paginated;
     }}
   />
   <style slot="header" is:inline set:html={styles}></style>
-  <Blog articles={pages[1].slice(3)} currentPage={1} totalPages={totalPages} />
+  <Blog
+    articles={pages[1].slice(3)}
+    currentPage={1}
+    totalPages={totalPages}
+    communityBlogs={communityBlogs}
+  />
 
   <Fragment slot="footer">
     <script src="../../scripts/blog/index.js"></script>

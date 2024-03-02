@@ -11,4 +11,4 @@ const isExpired = (unixTimestamp: string): boolean => {
   return new Date().getTime() > new Date(parseInt(unixTimestamp) * 1000).getTime()
 }
 
-export { getMonthName, isExpired }
+export { getMonthName, isExpired, months }
