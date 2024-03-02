@@ -243,3 +243,14 @@ interface CommunityBlogItem {
   image_url: string
   created_at: string
 }
+
+interface CommunityAPIResponse {
+  topic_list: {
+    topics: Array<{
+      title: string
+      slug: string
+      image_url: string
+      created_at: string
+    }>
+  }
+}

@@ -1,4 +1,4 @@
-import { months } from "./date"
+import { months } from './date'
 
 const convertSecondsToWords = (units: number): { formatted: string, text: string } => {
   const hours = Math.floor(units / 60 / 60)
@@ -53,7 +53,6 @@ const formatBlogDate = (dateString: string): string => { // 24 Nov 2022
 
   return `${day} ${month} ${year}`
 }
-
 
 export {
   convertSecondsToWords,

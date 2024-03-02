@@ -83,6 +83,15 @@
       border-top: 1px solid colors.$gray-200;
     }
   }
+
+  @media (max-width: 767px) {
+    .reports.grid {
+      .group {
+        grid-template-columns: 1fr;
+      }
+    }
+  
+  }
 }
 
 .dark .weekly.reports.section {
