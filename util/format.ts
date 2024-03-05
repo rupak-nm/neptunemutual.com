@@ -49,9 +49,11 @@ const formatBlogDate = (dateString: string): string => { // 24 Nov 2022
   const d = new Date(dateString)
   const day = d.getDate()
   const month = months[d.getMonth()]
+  // capitalize first letter
+  const capitalizedMonth = month.charAt(0).toUpperCase() + month.slice(1)
   const year = d.getFullYear()
 
-  return `${day} ${month} ${year}`
+  return `${day} ${capitalizedMonth} ${year}`
 }
 
 export {
