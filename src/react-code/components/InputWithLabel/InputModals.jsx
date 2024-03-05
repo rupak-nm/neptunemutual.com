@@ -7,6 +7,7 @@ const options = [
   { label: '10³', value: '3' },
   { label: 'Custom', value: 'custom' }
 ]
+
 const AddZeroesModal = ({ show, handleClose, handleAddZeroes }) => {
   const [selectedOption, setSelectedOption] = useState(options[0].value)
   const [value, setValue] = useState(options[0].value)
@@ -23,6 +24,7 @@ const AddZeroesModal = ({ show, handleClose, handleAddZeroes }) => {
   const handleSwitch = (e) => {
     setSelectedOption(e.target.value)
     const selectedOption = options.find(option => option.value === e.target.value)
+
     if (selectedOption.value !== 'custom') {
       setValue(selectedOption.value)
     }
@@ -37,7 +39,7 @@ const AddZeroesModal = ({ show, handleClose, handleAddZeroes }) => {
       className={'add-zeroes-modal'}
       cross
     >
-      <form className='content' onSubmit={(e) => e.preventDefault()}>
+      <form className='content' onSubmit={e => e.preventDefault()}>
         <select
           className='input container'
           value={selectedOption.value}
@@ -58,7 +60,7 @@ const AddZeroesModal = ({ show, handleClose, handleAddZeroes }) => {
               min={0}
               autoFocus
               onChange={
-                (e) => setValue(e.target.value)
+                e => setValue(e.target.value)
               }
               value={value}
             />
@@ -89,16 +91,16 @@ const StringToBytesModal = ({ show, handleClose, handleStringToBytes }) => {
       visible={show}
       setVisible={handleClose}
       title={'String to Bytes'}
-      description={'Convert string to bytes'}
+      description={'Convert String to Byte'}
       className={'string-to-bytes-modal'}
       cross
     >
-      <form className='content' onSubmit={(e) => e.preventDefault()}>
+      <form className='content' onSubmit={e => e.preventDefault()}>
         <input
           className='input container'
           type='text'
           onChange={
-            (e) => setValue(e.target.value)
+            e => setValue(e.target.value)
           }
           value={value}
           autoFocus

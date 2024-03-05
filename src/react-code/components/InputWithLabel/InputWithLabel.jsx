@@ -1,6 +1,5 @@
 import { forwardRef, useEffect, useState, useRef } from 'react'
 import { Icon } from '../Icon'
-import { Modal } from '../Modal/Modal'
 import { AddZeroesModal, StringToBytesModal } from './InputModals'
 import { transformWeb3Types } from '../../../scripts/web3-tools/converter/transform'
 
@@ -8,8 +7,7 @@ import './InputWithLabel.scss'
 
 const InputWithLabel = forwardRef(
   (
-    { children, placeholder, label, error, errorIcon, inputType, ...props },
-    ref
+    { children, placeholder, label, error, errorIcon, inputType, ...props }
   ) => {
     const [modalOpen, setModalOpen] = useState(false)
 
@@ -24,13 +22,16 @@ const InputWithLabel = forwardRef(
     }, [])
 
     const handleUpdateInput = (value) => {
-      if (typeof props.onChange !== 'function') return
+      if (typeof props.onChange !== 'function') {
+        return
+      }
 
       let newValue = inputRef.current.value
 
       if (inputType === 'uint256') {
         newValue = `${inputRef.current.value || 1}${'0'.repeat(value)}`
       }
+
       if (inputType === 'bytes32') {
         newValue = transformWeb3Types(value, 'string', 'bytes32', true)
       }
@@ -49,7 +50,7 @@ const InputWithLabel = forwardRef(
               <button
                 className='helper'
                 onClick={() => setModalOpen(true)}
-                data-tooltip={inputType === 'uint256' ? 'Add Zeroes' : 'Convert String to Bytes'}
+                data-tooltip={inputType === 'uint256' ? 'Add Zeroes' : 'Convert String to Byte'}
               >
                 {inputType === 'uint256' && <Icon variant={'plus'} size={'md'} /> }
                 {inputType === 'bytes32' && <Icon variant={'switch-horizontal-01'} size={'md'} /> }
@@ -79,7 +80,7 @@ const InputWithLabel = forwardRef(
             <AddZeroesModal
               show={modalOpen}
               handleClose={() => setModalOpen(false)}
-              handleAddZeroes={(value) => handleUpdateInput(value)}
+              handleAddZeroes={value => handleUpdateInput(value)}
             />
           )
         }
@@ -89,7 +90,7 @@ const InputWithLabel = forwardRef(
             <StringToBytesModal
               show={modalOpen}
               handleClose={() => setModalOpen(false)}
-              handleStringToBytes={(value) => handleUpdateInput(value)}
+              handleStringToBytes={value => handleUpdateInput(value)}
             />
           )
         }
