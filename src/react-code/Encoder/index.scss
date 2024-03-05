@@ -109,4 +109,10 @@
       }
     }
   }
+
+  p.helper.text {
+    color: colors.$gray-500;
+    @include styles.text-sm;
+    line-height: 1.5;
+  }
 }

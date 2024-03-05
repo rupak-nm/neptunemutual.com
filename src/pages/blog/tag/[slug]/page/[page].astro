@@ -40,6 +40,7 @@ export async function getStaticPaths() {
 // All paginated data is passed on the "page" prop
 
 const { tag, data, currentPage, totalPages } = Astro.props;
+const communityBlogs = await api.getCommunityBlogs(Api.CommunityBlogs);
 ---
 
 <BaseLayout>
@@ -60,6 +61,7 @@ const { tag, data, currentPage, totalPages } = Astro.props;
     articles={data}
     currentPage={currentPage}
     totalPages={totalPages}
+    communityBlogs={communityBlogs}
   />
 
   <Fragment slot="footer">

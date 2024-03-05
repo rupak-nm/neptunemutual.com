@@ -1,0 +1,70 @@
+---
+import Icon from "../../elements/Icon.astro";
+import { formatBlogDate } from "../../../util/format";
+
+interface Props {
+  data: CommunityBlogItem[];
+}
+
+const { data }: Props = Astro.props;
+
+const grouped = [
+  [0, 1],
+  [2, 3],
+  [4, 5],
+]
+  .map((group) => group.map((index) => data[index]).filter(Boolean))
+  .filter((group) => group.length > 0);
+---
+
+<div class="weekly reports section">
+  <div class="text and cta">
+    <div class="text">
+      <h2 id="community-weekly-reports">Community: Weekly Reports</h2>
+    </div>
+
+    <a
+      href="https://community.neptunemutual.com/c/general/4"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      View All Reports
+      <Icon variant="link-external-01" size="lg" />
+    </a>
+  </div>
+
+  <div class="reports grid">
+    {
+      grouped.map((group, i) => (
+        <>
+          <div class="group">
+            {group.map(({ title, image_url, slug, created_at }) => {
+              return (
+                <div class="single report">
+                  <a
+                    href={`https://community.neptunemutual.com/t/${slug}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={image_url}
+                      alt={`Image for blog titled: ${title}`}
+                    />
+
+                    <div class="right">
+                      <p class="date">{formatBlogDate(created_at)}</p>
+                      <h3>{title}</h3>
+                      {/*<p class="description"></p> */}
+                    </div>
+                  </a>
+                </div>
+              );
+            })}
+          </div>
+
+          {i < grouped.length - 1 && <hr />}
+        </>
+      ))
+    }
+  </div>
+</div>

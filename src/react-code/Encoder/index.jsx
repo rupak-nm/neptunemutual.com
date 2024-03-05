@@ -86,6 +86,7 @@ const Encoder = () => {
 
   useEffect(() => {
     const storageData = window.localStorage.getItem(STORAGE_KEY)
+
     if (isJSON(storageData)) {
       const parsed = JSON.parse(storageData) || []
       setContracts(parsed.map(c => ({ ...c, key: generateRandomString(6) })))
@@ -102,92 +103,21 @@ const Encoder = () => {
     }
   }, [contractNameExist])
 
-  const restoreSpecificCallback = (key) => {
-    const data = contracts.find(c => c.key === key)
-    if (!data) return
+  const validateABI = (e) => {
+    const abi = e.target.value
 
-    const { abi, contract_name: contractName, address, network } = data
-
-    const form = formRef.current
-    form.abi.value = abi || ''
-    form.contract_name.value = contractName || ''
-    form.address.value = address || ''
-    form.network.value = network || ''
-
-    setContractName(contractName)
-    setAddress(address)
-    setNetworkId(network)
-    setAbi(abi)
-    setIsSaveable(true)
-    validateABI({ target: { value: abi } })
-  }
-
-  const saveToStorage = (e) => {
-    e.preventDefault()
-    let abis = []
-    const form = formRef.current
-
-    const isAbiJson = isJSON(form.abi.value)
-
-    if (!isAbiJson) {
-      return true
+    if (abi === '') {
+      return setAbiInvalidFormat(false)
     }
 
-    const storageData = window.localStorage.getItem(STORAGE_KEY)
+    const isValidAbiString = isJSON(abi) && isArray(abi) && isValidAbi(abi)
 
-    if (isJSON(storageData)) {
-      abis = JSON.parse(storageData) || []
+    if (isValidAbiString && typeof JSON.parse(abi) === 'object') {
+      setAbi(abi)
     }
 
-    const newContractKey = currentKey || generateRandomString(6)
-
-    const data = {
-      key: newContractKey,
-      abi: form.abi.value,
-      contract_name: form.contract_name.value,
-      address: form.address.value,
-      network: form.network.value
-    }
-
-    const _contracts = [...contracts]
-    if (currentKey) {
-      const index = contracts.findIndex(c => c.key === currentKey)
-      _contracts[index] = { ..._contracts[index], ...data }
-
-      abis[index] = { ...abis[index], ...data }
-    } else {
-      _contracts.unshift(data)
-
-      abis.unshift(data)
-    }
-
-    setCurrentKey(newContractKey)
-    setContracts(_contracts)
-
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(abis))
-  }
-
-  const download = (e) => {
-    e.preventDefault()
-
-    const file = new window.Blob([JSON.stringify(contracts)], { type: 'text/json;charset=utf-8' })
-
-    const element = document.createElement('a')
-    element.href = URL.createObjectURL(file)
-    element.download = 'contracts.json'
-    document.body.appendChild(element)
-    element.click()
-    element.remove()
-  }
-
-  const restore = (e) => {
-    e.preventDefault()
-    const element = document.createElement('input')
-    element.type = 'file'
-    element.onchange = processFile
-    document.body.appendChild(element)
-    element.click()
-    element.remove()
+    setIsSaveable(isValidAbiString)
+    setAbiInvalidFormat(!isValidAbiString)
   }
 
   const processFile = (e) => {
@@ -197,6 +127,7 @@ const Encoder = () => {
 
     const file = e.target.files[0]
     const reader = new window.FileReader()
+
     reader.onload = (evt) => {
       try {
         const newContracts = JSON.parse(evt.target.result)
@@ -212,75 +143,6 @@ const Encoder = () => {
 
     reader.readAsText(file)
   }
-
-  const validateABI = (e) => {
-    const abi = e.target.value
-
-    if (abi === '') {
-      return setAbiInvalidFormat(false)
-    }
-
-    const isValidAbiString = isJSON(abi) && isArray(abi) && isValidAbi(abi)
-
-    if (isValidAbiString && typeof JSON.parse(abi) === 'object') {
-      setAbi(abi)
-    }
-    setIsSaveable(isValidAbiString)
-    setAbiInvalidFormat(!isValidAbiString)
-  }
-
-  // Consume and auto-fill values when available in URL
-  useEffect(() => {
-    consumeAndFill()
-  }, [])
-
-  // restore when currentKey is changed
-  useEffect(() => {
-    if (!currentKey) return
-
-    restoreSpecificCallback(currentKey)
-  }, [currentKey, contracts])
-
-  useEffect(() => {
-    if (!consumeFromUrlRef.current) return
-
-    if (!contracts.length) return
-
-    const form = formRef.current
-
-    const { contract_name: contractName, address, network, abi } = form
-
-    if (!abi.value) return
-
-    const alreadyExists = contracts.find(c => {
-      return c.contract_name === contractName.value && c.address === address.value && c.network?.toString() === network.value?.toString() && c?.abi === abi.value
-    })
-
-    if (alreadyExists) {
-      setCurrentKey(alreadyExists.key)
-      const element = document.querySelector(
-        `.history.container .history.list > .item.wrapper[data-key="${alreadyExists.key}"]`
-      )
-
-      element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
-    }
-
-    consumeFromUrlRef.current = false
-  }, [contracts, address])
-
-  const isUpdateDisabled = useMemo(() => {
-    const _contract = contracts.find(c => c.key === currentKey)
-    if (!_contract) return false
-
-    if (
-      _contract.abi === abi &&
-      _contract.contract_name === contractName &&
-      _contract.address === address &&
-      _contract.network === networkId
-    ) {
-      return true
-    }
-  }, [currentKey, JSON.stringify(contracts), abi, contractName, address, networkId])
 
   const consumeAndFill = async () => {
     const search = window.location.search
@@ -341,6 +203,162 @@ const Encoder = () => {
     }
   }
 
+  const restoreSpecificCallback = (key) => {
+    const data = contracts.find(c => c.key === key)
+
+    if (!data) {
+      return
+    }
+
+    const { abi, contract_name: contractName, address, network } = data
+
+    const form = formRef.current
+    form.abi.value = abi || ''
+    form.contract_name.value = contractName || ''
+    form.address.value = address || ''
+    form.network.value = network || ''
+
+    setContractName(contractName)
+    setAddress(address)
+    setNetworkId(network)
+    setAbi(abi)
+    setIsSaveable(true)
+    validateABI({ target: { value: abi } })
+  }
+
+  const saveToStorage = (e) => {
+    e.preventDefault()
+    let abis = []
+    const form = formRef.current
+
+    const isAbiJson = isJSON(form.abi.value)
+
+    if (!isAbiJson) {
+      return true
+    }
+
+    const storageData = window.localStorage.getItem(STORAGE_KEY)
+
+    if (isJSON(storageData)) {
+      abis = JSON.parse(storageData) || []
+    }
+
+    const newContractKey = currentKey || generateRandomString(6)
+
+    const data = {
+      key: newContractKey,
+      abi: form.abi.value,
+      contract_name: form.contract_name.value,
+      address: form.address.value,
+      network: form.network.value
+    }
+
+    const _contracts = [...contracts]
+
+    if (currentKey) {
+      const index = contracts.findIndex(c => c.key === currentKey)
+      _contracts[index] = { ..._contracts[index], ...data }
+
+      abis[index] = { ...abis[index], ...data }
+    } else {
+      _contracts.unshift(data)
+
+      abis.unshift(data)
+    }
+
+    setCurrentKey(newContractKey)
+    setContracts(_contracts)
+
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(abis))
+  }
+
+  const download = (e) => {
+    e.preventDefault()
+
+    const file = new window.Blob([JSON.stringify(contracts)], { type: 'text/json;charset=utf-8' })
+
+    const element = document.createElement('a')
+    element.href = URL.createObjectURL(file)
+    element.download = 'contracts.json'
+    document.body.appendChild(element)
+    element.click()
+    element.remove()
+  }
+
+  const restore = (e) => {
+    e.preventDefault()
+    const element = document.createElement('input')
+    element.type = 'file'
+    element.onchange = processFile
+    document.body.appendChild(element)
+    element.click()
+    element.remove()
+  }
+
+  // Consume and auto-fill values when available in URL
+  useEffect(() => {
+    consumeAndFill()
+  }, [])
+
+  // restore when currentKey is changed
+  useEffect(() => {
+    if (!currentKey) {
+      return
+    }
+
+    restoreSpecificCallback(currentKey)
+  }, [currentKey, contracts])
+
+  useEffect(() => {
+    if (!consumeFromUrlRef.current) {
+      return
+    }
+
+    if (!contracts.length) {
+      return
+    }
+
+    const form = formRef.current
+
+    const { contract_name: contractName, address, network, abi } = form
+
+    if (!abi.value) {
+      return
+    }
+
+    const alreadyExists = contracts.find((c) => {
+      return c.contract_name === contractName.value && c.address === address.value && c.network?.toString() === network.value?.toString() && c?.abi === abi.value
+    })
+
+    if (alreadyExists) {
+      setCurrentKey(alreadyExists.key)
+      const element = document.querySelector(
+        `.history.container .history.list > .item.wrapper[data-key="${alreadyExists.key}"]`
+      )
+
+      element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+    }
+
+    consumeFromUrlRef.current = false
+  }, [contracts, address])
+
+  const isUpdateDisabled = useMemo(() => {
+    const _contract = contracts.find(c => c.key === currentKey)
+
+    if (!_contract) {
+      return false
+    }
+
+    if (
+      _contract.abi === abi &&
+      _contract.contract_name === contractName &&
+      _contract.address === address &&
+      _contract.network === networkId
+    ) {
+      return true
+    }
+  }, [currentKey, JSON.stringify(contracts), abi, contractName, address, networkId])
+
   const handleNew = () => {
     setContractName('')
     setAddress('')
@@ -385,10 +403,12 @@ const Encoder = () => {
               label='Enter the name of the contract:'
               placeholder='Contract or interface name'
               id='contract_name'
-              onChange={(e) => { return setContractName(e.target.value) }}
+              onChange={(e) => {
+                return setContractName(e.target.value)
+              }}
               error={contractNameExist ? 'Contract name already exist!' : ''}
             >
-                Give a name to the contract. This will be used to identify the contract in the history.
+              Enter a name, contract name, or any identifier that will help you recall this ABI in the future.
             </InputWithLabel>
 
             <InputWithLabel
@@ -396,9 +416,11 @@ const Encoder = () => {
               label='Enter the deployment address of the contract:'
               placeholder='0x'
               id='address'
-              onChange={(e) => { return setAddress(e.target.value) }}
+              onChange={(e) => {
+                return setAddress(e.target.value)
+              }}
             >
-                If you’d like to perform read and write operations on this contract, paste it's address.
+                If you’d like to perform read and write operations on this contract, paste its address.
             </InputWithLabel>
 
             <InputWithLabel
@@ -406,9 +428,11 @@ const Encoder = () => {
               label='Enter the network of the deployed contract'
               placeholder='1'
               id='network'
-              onChange={(e) => { return setNetworkId(e.target.value) }}
+              onChange={(e) => {
+                return setNetworkId(e.target.value)
+              }}
             >
-                Give the chain id of the network where the contract is deployed.
+              Enter the network id(if this ABI is a deployed contract).
             </InputWithLabel>
 
             <div className='form action'>
@@ -446,6 +470,9 @@ const Encoder = () => {
                 Restore from Your Computer
               </Button>
             </div>
+            <p className='helper text'>
+              The data is stored locally in your browser's storage, NOT on our servers. You have the option to download a JSON backup.
+            </p>
           </form>
         </div>
 

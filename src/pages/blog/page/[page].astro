@@ -29,6 +29,7 @@ export async function getStaticPaths() {
 }
 
 const props = Astro.props;
+const communityBlogs = await api.getCommunityBlogs(Api.CommunityBlogs);
 ---
 
 <BaseLayout>
@@ -48,6 +49,7 @@ const props = Astro.props;
     articles={props.data}
     currentPage={props.currentPage}
     totalPages={props.totalPages}
+    communityBlogs={communityBlogs}
   />
 
   <Fragment slot="footer">

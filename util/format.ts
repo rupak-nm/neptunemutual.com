@@ -1,3 +1,5 @@
+import { months } from './date'
+
 const convertSecondsToWords = (units: number): { formatted: string, text: string } => {
   const hours = Math.floor(units / 60 / 60)
   const minutes = Math.floor(units / 60) - (hours * 60)
@@ -43,9 +45,21 @@ const formatDate = (date: Date, locale: string, options: Intl.DateTimeFormatOpti
   return Intl.DateTimeFormat(locale, options).format(date)
 }
 
+const formatBlogDate = (dateString: string): string => { // 24 Nov 2022
+  const d = new Date(dateString)
+  const day = d.getDate()
+  const month = months[d.getMonth()]
+  // capitalize first letter
+  const capitalizedMonth = month.charAt(0).toUpperCase() + month.slice(1)
+  const year = d.getFullYear()
+
+  return `${day} ${capitalizedMonth} ${year}`
+}
+
 export {
   convertSecondsToWords,
   convertWordsToMinutes,
   formatDate,
-  getFormattedDate
+  getFormattedDate,
+  formatBlogDate
 }

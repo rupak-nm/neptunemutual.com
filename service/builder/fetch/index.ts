@@ -6,6 +6,7 @@
 
 import { Api } from '../../../types/enum.js'
 import { env } from '../../../util/env.js'
+import { parseResponse } from './parse.js'
 import { get } from './request.js'
 
 const resources: ApiResource[] = [
@@ -25,7 +26,8 @@ const resources: ApiResource[] = [
   [Api.News, 'api/news?limit=2000'],
   [Api.Program, 'api/programs?limit=2000'],
   [Api.Video, 'api/videos?limit=2000'],
-  [Api.Hack, 'api/hacks?limit=20000']
+  [Api.Hack, 'api/hacks?limit=20000'],
+  [Api.CommunityBlogs, 'https://community.neptunemutual.com/c/general/4.json', true]
 ]
 
 const build = (): Array<Promise<{ url: string, identifier: string, string: string }>> => {
@@ -56,7 +58,8 @@ const fetchFromApi = async (): Promise<Array<{ identifier: string, data: string 
     }
 
     const { value: { identifier, string } } = item
-    result.push({ identifier, data: JSON.parse(string) })
+    const data = parseResponse(string, identifier as Api)
+    result.push({ identifier, data })
   }
 
   return result
