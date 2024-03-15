@@ -90,8 +90,8 @@ const StringToBytesModal = ({ show, handleClose, handleStringToBytes }) => {
     <Modal
       visible={show}
       setVisible={handleClose}
-      title={'String to Bytes'}
-      description={'Convert String to Byte'}
+      title={'string to bytes32'}
+      description={'Convert string to bytes32'}
       className={'string-to-bytes-modal'}
       cross
     >

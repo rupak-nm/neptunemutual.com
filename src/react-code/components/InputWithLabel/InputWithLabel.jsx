@@ -50,7 +50,7 @@ const InputWithLabel = forwardRef(
               <button
                 className='helper'
                 onClick={() => setModalOpen(true)}
-                data-tooltip={inputType === 'uint256' ? 'Add Zeroes' : 'Convert String to Byte'}
+                data-tooltip={inputType === 'uint256' ? 'Add Zeroes' : 'Convert string to bytes32'}
               >
                 {inputType === 'uint256' && <Icon variant={'plus'} size={'md'} /> }
                 {inputType === 'bytes32' && <Icon variant={'switch-horizontal-01'} size={'md'} /> }
@@ -75,25 +75,17 @@ const InputWithLabel = forwardRef(
 
         <p className="input hint">{children}</p>
 
-        {
-          modalOpen && inputType === 'uint256' && (
-            <AddZeroesModal
-              show={modalOpen}
-              handleClose={() => setModalOpen(false)}
-              handleAddZeroes={value => handleUpdateInput(value)}
-            />
-          )
-        }
+        <AddZeroesModal
+          show={modalOpen && inputType === 'uint256'}
+          handleClose={() => setModalOpen(false)}
+          handleAddZeroes={value => handleUpdateInput(value)}
+        />
 
-        {
-          modalOpen && inputType === 'bytes32' && (
-            <StringToBytesModal
-              show={modalOpen}
-              handleClose={() => setModalOpen(false)}
-              handleStringToBytes={value => handleUpdateInput(value)}
-            />
-          )
-        }
+        <StringToBytesModal
+          show={modalOpen && inputType === 'bytes32'}
+          handleClose={() => setModalOpen(false)}
+          handleStringToBytes={value => handleUpdateInput(value)}
+        />
 
       </div>
     )
