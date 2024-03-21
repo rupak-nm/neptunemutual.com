@@ -1,0 +1,143 @@
+@use "../../../design-system/colors";
+@use "../../../design-system/shadows";
+@use "../../../design-system/typography/styles";
+@use "../../../design-system/typography/weights";
+@use "../../../design-system/theme/light";
+@use "../../../design-system/theme/dark";
+
+.events.container {
+  padding: 32px 24px;
+  background-color: colors.$blue-25;
+  border-radius: 0 0 8px 8px;
+  border: 1px solid colors.$gray-300;
+
+  form {
+    .row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .input.container {
+      label span {
+        @include weights.bold;
+      }
+
+      input[type=number] {
+        min-width: 100px;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button { 
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          margin: 0; 
+        }
+      }
+    }
+
+    button[type="submit"] {
+      padding: 12px 14px;
+      @include styles.text-md;
+      align-self: flex-end;
+      margin-left: 16px;
+    }
+
+    p.error {
+      color: colors.$error-400;
+      margin-top: 8px;
+
+      &:empty {
+        display: none;
+      }
+    }
+
+    @media (max-width: 767px){
+      button[type="submit"] {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 600px){
+      .row {
+        flex-direction: column;
+      }
+    }
+  }
+
+  .logs {
+    margin-top: 32px;
+    max-width: 100%;
+    overflow-x: auto;
+
+    table {
+      min-width: 100%;
+      border-collapse: collapse;
+
+      th, td {
+        padding: 16px 8px;
+        text-align: left;
+        text-wrap: nowrap;
+        min-width: 220px;
+      }
+
+      thead {
+        tr {
+          background-color: colors.$blue-50;
+        }
+      }
+
+
+      tbody {
+        td.tx.hash {
+          max-width: 200px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          word-break: break-all;
+          text-wrap: balance;
+        }
+  
+        td.args {
+          min-width: 300px;
+
+          summary {
+            width: max-content;
+            cursor: pointer;
+          }
+        }
+  
+        tr:nth-child(even) {
+          background-color: colors.$blue-100;
+        }
+  
+        tr:first-child {
+          border-top: 1px solid colors.$gray-300;
+        }
+      }
+
+    }
+  }
+}
+
+.dark .events.container {
+  background-color: colors.$gray-blue-900;
+  border-color: colors.$gray-800;
+
+  .logs {
+    table {
+
+      thead {
+        tr {
+          background-color: colors.$gray-900;
+        }
+      }
+
+      tbody {
+        tr:nth-child(even) {
+          background-color: colors.$gray-800;
+        }
+      }
+    }
+  }
+}

@@ -94,6 +94,15 @@ const Result = (props) => {
             >
               Write Contract
             </Button>
+            <Button
+              variant='secondary-gray'
+              data-active={type === 'events'}
+              size='sm'
+              data-value='events'
+              onClick={handleType}
+            >
+              Events
+            </Button>
           </div>
           <div className='right group'>
             {
@@ -111,9 +120,13 @@ const Result = (props) => {
             ? <DecodeData encodeInterface={ethersInterface} />
             : (
                 Array.isArray(abi) &&
-            abi.filter(func => (
-              func.type === 'function' && validateStateMutability(func.stateMutability)
-            )).map((func, i) => (
+            abi.filter((func) => {
+              if (type === 'events') {
+                return func.type === 'event'
+              }
+
+              return func.type === 'function' && validateStateMutability(func.stateMutability)
+            }).map((func, i) => (
               <Func
                 type={type}
                 key={`func-${i}`}
@@ -123,6 +136,7 @@ const Result = (props) => {
                 isReady={isReady}
                 interface={ethersInterface}
                 abi={abi}
+                address={address}
               />
             ))
               )
