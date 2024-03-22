@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { ethers } from 'ethers'
-import { getArgsString, getEventTopic } from '../helpers/web3-tools/events'
+import { getArgs, getBlockTimestamp, getEventTopic } from '../helpers/web3-tools/events'
 
 const useGetLogs = ({ address, func, iface }) => {
   const { library } = useWeb3React()
@@ -10,11 +10,13 @@ const useGetLogs = ({ address, func, iface }) => {
 
   const [loading, setLoading] = useState(false)
 
+  const [noLogs, setNoLogs] = useState(false)
+
   const [error, setError] = useState('')
 
   const getLogs = useCallback(async (fromBlock, toBlock) => {
     if (!library || !library.getLogs || !address || !topics) {
-      return
+      return []
     }
 
     const fromBlockHex = '0x' + ethers.BigNumber.from(fromBlock).toNumber().toString(16)
@@ -22,6 +24,7 @@ const useGetLogs = ({ address, func, iface }) => {
     const id = 44
     const jsonrpc = '2.0'
 
+    setNoLogs(false)
     setError('')
     setLoading(true)
 
@@ -35,18 +38,30 @@ const useGetLogs = ({ address, func, iface }) => {
         jsonrpc
       })
 
-      return logs.map(log => ({
-        blockNumber: ethers.BigNumber.from(log.blockNumber).toNumber(),
-        blockHash: log.blockHash,
-        transactionIndex: log.transactionIndex,
-        removed: log.removed,
-        address: log.address,
-        data: log.data,
-        argsString: getArgsString(iface, log),
-        topics: log.topics,
-        transactionHash: log.transactionHash,
-        logIndex: log.logIndex
-      }))
+      if (!logs.length) {
+        setNoLogs(true)
+      }
+
+      const parsedLogs = []
+
+      for (const log of logs) {
+        const blockTimestamp = await getBlockTimestamp(library, log.blockNumber)
+        parsedLogs.push({
+          blockNumber: ethers.BigNumber.from(log.blockNumber).toNumber(),
+          timestamp: blockTimestamp,
+          blockHash: log.blockHash,
+          transactionIndex: log.transactionIndex,
+          removed: log.removed,
+          address: log.address,
+          data: log.data,
+          args: getArgs(iface, log),
+          topics: log.topics,
+          transactionHash: log.transactionHash,
+          logIndex: log.logIndex
+        })
+      }
+
+      return parsedLogs
     } catch (error) {
       console.error(error)
       setError(error.data.message)
@@ -67,7 +82,11 @@ const useGetLogs = ({ address, func, iface }) => {
     loading,
 
     error,
-    resetError: () => setError('')
+    resetError: () => {
+      setError('')
+      setNoLogs(false)
+    },
+    noLogs
   }
 }
 

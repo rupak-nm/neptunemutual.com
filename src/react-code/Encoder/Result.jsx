@@ -96,12 +96,12 @@ const Result = (props) => {
             </Button>
             <Button
               variant='secondary-gray'
-              data-active={type === 'events'}
+              data-active={type === 'view_events'}
               size='sm'
-              data-value='events'
+              data-value='view_events'
               onClick={handleType}
             >
-              Events
+              View Events
             </Button>
           </div>
           <div className='right group'>
@@ -121,7 +121,7 @@ const Result = (props) => {
             : (
                 Array.isArray(abi) &&
             abi.filter((func) => {
-              if (type === 'events') {
+              if (type === 'view_events') {
                 return func.type === 'event'
               }
 

@@ -14,7 +14,7 @@ const getEventTopic = (str) => {
   return id(getEventFragment(str).format())
 }
 
-const getArgsString = (iface, log) => {
+const getArgs = (iface, log) => {
   try {
     const args = iface.parseLog(log).args
 
@@ -24,19 +24,30 @@ const getArgsString = (iface, log) => {
         return
       }
 
-      if (Array.isArray(value)) {
-        value = value.map(v => (v.toString()))
-        parsedArgs[key] = value
-      } else {
-        parsedArgs[key] = (value.toString())
-      }
-
       if (value._isBigNumber) {
         parsedArgs[key] = value.toString()
+      } else if (Array.isArray(value)) {
+        value = value.map(v => (v.toString()))
+        parsedArgs[key] = JSON.stringify(value)
+      } else if (typeof value === 'object') {
+        parsedArgs[key] = JSON.stringify(value)
+      } else {
+        parsedArgs[key] = value
       }
     })
 
-    return JSON.stringify(parsedArgs, null, 2)
+    return parsedArgs
+  } catch (error) {
+    console.error(error)
+  }
+
+  return ''
+}
+
+const getBlockTimestamp = async (library, blockNumber) => {
+  try {
+    const block = await library.getBlock(blockNumber)
+    return block.timestamp
   } catch (error) {
     console.error(error)
   }
@@ -46,5 +57,6 @@ const getArgsString = (iface, log) => {
 
 export {
   getEventTopic,
-  getArgsString
+  getArgs,
+  getBlockTimestamp
 }

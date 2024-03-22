@@ -1,31 +1,41 @@
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import './events.scss'
 import { useGetLogs } from '../hooks/useGetLogs'
 import { InputWithLabel } from '../../components/InputWithLabel/InputWithLabel'
-import { Button } from '../../components/Button/Button'
+import { useDebouncedValue } from '../hooks/useDebouncedValue'
+import { LogsTable } from '../components/LogsTable'
 
 const Events = ({ address, func, encodeInterface }) => {
   const [fromBlock, setFromBlock] = useState('')
   const [toBlock, setToBlock] = useState('')
 
+  const fromBlockDebounced = useDebouncedValue(fromBlock, 500)
+  const toBlockDebounced = useDebouncedValue(toBlock, 500)
+
   const [logs, setLogs] = useState([])
 
-  const { isReady, getLogs, loading, error, resetError } = useGetLogs({
+  const { isReady, getLogs, loading, error, resetError, noLogs } = useGetLogs({
     address,
     func,
     iface: encodeInterface
   })
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
+  const handleSubmit = useCallback(async (from, to) => {
     try {
-      const logs = await getLogs(fromBlock, toBlock)
+      const logs = await getLogs(from, to)
       setLogs(logs)
     } catch (err) {
       console.error(err)
     }
-  }
+  }, [getLogs])
+
+  useEffect(() => {
+    if (!isReady || loading || !fromBlockDebounced || !toBlockDebounced) {
+      return
+    }
+
+    handleSubmit(fromBlockDebounced, toBlockDebounced)
+  }, [fromBlockDebounced, toBlockDebounced, isReady])
 
   const handleInputChange = (field, event) => {
     resetError()
@@ -42,7 +52,7 @@ const Events = ({ address, func, encodeInterface }) => {
       <form onSubmit={handleSubmit}>
         <div className='row'>
           <InputWithLabel
-            label={<>Enter the <span>from</span> block number</>}
+            label={'From block'}
             placeholder={'1'}
             type={'number'}
             id={'events-input-from-block'}
@@ -51,58 +61,44 @@ const Events = ({ address, func, encodeInterface }) => {
             />
 
           <InputWithLabel
-            label={<>Enter the <span>to</span> block number</>}
+            label={'To block'}
             placeholder={'1200'}
             type={'number'}
             id={'events-input-to-block'}
             onChange={e => handleInputChange('toBlock', e)}
             value={toBlock}
             />
-
-          <Button
-            variant='primary'
-            size='sm'
-            type='submit'
-            disabled={!isReady || !fromBlock || !toBlock || loading}
-            >
-            {loading ? 'Loading...' : 'Get Events'}
-          </Button>
         </div>
-
-        <p className='error'>{error}</p>
       </form>
+
+      {
+        loading && (
+          <div className='info'>
+            <p>Loading...</p>
+          </div>
+        )
+      }
+
+      {
+        noLogs && !loading && (
+          <div className='info'>
+            <p>No logs found</p>
+          </div>
+        )
+      }
+
+      {
+        error && (
+          <div className='info error'>
+            <p>{error}</p>
+          </div>
+        )
+      }
 
       {
         Boolean(logs.length) && (
           <div className='logs'>
-            <table>
-              <thead>
-                <tr>
-                  <th>Transaction Hash</th>
-                  <th>Block Number</th>
-                  <th>Log Index</th>
-                  <th>Arguments</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {
-                  logs.map((log, i) => (
-                    <tr key={i}>
-                      <td className='tx hash'>{log.transactionHash}</td>
-                      <td className='block number'>{log.blockNumber}</td>
-                      <td className='log index'>{log.logIndex}</td>
-                      <td className='args'>
-                        <details>
-                          <summary>Show args</summary>
-                          <pre>{log.argsString}</pre>
-                        </details>
-                      </td>
-                    </tr>
-                  ))
-                }
-                </tbody>
-            </table>
+            <LogsTable logs={logs} />
           </div>
         )
       }

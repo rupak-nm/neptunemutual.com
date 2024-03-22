@@ -20,7 +20,7 @@ const TypeComponent = {
   encode_data: EncodeData,
   read_contract: ReadContract,
   write_contract: WriteContract,
-  events: Events
+  view_events: Events
 }
 
 const Func = (props) => {
