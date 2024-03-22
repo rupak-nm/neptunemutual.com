@@ -4,6 +4,7 @@ import { useGetLogs } from '../hooks/useGetLogs'
 import { InputWithLabel } from '../../components/InputWithLabel/InputWithLabel'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
 import { LogsTable } from '../components/LogsTable'
+import { Icon } from '../../components/Icon'
 
 const Events = ({ address, func, encodeInterface }) => {
   const [fromBlock, setFromBlock] = useState('')
@@ -88,15 +89,25 @@ const Events = ({ address, func, encodeInterface }) => {
       }
 
       {
-        error && (
-          <div className='info error'>
-            <p>{error}</p>
+        (!loading && error) && (
+          <div className='error'>
+            <Icon variant='alert-circle' size={'lg'} />
+
+            <div>
+              <p className='title'>Error getting logs</p>
+              <p className='text'>{error}</p>
+
+              <button onClick={() => handleSubmit(fromBlockDebounced, toBlockDebounced)}>
+                Try Again
+                <Icon variant='refresh-ccw-02' size={'lg'} />
+              </button>
+            </div>
           </div>
         )
       }
 
       {
-        Boolean(logs.length) && (
+        Boolean(!loading && logs.length) && (
           <div className='logs'>
             <LogsTable logs={logs} />
           </div>

@@ -75,11 +75,45 @@
     @include weights.medium;
 
     color: colors.$gray-600;
+  }
 
-    &.error {
-      background-color: colors.$error-50;
-      border-color: colors.$error-300;
-      color: colors.$error-600;
+  div.error {
+    margin-top: 24px;
+    padding: 16px;
+    background-color: colors.$error-25;
+    border: 1px solid colors.$error-300;
+    border-radius: 12px;
+    width: max-content;
+    min-width: 300px;
+
+    color: colors.$error-600;
+    display: flex;
+    gap: 12px;
+
+    div {
+      &, * {
+        color: colors.$error-700;
+      }
+
+      p.title {
+        @include styles.text-md;
+        @include weights.semibold;
+      }
+      
+      p.text {
+        margin-top: 4px;
+        @include styles.text-sm;
+      }
+      
+      button {
+        margin-top: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        @include styles.text-sm;
+        @include weights.semibold;
+      }
     }
   }
 
@@ -131,26 +165,26 @@
 
 
       tbody {
-        td {
-          padding: 26px 24px;
-          @include styles.text-sm;
-          color: colors.$gray-600;
-          text-wrap: nowrap;
-
-          &.arg {
-            @include weights.medium;
-          }
-
-          a {
-            color: colors.$blue-600;
-            text-decoration: underline;
-            text-underline-offset: 2px;
-          }
-        }
-
         tr {
           background-color: colors.$base-white;
           border-top: 1px solid colors.$gray-200;
+
+          td {
+            padding: 26px 24px;
+            @include styles.text-sm;
+            color: colors.$gray-600;
+            text-wrap: nowrap;
+  
+            &.arg {
+              @include weights.medium;
+            }
+  
+            a {
+              color: colors.$blue-600;
+              text-decoration: underline;
+              text-underline-offset: 2px;
+            }
+          }
         }
       }
 
@@ -159,21 +193,57 @@
 }
 
 .dark .events.container {
-  background-color: colors.$gray-blue-900;
+  background-color: colors.$black-800;
   border-color: colors.$gray-800;
 
-  .logs {
-    table {
+  div.info {
+    background-color: colors.$gray-800;
+    border-color: colors.$gray-800;
+    color: colors.$gray-300;
+  }
 
+  div.error {
+    border-color: colors.$error-300;
+    background-color: colors.$black-800;
+    color: colors.$error-300;
+
+    div {
+      &, * {
+        color: colors.$base-white;
+      }
+    }
+  }
+
+  .logs {
+    border-color: colors.$gray-800;
+    background-color: colors.$black-900;
+
+    table {
+      border-bottom-color: colors.$gray-800;
       thead {
         tr {
-          background-color: colors.$gray-900;
+          background-color: colors.$gray-800;
+
+          th {
+            &, * {
+              color: colors.$gray-300;
+            }
+          }
         }
       }
 
       tbody {
-        tr:nth-child(even) {
-          background-color: colors.$gray-800;
+        tr {
+          background-color: colors.$black-900;
+          border-top: 1px solid colors.$gray-800;
+
+          td {
+            color: colors.$gray-300;
+
+            a {
+              color: colors.$blue-400;
+            }
+          }
         }
       }
     }

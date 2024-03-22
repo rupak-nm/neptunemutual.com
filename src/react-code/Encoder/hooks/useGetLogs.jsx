@@ -64,7 +64,8 @@ const useGetLogs = ({ address, func, iface }) => {
       return parsedLogs
     } catch (error) {
       console.error(error)
-      setError(error.data.message)
+      const errorMessage = (error.data.message || error.message).split('\n')[0]
+      setError(errorMessage)
     } finally {
       setLoading(false)
     }
