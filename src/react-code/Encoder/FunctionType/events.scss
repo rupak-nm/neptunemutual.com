@@ -8,7 +8,6 @@
 .events.container {
   padding: 32px 24px;
   background-color: colors.$blue-dark-25;
-  border-radius: 0 0 8px 8px;
   border: 1px solid colors.$gray-300;
 
   form {
@@ -46,19 +45,6 @@
       @include styles.text-md;
       align-self: flex-end;
       margin-left: 16px;
-    }
-
-    @media (max-width: 767px){
-      button[type="submit"] {
-        margin-left: 0;
-        width: 100%;
-      }
-    }
-
-    @media (max-width: 600px){
-      .row {
-        flex-direction: column;
-      }
     }
   }
 
@@ -190,6 +176,28 @@
 
     }
   }
+
+  @media (max-width: 767px){
+    form {
+      button[type="submit"] {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 600px){
+    form {
+      .row {
+        flex-direction: column;
+      }
+    }
+
+    div.error {
+      width: 100%;
+      min-width: 100px;
+    }
+  }
 }
 
 .dark .events.container {
@@ -206,6 +214,7 @@
     border-color: colors.$error-300;
     background-color: colors.$black-800;
     color: colors.$error-300;
+    max-width: 100%;
 
     div {
       &, * {
