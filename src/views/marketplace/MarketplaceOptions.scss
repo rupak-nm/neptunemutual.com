@@ -22,6 +22,7 @@
       justify-content: center;
       align-items: center;
       gap: 32px;
+      flex-wrap: wrap;
 
       @media (max-width: 767px) {
         gap: 16px;
@@ -163,7 +164,7 @@
           flex-direction: column;
           align-items: center;
 
-          .swap {
+          .swap.container {
             width: 100%;
           }
         }
