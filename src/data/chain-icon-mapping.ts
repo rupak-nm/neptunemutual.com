@@ -18,7 +18,8 @@ const chainIconMapping: Record<string, string> = {
   bird: 'bird chain icon',
   trx: 'trx chain icon',
   celo: 'celo chain icon',
-  heco: 'heco chain icon'
+  heco: 'heco chain icon',
+  btc: 'btc chain icon'
 }
 
 export { chainIconMapping }
