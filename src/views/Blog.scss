@@ -5,6 +5,28 @@
 @use "../design-system/theme/light";
 @use "../design-system/theme/dark";
 
+header[data-style="colored"] {
+  background-color: colors.$gray-50;
+}
+
+main {
+  .ui.basic.hero.section {
+    background-color: colors.$gray-50;
+  }
+
+  background-color: colors.$gray-50;
+}
+
+.dark {
+  main {
+    .ui.basic.hero.section {
+      background-color: colors.$black-800;
+    }
+
+    background-color: colors.$black-900;
+  }
+
+}
 
 .blog {
   .tags.container {

@@ -8,6 +8,10 @@
 .article.card.container {
   display: block;
   text-align: left;
+  background-color: colors.$base-white;
+  border: 1px solid colors.$gray-200;
+  border-radius: 16px;
+  overflow: hidden;
 
   .image.container {
     height: 240px;
@@ -75,6 +79,8 @@
 
 
 .dark .article.card.container {
+  border-color: colors.$gray-800;
+  background-color: colors.$black-800;
 
   time {
     color: colors.$gray-300;

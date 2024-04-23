@@ -9,18 +9,15 @@ import { slugify } from "../../../util/slug";
 import InputWithIcon from "../../elements/InputWithIcon.astro";
 
 import SearchModal from "../../components/SearchModal.astro";
-import WeeklyReports from "./WeeklyReports.astro";
 
 interface Props {
   articles: Article[];
   totalPages?: number;
   currentPage?: number;
   tag?: Tag;
-  weeklyReports: CommunityBlogItem[];
 }
 
-const { articles, totalPages, currentPage, tag, weeklyReports }: Props =
-  Astro.props;
+const { articles, totalPages, currentPage, tag }: Props = Astro.props;
 
 const heading = tag?.name || "All Stories";
 const slug = tag?.slug ?? slugify(heading);
@@ -28,6 +25,12 @@ const slug = tag?.slug ?? slugify(heading);
 
 <div class="blog post full width container">
   <div class="inner container">
+    <div class="text and cta">
+      <div class="text">
+        <h2 id={slug}>{heading}</h2>
+      </div>
+    </div>
+
     <div class="desktop only visible">
       <TagFilters />
       <InputWithIcon
@@ -45,11 +48,6 @@ const slug = tag?.slug ?? slugify(heading);
       <TagFilterDropdown />
     </div>
 
-    <div class="text and cta">
-      <div class="text">
-        <h2 id={slug}>{heading}</h2>
-      </div>
-    </div>
     <div class="blog posts">
       {
         articles.map((post) => (
@@ -65,8 +63,6 @@ const slug = tag?.slug ?? slugify(heading);
       currentPage={currentPage}
       totalPages={totalPages}
     />
-
-    <WeeklyReports data={weeklyReports} />
   </div>
 </div>
 

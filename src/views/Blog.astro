@@ -10,6 +10,7 @@ import * as api from "../../service/api";
 import Enumerable from "linq";
 import { getEnumerable } from "../../service/api";
 import { Api } from "../../types/enum";
+import WeeklyReports from "./blog/WeeklyReports.astro";
 
 interface Props {
   articles: Article[];
@@ -27,7 +28,7 @@ const { articles, currentPage, totalPages, tag, communityBlogs }: Props =
 
 const latest = Enumerable.from(posts)
   .orderByDescending((x) => x.publishedAt)
-  .take(3)
+  .take(4)
   .toArray();
 
 const videos = await api.getEnumerable<Video>(Api.Video, 3, 0);
@@ -49,15 +50,16 @@ const videos = await api.getEnumerable<Video>(Api.Video, 3, 0);
 
 <Featured posts={latest} />
 
-<Videos videos={videos} />
-
 <BlogPosts
   tag={tag}
   articles={articles}
   totalPages={totalPages}
   currentPage={currentPage}
-  weeklyReports={communityBlogs}
 />
+
+<Videos videos={videos} />
+
+<WeeklyReports data={communityBlogs} />
 
 <NewsletterSignupForm
   heading="Sign up for our newsletter"

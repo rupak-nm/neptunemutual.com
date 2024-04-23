@@ -26,7 +26,7 @@
   .grid.container {
     display: grid;
     margin-top: 32px;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr 1fr;
     gap: 32px;
     row-gap: 32px;
@@ -39,8 +39,7 @@
     .article.card.container {
       --max-lines: 1;
       display: flex;
-      flex-direction: row;
-      gap: 24px;
+      flex-direction: column;
 
       align-items: flex-start;
 
@@ -71,29 +70,72 @@
 
 
       &:not(:nth-of-type(1)) {
-        @media (min-width: 1024px) {
-          height: 200px;
+        .contents {
+          padding: 24px;
+        }
 
+        @media (min-width: 1024px) {
           .image.container {
-            height: 200px;
-            width: 320px;
+
+            img {
+              height: 240px;
+              width: 384px;
+            }
           }
         }
       }
 
       &:nth-of-type(1) {
+        .contents {
+          padding: 24px;
+        }
+
+        .image.container {
+          width: 100%;
+
+          img {
+            height: 100%;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .image.container {
+            width: auto;
+
+            img {
+              height: 240px;
+            }
+          }
+        }
+
         @media (min-width: 1024px) {
+          align-items: center;
+
+          grid-column-start: 1;
+          grid-column-end: 4;
+
           grid-row-start: 1;
           grid-row-end: 3;
 
-          flex-direction: column;
-          gap: 32px;
+          flex-direction: row;
+
+          height: 370px;
 
           --max-lines: 2;
-        }
 
-        img {
-          height: 240px;
+          .contents {
+            padding: 32px;
+          }
+
+          .image.container {
+            width: max-content;
+            height: 100%;
+
+            img {
+              max-width: 600px;
+              height: 100%;
+            }
+          }
         }
       }
 
@@ -112,6 +154,7 @@
       }
 
       @media (max-width: 1023px) {
+        flex-direction: row;
 
         // change font style of <Title> component of 2nd/3rd children
         &>div:nth-of-type(2) h3 {
@@ -122,7 +165,6 @@
       // if screen size is below 768px
       @media (max-width: 767px) {
         flex-direction: column;
-        gap: 20px;
 
         --max-lines: 2;
       }
