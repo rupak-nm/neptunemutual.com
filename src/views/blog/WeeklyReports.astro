@@ -7,14 +7,6 @@ interface Props {
 }
 
 const { data }: Props = Astro.props;
-
-const grouped = [
-  [0, 1],
-  [2, 3],
-  [4, 5],
-]
-  .map((group) => group.map((index) => data[index]).filter(Boolean))
-  .filter((group) => group.length > 0);
 ---
 
 <div class="weekly reports section">
@@ -36,35 +28,25 @@ const grouped = [
 
     <div class="reports grid">
       {
-        grouped.map((group, i) => (
-          <>
-            <div class="group">
-              {group.map(({ title, image_url, slug, created_at }) => {
-                return (
-                  <div class="single report">
-                    <a
-                      href={`https://community.neptunemutual.com/t/${slug}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img
-                        src={image_url}
-                        alt={`Image for blog titled: ${title}`}
-                      />
+        data.map((item, i) => (
+          <div class="single report">
+            <a
+              href={`https://community.neptunemutual.com/t/${item.slug}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={item.image_url}
+                alt={`Image for blog titled: ${item.title}`}
+              />
 
-                      <div class="right">
-                        <p class="date">{formatBlogDate(created_at)}</p>
-                        <h3>{title}</h3>
-                        {/*<p class="description"></p> */}
-                      </div>
-                    </a>
-                  </div>
-                );
-              })}
-            </div>
-
-            {i < grouped.length - 1 && <hr />}
-          </>
+              <div class="right">
+                <p class="date">{formatBlogDate(item.created_at)}</p>
+                <h3>{item.title}</h3>
+                {/*<p class="description"></p> */}
+              </div>
+            </a>
+          </div>
         ))
       }
     </div>

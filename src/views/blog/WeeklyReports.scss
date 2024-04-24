@@ -17,11 +17,6 @@
       gap: 32px;
       flex-wrap: wrap;
   
-      // @media (max-width: 767px) {
-      //   flex-direction: column;
-      //   align-items: stretch;
-      // }
-  
       .text {
         max-width: 767px;   
         
@@ -50,85 +45,80 @@
 
     .reports.grid {
       margin-top: 32px;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 24px;
 
-      .group {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
+      .single.report a {
+        display: flex;
+        flex-direction: column;
+        border-radius: 12px;
+        overflow: hidden;
 
-        .single.report a {
-          display: flex;
-          border-radius: 16px;
+        background-color: colors.$base-white;
+        border: 1px solid colors.$gray-200;
 
-          &:hover, &:focus-visible {
-            background-color: colors.$gray-100;
+        img {
+          height: 182px;
+          aspect-ratio: 1 / 1;
+          object-fit: cover;
+        }
+
+        .right {
+          padding: 16px;
+
+          .date {
+            @include styles.text-sm;
+            @include weights.semibold;
+            color: colors.$gray-500;
           }
 
-          img {
-            border-radius: 16px;
-            width: 146px;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
+          h3 {
+            margin-top: 8px;
+            @include styles.text-xl;
+            @include weights.semibold;
+            color: colors.$gray-900;
           }
 
-          .right {
-            padding: 16px 24px;
+          p.description {
+            margin-top: 8px;
+            @include styles.text-md;
+            @include weights.regular;
+            color: colors.$gray-600;
 
-            .date {
-              @include styles.text-sm;
-              @include weights.semibold;
-              color: colors.$gray-500;
-            }
-
-            h3 {
-              margin-top: 8px;
-              @include styles.text-xl;
-              @include weights.semibold;
-              color: colors.$gray-900;
-            }
-
-            p.description {
-              margin-top: 8px;
-              @include styles.text-md;
-              @include weights.regular;
-              color: colors.$gray-600;
-
-              // limit to 2 lines
-              display: -webkit-box;
-              -webkit-line-clamp: 2;
-              -webkit-box-orient: vertical;
-              overflow: hidden;
-              text-overflow: ellipsis;
-            }
+            // limit to 2 lines
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
         }
       }
+    }
 
-      hr {
-        border-top: 1px solid colors.$gray-200;
+    @media (max-width: 1023px) {
+      .reports.grid {
+        grid-template-columns: repeat(2, 1fr);
+
+        .single.report a {
+          img {
+            height: 240px;
+          }
+        }
       }
     }
 
     @media (max-width: 767px) {
       .reports.grid {
-        .group {
-          grid-template-columns: 1fr;
-        }
-
-        hr {
-          display: none;
-        }
+        grid-template-columns: 1fr;
       }
-    
     }
   }
 }
 
 .dark .weekly.reports.section {
-  background-color: colors.$black-900;
+  background-color: colors.$black-700;
 
   .inner {
     .text.and.cta a {
@@ -137,9 +127,8 @@
   
     .reports.grid {
       .single.report a {
-        &:hover, &:focus-visible {
-          background-color: colors.$gray-800;
-        }
+        background-color: colors.$black-800;
+        border-color: colors.$gray-800;
   
         .right {
           .date {

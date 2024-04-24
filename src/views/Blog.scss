@@ -15,15 +15,23 @@ main {
   }
 
   background-color: colors.$gray-50;
+
+  .newsletter.signup {
+    background-color: colors.$base-white;
+  }
 }
 
 .dark {
   main {
     .ui.basic.hero.section {
-      background-color: colors.$black-800;
+      background-color: colors.$black-900;
     }
 
     background-color: colors.$black-900;
+
+    .newsletter.signup {
+      background-color: colors.$black-700;
+    }
   }
 
 }

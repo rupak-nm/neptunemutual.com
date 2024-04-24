@@ -7,12 +7,10 @@
 
 .blog.video.list {
   padding-top: 56px;
-  padding-bottom: 56px;
   background-color: colors.$base-white;
   
   @media (max-width: 767px) {
     padding-top: 32px;
-    padding-bottom: 32px;
   }
   
   .inner {
@@ -84,7 +82,7 @@
 }
 
 .dark .blog.video.list {
-  background-color: colors.$black-900;
+  background-color: colors.$black-700;
 
   .inner {
     .heading {
@@ -99,7 +97,7 @@
 
     .all.videos {
       .video.player {
-        background-color: colors.$black-900;
+        background-color: colors.$black-800;
         border-color: colors.$gray-800;
       }
     }
