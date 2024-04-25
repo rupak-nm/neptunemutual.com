@@ -59,10 +59,17 @@ const t = (x: string): string => x;
         placeholder=""
         type={"textarea"}
       >
-        <Button type="button" variant="secondary-gray" disabled>
-          <Icon variant="copy-01" />
-          <span class="text">Copy</span>
-        </Button>
+        <div class="copy button container">
+          <Button type="button" disabled>
+            <Icon variant="copy-01" /> Copy Result
+          </Button>
+        </div>
+
+        <div class="copied button container">
+          <Button type="button">
+            <Icon variant="check" /> Copied
+          </Button>
+        </div>
       </Input>
 
       <p class="error"></p>

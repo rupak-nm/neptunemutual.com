@@ -1,30 +1,35 @@
 import { utils } from 'ethers'
-import { copyToClipboard } from '../../util/copy'
 
 const toChecksumSection = document.querySelector('.ethereum.checksum.container .inner > .section#toChecksumAddress')
 const checkChecksumSection = document.querySelector('.ethereum.checksum.container .inner > .section#checkAddressChecksum')
 
-const handleCopy = (btn) => {
-  btn.addEventListener('click', () => {
-    copyToClipboard(
-      btn.getAttribute('data-address'),
-      () => {
-        btn.querySelector('span.text').textContent = 'Copied!'
-        setTimeout(() => {
-          btn.querySelector('span.text').textContent = 'Copy'
-        }, 1000)
-      })
+const handleCopy = (copyBtn, copiedBtn) => {
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(copyBtn.getAttribute('data-address'))
+      copyBtn.style.display = 'none'
+      copiedBtn.style.display = 'block'
+
+      setTimeout(() => {
+        copiedBtn.style.display = 'none'
+        copyBtn.style.display = 'block'
+      }, 1000)
+    } catch (err) {
+      console.error('Failed to copy: ', err)
+    }
   })
 }
 
-const handleAction = (section, fn, writeOutput = output => output) => {
+const handleAction = (section, handler = () => {}) => {
   const input = section.querySelector('.address input')
   const output = section.querySelector('.result textarea')
   const error = section.querySelector('& > p.error')
-  const copyButton = section.querySelector('.result > button.gray')
+
+  const copyButton = section.querySelector('.result .copy.button button')
+  const copiedButtonContainer = section.querySelector('.result .copied.button')
 
   if (copyButton) {
-    handleCopy(copyButton)
+    handleCopy(copyButton, copiedButtonContainer)
   }
 
   input.addEventListener('input', () => {
@@ -39,21 +44,40 @@ const handleAction = (section, fn, writeOutput = output => output) => {
       return
     }
 
-    try {
-      const result = fn(input.value)
-      output.value = writeOutput(result)
-
-      if (copyButton) {
-        copyButton.removeAttribute('disabled')
-        copyButton.setAttribute('data-address', result)
-      }
-    } catch (e) {
-      console.error(e)
-      output.value = writeOutput('')
-      error.textContent = e.message
-    }
+    handler(input, output, copyButton, error)
   })
 }
 
-handleAction(toChecksumSection, utils.getAddress)
-handleAction(checkChecksumSection, utils.isAddress, res => res ? 'Valid checksum address' : 'Invalid checksum address')
+const handleToChecksum = (input, output, copyButton, error) => {
+  try {
+    const result = utils.getAddress(input.value.toLowerCase())
+    output.value = result
+
+    if (copyButton) {
+      copyButton.removeAttribute('disabled')
+      copyButton.setAttribute('data-address', result)
+    }
+  } catch (e) {
+    console.error(e)
+    output.value = ''
+    error.textContent = e.message
+  }
+}
+
+const handleCheckChecksum = (input, output, copyButton) => {
+  try {
+    const result = utils.getAddress(input.value)
+    output.value = result === input.value ? 'Valid Checksum Address' : 'False'
+
+    if (copyButton) {
+      copyButton.removeAttribute('disabled')
+      copyButton.setAttribute('data-address', result)
+    }
+  } catch (e) {
+    console.error(e)
+    output.value = 'False'
+  }
+}
+
+handleAction(toChecksumSection, handleToChecksum)
+handleAction(checkChecksumSection, handleCheckChecksum)

@@ -46,24 +46,28 @@
           resize: vertical;
         }
 
-        button {
-          padding: 0;
-          background-color: colors.$gray-500;
-          color: colors.$white;
-
+        .copy.button.container, .copied.button.container {
           position: absolute;
           bottom: 12px;
           right: 14px;
 
-          &:disabled {
-            opacity: 0.5;
-          }
+          button {
+            span.content {
+              display: flex;
+              gap: 8px;
+            }
 
-          span.content {
-            padding: 8px 14px;
-            display: flex;
-            gap: 8px;
+            &:disabled {
+              opacity: 0.5;
+              cursor: not-allowed;
+              background-color: rgb(102, 112, 133);
+              border: none;
+            }
           }
+        }
+
+        .copied.button.container {
+          display: none;
         }
       }
 
