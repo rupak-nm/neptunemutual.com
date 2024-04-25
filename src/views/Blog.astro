@@ -26,7 +26,9 @@ const t = (x: string): string => x;
 const { articles, currentPage, totalPages, tag, communityBlogs }: Props =
   Astro.props;
 
-const latest = Enumerable.from(posts)
+const featuredPosts = posts.filter((x) => x.featured);
+
+const latestFeatured = Enumerable.from(featuredPosts)
   .orderByDescending((x) => x.publishedAt)
   .take(4)
   .toArray();
@@ -48,7 +50,7 @@ const videos = await api.getEnumerable<Video>(Api.Video, 3, 0);
   <EmailSubscription id="BlogHeroSubscriptionEmail" className="script only" />
 </HeaderSection>
 
-<Featured posts={latest} />
+<Featured posts={latestFeatured} />
 
 <BlogPosts
   tag={tag}
