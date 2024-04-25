@@ -1,0 +1,91 @@
+@use "../../design-system/utils";
+@use "../../design-system/colors";
+@use "../../design-system/shadows";
+@use "../../design-system/typography/styles";
+@use "../../design-system/typography/weights";
+@use "../../design-system/theme/light";
+@use "../../design-system/theme/dark";
+
+.ethereum.checksum.container {
+  .inner {
+    padding: 56px 0 288px;
+    max-width: 754px;
+    margin: 0 auto;
+
+    ol.breadcrumb {
+      margin-top: 0;
+    }
+
+    div.section {
+      margin-top: 56px;
+
+      div.title {
+        h2 {
+          @include styles.text-xl;
+          @include weights.semibold;
+        }
+        
+        p {
+          margin-top: 8px;
+          @include styles.text-md;
+          color: colors.$gray-600;
+        }
+      }
+
+      .input.container {
+        margin-top: 24px;
+      }
+
+      .result.container {
+        margin-top: 16px;
+        position: relative;
+
+        textarea {
+          height: 76px;
+          min-height: 76px;
+          resize: vertical;
+        }
+
+        button {
+          padding: 0;
+          background-color: colors.$gray-500;
+          color: colors.$white;
+
+          position: absolute;
+          bottom: 12px;
+          right: 14px;
+
+          &:disabled {
+            opacity: 0.5;
+          }
+
+          span.content {
+            padding: 8px 14px;
+            display: flex;
+            gap: 8px;
+          }
+        }
+      }
+
+      p.error {
+        margin-top: 12px;
+        color: colors.$error-500;
+
+      }
+    }
+  }
+}
+
+.dark {
+  .ethereum.checksum.container {
+    .inner {
+      div.section {
+        div.title {
+          p {
+            color: colors.$gray-300;
+          }
+        }
+      }
+    }
+  }
+}
