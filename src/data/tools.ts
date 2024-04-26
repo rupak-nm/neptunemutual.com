@@ -55,7 +55,7 @@ const tools: Web3ToolItem[] = [
   {
     slug: 'ethereum-address-checksum',
     title: 'Ethereum Address Checksum',
-    intro: 'Check if an Ethereum address checksum is valid and convert it to a checksum address.',
+    intro: 'Check if an address passes checksum validation and convert to a checksum address.',
     category: 'Ethereum',
     icon: 'code-square-01',
     badges: []

@@ -67,7 +67,7 @@ const handleToChecksum = (input, output, copyButton, error) => {
 const handleCheckChecksum = (input, output, copyButton) => {
   try {
     const result = utils.getAddress(input.value)
-    output.value = result === input.value ? 'Valid Checksum Address' : 'False'
+    output.value = result === input.value ? 'Valid Checksum Address' : 'Invalid Checksum Address'
 
     if (copyButton) {
       copyButton.removeAttribute('disabled')
@@ -75,7 +75,7 @@ const handleCheckChecksum = (input, output, copyButton) => {
     }
   } catch (e) {
     console.error(e)
-    output.value = 'False'
+    output.value = 'Invalid Checksum Address'
   }
 }
 

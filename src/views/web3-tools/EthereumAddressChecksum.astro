@@ -37,14 +37,12 @@ const t = (x: string): string => x;
 
     <div class="section" id="toChecksumAddress">
       <div class="title">
-        <h2>toChecksumAddress</h2>
-        <p>
-          Convert an upper or lowercase Ethereum address to a checksum address.
-        </p>
+        <h2>To Checksum Address</h2>
+        <p>Convert an Ethereum address to a checksum address.</p>
       </div>
 
       <Input
-        label="Enter Address String"
+        label="Enter an Address"
         type="text"
         id="check-address"
         className="address"
@@ -77,15 +75,12 @@ const t = (x: string): string => x;
 
     <div class="section" id="checkAddressChecksum">
       <div class="title">
-        <h2>checkAddressChecksum</h2>
-        <p>
-          Checks the checksum of a given address. Will also return false on
-          non-checksum addresses.
-        </p>
+        <h2>Check Address Checksum</h2>
+        <p>Checks if the supplied address passes checksum validation.</p>
       </div>
 
       <Input
-        label="Enter Address String"
+        label="Enter an Address"
         type="text"
         id="to-address"
         className="address"
