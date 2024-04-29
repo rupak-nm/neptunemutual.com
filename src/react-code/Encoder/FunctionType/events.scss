@@ -123,7 +123,6 @@
 
   .func.item.container {
     .event.table.container {
-      border-top: 1px solid colors.$gray-300;
       padding: 32px 24px;
       background-color: colors.$blue-dark-25;
       
@@ -229,7 +228,7 @@
 .dark .events.section {
   .events.form.container {
     background-color: colors.$black-800;
-      border-color: colors.$gray-800;
+    border-color: colors.$gray-800;
     
     div.info {
       background-color: colors.$gray-800;
@@ -266,7 +265,6 @@
   .func.item.container {
     .event.table.container {
       background-color: colors.$black-800;
-      border-color: colors.$gray-800;
 
       .logs {
         border-color: colors.$gray-800;
