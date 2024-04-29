@@ -377,7 +377,7 @@ const Encoder = () => {
 
   return (
     <div className='encoder container'>
-      <div className='form container'>
+      <div className='main form container'>
         <div>
           <Breadcrumbs
             crumbs={[

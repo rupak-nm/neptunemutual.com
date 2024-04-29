@@ -9,7 +9,7 @@ import { Icon } from '../components/Icon'
 import { EncodeData } from './FunctionType/encode'
 import { ReadContract } from './FunctionType/read'
 import { WriteContract } from './FunctionType/write'
-import { Events } from './FunctionType/events'
+import { EventTable } from './FunctionType/events'
 import {
   encodeData
 
@@ -20,7 +20,7 @@ const TypeComponent = {
   encode_data: EncodeData,
   read_contract: ReadContract,
   write_contract: WriteContract,
-  view_events: Events
+  view_events: EventTable
 }
 
 const Func = (props) => {
@@ -51,6 +51,11 @@ const Func = (props) => {
   }, [func, encodeInterface, type])
 
   useEffect(() => {
+    if (type === 'view_events') {
+      setIsOpen(true)
+      return
+    }
+
     setIsOpen(false)
   }, [type, abi])
 
@@ -72,17 +77,24 @@ const Func = (props) => {
           </button>
         </div>
       </div>
-      {isOpen &&
-        <Component
-          type={type}
-          func={func}
-          call={call}
-          isReady={isReady}
-          encodeInterface={encodeInterface}
-          joiSchema={createJoiSchema(func)}
-          itemIndex={count}
-          address={address}
-        />}
+      {isOpen && (
+        type === 'view_events'
+          ? <Component
+              logs={props.logs}
+              loading={props.loading}
+              noLogs={props.noLogs}
+            />
+          : <Component
+              type={type}
+              func={func}
+              call={call}
+              isReady={isReady}
+              encodeInterface={encodeInterface}
+              joiSchema={createJoiSchema(func)}
+              itemIndex={count}
+              address={address}
+            />
+      )}
     </div>
   )
 }
