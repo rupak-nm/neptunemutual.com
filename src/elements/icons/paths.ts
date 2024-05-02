@@ -97,7 +97,8 @@ const paths: Record<string, Promise<typeof import('*?raw')>> = {
   minus: import('./variants/General/minus.svg?raw'),
   'base-goerli': import('./custom/Brands/default/SvgBaseGoerli.svg?raw'),
   mumbai: import('./custom/Brands/default/SvgPolygon.svg?raw'),
-  clapperboard: import('./variants/General/clapperboard.svg?raw')
+  clapperboard: import('./variants/General/clapperboard.svg?raw'),
+  fuji: import('./custom/Brands/default/SvgAvalanche.svg?raw')
 }
 
 export { paths }

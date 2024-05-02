@@ -17,7 +17,9 @@ interface Props {
 const { network, tabItems, type, data } = Astro.props;
 
 const iterable =
-  type === "cxTokens" ? getKeyValuePairFrom(data[type], "active") : data[type];
+  type === "cxTokens"
+    ? getKeyValuePairFrom(data[type], "active")
+    : data[type] ?? [];
 
 const expired =
   type === "cxTokens" ? getKeyValuePairFrom(data[type], "expired") : [];

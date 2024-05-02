@@ -23,12 +23,12 @@ export async function getStaticPaths() {
       },
     },
     {
-      params: { network: "mumbai", type: "contracts" },
+      params: { network: "fuji", type: "contracts" },
       props: {
-        networkId: 80001,
+        networkId: 43113,
         type: "contracts",
-        paginated: await api.getContracts(Api.ContractMumbai),
-        networkName: "Base Goerli Network",
+        paginated: await api.getContracts(Api.ContractFuji),
+        networkName: "Avalanche Fuji Network",
       },
     },
     {
@@ -59,12 +59,12 @@ export async function getStaticPaths() {
       },
     },
     {
-      params: { network: "mumbai", type: "cx-tokens" },
+      params: { network: "fuji", type: "cx-tokens" },
       props: {
-        networkId: 80001,
+        networkId: 43113,
         type: "cxTokens",
-        paginated: await api.getContracts(Api.ContractMumbai),
-        networkName: "Base Goerli Network",
+        paginated: await api.getContracts(Api.ContractFuji),
+        networkName: "Avalanche Fuji Network",
       },
     },
     {
@@ -95,12 +95,12 @@ export async function getStaticPaths() {
       },
     },
     {
-      params: { network: "mumbai", type: "pods" },
+      params: { network: "fuji", type: "pods" },
       props: {
-        networkId: 80001,
+        networkId: 43113,
         type: "pods",
-        paginated: await api.getContracts(Api.ContractMumbai),
-        networkName: "Base Goerli Network",
+        paginated: await api.getContracts(Api.ContractFuji),
+        networkName: "Avalanche Fuji Network",
       },
     },
     {
