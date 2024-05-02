@@ -5,8 +5,9 @@ import { InputWithLabel } from '../../components/InputWithLabel/InputWithLabel'
 import { useDebouncedValue } from '../hooks/useDebouncedValue'
 import { LogsTable } from '../components/LogsTable'
 import { Icon } from '../../components/Icon'
+import { Func } from '../Func'
 
-const Events = ({ address, func, encodeInterface }) => {
+const Events = ({ address, functions, encodeInterface, abi }) => {
   const [fromBlock, setFromBlock] = useState('')
   const [toBlock, setToBlock] = useState('')
 
@@ -17,21 +18,21 @@ const Events = ({ address, func, encodeInterface }) => {
 
   const { isReady, getLogs, loading, error, resetError, noLogs } = useGetLogs({
     address,
-    func,
+    functions,
     iface: encodeInterface
   })
 
   const handleSubmit = useCallback(async (from, to) => {
     try {
-      const logs = await getLogs(from, to)
-      setLogs(logs)
+      const _logs = await getLogs(from, to)
+      setLogs(_logs)
     } catch (err) {
       console.error(err)
     }
   }, [getLogs])
 
   useEffect(() => {
-    if (!isReady || loading || !fromBlockDebounced || !toBlockDebounced) {
+    if (loading || !fromBlockDebounced || !toBlockDebounced) {
       return
     }
 
@@ -49,72 +50,107 @@ const Events = ({ address, func, encodeInterface }) => {
   }
 
   return (
-    <div className="events container">
-      <form onSubmit={handleSubmit}>
-        <div className='row'>
-          <InputWithLabel
-            label={'From block'}
-            placeholder={'1'}
-            type={'number'}
-            id={'events-input-from-block'}
-            onChange={e => handleInputChange('fromBlock', e)}
-            value={fromBlock}
-            />
+    <div className='events section'>
+      <div className="events form container">
+        <form onSubmit={handleSubmit}>
+          <div className='row'>
+            <InputWithLabel
+              label={'From block'}
+              placeholder={'1'}
+              type={'number'}
+              id={'events-input-from-block'}
+              onChange={e => handleInputChange('fromBlock', e)}
+              value={fromBlock}
+              />
 
-          <InputWithLabel
-            label={'To block'}
-            placeholder={'1200'}
-            type={'number'}
-            id={'events-input-to-block'}
-            onChange={e => handleInputChange('toBlock', e)}
-            value={toBlock}
-            />
-        </div>
-      </form>
-
-      {
-        loading && (
-          <div className='info'>
-            <p>Loading...</p>
+            <InputWithLabel
+              label={'To block'}
+              placeholder={'1200'}
+              type={'number'}
+              id={'events-input-to-block'}
+              onChange={e => handleInputChange('toBlock', e)}
+              value={toBlock}
+              />
           </div>
-        )
-      }
+        </form>
 
-      {
-        noLogs && !loading && (
-          <div className='info'>
-            <p>No logs found</p>
-          </div>
-        )
-      }
-
-      {
-        (!loading && error) && (
-          <div className='error'>
-            <Icon variant='alert-circle' size={'lg'} />
-
-            <div>
-              <p className='title'>Error getting logs</p>
-              <p className='text'>{error}</p>
-
-              <button onClick={() => handleSubmit(fromBlockDebounced, toBlockDebounced)}>
-                Try Again
-                <Icon variant='refresh-ccw-02' size={'lg'} />
-              </button>
+        {
+          loading && (
+            <div className='info'>
+              <p>Loading...</p>
             </div>
-          </div>
-        )
-      }
+          )
+        }
+
+        {
+          noLogs && !loading && (
+            <div className='info'>
+              <p>No logs found</p>
+            </div>
+          )
+        }
+
+        {
+          (!loading && error) && (
+            <div className='error' data-error-type={error.type}>
+              <Icon variant='alert-circle' size={'lg'} />
+
+              <div>
+                <p className='title'>Error getting logs</p>
+                <p className='text'>{error.message}</p>
+
+                <button onClick={() => handleSubmit(fromBlockDebounced, toBlockDebounced)}>
+                  Try Again
+                  <Icon variant='refresh-ccw-02' size={'lg'} />
+                </button>
+              </div>
+            </div>
+          )
+        }
+      </div>
 
       {
-        Boolean(!loading && logs.length) && (
-          <div className='logs'>
-            <LogsTable logs={logs} />
-          </div>
-        )
+        functions.map((func, idx) => (
+          <Func
+            key={`func-${idx}`}
+            count={idx + 1}
+            func={func}
+            type={'view_events'}
+            abi={abi}
+            logs={logs[idx]}
+            loading={loading}
+            noLogs={noLogs}
+          />
+        ))
       }
     </div>
   )
 }
 
-export { Events }
+const EventTable = ({ logs, loading, noLogs }) => {
+  return (
+    <div className='event table container'>
+      {
+        loading
+          ? (
+          <div className='info'><p>Loading...</p></div>
+            )
+          : noLogs
+            ? (
+          <div className='info'><p>No logs found</p></div>
+              )
+            : logs?.length > 0
+              ? (
+            <div className='logs'>
+              <LogsTable logs={logs} />
+            </div>
+                )
+              : (
+          <div className='info'><p>No logs</p></div>
+                )
+      }
+    </div>
+  )
+}
+
+export { Events, EventTable }

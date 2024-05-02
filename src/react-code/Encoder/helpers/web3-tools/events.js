@@ -11,7 +11,12 @@ const getEventFragment = (str) => {
 }
 
 const getEventTopic = (str) => {
-  return id(getEventFragment(str).format())
+  try {
+    return id(getEventFragment(str).format())
+  } catch (error) {
+    console.error(`Error in getEventTopic: ${error}`)
+    return ''
+  }
 }
 
 const getArgs = (iface, log) => {

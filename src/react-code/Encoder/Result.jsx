@@ -1,6 +1,6 @@
 import './Result.scss'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import { ethers } from 'ethers'
 
@@ -9,6 +9,7 @@ import { ConnectWallet } from '../components/ConnectWallet/ConnectWallet'
 import { Func } from './Func'
 import { useContractCall } from './hooks/useContractCall'
 import { DecodeData } from './FunctionType/decode'
+import { Events } from './FunctionType/events'
 
 const filter = {
   encode_data: {
@@ -47,6 +48,20 @@ const Result = (props) => {
   }
 
   const ethersInterface = new ethers.utils.Interface(abi)
+
+  const functions = useMemo(() => {
+    if (!Array.isArray(abi) || type === 'decode_data') {
+      return []
+    }
+
+    return abi.filter((func) => {
+      if (type === 'view_events') {
+        return func.type === 'event'
+      }
+
+      return func.type === 'function' && validateStateMutability(func.stateMutability)
+    })
+  }, [abi, type])
 
   return (
     <div className='result container'>
@@ -116,30 +131,27 @@ const Result = (props) => {
 
       <div className='result list container'>
         {
-          type === 'decode_data'
-            ? <DecodeData encodeInterface={ethersInterface} />
-            : (
-                Array.isArray(abi) &&
-            abi.filter((func) => {
-              if (type === 'view_events') {
-                return func.type === 'event'
-              }
-
-              return func.type === 'function' && validateStateMutability(func.stateMutability)
-            }).map((func, i) => (
-              <Func
-                type={type}
-                key={`func-${i}`}
-                func={func}
-                count={i + 1}
-                call={callMethod}
-                isReady={isReady}
-                interface={ethersInterface}
-                abi={abi}
-                address={address}
-              />
-            ))
+          type === 'view_events'
+            ? (
+              <Events address={address} functions={functions} encodeInterface={ethersInterface} />
               )
+            : type === 'decode_data'
+              ? <DecodeData encodeInterface={ethersInterface} />
+              : (
+                  functions.map((func, i) => (
+                    <Func
+                      type={type}
+                      key={`func-${i}`}
+                      func={func}
+                      count={i + 1}
+                      call={callMethod}
+                      isReady={isReady}
+                      interface={ethersInterface}
+                      abi={abi}
+                      address={address}
+                    />
+                  ))
+                )
         }
       </div>
     </div>
