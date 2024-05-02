@@ -10,6 +10,7 @@ import * as api from "../../service/api";
 import Enumerable from "linq";
 import { getEnumerable } from "../../service/api";
 import { Api } from "../../types/enum";
+import WeeklyReports from "./blog/WeeklyReports.astro";
 
 interface Props {
   articles: Article[];
@@ -25,9 +26,11 @@ const t = (x: string): string => x;
 const { articles, currentPage, totalPages, tag, communityBlogs }: Props =
   Astro.props;
 
-const latest = Enumerable.from(posts)
+const featuredPosts = posts.filter((x) => x.featured);
+
+const latestFeatured = Enumerable.from(featuredPosts)
   .orderByDescending((x) => x.publishedAt)
-  .take(3)
+  .take(4)
   .toArray();
 
 const videos = await api.getEnumerable<Video>(Api.Video, 3, 0);
@@ -47,17 +50,18 @@ const videos = await api.getEnumerable<Video>(Api.Video, 3, 0);
   <EmailSubscription id="BlogHeroSubscriptionEmail" className="script only" />
 </HeaderSection>
 
-<Featured posts={latest} />
-
-<Videos videos={videos} />
+<Featured posts={latestFeatured} />
 
 <BlogPosts
   tag={tag}
   articles={articles}
   totalPages={totalPages}
   currentPage={currentPage}
-  weeklyReports={communityBlogs}
 />
+
+<Videos videos={videos} />
+
+<WeeklyReports data={communityBlogs} />
 
 <NewsletterSignupForm
   heading="Sign up for our newsletter"

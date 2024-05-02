@@ -26,7 +26,7 @@ const { totalPages, pages } = paginated;
   />
   <style slot="header" is:inline set:html={styles}></style>
   <Blog
-    articles={pages[1].slice(3)}
+    articles={pages[1]}
     currentPage={1}
     totalPages={totalPages}
     communityBlogs={communityBlogs}

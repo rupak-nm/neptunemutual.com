@@ -126,7 +126,8 @@ const getCommunityBlogs = async (api: Api.CommunityBlogs): Promise<CommunityBlog
   const file = path.join(config.root, `${api}.json`)
   const contents = await io.readFile(file)
 
-  const result = JSON.parse(contents)
+  const result = JSON.parse(contents).slice(0, 4)
+
   return result
 }
 

@@ -11,27 +11,29 @@ interface Props {
 const { videos } = Astro.props;
 ---
 
-<div class="blog video list full width container">
-  <div class="heading">
-    <h2>
-      {t("Recent Videos")}
-    </h2>
-    <a
-      href="https://www.youtube.com/neptune-mutual"
-      rel="noreferrer"
-      target="_blank"
-    >
-      {t("View All Videos")}
-      <Icon size={"md"} variant="link-external-01" />
-    </a>
-  </div>
+<div class="blog video list">
+  <div class="inner full width container">
+    <div class="heading">
+      <h2>
+        {t("Recent Videos")}
+      </h2>
+      <a
+        href="https://www.youtube.com/neptune-mutual"
+        rel="noreferrer"
+        target="_blank"
+      >
+        {t("View All Videos")}
+        <Icon size={"md"} variant="link-external-01" />
+      </a>
+    </div>
 
-  <div class="all videos">
-    {
-      videos &&
-        videos.map((video: any) => {
-          return <VideoPlayer video={video} />;
-        })
-    }
+    <div class="all videos">
+      {
+        videos &&
+          videos.map((video: any) => {
+            return <VideoPlayer video={video} />;
+          })
+      }
+    </div>
   </div>
 </div>

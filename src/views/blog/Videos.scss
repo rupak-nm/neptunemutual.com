@@ -6,73 +6,100 @@
 @use "../../design-system/theme/dark";
 
 .blog.video.list {
-  border-top: 0.5px solid colors.$gray-300;
-
   padding-top: 56px;
-  padding-bottom: 56px;
+  background-color: colors.$base-white;
   
   @media (max-width: 767px) {
     padding-top: 32px;
-    padding-bottom: 32px;
   }
-
-  .heading {
-    display: flex;
-    justify-content: space-between;
-    gap: 32px;
   
-    @media (max-width: 374px) {
-      flex-direction: column;
-      justify-content: center;
-    }
-    
-    a {
-      color: colors.$primary-700;
+  .inner {
+    .heading {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      @include styles.text-md;
-      @include weights.semibold;
-          
+      justify-content: space-between;
+      gap: 32px;
+    
       @media (max-width: 374px) {
-        justify-content: start;
-      }      
+        flex-direction: column;
+        justify-content: center;
+      }
+      
+      a {
+        color: colors.$primary-700;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        @include styles.text-md;
+        @include weights.semibold;
+            
+        @media (max-width: 374px) {
+          justify-content: start;
+        }      
+      }
+  
+      h2 {
+        color: light.$color;
+        @include styles.display-xs;
+        @include weights.semibold;
+  
+      
+        @media (max-width: 767px) {
+          @include styles.text-xl;
+        }      
+      }
     }
-
-    h2 {
-      color: light.$color;
-      @include styles.display-xs;
-      @include weights.semibold;
-
-    
+  
+    .all.videos {
+      margin-top: 32px;
+      display: flex;
+      gap: 32px;
+      
       @media (max-width: 767px) {
-        @include styles.text-xl;
-      }      
+        flex-direction: column;
+      }
+  
+      .video.player {
+        background-color: colors.$base-white;
+        gap: 0;
+        border: 1px solid colors.$gray-200;
+  
+        border-radius: 16px;
+        overflow: hidden;
+  
+        .thumbnail {
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+  
+        .content {
+          padding: 24px;
+        }
+      }
     }
   }
 
-  .all.videos {
-    margin-top: 32px;
-    display: flex;
-    gap: 32px;
-    
-    @media (max-width: 767px) {
-      flex-direction: column;
-    }
-  }
 }
 
 .dark .blog.video.list {
-  border-top: 0.5px solid colors.$gray-800;
+  background-color: colors.$black-700;
 
-  .heading {
-    a {
-      color: colors.$primary-300;
+  .inner {
+    .heading {
+      a {
+        color: colors.$primary-300;
+      }
+  
+      h2 {
+        color: dark.$color;
+      }
     }
 
-    h2 {
-      color: dark.$color;
+    .all.videos {
+      .video.player {
+        background-color: colors.$black-800;
+        border-color: colors.$gray-800;
+      }
     }
   }
 }

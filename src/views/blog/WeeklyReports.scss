@@ -6,48 +6,66 @@
 @use "../../design-system/theme/dark";
 
 .weekly.reports.section {
+  background-color: colors.$base-white;
   padding: 96px 0;
 
-  .text.and.cta {
-    a {
+  .inner {
+    .text.and.cta {
       display: flex;
-      align-items: center;
-      gap: 8px;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 32px;
+      flex-wrap: wrap;
+  
+      .text {
+        max-width: 767px;   
+        
+        h2 {
+          color: light.$color;
+    
+          @include styles.display-xs;
+          @include weights.semibold;
+        
+          @media (max-width: 767px) {
+            @include styles.text-xl;
+          }      
+        }
+      }
 
-      @include styles.text-md;
-      @include weights.semibold;
-      color: colors.$primary-700;
+      a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        @include styles.text-md;
+        @include weights.semibold;
+        color: colors.$primary-700;
+      }
     }
-  }
 
-  .reports.grid {
-    margin-top: 32px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-
-    .group {
+    .reports.grid {
+      margin-top: 32px;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 24px;
 
       .single.report a {
         display: flex;
-        border-radius: 16px;
+        flex-direction: column;
+        border-radius: 12px;
+        overflow: hidden;
 
-        &:hover, &:focus-visible {
-          background-color: colors.$gray-100;
-        }
+        background-color: colors.$base-white;
+        border: 1px solid colors.$gray-200;
 
         img {
-          border-radius: 16px;
-          width: 146px;
+          height: 182px;
           aspect-ratio: 1 / 1;
           object-fit: cover;
         }
 
         .right {
-          padding: 16px 24px;
+          padding: 16px;
 
           .date {
             @include styles.text-sm;
@@ -79,49 +97,63 @@
       }
     }
 
-    hr {
-      border-top: 1px solid colors.$gray-200;
-    }
-  }
+    @media (max-width: 1023px) {
+      .reports.grid {
+        grid-template-columns: repeat(2, 1fr);
 
-  @media (max-width: 767px) {
-    .reports.grid {
-      .group {
+        .single.report a {
+          img {
+            height: 240px;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 767px) {
+      .reports.grid {
         grid-template-columns: 1fr;
       }
     }
-  
   }
 }
 
 .dark .weekly.reports.section {
-  .text.and.cta a {
-    color: colors.$primary-300;
-  }
+  background-color: colors.$black-700;
 
-  .reports.grid {
-    .single.report a {
-      &:hover, &:focus-visible {
-        background-color: colors.$gray-700;
+  .inner {
+    .text.and.cta a {
+      color: colors.$primary-300;
+    }
+  
+    .reports.grid {
+      .single.report a {
+        background-color: colors.$black-800;
+        border-color: colors.$gray-800;
+  
+        .right {
+          .date {
+            color: colors.$gray-400;
+          }
+  
+          h3 {
+            color: colors.$gray-100;
+          }
+  
+          p.description {
+            color: colors.$gray-300;
+          }
+        }
       }
-
-      .right {
-        .date {
-          color: colors.$gray-400;
-        }
-
-        h3 {
-          color: colors.$gray-100;
-        }
-
-        p.description {
-          color: colors.$gray-300;
-        }
+  
+      hr {
+        border-top: 1px solid colors.$gray-800;
       }
     }
 
-    hr {
-      border-top: 1px solid colors.$gray-800;
+    .text.and.cta {
+      h2 {
+        color: dark.$color;
+      }
     }
   }
 }
