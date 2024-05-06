@@ -3,7 +3,7 @@ import Button from "./buttons/Button.astro";
 
 import { getPagination } from "../../util/pagination";
 import { normalizeUrl } from "../../util/url";
-import { BlogOrPressroom } from "../../types/enum";
+import { Api, BlogOrPressroom } from "../../types/enum";
 
 interface Props {
   type?: BlogOrPressroom;
@@ -19,7 +19,11 @@ const prefix = [null, type, tag?.slug ? "tag" : null, tag?.slug, "page"]
   .filter((x) => !!x)
   .join("/");
 
-const postfix = tag?.slug ? "#" + tag.slug : "";
+const postfix = tag?.slug
+  ? "#" + tag.slug
+  : type === Api.Blog
+  ? "#all-stories"
+  : "";
 
 const { previous, pages, next } = getPagination(totalPages, currentPage);
 const previousHref = previous ? `/${prefix}/${previous}${postfix}` : undefined;
