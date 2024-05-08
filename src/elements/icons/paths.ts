@@ -98,7 +98,18 @@ const paths: Record<string, Promise<typeof import('*?raw')>> = {
   'base-goerli': import('./custom/Brands/default/SvgBaseGoerli.svg?raw'),
   mumbai: import('./custom/Brands/default/SvgPolygon.svg?raw'),
   clapperboard: import('./variants/General/clapperboard.svg?raw'),
-  fuji: import('./custom/Brands/default/SvgAvalanche.svg?raw')
+  fuji: import('./custom/Brands/default/SvgAvalanche.svg?raw'),
+  'lock-04': import('./variants/Security/lock-04.svg?raw'),
+  coinbase: import('./custom/Brands/default/SvgCoinbase.svg?raw'),
+  'coinbase-dark': import('./custom/Brands/dark/SvgCoinbaseDark.svg?raw'),
+  plus: import('./variants/General/plus.svg?raw'),
+  'switch-horizontal-01': import('./variants/Arrows/switch-horizontal-01.svg?raw'),
+  'file-plus-03': import('./variants/Files/file-plus-03.svg?raw'),
+  'folder-download': import('./variants/Files/folder-download.svg?raw'),
+  'refresh-ccw-01': import('./variants/Arrows/refresh-ccw-01.svg?raw'),
+  'clock-rewind': import('./variants/Time/clock-rewind.svg?raw'),
+  'download-02': import('./variants/General/download-02.svg?raw'),
+  'dots-vertical': import('./variants/General/dots-vertical.svg?raw')
 }
 
 export { paths }

@@ -253,7 +253,7 @@ const History = ({
                       onClick={duplicateContracts}
                       data-tooltip='Duplicate selected contract(s)'
                     >
-                      <Icon variant='file-plus' />
+                      <Icon variant='file-plus-03' />
                     </button>
 
                     <button
