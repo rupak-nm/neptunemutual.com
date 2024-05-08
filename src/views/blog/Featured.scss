@@ -71,7 +71,7 @@
 
       &:not(:nth-of-type(1)) {
         .contents {
-          padding: 24px;
+          width: 100%;
         }
 
         @media (min-width: 1024px) {
@@ -86,10 +86,6 @@
       }
 
       &:nth-of-type(1) {
-        .contents {
-          padding: 24px;
-        }
-
         .image.container {
           width: 100%;
 

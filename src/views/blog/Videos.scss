@@ -59,7 +59,8 @@
         flex-direction: column;
       }
   
-      .video.player {
+      .video.play.button {
+        padding: 0;
         background-color: colors.$base-white;
         gap: 0;
         border: 1px solid colors.$gray-200;
@@ -96,7 +97,7 @@
     }
 
     .all.videos {
-      .video.player {
+      .video.play.button {
         background-color: colors.$black-800;
         border-color: colors.$gray-800;
       }

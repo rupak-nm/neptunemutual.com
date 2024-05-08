@@ -17,8 +17,8 @@ const { videoId, thumbnail, title, length } = video;
 const duration = convertSecondsToWords(length);
 ---
 
-<a class="video player">
-  <div class="video thumbnail play button" data-video-id={videoId}>
+<a class="video play button">
+  <div class="video thumbnail" data-video-id={videoId}>
     <img
       src={`${fromCdnUnqualified(thumbnail.filename)}`}
       alt={title}

@@ -15,10 +15,10 @@ const getVerticalTabItems = (networkId: number): TabItem[] => {
       active: networkId === Network.Arbitrum
     },
     {
-      text: 'Polygon Mumbai',
-      icon: 'mumbai',
-      href: '/protocol/mumbai/contracts',
-      active: networkId === Network.Mumbai
+      text: 'Avalanche Fuji',
+      icon: 'fuji',
+      href: '/protocol/fuji/contracts',
+      active: networkId === Network.Fuji
     },
     {
       text: 'BNB Smart Chain',
@@ -34,7 +34,7 @@ const getTabItems = (networkId: number, type: string): TabItem[] => {
     [Network.Ethereum]: 'ethereum',
     [Network.Arbitrum]: 'arbitrum',
     [Network.BaseGoerli]: 'base-goerli',
-    [Network.Mumbai]: 'mumbai',
+    [Network.Fuji]: 'fuji',
     [Network.BSC]: 'bsc'
   }
 
@@ -76,11 +76,11 @@ const config: Record<number, NetworkConfig> = {
     app: 'https://test.neptunemutual.net',
     explorer: 'https://goerli.basescan.org/address/'
   },
-  [Network.Mumbai]: {
-    id: Network.Mumbai,
-    title: 'Neptune Mutual on Mumbai (Testnet)',
+  [Network.Fuji]: {
+    id: Network.Fuji,
+    title: 'Neptune Mutual on Fuji (Testnet)',
     app: 'https://test.neptunemutual.net',
-    explorer: 'https://mumbai.polygonscan.com/address/'
+    explorer: 'https://testnet.snowtrace.io/address/'
   },
   [Network.BSC]: {
     id: Network.BSC,

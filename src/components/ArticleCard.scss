@@ -12,6 +12,7 @@
   border: 1px solid colors.$gray-200;
   border-radius: 16px;
   overflow: hidden;
+  padding: 0;
 
   .image.container {
     height: 240px;
@@ -29,6 +30,10 @@
         filter: inherit;
       }
     }
+  }
+
+  .contents {
+    padding: 24px;
   }
 
   time {
