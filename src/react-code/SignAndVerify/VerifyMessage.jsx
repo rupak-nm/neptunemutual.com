@@ -49,7 +49,8 @@ const VerifyMessage = () => {
           {
             _type === 'success' && (
               <div className='description'>
-                The address <b>{_account}</b> did sign the message: <br />{_message}
+                The address <b>{_account}</b> did sign the message: <br />
+                <i><b>{_message}</b></i>
               </div>
             )
           }

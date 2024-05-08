@@ -41,6 +41,8 @@
     .title.and.cta {
       display: flex;
       justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     button#sign-button {
@@ -123,8 +125,8 @@
 
 .dark .sign.and.verify.component {
   button.ui.primary.button:disabled {
-    background-color: colors.$primary-300;
-    border-color: colors.$primary-500;
+    background-color: colors.$primary-400;
+    border-color: colors.$primary-400;
   }
 
   hr {
@@ -141,6 +143,12 @@
         background-color: rgba(colors.$success-900, 0.5);
         border: 1px solid colors.$success-700;
         color: colors.$success-50;
+      }
+
+      div.description {
+        b {
+          word-break: break-all;
+        }
       }
     }
   }

@@ -32,6 +32,7 @@
     display: none;
     background-color: colors.$white;
     border: 1px solid colors.$gray-200;
+    min-width: 100%;
 
     &.visible {
       position: absolute;
