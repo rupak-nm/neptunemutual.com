@@ -14,7 +14,7 @@ import { Icon } from '../Icon'
 import { Modal } from '../Modal/Modal'
 import { ConnectedDropdown } from './ConnectedDropdown'
 
-const ConnectWallet = ({ networkId }) => {
+const ConnectWallet = ({ networkId = undefined }) => {
   const [popupOpen, setPopupOpen] = useState(false)
 
   const { login, logout } = useAuth()
@@ -34,7 +34,9 @@ const ConnectWallet = ({ networkId }) => {
   }
 
   useEffect(() => {
-    if (!popupOpen) setIsConnecting(false)
+    if (!popupOpen) {
+      setIsConnecting(false)
+    }
 
     if (active) {
       setIsConnecting(false)
@@ -48,10 +50,13 @@ const ConnectWallet = ({ networkId }) => {
     setIsConnecting(true)
     setError('')
 
-    const wallet = wallets.find((x) => x.id === id)
+    const wallet = wallets.find(x => x.id === id)
     const connectorName = wallet.connectorName
     await login(connectorName, networkId, (switched) => {
-      if (!switched.success) setError(switched.message)
+      if (!switched.success) {
+        setError(switched.message)
+      }
+
       setIsConnecting(false)
     })
   }

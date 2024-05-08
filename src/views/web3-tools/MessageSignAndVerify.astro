@@ -1,0 +1,39 @@
+---
+import HeaderSection from "../../components/HeaderSection.astro";
+import Breadcrumb from "../../elements/Breadcrumb.astro";
+
+import { SignAndVerify } from "../../react-code/SignAndVerify";
+
+const title = "Sign And Verify Message";
+
+const items = [
+  {
+    link: "/",
+    name: "Home",
+  },
+  {
+    link: "/web3-tools",
+    name: "Web3 Tools",
+  },
+  {
+    link: `#`,
+    name: title,
+  },
+];
+
+const t = (x: string): string => x;
+---
+
+<HeaderSection
+  color={"basic"}
+  alignment={"center"}
+  heading={t("Sign And Verify Message")}
+/>
+
+<div class="message sign and verify full width container">
+  <div class="inner container">
+    <Breadcrumb items={items} />
+
+    <SignAndVerify client:idle />
+  </div>
+</div>

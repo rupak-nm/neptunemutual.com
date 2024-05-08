@@ -59,6 +59,14 @@ const tools: Web3ToolItem[] = [
     category: 'Ethereum',
     icon: 'code-square-01',
     badges: []
+  },
+  {
+    slug: 'sign-and-verify-message',
+    title: 'Sign and Verify Message',
+    intro: 'Sign and verify messages using your Ethereum address.',
+    category: 'Ethereum',
+    icon: 'code-square-01',
+    badges: []
   }
 ]
 
