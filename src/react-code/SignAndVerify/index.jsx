@@ -1,17 +1,33 @@
 import './index.scss'
 
-import { Web3ReactProvider } from '@web3-react/core'
 import { SignMessage } from './SignMessage'
-import { getLibrary } from '../lib/connect-wallet/utils/web3'
 import { VerifyMessage } from './VerifyMessage'
+import { ConnectorNames, ConnectWallet } from '../packages/web3-core'
+import { Popup } from '../components/ConnectWallet/Popup'
+
+const SUPPORTED_NETWORKS = []
+
+const SUPPORTED_CONNECTORS = [
+  ConnectorNames.Injected,
+  ConnectorNames.MetaMask,
+  ConnectorNames.CoinbaseWallet,
+  ConnectorNames.BitKeepWallet,
+  ConnectorNames.BinanceWallet,
+  ConnectorNames.OKXWallet,
+  ConnectorNames.Gnosis
+]
 
 const SignAndVerify = () => {
   return (
     <div className='sign and verify component'>
-      <Web3ReactProvider getLibrary={getLibrary}>
+      <ConnectWallet.Root
+        getInitialNetwork={async () => null}
+        connectors={SUPPORTED_CONNECTORS}
+        supportedNetworks={SUPPORTED_NETWORKS}
+      >
         <SignMessage />
-      </Web3ReactProvider>
-
+        <Popup />
+      </ConnectWallet.Root>
       <VerifyMessage />
     </div>
   )

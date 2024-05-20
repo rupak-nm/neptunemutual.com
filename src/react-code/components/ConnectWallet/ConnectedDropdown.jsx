@@ -5,24 +5,20 @@ import {
   useState
 } from 'react'
 
-import { useWeb3React } from '@web3-react/core'
-
 import { chains } from '../../Encoder/helpers/wallet/chains'
 import { useOnClickOutside } from '../../Encoder/hooks/useOnOutsideClick'
 import {
   abbreviateAccount,
   handleCopy
 } from '../../helpers'
-import useAuth from '../../lib/connect-wallet/hooks/useAuth'
 import { Icon } from '../Icon'
 import { IconButton } from '../IconButton/IconButton'
+import { useConnectWallet } from '../../packages/web3-core'
 
 const ConnectedDropdown = () => {
   const [open, setOpen] = useState(false)
 
-  const { account, chainId } = useWeb3React()
-
-  const { logout } = useAuth()
+  const { account, connectedChainId: chainId, logout } = useConnectWallet()
 
   const ref = useRef()
 

@@ -1,10 +1,10 @@
 import { useCallback, useMemo, useState } from 'react'
-import { useWeb3React } from '@web3-react/core'
 import { ethers } from 'ethers'
 import { getArgs, getBlockTimestamp, getEventTopic } from '../helpers/web3-tools/events'
+import { useConnectWallet } from '../../packages/web3-core'
 
 const useGetLogs = ({ address, functions, iface }) => {
-  const { library } = useWeb3React()
+  const { signerOrProvider } = useConnectWallet()
 
   const topics = useMemo(() => {
     return [functions.map(func => getEventTopic(func))]
@@ -17,8 +17,8 @@ const useGetLogs = ({ address, functions, iface }) => {
   const [error, setError] = useState(null)
 
   const isReady = useMemo(() => {
-    return library && library.getLogs
-  }, [library])
+    return !!(signerOrProvider?.provider.getLogs)
+  }, [signerOrProvider])
 
   const getLogs = useCallback(async (fromBlock, toBlock) => {
     setNoLogs(false)

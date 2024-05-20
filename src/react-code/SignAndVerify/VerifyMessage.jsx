@@ -3,10 +3,10 @@ import { InputWithLabel } from '../components/InputWithLabel/InputWithLabel'
 import { Button } from '../components/Button/Button'
 import { Icon } from '../components/Icon'
 import { useState, useEffect } from 'react'
-import { utils } from 'ethers'
+import * as wallet from '@ethersproject/wallet'
 
 const Alert = ({ account, message, signature, type = 'success' }) => {
-  const recoveredAddress = utils.verifyMessage(message, signature)
+  const recoveredAddress = wallet.verifyMessage(message, signature)
 
   const title = type === 'success'
     ? 'Verified'
@@ -52,9 +52,9 @@ const VerifyMessage = () => {
     setVerified(null)
   }, [message, signature, address])
 
-  const verifyMessage = async () => {
+  const handleSubmit = async () => {
     try {
-      const recoveredAddress = utils.verifyMessage(message, signature)
+      const recoveredAddress = wallet.verifyMessage(message, signature)
 
       if (recoveredAddress.toLowerCase() === address.toLowerCase()) {
         setVerified(true)
@@ -101,7 +101,7 @@ const VerifyMessage = () => {
       <Button variant="primary"
         disabled={!message || !signature || !address}
         id="verify-button"
-        onClick={verifyMessage}
+        onClick={handleSubmit}
       >
         <Icon variant={'check'} />
         Verify Message

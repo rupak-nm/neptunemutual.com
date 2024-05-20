@@ -1,16 +1,16 @@
 import { TextArea } from '../components/TextArea'
 import { InputWithLabel } from '../components/InputWithLabel/InputWithLabel'
 import { Button } from '../components/Button/Button'
-import { useWeb3React } from '@web3-react/core'
 import { useState } from 'react'
 import { Icon } from '../components/Icon'
 import { copyToClipboard } from '../../scripts/util/copy'
 import { ConnectWallet } from '../components/ConnectWallet/ConnectWallet'
+import { useConnectWallet } from '../packages/web3-core'
 
 const SignMessage = () => {
   const [message, setMessage] = useState('')
   const [signedMessage, setSignedMessage] = useState('')
-  const { account, library } = useWeb3React()
+  const { account, signerOrProvider } = useConnectWallet()
   const [signing, setSigning] = useState(false)
 
   const [copied, setCopied] = useState(false)
@@ -23,17 +23,15 @@ const SignMessage = () => {
   }
 
   const signMessage = async () => {
-    if (!library || !library.getSigner) {
+    if (!signerOrProvider) {
       console.error('No signer available')
       return
     }
 
-    const signer = library.getSigner()
-
     setSigning(true)
 
     try {
-      const signature = await signer.signMessage(message)
+      const signature = await signerOrProvider.signMessage(message)
       setSignedMessage(signature)
     } catch (e) {
       console.error(e)

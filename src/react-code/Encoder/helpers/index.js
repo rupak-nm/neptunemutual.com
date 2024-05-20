@@ -1,4 +1,4 @@
-import { ethers } from 'ethers'
+import { Interface } from '@ethersproject/abi'
 
 const isJSON = (string) => {
   try {
@@ -23,7 +23,7 @@ const isValidAbi = (string) => {
     const res = JSON.parse(string)
 
     if (Array.isArray(res)) {
-      const _iface = new ethers.utils.Interface(res)
+      const _iface = new Interface(res)
 
       if (_iface) {
         return true

@@ -8,16 +8,14 @@ import {
 
 import { Button } from '../../components/Button/Button'
 import {
-  checkEmptyInputs,
-  checkInputErrors,
   getWriteArguments,
   updateObjectByArrayOfKeys
 } from '../helpers/web3-tools/abi-encoder'
 import { InputFields } from '../components/InputFields'
-import { useWeb3React } from '@web3-react/core'
 
 import { JSONPopup } from '../../components/JSONPopup/JSONPopup'
 import { chains } from '../helpers/wallet/chains'
+import { useConnectWallet } from '../../packages/web3-core'
 
 const WriteContract = (props) => {
   const [inputData, setInputData] = useState({})
@@ -27,7 +25,7 @@ const WriteContract = (props) => {
 
   const [parsedJSON, setParsedJSON] = useState(null)
 
-  const { chainId } = useWeb3React()
+  const { connectedChainId: chainId } = useConnectWallet()
   const explorerUrl = useMemo(() => {
     const explorer = chains[chainId]?.explorer
     return explorer ? explorer + '/tx/' : ''
@@ -49,9 +47,13 @@ const WriteContract = (props) => {
 
     const { error: _error, hash: _hash } = await call(methodName, methodArgs, hasPayableStateMutability && { value }, iface)
 
-    if (_hash) setHash(_hash)
+    if (_hash) {
+      setHash(_hash)
+    }
 
-    if (_error) setError(_error)
+    if (_error) {
+      setError(_error)
+    }
 
     setMakingCall(false)
   }, [call, name, func, iface, inputs])
@@ -59,7 +61,10 @@ const WriteContract = (props) => {
   const handleInputChange = (value = '', keyArray) => {
     const updatedObject = updateObjectByArrayOfKeys(inputData, keyArray, value)
     setInputData({ ...updatedObject })
-    if (error) setError('')
+
+    if (error) {
+      setError('')
+    }
   }
 
   const handleJSON = (json) => {

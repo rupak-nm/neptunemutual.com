@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import { ethers } from 'ethers'
+import { getAddress } from '@ethersproject/address'
 import Joi from 'joi'
 
 const ARGS_TYPE_PATTERN = /([a-zA-Z0-9]+)(\[(\d*)\])?/
@@ -87,7 +87,7 @@ const getJoiType = (type) => {
           .alphanum()
           .custom((value, helper) => {
             try {
-              ethers.utils.getAddress(value)
+              getAddress(value)
               return value
             } catch { }
 

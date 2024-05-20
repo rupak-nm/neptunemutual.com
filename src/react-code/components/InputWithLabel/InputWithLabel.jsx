@@ -7,7 +7,8 @@ import './InputWithLabel.scss'
 
 const InputWithLabel = forwardRef(
   (
-    { children, placeholder, label, error, errorIcon, inputType, ...props }
+    { children, placeholder, label, error, errorIcon, inputType, ...props },
+    ref
   ) => {
     const [modalOpen, setModalOpen] = useState(false)
 

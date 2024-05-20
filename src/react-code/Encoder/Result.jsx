@@ -2,7 +2,7 @@ import './Result.scss'
 
 import { useMemo, useState } from 'react'
 
-import { ethers } from 'ethers'
+import { Interface } from '@ethersproject/abi'
 
 import { Button } from '../components/Button/Button'
 import { ConnectWallet } from '../components/ConnectWallet/ConnectWallet'
@@ -29,7 +29,7 @@ const filter = {
 const Result = (props) => {
   const [type, setType] = useState('encode_data')
 
-  const { abi, address, title, networkId } = props
+  const { abi, address, title } = props
 
   const { callMethod, isReady } = useContractCall({
     abi,
@@ -47,7 +47,7 @@ const Result = (props) => {
     return re.test(stateMutability)
   }
 
-  const ethersInterface = new ethers.utils.Interface(abi)
+  const ethersInterface = new Interface(abi)
 
   const functions = useMemo(() => {
     if (!Array.isArray(abi) || type === 'decode_data') {
@@ -122,7 +122,7 @@ const Result = (props) => {
           <div className='right group'>
             {
               !['encode_data', 'decode_data'].includes(type) && (
-                <ConnectWallet networkId={networkId} />
+                <ConnectWallet />
               )
             }
           </div>
