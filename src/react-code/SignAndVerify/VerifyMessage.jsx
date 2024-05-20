@@ -5,6 +5,42 @@ import { Icon } from '../components/Icon'
 import { useState, useEffect } from 'react'
 import { utils } from 'ethers'
 
+const Alert = ({ account, message, signature, type = 'success' }) => {
+  const recoveredAddress = utils.verifyMessage(message, signature)
+
+  const title = type === 'success'
+    ? 'Verified'
+    : 'Failed to verify'
+
+  return (
+    <div className='verify message alert' data-type={type}>
+      <div className='icon'>
+        <Icon variant={type === 'success' ? 'check' : 'alert-circle'} size='xl' />
+      </div>
+
+      <div className='content'>
+        <div className='title'>
+          {title}
+        </div>
+
+        {
+          type === 'success'
+            ? (
+            <div className='description'>
+              The address <b>{account}</b> did sign the message: <br /><i><b>{message}</b></i>
+            </div>
+              )
+            : (
+            <div className='description'>
+              This message was signed by <b>{recoveredAddress}</b>, which does not match the provided wallet <b>{account}</b>. Are you sure you have connected the correct wallet while signing?
+            </div>
+              )
+        }
+      </div>
+    </div>
+  )
+}
+
 const VerifyMessage = () => {
   const [message, setMessage] = useState('')
   const [signature, setSignature] = useState('')
@@ -20,43 +56,16 @@ const VerifyMessage = () => {
     try {
       const recoveredAddress = utils.verifyMessage(message, signature)
 
-      console.log('recoveredAddress', recoveredAddress, 'address', address)
-
       if (recoveredAddress.toLowerCase() === address.toLowerCase()) {
-        // alert('Signature verified successfully')
         setVerified(true)
       } else {
-        // alert('Failed to verify signature')
         setVerified(false)
       }
     } catch (e) {
       console.error(e)
-      // alert('Failed to verify signature')
       setVerified(false)
     }
   }
-
-  const Alert = ({ _account, _message, _type = 'success' }) => (
-    <div className='verify message alert' data-type={_type}>
-      <div className='icon'>
-        <Icon variant={_type === 'success' ? 'check' : 'alert-circle'} size='xl' />
-      </div>
-
-        <div className='content'>
-          <div className='title'>
-            {_type === 'success' ? 'Verified' : 'Failed to verify'}
-          </div>
-          {
-            _type === 'success' && (
-              <div className='description'>
-                The address <b>{_account}</b> did sign the message: <br />
-                <i><b>{_message}</b></i>
-              </div>
-            )
-          }
-        </div>
-    </div>
-  )
 
   return (
     <div className="verify section">
@@ -102,7 +111,11 @@ const VerifyMessage = () => {
         (verified !== null) && (
           <>
             <hr />
-            <Alert _account={address} _message={message} _type={verified ? 'success' : 'error'} />
+            <Alert
+              account={address}
+              message={message}
+              signature={signature}
+              type={verified ? 'success' : 'error'} />
           </>
         )
       }
