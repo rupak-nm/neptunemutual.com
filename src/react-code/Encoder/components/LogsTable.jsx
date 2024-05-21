@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { fromNow } from '../../../../util/relative-time'
 import { chains } from '../helpers/wallet/chains'
 import { Icon } from '../../components/Icon'
+import { useConnectWallet } from '../../packages/web3-core'
 
 const LogsTable = ({ logs }) => {
   const { connectedChainId: chainId } = useConnectWallet()

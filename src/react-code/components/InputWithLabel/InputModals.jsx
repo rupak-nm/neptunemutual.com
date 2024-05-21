@@ -42,7 +42,7 @@ const AddZeroesModal = ({ show, handleClose, handleAddZeroes }) => {
       <form className='content' onSubmit={e => e.preventDefault()}>
         <select
           className='input container'
-          value={selectedOption.value}
+          value={selectedOption}
           onChange={handleSwitch}
           autoFocus
         >

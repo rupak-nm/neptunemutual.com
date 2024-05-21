@@ -16,8 +16,11 @@ const useGetLogs = ({ address, functions, iface }) => {
 
   const [error, setError] = useState(null)
 
-  const isReady = useMemo(() => {
-    return !!(signerOrProvider?.provider.getLogs)
+  const { isReady, library } = useMemo(() => {
+    return {
+      isReady: !!(signerOrProvider?.provider.getLogs),
+      library: signerOrProvider?.provider
+    }
   }, [signerOrProvider])
 
   const getLogs = useCallback(async (fromBlock, toBlock) => {
