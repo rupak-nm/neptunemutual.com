@@ -19,14 +19,13 @@
 
   .sign.section,
   .verify.section {
-    
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
   }
 
   h2 {
-    @include styles.display-sm;
+    @include styles.text-xl;
     @include weights.semibold;
   }
 
@@ -45,9 +44,17 @@
       flex-wrap: wrap;
     }
 
+    input#address-input {
+      background-color: colors.$gray-50;
+
+      & + p.input.hint {
+        display: initial;
+        margin-top: 0;
+      }
+    }
+
     button#sign-button {
       width: max-content;
-      margin-top: 8px;
 
       span {
         display: flex;
@@ -59,22 +66,32 @@
     .textarea.container {
       position: relative;
 
+      textarea {
+        height: 96px;
+      }
+
       .copy.button.container {
         position: absolute;
         bottom: 12px;
         right: 14px;
 
-        button span.content {
-          display: flex;
-          align-items: center;
-          gap: 8px;
+        button {
+          span.content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+          }
         }
       }
     }
   }
 
   .verify.section {
-    margin-top: 32px;
+    margin-top: 40px;
+
+    .textarea.container textarea {
+      height: 96px;
+    }
 
     button#verify-button {
       width: max-content;
@@ -86,39 +103,43 @@
         gap: 8px;
       }
     }
+  }
 
-    .verify.message.alert {
-      padding: 16px;
-      border-radius: 4px;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
+  .message.alert {
+    padding: 16px;
+    border-radius: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
 
-      div.icon {
-        padding-top: 2px;
+    &.sign {
+      align-items: center;
+    }
+
+    div.icon {
+      padding-top: 2px;
+    }
+
+    .content {
+      .title {
+        @include styles.text-lg;
+        @include weights.medium;
       }
 
-      .content {
-        .title {
-          @include styles.text-lg;
-          @include weights.medium;
-        }
-
-        .description {
-          @include styles.text-sm;
-          @include weights.regular;
-        }
+      .description {
+        @include styles.text-sm;
+        @include weights.regular;
       }
+    }
 
-      background-color: colors.$error-50;
-      border: 1px solid colors.$error-600;
-      color: colors.$error-600;
+    background-color: colors.$error-25;
+    border: 1px solid colors.$error-300;
+    color: colors.$error-600;
 
-      &[data-type="success"] {
-        background-color: colors.$success-50;
-        border: 1px solid colors.$success-600;
-        color: colors.$success-700;
-      }
+    &[data-type="success"] {
+      background-color: colors.$success-25;
+      border: 1px solid colors.$success-300;
+      color: colors.$success-600;
     }
   }
 }
@@ -129,26 +150,30 @@
     border-color: colors.$primary-400;
   }
 
+  .sign.section {
+    input#address-input {
+      background-color: colors.$gray-800;
+    }
+  }
+
   hr {
     border-top: 1px solid colors.$gray-700;
   }
 
-  .verify.section {
-    .verify.message.alert {
-      background-color: rgba(colors.$error-900, 0.5);
-      border: 1px solid colors.$error-700;
-      color: colors.$error-50;
+  .message.alert {
+    background-color: rgba(colors.$error-900, 0.5);
+    border: 1px solid colors.$error-700;
+    color: colors.$error-50;
 
-      &[data-type="success"] {
-        background-color: rgba(colors.$success-900, 0.5);
-        border: 1px solid colors.$success-700;
-        color: colors.$success-50;
-      }
+    &[data-type="success"] {
+      background-color: rgba(colors.$success-900, 0.5);
+      border: 1px solid colors.$success-700;
+      color: colors.$success-50;
+    }
 
-      div.description {
-        b {
-          word-break: break-all;
-        }
+    div.description {
+      b {
+        word-break: break-all;
       }
     }
   }

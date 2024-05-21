@@ -2,18 +2,24 @@ import { TextArea } from '../components/TextArea'
 import { InputWithLabel } from '../components/InputWithLabel/InputWithLabel'
 import { Button } from '../components/Button/Button'
 import { Icon } from '../components/Icon'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import * as wallet from '@ethersproject/wallet'
 
 const Alert = ({ account, message, signature, type = 'success' }) => {
-  const recoveredAddress = wallet.verifyMessage(message, signature)
+  const recoveredAddress = useMemo(() => {
+    try {
+      return wallet.verifyMessage(message, signature)
+    } catch (e) {
+      return ''
+    }
+  }, [message, signature])
 
   const title = type === 'success'
     ? 'Verified'
     : 'Failed to verify'
 
   return (
-    <div className='verify message alert' data-type={type}>
+    <div className='message alert' data-type={type}>
       <div className='icon'>
         <Icon variant={type === 'success' ? 'check' : 'alert-circle'} size='xl' />
       </div>
@@ -32,7 +38,19 @@ const Alert = ({ account, message, signature, type = 'success' }) => {
               )
             : (
             <div className='description'>
-              This message was signed by <b>{recoveredAddress}</b>, which does not match the provided wallet <b>{account}</b>. Are you sure you have connected the correct wallet while signing?
+              {
+                recoveredAddress
+                  ? (
+                  <>
+                    This message was signed by <b>{recoveredAddress}</b>, which does not match the provided wallet <b>{account}</b>. Are you sure you have connected the correct wallet while signing?
+                  </>
+                    )
+                  : (
+                  <>
+                    The signature is invalid. Please check the message and signature and try again.
+                  </>
+                    )
+              }
             </div>
               )
         }
@@ -71,6 +89,16 @@ const VerifyMessage = () => {
     <div className="verify section">
       <h2>Verify Message</h2>
 
+      {
+        (verified !== null) && (
+          <Alert
+            account={address}
+            message={message}
+            signature={signature}
+            type={verified ? 'success' : 'error'} />
+        )
+      }
+
       <InputWithLabel
         label="Message"
         placeholder="Enter message to verify"
@@ -106,19 +134,6 @@ const VerifyMessage = () => {
         <Icon variant={'check'} />
         Verify Message
       </Button>
-
-      {
-        (verified !== null) && (
-          <>
-            <hr />
-            <Alert
-              account={address}
-              message={message}
-              signature={signature}
-              type={verified ? 'success' : 'error'} />
-          </>
-        )
-      }
     </div>
   )
 }
