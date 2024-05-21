@@ -15,4 +15,6 @@ const abbreviateAccount = (input) => {
   return input.slice(0, 4) + '...' + input.slice(-6)
 }
 
-export { abbreviateAccount, handleCopy }
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+export { abbreviateAccount, handleCopy, sleep }

@@ -2,10 +2,19 @@ import { TextArea } from '../components/TextArea'
 import { InputWithLabel } from '../components/InputWithLabel/InputWithLabel'
 import { Button } from '../components/Button/Button'
 import { Icon } from '../components/Icon'
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import * as wallet from '@ethersproject/wallet'
+import { sleep } from '../helpers'
 
 const Alert = ({ account, message, signature, type = 'success' }) => {
+  const alertRef = useRef(null)
+
+  useEffect(() => {
+    if (alertRef.current) {
+      alertRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [])
+
   const recoveredAddress = useMemo(() => {
     try {
       return wallet.verifyMessage(message, signature)
@@ -19,7 +28,7 @@ const Alert = ({ account, message, signature, type = 'success' }) => {
     : 'Failed to verify'
 
   return (
-    <div className='message alert' data-type={type}>
+    <div className='message alert' data-type={type} ref={alertRef}>
       <div className='icon'>
         <Icon variant={type === 'success' ? 'check' : 'alert-circle'} size='xl' />
       </div>
@@ -71,6 +80,10 @@ const VerifyMessage = () => {
   }, [message, signature, address])
 
   const handleSubmit = async () => {
+    setVerified(null)
+
+    await sleep(300)
+
     try {
       const recoveredAddress = wallet.verifyMessage(message, signature)
 
@@ -131,7 +144,6 @@ const VerifyMessage = () => {
         id="verify-button"
         onClick={handleSubmit}
       >
-        <Icon variant={'check'} />
         Verify Message
       </Button>
     </div>

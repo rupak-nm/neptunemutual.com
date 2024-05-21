@@ -1,15 +1,23 @@
 import { TextArea } from '../components/TextArea'
 import { InputWithLabel } from '../components/InputWithLabel/InputWithLabel'
 import { Button } from '../components/Button/Button'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Icon } from '../components/Icon'
 import { copyToClipboard } from '../../scripts/util/copy'
 import { ConnectWallet } from '../components/ConnectWallet/ConnectWallet'
 import { useConnectWallet } from '../packages/web3-core'
 
 const FailedAlert = ({ message }) => {
+  const alertRef = useRef(null)
+
+  useEffect(() => {
+    if (alertRef.current) {
+      alertRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [])
+
   return (
-    <div className='sign message alert' data-type={'error'}>
+    <div className='sign message alert' data-type={'error'} ref={alertRef} >
       <div className='icon'>
         <Icon variant={'alert-circle'} size='xl' />
       </div>
@@ -43,6 +51,7 @@ const SignMessage = () => {
     }
 
     setSigning(true)
+    setError(null)
 
     try {
       const signature = await signerOrProvider.signMessage(message)
@@ -73,7 +82,8 @@ const SignMessage = () => {
         placeholder="-"
         type="text"
         id="address-input"
-        disabled
+        readOnly
+        value={account || '-'}
       >
         This address is connected to your Web3 wallet.
         </InputWithLabel>
