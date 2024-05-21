@@ -4,7 +4,7 @@ import BitKeepLogo from '../../logos/wallets/BitKeepLogo.jsx';
 const isInstalled = () => !!getProvider();
 const getInstallationURL = () => 'https://bitkeep.com/en/download?type=2';
 const Icon = BitKeepLogo;
-const name = 'BitKeep Wallet';
+const name = 'Bitget (BitKeep) Wallet';
 const connectorName = ConnectorNames.BitKeepWallet;
 export const config = {
     name,
