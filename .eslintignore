@@ -1,3 +1,4 @@
 dist
 lib
+src/react-code/packages
 **/*.min.js

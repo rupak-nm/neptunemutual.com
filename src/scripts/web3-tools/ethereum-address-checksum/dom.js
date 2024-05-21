@@ -1,4 +1,4 @@
-import { utils } from 'ethers'
+import { getAddress } from '@ethersproject/address'
 
 const toChecksumSection = document.querySelector('.ethereum.checksum.container .inner > .section#toChecksumAddress')
 const checkChecksumSection = document.querySelector('.ethereum.checksum.container .inner > .section#checkAddressChecksum')
@@ -50,7 +50,7 @@ const handleAction = (section, handler = () => {}) => {
 
 const handleToChecksum = (input, output, copyButton, error) => {
   try {
-    const result = utils.getAddress(input.value.toLowerCase())
+    const result = getAddress(input.value.toLowerCase())
     output.value = result
 
     if (copyButton) {
@@ -66,7 +66,7 @@ const handleToChecksum = (input, output, copyButton, error) => {
 
 const handleCheckChecksum = (input, output, copyButton) => {
   try {
-    const result = utils.getAddress(input.value)
+    const result = getAddress(input.value)
     output.value = result === input.value ? 'Valid Checksum Address' : 'Invalid Checksum Address'
 
     if (copyButton) {

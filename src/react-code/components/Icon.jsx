@@ -1,75 +1,23 @@
-import { AlignBottomIcon } from './icons/AlignBottomIcon'
-import { CheckIcon } from './icons/CheckIcon'
-import { ChevronDown } from './icons/ChevronDown'
-import { ChevronRight } from './icons/ChevronRight'
-import { ChevronRightDouble } from './icons/ChevronRightDouble'
-import { ChevronUp } from './icons/ChevronUp'
-import { CloseIcon } from './icons/CloseIcon'
-import { CloudDownloadIcon } from './icons/CloudDownloadIcon'
-import { CoinbaseDarkIcon } from './icons/CoinbaseDarkIcon'
-import { CoinbaseIcon } from './icons/CoinbaseIcon'
-import { CopyIcon } from './icons/CopyIcon'
-import { FolderIcon } from './icons/FolderIcon'
-import { GnosisDarkIcon } from './icons/GnosisDarkIcon'
-import { GnosisIcon } from './icons/GnosisIcon'
-import { LogoutIcon } from './icons/LogoutIcon'
-import { MetamaskDarkIcon } from './icons/MetamaskDarkIcon'
-import { MetamaskIcon } from './icons/MetamaskIcon'
-import { OkxWalletDarkIcon } from './icons/OkxWalletDarkIcon'
-import { OkxWalletIcon } from './icons/OkxWalletIcon'
-import { RefreshIcon } from './icons/RefreshIcon'
-import { TrashIcon } from './icons/TrashIcon'
-import { WalletIcon } from './icons/WalletIcon'
-import { PlusIcon } from './icons/PlusIcon'
-import { SwitchHorizontalIcon } from './icons/SwitchHorizontal'
-import { AlertCircleIcon } from './icons/AlertCircleIcon'
-import { FilePlusIcon } from './icons/FilePlusIcon'
-import { FolderDownloadIcon } from './icons/FolderDownloadIcon'
-import { RefreshCCWIcon } from './icons/RefreshCCWIcon'
-import { ClockRewind } from './icons/ClockRewind'
-import { Download02 } from './icons/Download02'
-import { DotsVertical } from './icons/DotsVertical'
-import { ArrowDownIcon } from './icons/ArrowDownIcon'
+import React from 'react'
 
-const icons = {
-  'chevron-right': <ChevronRight />,
-  'chevron-down': <ChevronDown />,
-  'chevron-up': <ChevronUp />,
-  'wallet-04': <WalletIcon />,
-  check: <CheckIcon />,
-  'copy-01': <CopyIcon />,
-  'log-out-01': <LogoutIcon />,
-  'x-close': <CloseIcon />,
-  metamask: <MetamaskIcon />,
-  'metamask-dark': <MetamaskDarkIcon />,
-  'okx-wallet': <OkxWalletIcon />,
-  'okx-wallet-dark': <OkxWalletDarkIcon />,
-  'gnosis-wallet': <GnosisIcon />,
-  'gnosis-wallet-dark': <GnosisDarkIcon />,
-  'refresh-ccw-02': <RefreshIcon />,
-  'align-bottom-01': <AlignBottomIcon />,
-  'trash-01': <TrashIcon />,
-  'download-cloud-01': <CloudDownloadIcon />,
-  folder: <FolderIcon />,
-  'chevron-right-double': <ChevronRightDouble />,
-  coinbase: <CoinbaseIcon />,
-  'coinbase-dark': <CoinbaseDarkIcon />,
-  plus: <PlusIcon />,
-  'switch-horizontal-01': <SwitchHorizontalIcon />,
-  'alert-circle': <AlertCircleIcon />,
-  'file-plus': <FilePlusIcon />,
-  'folder-download': <FolderDownloadIcon />,
-  'refresh-ccw-01': <RefreshCCWIcon />,
-  'clock-rewind': <ClockRewind />,
-  'download-02': <Download02 />,
-  'dots-vertical': <DotsVertical />,
-  'arrow-down': <ArrowDownIcon />
-}
+import { paths } from '../../elements/icons/paths'
 
 export const Icon = ({ variant, size }) => {
-  return Object.prototype.hasOwnProperty.call(icons, variant)
-    ? <i data-size={size}>
-        {icons[variant]}
-      </i>
-    : <></>
+  const [innerHTML, setInnerHTML] = React.useState(null)
+
+  React.useEffect(() => {
+    if (variant !== undefined) {
+      try {
+        paths[variant]
+          .then(x => setInnerHTML(x.default))
+          .catch(e => console.error(`Error loading icon: ${variant}`, e))
+      } catch (e) {
+        console.error(`Icon not found: ${variant}`)
+      }
+    }
+  }, [variant])
+
+  return (
+    <i data-size={size} dangerouslySetInnerHTML={{ __html: innerHTML || variant }} />
+  )
 }

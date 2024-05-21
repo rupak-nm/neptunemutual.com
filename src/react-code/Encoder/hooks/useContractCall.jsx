@@ -3,38 +3,42 @@ import {
   useState
 } from 'react'
 
-import { useWeb3React } from '@web3-react/core'
-
 import { getContract } from '../helpers/solidity/contract'
 import {
   calculateGasMargin,
   getErrorMessage
 } from '../helpers/solidity/methods'
+import { useConnectWallet } from '../../packages/web3-core'
 
 export const useContractCall = ({ abi, address }) => {
-  const { library, account } = useWeb3React()
+  const { account, signerOrProvider } = useConnectWallet()
+
   const [contract, setContract] = useState(null)
 
   useEffect(() => {
-    if (!abi || !address || !library?.getSigner || !account) {
+    if (!abi || !address || !account) {
       setContract(null)
       return
     }
 
     try {
-      const _c = getContract(address, abi, library?.getSigner())
+      const _c = getContract(address, abi, signerOrProvider.provider)
       setContract(_c)
     } catch (error) {
       console.log('Error in creating contract: ', error)
       setContract(null)
     }
-  }, [abi, address, library, account])
+  }, [abi, address, account])
 
+  // eslint-disable-next-line no-restricted-syntax
   async function callMethod (methodName, args = [], overrides = {}, iface = null) {
-    if (!contract || !methodName) return
+    if (!contract || !methodName) {
+      return
+    }
 
     let methodArgs = [...args]
     let estimatedGas = null
+
     try {
       estimatedGas = await contract.estimateGas[methodName](...args, { ...overrides })
 
@@ -43,7 +47,9 @@ export const useContractCall = ({ abi, address }) => {
 
         const res = await contract[methodName](...methodArgs)
 
-        if (res.wait) await res.wait()
+        if (res.wait) {
+          await res.wait()
+        }
 
         const data = Array.isArray(res) ? Array.from(res) : [res]
         return { hash: res.hash, data }

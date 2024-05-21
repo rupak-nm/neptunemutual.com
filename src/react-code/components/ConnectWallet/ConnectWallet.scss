@@ -139,3 +139,29 @@
     }
   }
 }
+
+.loader {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.75rem;
+  margin-left: -0.25rem;
+  animation: spin 2s linear infinite;
+  color: #4e7dd9;
+
+  circle {
+    opacity: 0.25;
+  }
+
+  path {
+    opacity: 0.75;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

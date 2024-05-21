@@ -55,13 +55,13 @@
             span.content {
               display: flex;
               gap: 8px;
+              align-items: center;
             }
 
-            &:disabled {
-              opacity: 0.5;
-              cursor: not-allowed;
-              background-color: rgb(102, 112, 133);
-              border: none;
+            &:disabled,
+            &[data-disabled] {
+              background-color: colors.$primary-200;
+              border-color: colors.$primary-200;
             }
           }
         }
@@ -87,6 +87,18 @@
         div.title {
           p {
             color: colors.$gray-300;
+          }
+        }
+
+        .result.container {
+          .copy.button.container, .copied.button.container {
+            button {
+              &:disabled,
+              &[data-disabled] {
+                background-color: colors.$primary-400;
+                border-color: colors.$primary-400;
+              }
+            }
           }
         }
       }

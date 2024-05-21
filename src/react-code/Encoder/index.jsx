@@ -8,13 +8,11 @@ import {
 } from 'react'
 
 import { isAddress } from '@ethersproject/address'
-import { Web3ReactProvider } from '@web3-react/core'
 
 import { Breadcrumbs } from '../components/BreadCrumbs'
 import { Button } from '../components/Button/Button'
 import { InputWithLabel } from '../components/InputWithLabel/InputWithLabel'
 import { TextArea } from '../components/TextArea'
-import { getLibrary } from '../lib/connect-wallet/utils/web3'
 import {
   isArray,
   isJSON,
@@ -24,6 +22,8 @@ import { History } from './History'
 import { Result } from './Result'
 
 import { generateRandomString } from '../../../util/string'
+import { Popup } from '../components/ConnectWallet/Popup'
+import { ConnectorNames, ConnectWallet, useConnectWallet } from '../packages/web3-core'
 
 const STORAGE_KEY = 'abis'
 
@@ -65,6 +65,27 @@ const POSSIBLE_ABIS = [
   'IWitness'
 ]
 
+const SUPPORTED_CONNECTORS = [
+  ConnectorNames.Injected,
+  ConnectorNames.MetaMask,
+  ConnectorNames.CoinbaseWallet,
+  ConnectorNames.BitKeepWallet,
+  ConnectorNames.BinanceWallet,
+  ConnectorNames.OKXWallet,
+  ConnectorNames.Gnosis
+]
+
+const NetworkSelector = ({ networkId }) => {
+  const { setSelectedChainId } = useConnectWallet()
+  const selection = isNaN(parseInt(networkId)) ? undefined : parseInt(networkId)
+
+  useEffect(() => {
+    setSelectedChainId(selection)
+  }, [selection])
+
+  return null
+}
+
 const Encoder = () => {
   const formRef = useRef()
 
@@ -83,6 +104,10 @@ const Encoder = () => {
   const [selected, setSelected] = useState([])
 
   const consumeFromUrlRef = useRef(false)
+
+  const SUPPORTED_NETWORKS = useMemo(() => {
+    return isNaN(parseInt(networkId)) ? [] : [parseInt(networkId)]
+  }, [networkId])
 
   useEffect(() => {
     const storageData = window.localStorage.getItem(STORAGE_KEY)
@@ -491,14 +516,20 @@ const Encoder = () => {
         />
       </div>
 
-      <Web3ReactProvider getLibrary={getLibrary}>
+      <ConnectWallet.Root
+        getInitialNetwork={async () => {}}
+        connectors={SUPPORTED_CONNECTORS}
+        supportedNetworks={SUPPORTED_NETWORKS}
+      >
+        <NetworkSelector networkId={networkId} />
         <Result
           title={contractName}
           address={address}
           abi={JSON.parse(abi)}
           networkId={networkId}
         />
-      </Web3ReactProvider>
+        <Popup />
+      </ConnectWallet.Root>
 
     </div>
   )

@@ -23,10 +23,10 @@ const AddZeroesModal = ({ show, handleClose, handleAddZeroes }) => {
 
   const handleSwitch = (e) => {
     setSelectedOption(e.target.value)
-    const selectedOption = options.find(option => option.value === e.target.value)
+    const found = options.find(option => option.value === e.target.value)
 
-    if (selectedOption.value !== 'custom') {
-      setValue(selectedOption.value)
+    if (found.value !== 'custom') {
+      setValue(found.value)
     }
   }
 
@@ -42,7 +42,7 @@ const AddZeroesModal = ({ show, handleClose, handleAddZeroes }) => {
       <form className='content' onSubmit={e => e.preventDefault()}>
         <select
           className='input container'
-          value={selectedOption.value}
+          value={selectedOption}
           onChange={handleSwitch}
           autoFocus
         >

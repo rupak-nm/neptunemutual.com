@@ -1,11 +1,11 @@
 import { useMemo, useState } from 'react'
 import { fromNow } from '../../../../util/relative-time'
 import { chains } from '../helpers/wallet/chains'
-import { useWeb3React } from '@web3-react/core'
 import { Icon } from '../../components/Icon'
+import { useConnectWallet } from '../../packages/web3-core'
 
 const LogsTable = ({ logs }) => {
-  const { chainId } = useWeb3React()
+  const { connectedChainId: chainId } = useConnectWallet()
 
   const [sortType, setSortType] = useState('desc')
 
