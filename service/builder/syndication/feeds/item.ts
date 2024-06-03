@@ -1,4 +1,4 @@
-import { Item } from 'feed'
+import { type Item } from 'feed'
 
 import { fixImagePaths } from './media'
 

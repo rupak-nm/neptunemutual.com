@@ -1,4 +1,4 @@
-import { FeedOptions } from 'feed'
+import { type FeedOptions } from 'feed'
 
 import blog from './blog.json'
 import pressroom from './pressroom.json'
